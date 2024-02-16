@@ -1,0 +1,44 @@
+import { Request, Response } from 'express';
+import {
+  ExceptionFilter,
+  Catch,
+  ArgumentsHost,
+  HttpException,
+} from '@nestjs/common';
+
+/**
+ * HttpException Catch: NestJS에서는 예외 처리를 위해 Exception Filter를 사용한다.
+ */
+@Catch()
+export class HttpExceptionFilter implements ExceptionFilter {
+  constructor() {}
+
+  catch(exception: HttpException, host: ArgumentsHost) {
+    const ctx = host.switchToHttp();
+    const response = ctx.getResponse<Response>();
+    const request = ctx.getRequest<Request>();
+    let status = 500;
+    let errorMessage = exception.message;
+    try {
+      status = exception.getStatus();
+      /** @description class validator를 통해 message가 string[]인 경우가 있어서 아래와 같이 예외 처리  */
+      const exceptionResponse = exception.getResponse();
+      if (typeof exceptionResponse === 'object') {
+        if (exceptionResponse['message']) {
+          errorMessage =
+            typeof exceptionResponse['message'] === 'string'
+              ? exceptionResponse['message']
+              : exceptionResponse['message'].join('\r\n');
+        }
+      }
+    } catch (e) {}
+
+    console.error(exception);
+    response.status(status).json({
+      statusCode: status,
+      message: errorMessage,
+      path: request.url,
+      timestamp: new Date().toISOString(),
+    });
+  }
+}
