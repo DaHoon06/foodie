@@ -1,0 +1,132 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    // ECMAScript 목표 버전 설정: 'ES3'(기본), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018', 'ES2019', 'ES2020', or 'ESNEXT'.
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    // 컴파일 과정에 사용될 라이브러리 파일 설정
+    "module": "ESNext",
+    // 생성될 모듈 코드 설정: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'
+    "allowJs": true,
+    //JavaScript 파일 컴파일 허용
+    "skipLibCheck": true,
+    //js 파일 오류 리포트 설정
+    "incremental": true,
+    // 증분 컴파일 활성화
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    //출력 방출(emit) 유무 설정
+    "esModuleInterop": true,
+    // 모든 가져오기에 대한 네임스페이스 객체 생성을 통해 CommonJS와 ES 모듈 간의 상호 운용성을 제공. 'allowSyntheticDefaultImports' 암시
+    "moduleResolution": "node",
+    // 모듈 분석 방법 설정: 'node' (Node.js) 또는 'classic' (TypeScript pre-1.6).
+    "resolveJsonModule": true,
+    // json 파일 파서
+    "isolatedModules": true,
+    // 각 파일을 별도 모듈로 변환 ('ts.transpileModule'과 유사)
+    "types": [
+      "jest",
+      "node"
+    ],
+    // 컴파일 시 포함될 유형 선언 파일 입력
+    /* ---------------------------------------------------------------------------------------------------------------------------------------------------- */
+    "jsx": "preserve",
+    /* 컨벤션 옵션 ------------------------------------------------------------------------------------------------------------------------------------------- */
+    "noImplicitAny": true,
+    //명시적이지 않은 'any' 유형으로 표현식 및 선언 사용 시 오류 발생 unknown 쓰십쇼
+    "noUnusedLocals": false,
+    //쓰지않는 지역변수 있으면 에러내기
+    "noUnusedParameters": false,
+    //쓰지않는 파라미터 있으면 에러내기
+    "noImplicitReturns": false,
+    //함수에서 return 빼먹으면 에러내기
+    "noFallthroughCasesInSwitch": true,
+    //switch문 이상하면 에러내기
+    "removeComments": true,
+    //컴파일시 주석제거
+    "strictFunctionTypes": true,
+    //함수파라미터 타입체크 강하게
+    "baseUrl": "./src",
+    // 절대 경로 모듈이 아닌, 모듈이 기본적으로 위치한 디렉토리 설정 (예: './modules-name')
+    "strict": false,
+    // 모든 엄격한 유형 검사 옵션 활성화
+    "paths": {
+      "@components/*": [
+        "components/*"
+      ],
+      "@mocks/*": [
+        "mocks/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@api/*": [
+        "pages/api/*"
+      ],
+      "@apis/*": [
+        "apis/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@constants/*": [
+        "constants/*"
+      ],
+      "@libs/*": [
+        "libs/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@styles/*": [
+        "styles/*"
+      ],
+      "@interfaces/*": [
+        "interfaces/*"
+      ],
+      "@images/*": [
+        "../public/images/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ],
+      "@containers/*": [
+        "containers/*"
+      ],
+      "@providers/*": [
+        "providers/*"
+      ],
+      "@tests/*": [
+        "__tests__/*"
+      ]
+    }
+  },
+  "typeRoots": [
+    "./types/**/*.d.ts",
+    "node_modules/@types"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "src",
+    "**/*.ts",
+    "**/*.tsx",
+    "types/**/*.ts"
+  ],
+  // 컴파일 포함
+  "exclude": [
+    "node_modules"
+  ]
+  // 컴파일 제외
+}
