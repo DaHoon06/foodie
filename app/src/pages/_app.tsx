@@ -1,9 +1,14 @@
-import type { AppProps } from "next/app";
+import type {AppProps} from "next/app";
+import {AppLayout} from "../layouts/AppLayout";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   import('../mocks');
 }
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+export default function App({Component, pageProps}: AppProps) {
+  return (
+    <AppLayout>
+      <Component {...pageProps} />
+    </AppLayout>
+  );
 }
