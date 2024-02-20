@@ -60,6 +60,9 @@
       "@mocks/*": [
         "mocks/*"
       ],
+      "@layouts/*": [
+        "layouts/*"
+      ],
       "@pages/*": [
         "pages/*"
       ],
