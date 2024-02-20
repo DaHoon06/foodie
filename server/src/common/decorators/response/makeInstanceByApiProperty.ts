@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types */
-import { ApiPropertyOptions } from '@nestjs/swagger';
+import {ApiPropertyOptions} from '@nestjs/swagger';
 
 // 스웨거 메타데이터 키
 const DECORATORS_PREFIX = 'swagger';
@@ -19,10 +18,7 @@ function isObject(value) {
 
 // 기본생성자 함수
 function isFunction(value): value is Function {
-  if (!isObject(value)) {
-    return false;
-  }
-  return true;
+  return isObject(value);
 }
 
 // () => type 형태의 순환참조로 기술했을때 가져오는 함수

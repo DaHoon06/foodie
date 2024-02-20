@@ -1,8 +1,7 @@
 import { applyDecorators, HttpStatus, Type } from '@nestjs/common';
 import { ApiExtraModels, ApiResponse, getSchemaPath } from '@nestjs/swagger';
-import {ResponseSuccessDto} from "@common/decorators/response/dto/response-success.dto";
-import {makeInstanceByApiProperty} from "@common/decorators/response/makeInstanceByApiProperty";
-
+import { ResponseSuccessDto } from '@common/decorators/response/dto/response-success.dto';
+import { makeInstanceByApiProperty } from '@common/decorators/response/makeInstanceByApiProperty';
 
 interface SuccessResponseOption {
   /**
@@ -79,9 +78,8 @@ export const SuccessResponse = (
   const examples = successResponseOptions
     .map((response: SuccessResponseOption) => {
       // base CommonResponse 를 만듭니다.
-      const commonResponseInstance = makeInstanceByApiProperty<
-        ResponseSuccessDto<any>
-      >(ResponseSuccessDto);
+      const commonResponseInstance =
+        makeInstanceByApiProperty<ResponseSuccessDto<any>>(ResponseSuccessDto);
 
       const DtoModel = response.model;
 
