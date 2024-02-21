@@ -11,6 +11,10 @@ export const StoreLists = (): ReactElement => {
         <StoreCard/>
         <StoreCard/>
         <StoreCard/>
+        <StoreCard/>
+        <StoreCard/>
+        <StoreCard/>
+        <StoreCard/>
       </div>
     </article>
   )

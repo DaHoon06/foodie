@@ -18,7 +18,8 @@ export const appContainer = style({
   maxWidth: '428px !important',
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: '#fff'
+  backgroundColor: '#fff',
+  boxShadow: "0px 0px 16px rgb(50 50 50 / 12%)"
 })
 
 export const appMainContainer = style({

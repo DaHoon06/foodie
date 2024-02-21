@@ -5,6 +5,7 @@ import {AppLanding} from "@layouts/landing/AppLading";
 import {Header} from "@components/header/Header";
 import {NavBarTop} from "@components/nav/NavBarTop";
 import {NavBarBottom} from "@components/nav/NavBarBottom";
+import {Footer} from "@layouts/footer/Footer";
 
 type Props = PropsWithChildren;
 
@@ -19,11 +20,10 @@ export const AppLayout = ({children}: Props): ReactElement => {
           <NavBarTop/>
           <main className={styles.appMainContainer}>
             {children}
-
           </main>
+          <Footer/>
           <NavBarBottom/>
         </div>
-
       </div>
 
     </>
