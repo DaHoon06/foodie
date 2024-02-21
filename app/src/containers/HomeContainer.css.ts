@@ -1,4 +1,5 @@
 import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
 export const homeContainerLayout = style({
   width: '100%',
@@ -20,4 +21,16 @@ export const homeContainerLayout = style({
       width: "100vw",
     }
   }
+})
+
+export const homeListsFilterContainer = style({
+  position: "sticky",
+  width: '100%',
+  height: '80px',
+  top: 90,
+  backgroundColor: vars.colors.white000,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: '0 1em'
 })
