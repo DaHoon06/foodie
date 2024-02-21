@@ -1,10 +1,10 @@
 import {style} from "@vanilla-extract/css";
 
 export const homeContainerLayout = style({
-  width: '366px',
+  width: '100%',
+  maxWidth: '428px',
   height: '100%',
   border: '1px solid black',
-  minHeight: '100vh',
   display: 'flex',
   flexDirection: 'column',
   marginLeft: 'unset',
@@ -14,7 +14,10 @@ export const homeContainerLayout = style({
   boxShadow: '0 0 16px rgb(50, 50, 50 / 12%)',
 
   '@media': {
-    'screen and (max-width: 767px)': {
+    'screen and (max-width: 1024px)': {
+      width: '466px',
+    },
+    'screen and (max-width: 480px)': {
       width: "100vw",
     }
   }

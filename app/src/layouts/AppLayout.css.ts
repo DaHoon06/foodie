@@ -6,12 +6,30 @@ export const appLayout = style({
   minHeight: "100vh",
   display: "flex",
   flexDirection: "row",
-  gap: "30px",
+  gap: 30,
   paddingLeft: "0 !important",
   paddingRight: "0 !important",
   justifyContent: "center",
   backgroundColor: "#f5f5f5"
 });
+
+export const appContainer = style({
+  width: '100%',
+  maxWidth: '428px !important',
+  display: 'flex',
+  flexDirection: 'column'
+})
+
+export const appMainContainer = style({
+  width: '100%',
+  maxWidth: '428px !important',
+  position: "relative",
+  top: 98,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  height: "calc(100% - 162px)",
+})
 
 /**
  * display: -webkit-box;
