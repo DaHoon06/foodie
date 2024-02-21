@@ -1,4 +1,5 @@
 import {style} from '@vanilla-extract/css';
+import {vars} from "@styles/theme.css";
 
 export const appLayout = style({
   width: "100%",
@@ -10,7 +11,7 @@ export const appLayout = style({
   paddingLeft: "0 !important",
   paddingRight: "0 !important",
   justifyContent: "center",
-  backgroundColor: "#f5f5f5"
+  backgroundColor: vars.colors.backgroundColor
 });
 
 export const appContainer = style({
@@ -18,7 +19,7 @@ export const appContainer = style({
   maxWidth: '428px !important',
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: '#fff',
+  backgroundColor: vars.colors.white000,
   boxShadow: "0px 0px 16px rgb(50 50 50 / 12%)"
 })
 
@@ -32,25 +33,3 @@ export const appMainContainer = style({
   bottom: 0,
   height: "calc(100% - 162px)",
 })
-
-/**
- * display: -webkit-box;
- * display: -webkit-flex;
- * display: -ms-flexbox;
- * display: flex;
- * -webkit-flex-direction: row;
- * -ms-flex-direction: row;
- * flex-direction: row;
- * width: 100%;
- * max-width: unset!important;
- * min-height: var(--100vh);
- * gap: 120px;
- * padding-left: 0!important;
- * padding-right: 0!important;
- * -webkit-box-pack: center;
- * -ms-flex-pack: center;
- * -webkit-justify-content: center;
- * justify-content: center;
- * background-color: #F5F5F5;
- *
- */

@@ -1,4 +1,5 @@
 import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
 export const carouselLayout = style({
   width: '100%',
@@ -30,7 +31,7 @@ export const carouselCountWrapper = style({
   justifyContent: "center",
   alignItems: 'center',
   borderRadius: '24px',
-  color: '#fff',
+  color: vars.colors.white000,
   fontSize: 14,
   fontWeight: 400,
   lineHeight: 1.6,

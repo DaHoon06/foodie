@@ -1,4 +1,5 @@
 import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
 export const footerLayout = style({
   display: 'flex',
@@ -9,8 +10,8 @@ export const footerLayout = style({
 })
 
 export const information = style({
-  backgroundColor: '#f5f5f5',
-  color: '#222',
+  backgroundColor: vars.colors.backgroundColor,
+  color: vars.colors.black100,
   height: 160,
   display: 'flex',
   flexDirection: 'column',
@@ -19,8 +20,8 @@ export const information = style({
 })
 
 export const copyright = style({
-  backgroundColor: '#222',
-  color: '#fff',
+  backgroundColor: vars.colors.black000,
+  color: vars.colors.white000,
   height: 90,
   display: 'flex',
   flexDirection: 'column',

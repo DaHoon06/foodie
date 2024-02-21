@@ -1,7 +1,8 @@
 import {style} from '@vanilla-extract/css';
+import {vars} from "@styles/theme.css";
 
 export const navBarTopLayout = style({
-  backgroundColor: '#fff',
+  backgroundColor: vars.colors.white000,
   width: '100%',
   overflow: 'hidden',
   display: 'flex',

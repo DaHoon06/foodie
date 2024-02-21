@@ -22,5 +22,28 @@ export const appLandingLayout = style({
 export const appLandingContainer = style({
   width: '300px',
   height: '100%',
-  border: '1px solid black'
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'flex-start'
+})
+export const bannerWrapper = style({
+  width: '100%',
+  marginBottom: '2em'
+})
+export const bannerImage = style({
+  display: 'block',
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  borderRadius: 4
+})
+
+export const contentsBoxDownloadGuid = style({
+  borderRadius: 4,
+  backgroundColor: "rgba(222,222,222,0.95)",
+  height: 90,
+  width: '100%',
+  color: '#222',
+  padding: '0.8em 1em'
 })

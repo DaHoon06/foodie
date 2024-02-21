@@ -1,4 +1,5 @@
 import {style} from '@vanilla-extract/css';
+import {vars} from "@styles/theme.css";
 
 export const navBarBottomLayout = style({
   position: "fixed",
@@ -7,7 +8,7 @@ export const navBarBottomLayout = style({
   maxWidth: 428,
   display: 'flex',
   alignItems: 'center',
-  backgroundColor: '#fff',
+  backgroundColor: vars.colors.white000,
   borderTop: '1px solid #ededed',
   transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
   height: 64,
