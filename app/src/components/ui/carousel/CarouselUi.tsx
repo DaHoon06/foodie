@@ -15,7 +15,7 @@ export const Carousel = () => {
   }
 
   return (
-    <div style={{maxHeight: '300px'}}>
+    <div>
       <Swiper
         centeredSlides={true}
         autoplay={{

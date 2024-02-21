@@ -1,5 +1,6 @@
 import * as styles from './HomeContainer.css';
 import {Carousel} from "@components/ui/carousel/CarouselUi";
+import {StoreLists} from "@components/lists/StoreLists";
 
 
 export const HomeContainer = () => {
@@ -7,8 +8,9 @@ export const HomeContainer = () => {
     <div className={styles.homeContainerLayout}>
       <Carousel/>
       <div>
-        test
+        맛집 카테고리
       </div>
+      <StoreLists/>
     </div>
   )
 }

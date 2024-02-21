@@ -11,11 +11,12 @@ export const navBarTopLayout = style({
   maxWidth: '428px',
   position: 'fixed',
   top: '48px',
+  zIndex: 1100
 })
 
 export const navBarTopLists = style({
   display: 'flex',
-  ':-webkit-box-align': 'center',
+  // ':-webkit-box-align': 'center',
   alignItems: 'center',
   position: 'relative',
   flex: '1 1 auto',

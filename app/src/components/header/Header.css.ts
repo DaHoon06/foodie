@@ -14,6 +14,7 @@ export const headerLayout = style({
   color: '#222',
   position: 'fixed',
   top: '0',
+  zIndex: 1100
 });
 
 export const headerLists = style({

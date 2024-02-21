@@ -2,8 +2,7 @@ import {style} from "@vanilla-extract/css";
 
 export const carouselLayout = style({
   width: '100%',
-  height: '100%',
-  maxHeight: 300
+  height: 'auto',
 })
 
 export const carouselBanner = style({

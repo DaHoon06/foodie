@@ -17,7 +17,8 @@ export const appContainer = style({
   width: '100%',
   maxWidth: '428px !important',
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  backgroundColor: '#fff'
 })
 
 export const appMainContainer = style({

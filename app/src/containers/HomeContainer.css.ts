@@ -4,7 +4,6 @@ export const homeContainerLayout = style({
   width: '100%',
   maxWidth: '428px',
   height: '100%',
-  border: '1px solid black',
   display: 'flex',
   flexDirection: 'column',
   marginLeft: 'unset',
