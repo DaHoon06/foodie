@@ -1,22 +1,18 @@
-import {ReactElement, useEffect} from "react";
+import {ReactElement, useEffect, useState} from "react";
 import * as styles from './StoreLists.css';
 import {StoreCard, StoreCardItem} from "@components/cards/StoreCard";
 import {allRestaurantListsApi} from "@services/apis/restaurant";
 
-const mockData: StoreCardItem[] = [
-  {title: '치킨시대', location: '구로구/구로동', categories: '양식/치킨,튀김', viewCount: 5000, reviewCount: 20, point: 4.7},
-  {title: '치킨시대', location: '구로구/구로동', categories: '양식/치킨,튀김', viewCount: 5000, reviewCount: 20, point: 4.7},
-  {title: '치킨시대', location: '구로구/구로동', categories: '양식/치킨,튀김', viewCount: 5000, reviewCount: 20, point: 4.7},
-  {title: '치킨시대', location: '구로구/구로동', categories: '양식/치킨,튀김', viewCount: 5000, reviewCount: 20, point: 4.7},
-  {title: '치킨시대', location: '구로구/구로동', categories: '양식/치킨,튀김', viewCount: 5000, reviewCount: 20, point: 4.7},
-]
 
 export const StoreLists = (): ReactElement => {
-
+  const [lists, setLists] = useState<StoreCardItem[]>([]);
   const init = async () => {
     try {
-      const {data} = await allRestaurantListsApi();
-      console.log('SUCCESS', data)
+      const axiosResponseValue = await allRestaurantListsApi();
+      if (axiosResponseValue && axiosResponseValue.data) {
+        const {data} = axiosResponseValue.data;
+        setLists(data);
+      }
     } catch (e) {
       console.log('EXCEPTION', e)
     }
@@ -29,7 +25,7 @@ export const StoreLists = (): ReactElement => {
   return (
     <article className={styles.storeListsLayout}>
       <div className={styles.storeListsContainer}>
-        {mockData.map((store: StoreCardItem, index) => {
+        {lists.map((store: StoreCardItem, index) => {
           return (
             <div key={index}>
               <StoreCard
