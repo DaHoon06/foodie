@@ -1,10 +1,14 @@
-import {Html, Main, NextScript} from "next/document";
-import DocumentHead from "../layouts/heads/DocumentHead";
+import {Head, Html, Main, NextScript} from "next/document";
 
 export default function Document() {
   return (
     <Html lang="kr">
-      <DocumentHead/>
+      <Head>
+        <link rel="stylesheet" as="style"
+              href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
+
+        <link rel="icon" href="/favicon.ico"/>
+      </Head>
       <body>
       <Main/>
       <NextScript/>

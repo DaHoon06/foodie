@@ -3,7 +3,6 @@ import MetaHead from "./heads/MetaHead";
 import * as styles from "@layouts/AppLayout.css";
 import {AppLanding} from "@layouts/landing/AppLading";
 import {Header} from "@components/header/Header";
-import {NavBarTop} from "@components/nav/NavBarTop";
 import {NavBarBottom} from "@components/nav/NavBarBottom";
 import {Footer} from "@layouts/footer/Footer";
 
@@ -17,7 +16,6 @@ export const AppLayout = ({children}: Props): ReactElement => {
         <AppLanding/>
         <div className={styles.appContainer}>
           <Header/>
-          <NavBarTop/>
           <main className={styles.appMainContainer}>
             {children}
           </main>

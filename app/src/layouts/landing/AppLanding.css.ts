@@ -45,5 +45,8 @@ export const contentsBoxDownloadGuid = style({
   height: 90,
   width: '100%',
   color: '#222',
-  padding: '0.8em 1em'
+  padding: '0.8em 1em',
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
 })

@@ -6,14 +6,14 @@ export const headerLayout = style({
   alignItems: 'center',
   width: '100%',
   maxWidth: 428,
-  height: '48px',
+  height: 54,
   margin: '0 auto',
   minHeight: 'unset !important',
   padding: '0 20px',
   gap: 8,
   backgroundColor: vars.colors.white000,
   color: vars.colors.black100,
-  position: 'fixed',
+  position: 'sticky',
   top: '0',
   zIndex: 1100
 });

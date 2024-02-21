@@ -2,7 +2,7 @@ import {style} from '@vanilla-extract/css';
 import {vars} from "@styles/theme.css";
 
 export const navBarBottomLayout = style({
-  position: "fixed",
+  position: "sticky",
   bottom: '0',
   width: '100%',
   maxWidth: 428,

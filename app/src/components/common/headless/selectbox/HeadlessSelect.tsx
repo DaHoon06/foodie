@@ -1,5 +1,6 @@
 import {ChangeEvent, useState} from 'react';
 import * as styles from './HeadlessSelect.css';
+import {Typography} from "@components/common/typography/Typography";
 
 export type Items = {
   id: string;
@@ -9,25 +10,26 @@ export type Items = {
 
 export interface SelectBoxProps {
   items: Items[];
-  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (value: string) => void;
 }
 
 export const HeadlessSelect = (props: SelectBoxProps) => {
-  const {items} = props;
+  const {items, onChange} = props;
   const [currentValue, setCurrentValue] = useState(items[0].label);
   const [showOptions, setShowOptions] = useState(false)
 
   const onClickSelectOptions = (value: string) => {
     setCurrentValue(value);
+    onChange(value);
   };
 
   return (
     <div className={styles.selectBox} onClick={() => setShowOptions((prev) => !prev)}>
-      <div>{currentValue}</div>
-      <ul>
+      <Typography color={'gray400'} fontSize={14}>{currentValue}</Typography>
+      <ul className={styles.selectBoxOptions} style={{maxHeight: showOptions ? 'none' : 0}}>
         {items.map((option, index) => {
           return (
-            <li className={styles.selectBoxOptions} key={`${option.key}_${index}_${option.id}`} value={option.key}
+            <li className={styles.selectBoxOption} key={`${option.key}_${index}_${option.id}`} value={option.key}
                 onClick={() => onClickSelectOptions(option.label)}>
               {option.label}
             </li>

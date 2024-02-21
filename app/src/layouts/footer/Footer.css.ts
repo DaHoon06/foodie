@@ -6,7 +6,6 @@ export const footerLayout = style({
   flexDirection: 'column',
   width: '100%',
   height: 'auto',
-  marginBottom: 70,
 })
 
 export const information = style({
@@ -16,7 +15,8 @@ export const information = style({
   display: 'flex',
   flexDirection: 'column',
   gap: 10,
-  padding: '0.8em 1em'
+  padding: '0.8em 1em',
+  justifyContent: 'center'
 })
 
 export const copyright = style({

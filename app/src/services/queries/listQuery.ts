@@ -11,10 +11,11 @@ export const prefetchingRestaurantList = async () => {
     () => getRestaurantListsApi())
 }
 
-export const useRestaurantQuery = () => {
+export const useRestaurantQuery = (sort: string) => {
   return useQuery<unknown, AxiosError, ResponseReturnValue<{ data: StoreCardItem[] }>>(
     [queryKeys.lists.restaurantLists],
-    () => getRestaurantListsApi().catch(e => {
+    () => getRestaurantListsApi(sort).catch(e => {
+      //todo: error handling
       const error = e as unknown as AxiosError;
       if (error.response && error.response.data) {
         const {statusCode, message} = error.response.data as { statusCode: number, message: string }

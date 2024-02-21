@@ -7,7 +7,6 @@ export const storeListsLayout = style({
   gap: 40,
   padding: '0.5em',
   overflow: 'hidden',
-  paddingBottom: 100
 });
 
 export const storeListsContainer = style({

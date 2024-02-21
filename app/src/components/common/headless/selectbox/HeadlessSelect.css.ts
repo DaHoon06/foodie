@@ -3,22 +3,22 @@ import {vars} from "@styles/theme.css";
 
 export const selectBox = style({
   position: 'relative',
-  width: 200,
+  width: "fit-content",
   padding: 8,
   borderRadius: 6,
   backgroundColor: vars.colors.white000,
   alignSelf: 'center',
-  border: '1px solid #ededed',
   cursor: "pointer",
+  color: vars.colors.black100,
 
   selectors: {
     '&::before': {
       content: '⌵',
       position: 'absolute',
-      top: 1,
-      right: 8,
-      color: vars.colors.black100,
-      fontSize: 20
+      top: 4,
+      right: -8,
+      color: vars.colors.gray400,
+      fontSize: 18
     }
   }
 })
@@ -26,12 +26,26 @@ export const selectBox = style({
 export const selectBoxOptions = style({
   position: 'absolute',
   listStyle: 'none',
-  top: 30,
-  left: 1,
-  width: '100%',
+  top: 26,
+  left: 4,
+  width: 70,
   overflow: 'hidden',
   padding: 0,
-  borderRadius: 8,
+  borderRadius: 4,
   backgroundColor: '#606060',
   color: '#fefefe'
+})
+
+export const selectBoxOption = style({
+  fontSize: 14,
+  padding: '6px 8px',
+  transition: 'background-color 0.2s ease-in',
+  textAlign: 'center',
+  borderBottom: '1px solid #6a6a6aa3',
+
+  selectors: {
+    '&:last-child': {
+      borderColor: 'transparent'
+    }
+  }
 })

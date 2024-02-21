@@ -27,7 +27,7 @@ export const appMainContainer = style({
   width: '100%',
   maxWidth: '428px !important',
   position: "relative",
-  top: 98,
+  top: 0,
   left: 0,
   right: 0,
   bottom: 0,

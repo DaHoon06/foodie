@@ -3,6 +3,10 @@ import {Carousel} from "@components/ui/carousel/CarouselUi";
 import {StoreLists} from "@components/lists/StoreLists";
 import {VscSettings} from "react-icons/vsc";
 import {HeadlessSelect} from "@components/common/headless/selectbox/HeadlessSelect";
+import FlexBox from "@components/common/headless/flex-box/FlexBox";
+import {useState} from "react";
+import {NavBar} from "@components/nav/NavBar";
+import {Typography} from "@components/common/typography/Typography";
 
 const selectOptions = [
   {id: '1', key: '1', label: '평점순'},
@@ -11,8 +15,11 @@ const selectOptions = [
 ]
 
 export const HomeContainer = () => {
-  const onChangeSelectBox = () => {
-    console.log('selectbox')
+  const [sort, setSort] = useState('1');
+  const [filterOpen, setFilterOpen] = useState(false);
+  const onChangeSelectBox = (payload: string) => {
+    const index = selectOptions.findIndex(v => v.label === payload);
+    setSort(selectOptions[index].key);
   }
   return (
     <div className={styles.homeContainerLayout}>
@@ -21,12 +28,19 @@ export const HomeContainer = () => {
         <div>
           <HeadlessSelect items={selectOptions} onChange={onChangeSelectBox}/>
         </div>
-        <div>
-          <VscSettings size={18} color={'#8c8c8c'}/>
-          필터 버튼
-        </div>
+        <button type={"button"} onClick={() => setFilterOpen(!filterOpen)}>
+          <FlexBox direction={'row'} gap={6}>
+            <VscSettings size={18} color={'#8c8c8c'}/>
+            <Typography color={'gray400'} fontSize={14}>
+              필터
+            </Typography>
+          </FlexBox>
+        </button>
       </div>
-      <StoreLists/>
+      <div style={{display: filterOpen ? 'inline-block' : 'none'}}>
+        <NavBar />
+      </div>
+      <StoreLists sort={sort}/>
     </div>
   )
 }
