@@ -32,7 +32,7 @@ function baseElement(props: TypographyProps) {
       style: {
         color: vars.colors[color],
         fontWeight,
-        fontSize: `${fontSize}px`,
+        fontSize: `min(5vw, ${fontSize}px)`,
         lineHeight: `${lineHeight}px`,
         letterSpacing
       },

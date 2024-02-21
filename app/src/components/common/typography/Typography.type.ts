@@ -29,6 +29,7 @@ export type FontColorType =
   | "black100"
   | "white000"
   | "gray400"
+  | "primary"
 
 export type LetterSpacing = "-2" | "-1.5" | "-1" | "-0.5" | "1";
 export type LineHeight =

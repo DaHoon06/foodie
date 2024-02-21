@@ -1,48 +1,63 @@
 import Image from "next/image";
 import * as styles from './StoreCard.css';
 import {RiEyeLine, RiPencilFill} from "react-icons/ri";
+import {Typography} from "@components/common/typography/Typography";
+import {ReactElement} from "react";
 
-export const StoreCard = () => {
+export interface StoreCardItem {
+  title: string;
+  location: string;
+  point: number;
+  categories: string;
+  viewCount: number;
+  reviewCount: number;
+  thumbnail?: string;
+}
+
+interface Props {
+  items: StoreCardItem
+}
+
+export const StoreCard = (props: Props): ReactElement => {
+  const {categories, point, reviewCount, viewCount, location, title} = props.items;
   return (
-    <>
-      <article className={styles.storeCardLayout}>
-        <div className={styles.thumbnailImageWrapper}>
-          <Image className={styles.thumbnailImage} src={'/images/food1.webp'} alt={'food'} width={200} height={200}/>
-        </div>
-        <p>
-          구로구/구로동
-        </p>
-        <p>
-          치킨시대
-        </p>
-        <p>양식/튀김,치킨</p>
-        <p>4.6 (리뷰 91)</p>
-      </article>
-      <article className={styles.storeCardLayout}>
-        <div className={styles.thumbnailImageWrapper}>
-          <Image className={styles.thumbnailImage} src={'/images/food2.webp'} alt={'food'} width={200} height={200}/>
-        </div>
-        <p className={styles.locationLabel}>
-          구로구/구로동
-        </p>
+    <article className={styles.storeCardLayout}>
+      <div className={styles.thumbnailImageWrapper}>
+        <Image className={styles.thumbnailImage} src={'/images/food1.webp'} alt={'food'} width={200} height={200}/>
+      </div>
+      <div className={styles.storeInformationContainer}>
+        <Typography lineHeight={22} className={styles.locationLabel} fontSize={14} color={'gray400'} fontWeight={300}>
+          {location}
+        </Typography>
+
         <div className={styles.storeTitle}>
-          <span>
-            치킨시대
-          </span>
-          <span>4.6</span>
+          <Typography as={"span"} fontWeight={700} fontSize={22}>
+            {title}
+          </Typography>
+          <Typography as={"span"} fontWeight={700} color={'primary'} fontSize={28}>
+            {point}
+          </Typography>
         </div>
-        <p className={styles.storeCategories}>양식/튀김,치킨</p>
-        <div className={styles.storeCountLabel}>
-          <div>
-            <RiEyeLine size={12}/>
-            98,344
+        <Typography className={styles.storeCategories} fontSize={14} color={'gray400'} fontWeight={400}>
+          {categories}
+        </Typography>
+        <div className={styles.storeCountLabelWrapper}>
+          <div className={styles.storeCountLabel}>
+            <RiEyeLine size={14} color={'#939393'}/>
+            <Typography as={'span'} className={styles.storeOptionLabel} fontSize={14} color={'gray400'}
+                        fontWeight={300}>
+              {viewCount}
+            </Typography>
           </div>
-          <div>
-            <RiPencilFill size={12}/>
-            91
+          <div className={styles.storeCountLabel}>
+            <RiPencilFill size={14} color={'#939393'}/>
+            <Typography as={'span'} className={styles.storeOptionLabel} fontSize={14} color={'gray400'}
+                        fontWeight={300}>
+              {reviewCount}
+            </Typography>
           </div>
         </div>
-      </article>
-    </>
+      </div>
+    </article>
   )
 }

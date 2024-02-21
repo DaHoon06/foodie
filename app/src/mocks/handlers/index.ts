@@ -1,1 +1,3 @@
-export const handlers: any[] = []; //...Object.values()
+import * as restaurantHandler from './restaurant/handler';
+
+export const handlers = [...Object.values(restaurantHandler)];

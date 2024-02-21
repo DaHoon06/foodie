@@ -18,16 +18,15 @@ export const navBarBottomContainer = style({
   width: '100%',
   height: '100%',
   display: 'flex',
-  justifyContent: 'center',
   alignItems: 'center',
 })
 
 export const navBarBottomLists = style({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
-  gap: 12
-
+  justifyContent: 'space-evenly',
+  gap: 12,
+  width: '100%',
 })
 export const navBarBottomItems = style({
   padding: '0 0.5em',
