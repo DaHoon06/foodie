@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "next-sitemap",
     "test": "jest --watch --passWithNoTests",
     "test:ci": "jest --ci --passWithNoTests",
     "test:coverage": "jest --coverage"
