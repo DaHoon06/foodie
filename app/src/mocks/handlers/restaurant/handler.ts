@@ -5,7 +5,6 @@ import {StoreCardItem} from "@components/cards/StoreCard";
 
 const DOMAIN = '/api/restaurant'
 
-
 export const getRestaurantListsApiMocking = http.get(
   `${DOMAIN}`,
   () => {
@@ -15,6 +14,6 @@ export const getRestaurantListsApiMocking = http.get(
     if (error) return new HttpResponse(null, {status: 404});
 
     const data = responseConversion<StoreCardItem[]>(
-      restaurantListMockData)
-    return HttpResponse.json(data);
+      restaurantListMockData);
+    return HttpResponse.json({...data});
   })

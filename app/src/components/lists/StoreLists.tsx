@@ -1,31 +1,22 @@
-import {ReactElement, useEffect, useState} from "react";
+import {ReactElement, useEffect} from "react";
 import * as styles from './StoreLists.css';
 import {StoreCard, StoreCardItem} from "@components/cards/StoreCard";
-import {allRestaurantListsApi} from "@services/apis/restaurant";
+import {prefetchingRestaurantList, useRestaurantQuery} from "@services/queries/listQuery";
 
 
 export const StoreLists = (): ReactElement => {
-  const [lists, setLists] = useState<StoreCardItem[]>([]);
-  const init = async () => {
-    try {
-      const axiosResponseValue = await allRestaurantListsApi();
-      if (axiosResponseValue && axiosResponseValue.data) {
-        const {data} = axiosResponseValue.data;
-        setLists(data);
-      }
-    } catch (e) {
-      console.log('EXCEPTION', e)
-    }
-  }
+  const {data: listQueryData, isLoading} = useRestaurantQuery();
 
   useEffect(() => {
-    init();
+    prefetchingRestaurantList().then();
   }, []);
+
+  if (isLoading) return <div>...isLoading</div>
 
   return (
     <article className={styles.storeListsLayout}>
       <div className={styles.storeListsContainer}>
-        {lists.map((store: StoreCardItem, index) => {
+        {listQueryData.data.data.map((store: StoreCardItem, index: number) => {
           return (
             <div key={index}>
               <StoreCard
