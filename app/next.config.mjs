@@ -4,7 +4,6 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@company/design-system'],
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,

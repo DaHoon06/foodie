@@ -12,6 +12,7 @@ const MSWProvider = ({children}: PropsWithChildren) => {
         setIsReady(true);
       }
     };
+    init();
 
     if (!isReady) init().then();
   }, [isReady]);
