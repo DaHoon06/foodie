@@ -26,11 +26,23 @@ export const homeContainerLayout = style({
 export const homeListsFilterContainer = style({
   position: "sticky",
   width: '100%',
-  height: 60,
-  top: 49,
+  height: 48,
+  top: 50,
   backgroundColor: vars.colors.white000,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '0 1em'
+  padding: '0 1em',
+  zIndex: 99
+})
+
+export const filterButton = style({
+  border: `1px solid ${vars.colors.gray000}`,
+  borderRadius: 20,
+  padding: "0.25em 0.6em"
+})
+
+export const filterLists = style({
+  position: 'sticky',
+  top: 98
 })

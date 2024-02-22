@@ -1,9 +1,9 @@
 import * as styles from './NavBarBottom.css';
 import {RiHome5Line, RiMessage3Line, RiPencilFill, RiStarSLine, RiUserLine} from "react-icons/ri";
 import {Typography} from "@components/common/typography/Typography";
-import useRouteStore, {useRoutePath} from "@store/routeStore";
 import {useRouter} from "next/router";
 import {FontColorType} from "@components/common/typography/Typography.type";
+import {useEffect, useState} from "react";
 
 const link = {
   home: {label: '홈', to: '/'},
@@ -13,19 +13,23 @@ const link = {
   management: {label: '마이', to: '/management'}
 }
 
-
 export const NavBarBottom = () => {
-  const currentPage = useRoutePath();
-  const {setCurrentPage} = useRouteStore();
   const router = useRouter();
+  const [currentPath, setCurrentPath] = useState(router.pathname)
+
+  useEffect(() => {
+    const path = router.pathname;
+    if (path.includes('search')) setCurrentPath('/')
+    else setCurrentPath(router.pathname)
+  }, [currentPath])
 
   const onClickHandlerMenu = async (to: string) => {
-    setCurrentPage(to);
+    setCurrentPath(to);
     await router.push(to);
   }
 
   const buttonActive = (to: string): boolean => {
-    return currentPage === to;
+    return currentPath === to;
   }
 
   const textActive = (to: string): FontColorType => {

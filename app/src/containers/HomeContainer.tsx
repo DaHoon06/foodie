@@ -28,16 +28,16 @@ export const HomeContainer = () => {
         <div>
           <HeadlessSelect items={selectOptions} onChange={onChangeSelectBox}/>
         </div>
-        <button type={"button"} onClick={() => setFilterOpen(!filterOpen)}>
+        <button type={"button"} onClick={() => setFilterOpen(!filterOpen)} className={styles.filterButton}>
           <FlexBox direction={'row'} gap={6}>
-            <VscSettings size={18} color={'#8c8c8c'}/>
-            <Typography color={'gray400'} fontSize={14}>
+            <VscSettings size={14} color={'#8c8c8c'}/>
+            <Typography color={'gray400'} fontSize={12}>
               필터
             </Typography>
           </FlexBox>
         </button>
       </div>
-      <div style={{display: filterOpen ? 'inline-block' : 'none'}}>
+      <div style={{display: filterOpen ? 'inline-block' : 'none'}} className={styles.filterLists}>
         <NavBar />
       </div>
       <StoreLists sort={sort}/>

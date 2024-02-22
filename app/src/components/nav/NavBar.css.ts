@@ -7,10 +7,7 @@ export const navBarLayout = style({
   overflow: 'hidden',
   display: 'flex',
   margin: '0 auto',
-  height: '50px',
-  position: 'sticky',
-  top: 97,
-  zIndex: 1100
+  height: 46,
 })
 
 export const navBarLists = style({
