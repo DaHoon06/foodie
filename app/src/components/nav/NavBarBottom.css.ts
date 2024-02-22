@@ -77,3 +77,4 @@ export const navBarRightBox = style({
   justifyContent: 'center',
   gap: 30
 })
+

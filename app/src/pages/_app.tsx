@@ -1,5 +1,4 @@
 import type {AppProps} from "next/app";
-import {AppLayout} from "@layouts/AppLayout";
 import '@styles/reset.scss';
 import MSWProvider from "@mocks/mockProvider";
 import {queryClient} from "@libs/tanstack";
@@ -13,9 +12,7 @@ export default function App({Component, pageProps}: AppProps) {
     <MSWProvider>
       <QueryClientProvider client={queryState}>
         <Hydrate state={pageProps.dehydratedState}>
-          <AppLayout>
-            <Component {...pageProps} />
-          </AppLayout>
+          <Component {...pageProps} />
           <ReactQueryDevtools initialIsOpen={false}/>
         </Hydrate>
       </QueryClientProvider>

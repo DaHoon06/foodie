@@ -3,7 +3,7 @@ import Head from "next/head";
 const MetaHead = () => {
   return (
     <Head>
-      <title>배고플텐 고푸디 | go foodie</title>
+      <title>배~고푸디? 배고플땐 고푸디 | go foodie</title>
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, user-scalable=0"
@@ -25,16 +25,16 @@ const MetaHead = () => {
       <meta name="apple-web-app-capable" content="yes"/>
 
       <meta name="color-scheme" content="dark light"/>
-      {/*<meta*/}
-      {/*  name={"theme-color"}*/}
-      {/*  content={"#fff"}*/}
-      {/*  media={"(prefers-color-scheme: light)"}*/}
-      {/*/>*/}
-      {/*<meta*/}
-      {/*  name={"theme-color"}*/}
-      {/*  content={"#383838"}*/}
-      {/*  media={"(prefers-color-scheme: dark)"}*/}
-      {/*/>*/}
+      <meta
+        name={"theme-color"}
+        content={"#fff"}
+        media={"(prefers-color-scheme: light)"}
+      />
+      <meta
+        name={"theme-color"}
+        content={"#fff"}
+        media={"(prefers-color-scheme: dark)"}
+      />
     </Head>
   )
 }

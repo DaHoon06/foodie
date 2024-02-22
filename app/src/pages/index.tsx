@@ -1,9 +1,12 @@
 import {HomeContainer} from "@containers/HomeContainer";
+import {AppLayout} from "@layouts/AppLayout";
 
 export default function Home() {
   return (
     <>
-      <HomeContainer/>
+      <AppLayout>
+        <HomeContainer/>
+      </AppLayout>
     </>
   );
 }

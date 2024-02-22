@@ -1,23 +1,18 @@
-import React, {
-  CSSProperties,
-  HTMLAttributes,
-  PropsWithChildren,
-  Ref,
-  forwardRef,
-} from 'react';
+import React, {CSSProperties, forwardRef, HTMLAttributes, PropsWithChildren, Ref,} from 'react';
 
 interface FlexProps {
   direction?: CSSProperties['flexDirection'];
   justifyContent?: CSSProperties['justifyContent'];
   alignItems?: CSSProperties['alignItems'];
-  gap?: string;
+  gap?: number;
   width?: string;
   height?: string;
 }
 
 export interface FlexBoxProps
   extends FlexProps,
-    HTMLAttributes<HTMLDivElement> {}
+    HTMLAttributes<HTMLDivElement> {
+}
 
 const FlexBox = forwardRef(
   (
@@ -26,7 +21,7 @@ const FlexBox = forwardRef(
       direction = 'column',
       justifyContent = 'center',
       alignItems = 'center',
-      gap = '0',
+      gap = 0,
       width = 'fix-content',
       height = 'auto',
       ...rest
@@ -43,8 +38,8 @@ const FlexBox = forwardRef(
         alignItems,
         gap
       }}
-        ref={forwardRef}
-        {...rest}
+           ref={forwardRef}
+           {...rest}
       >
         {children}
       </div>
