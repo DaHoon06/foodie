@@ -5,7 +5,7 @@ import {AppLanding} from "@layouts/landing/AppLading";
 import {Header} from "@components/header/Header";
 import {NavBarBottom} from "@components/nav/NavBarBottom";
 import {Footer} from "@layouts/footer/Footer";
-import {ModalHandler} from "@components/common/modal/ModalHandler";
+import {ModalContainer} from "@containers/ModalContainer";
 
 type Props = PropsWithChildren;
 
@@ -21,7 +21,7 @@ export const AppLayout = ({children}: Props): ReactElement => {
             {children}
           </main>
           <div id="modal"/>
-          <ModalHandler/>
+          <ModalContainer/>
           <Footer/>
           <NavBarBottom/>
         </div>

@@ -40,7 +40,7 @@ export const bottomSlideBody = style({
   alignItems: 'center',
   background: vars.colors.white000,
   width: '100%',
-  minHeight: 550,
+  minHeight: 300,
   height: 'auto',
   borderRadius: '20px 20px 0 0',
   boxShadow: '0 0 16px rgb(50 50 50 / 12%)',

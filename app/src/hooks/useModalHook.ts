@@ -4,10 +4,11 @@ import useModalStore from "@store/modalStore";
 export type Element = React.MutableRefObject<HTMLDivElement> | any;
 
 export default function useModalHook(ele: Element) {
-  const store = useModalStore();
+  const {setModalType, setIsOpen} = useModalStore();
 
   const onRequestClose = () => {
-    store.setIsOpen(false);
+    setIsOpen(false);
+    setModalType('');
   }
 
   const outerClickEvent = (e: React.MouseEvent) => {
