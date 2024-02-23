@@ -8,6 +8,7 @@ import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 
 export default function App({Component, pageProps}: AppProps) {
   const [queryState] = useState(() => queryClient);
+
   return (
     <MSWProvider>
       <QueryClientProvider client={queryState}>

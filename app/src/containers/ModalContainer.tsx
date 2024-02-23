@@ -5,8 +5,11 @@ import {SignInAlertBox} from "@components/alert-box/SignInAlertBox";
 export const ModalContainer = () => {
   const {type} = useModalStore();
   return (
-    <ModalHandler>
-      {type === 'signInAlertBox' && <SignInAlertBox/>}
-    </ModalHandler>
+    <>
+      <div id="modal"/>
+      <ModalHandler>
+        {type === 'signInAlertBox' && <SignInAlertBox/>}
+      </ModalHandler>
+    </>
   )
 }

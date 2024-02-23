@@ -4,14 +4,13 @@ import {NextResponse} from "next/server";
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
   const url = request.nextUrl.clone();
-
-  if (request.nextUrl.pathname.startsWith('/posts')) {
-    url.pathname = '/';
-    // posts는 로그인이 필요하다.
-    //todo: 인증 로직 추가해야한다.
-    return NextResponse.redirect(`${url}?login=required`)
-    // return await withAuth(request);
-  }
+  // if (request.nextUrl.pathname.startsWith('/posts')) {
+  //   url.pathname = '/';
+  //   // posts는 로그인이 필요하다.
+  //   //todo: 인증 로직 추가해야한다.
+  //   return NextResponse.redirect(`${url}?login=required`)
+  //   // return await withAuth(request);
+  // }
   return response;
 }
 
@@ -51,6 +50,6 @@ async function withAuth(request: NextRequest) {
 export const config = {
   matcher: [
     "/",
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|images|favicon.ico|mockServiceWorker|manifest.json).*)',
   ],
 };

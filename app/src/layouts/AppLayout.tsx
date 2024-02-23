@@ -20,7 +20,6 @@ export const AppLayout = ({children}: Props): ReactElement => {
           <main className={styles.appMainContainer}>
             {children}
           </main>
-          <div id="modal"/>
           <ModalContainer/>
           <Footer/>
           <NavBarBottom/>

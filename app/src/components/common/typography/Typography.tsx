@@ -34,7 +34,7 @@ function baseElement(props: TypographyProps) {
         fontWeight,
         fontSize: `min(5vw, ${fontSize}px)`,
         lineHeight: `${lineHeight}px`,
-        letterSpacing
+        letterSpacing: `${letterSpacing}px`
       },
       ...rest,
     },

@@ -17,8 +17,10 @@ export const SignInAlertBox = (): ReactElement => {
         <Typography letterSpacing={'-1.5'} fontWeight={400} fontSize={12} color={'gray400'}>로그인을 하고 여러분의 식도락 여행 이야기를
           들려주세요.</Typography>
       </FlexBox>
+      <FlexBox className={styles.buttonWrapper}>
+        <KakaoButton />
+      </FlexBox>
 
-      <KakaoButton />
     </div>
   )
 }

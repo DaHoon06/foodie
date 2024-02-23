@@ -4,18 +4,20 @@ import {Typography} from "@components/common/typography/Typography";
 import {useRouter} from "next/router";
 import {FontColorType} from "@components/common/typography/Typography.type";
 import {useEffect, useState} from "react";
+import useModalStore from "@store/modalStore";
 
 const link = {
   home: {label: '홈', to: '/'},
-  community: {label: '홈', to: '/community'},
+  feeds: {label: '소식', to: '/feeds'},
   posts: {label: '글작성', to: '/posts'},
-  likes: {label: '홈', to: '/likes'},
+  likes: {label: '픽', to: '/pick'},
   management: {label: '마이', to: '/management'}
 }
 
 export const NavBarBottom = () => {
   const router = useRouter();
   const [currentPath, setCurrentPath] = useState(router.pathname)
+  const {setIsOpen, setModalType} = useModalStore();
 
   useEffect(() => {
     const path = router.pathname;
@@ -24,6 +26,13 @@ export const NavBarBottom = () => {
   }, [currentPath])
 
   const onClickHandlerMenu = async (to: string) => {
+
+    if (to === '/posts') {
+      // 만약 로그인이 안되어있다면?
+      setModalType('signInAlertBox');
+      setIsOpen(true);
+      return;
+    }
     setCurrentPath(to);
     await router.push(to);
   }
@@ -56,11 +65,11 @@ export const NavBarBottom = () => {
           </button>
           <button type={'button'}
                   className={styles.navBarBottomItems}
-                  onClick={() => onClickHandlerMenu(link.community.to)}>
-            <RiMessage3Line size={22} color={iconActive(link.community.to)}/>
-            <Typography as={'span'} color={textActive(link.community.to)} fontWeight={500}
+                  onClick={() => onClickHandlerMenu(link.likes.to)}>
+            <RiStarSLine size={22} color={iconActive(link.likes.to)}/>
+            <Typography as={'span'} color={textActive(link.likes.to)} fontWeight={500}
                         fontSize={12}>
-              메세지
+              {link.likes.label}
             </Typography>
           </button>
         </li>
@@ -74,11 +83,11 @@ export const NavBarBottom = () => {
         <li className={styles.navBarRightBox}>
           <button type={'button'}
                   className={styles.navBarBottomItems}
-                  onClick={() => onClickHandlerMenu(link.likes.to)}>
-            <RiStarSLine size={22} color={iconActive(link.likes.to)}/>
-            <Typography as={'span'} color={textActive(link.likes.to)} fontWeight={500}
+                  onClick={() => onClickHandlerMenu(link.feeds.to)}>
+            <RiMessage3Line size={22} color={iconActive(link.feeds.to)}/>
+            <Typography as={'span'} color={textActive(link.feeds.to)} fontWeight={500}
                         fontSize={12}>
-              즐겨찾기
+              {link.feeds.label}
             </Typography>
           </button>
           <button type={'button'}
@@ -87,7 +96,7 @@ export const NavBarBottom = () => {
             <RiUserLine size={22} color={iconActive(link.management.to)}/>
             <Typography as={'span'} color={textActive(link.management.to)} fontWeight={500}
                         fontSize={12}>
-              마이
+              {link.management.label}
             </Typography>
           </button>
         </li>

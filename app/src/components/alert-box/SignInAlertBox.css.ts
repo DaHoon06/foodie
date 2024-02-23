@@ -18,3 +18,7 @@ export const logo = style({
 export const goFoodie = style({
   marginLeft: 4
 })
+
+export const buttonWrapper = (style({
+  marginTop: 30
+}))
