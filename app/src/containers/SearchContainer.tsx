@@ -49,8 +49,8 @@ export const SearchContainer = () => {
     setKeywords([])
   }
 
-  const handleCloseSearch = () => {
-    router.back();
+  const handleCloseSearch = async () => {
+    await router.push('/');
   }
   return (
     <div className={styles.searchContainerLayout}>

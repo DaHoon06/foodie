@@ -3,7 +3,12 @@ import {vars} from "@styles/theme.css";
 
 export const carouselLayout = style({
   width: '100%',
-  height: 'auto',
+  height: 280
+})
+
+export const carouselContainer = style({
+  width: '100%',
+  height: '100%',
 })
 
 export const carouselBanner = style({

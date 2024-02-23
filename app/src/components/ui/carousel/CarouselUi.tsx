@@ -15,7 +15,7 @@ export const Carousel = () => {
   }
 
   return (
-    <div>
+    <div className={styles.carouselLayout}>
       <Swiper
         centeredSlides={true}
         autoplay={{
@@ -27,7 +27,7 @@ export const Carousel = () => {
         onSlideChange={(swiper) => onChangeCarousel(swiper)}
         modules={[Autoplay]}
         loop={true}
-        className={styles.carouselLayout}
+        className={styles.carouselContainer}
       >
         <SwiperSlide>
           <div className={styles.carouselBanner}>
