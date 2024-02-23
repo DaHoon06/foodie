@@ -7,7 +7,7 @@ import * as styles from './BottomSlide.css';
 
 export const BottomSlideModal = (props: ModalProps): ReactElement => {
   const {isOpen, children, ele} = props;
-  const {onRequestClose, outerClickEvent} = useModalHook(ele);
+  const {outerClickEvent} = useModalHook(ele);
 
   return (
     <AnimatePresence>

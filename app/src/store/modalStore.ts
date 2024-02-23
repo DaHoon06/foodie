@@ -25,12 +25,4 @@ const useModalStore = create(
   )
 )
 
-const getIsOpen = () => {
-  return useModalStore((state) => state.isOpen)
-}
-
-const getModalType = () => {
-  return useModalStore((state) => state.type)
-}
-
 export default useModalStore;
