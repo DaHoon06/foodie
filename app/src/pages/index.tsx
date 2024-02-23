@@ -1,10 +1,11 @@
 import {HomeContainer} from "@containers/HomeContainer";
 import {AppLayout} from "@layouts/AppLayout";
 import {useRouter} from "next/router";
-import {useEffect} from "react";
+import {ReactElement, useEffect} from "react";
 import useModalStore from "@store/modalStore";
+import {NextPage} from "next";
 
-export default function Home() {
+const HomePage: NextPage = (): ReactElement => {
   const router = useRouter();
   const {setIsOpen, setModalType} = useModalStore();
   useEffect(() => {
@@ -20,10 +21,10 @@ export default function Home() {
 
   }, [router.query]);
   return (
-    <>
-      <AppLayout>
-        <HomeContainer/>
-      </AppLayout>
-    </>
+    <AppLayout>
+      <HomeContainer/>
+    </AppLayout>
   );
 }
+
+export default HomePage;

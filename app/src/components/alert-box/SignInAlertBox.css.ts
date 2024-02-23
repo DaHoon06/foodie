@@ -18,20 +18,3 @@ export const logo = style({
 export const goFoodie = style({
   marginLeft: 4
 })
-
-export const kakaoLoginButton = style({
-  backgroundColor: '#fcdd3f',
-  height: 46,
-  width: '100%',
-  borderRadius: 10,
-  display: 'flex',
-  alignItems: 'center',
-  marginTop: 20
-})
-
-export const kakaoLogo = style({
-  width: 'auto',
-  height: 36,
-  paddingLeft: 28,
-  paddingRight: 76
-})

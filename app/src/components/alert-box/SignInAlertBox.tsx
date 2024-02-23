@@ -3,6 +3,7 @@ import {Typography} from "@components/common/typography/Typography";
 import * as styles from './SignInAlertBox.css';
 import Image from "next/image";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
+import {KakaoButton} from "@components/buttons/KakaoButton";
 
 export const SignInAlertBox = (): ReactElement => {
   return (
@@ -17,12 +18,7 @@ export const SignInAlertBox = (): ReactElement => {
           들려주세요.</Typography>
       </FlexBox>
 
-      <button type={'button'} className={styles.kakaoLoginButton}>
-        <Image className={styles.kakaoLogo} src={'/images/kakao.png'} alt={'카카오_로그인_버튼'} width={40} height={40}/>
-        <Typography as={'span'} fontSize={16} fontWeight={700}>카카오 로그인</Typography>
-      </button>
-
-
+      <KakaoButton />
     </div>
   )
 }
