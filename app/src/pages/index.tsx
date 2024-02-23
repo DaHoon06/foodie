@@ -10,7 +10,11 @@ export default function Home() {
   useEffect(() => {
     if (router.query) {
       const {login} = router.query as { login: string };
-      if (login === "required") setIsOpen(true);
+      if (login === "required") {
+        router.replace('/')
+        setIsOpen(true)
+      }
+
     }
 
   }, [router.query]);

@@ -36,7 +36,10 @@ export const ModalHandler: React.FC<Modal> = (props) => {
     return (
       <>
         <div className={styles.modalBackGroundLayer} onClick={outerClickEvent}
-             style={{opacity: isOpen ? '1' : '0'}}/>
+             style={{
+               opacity: isOpen ? '1' : '0',
+               visibility: isOpen ? 'visible' : 'hidden'
+             }}/>
         <BottomSlideModal ele={ele} isOpen={isOpen}>
           {children}
         </BottomSlideModal>
