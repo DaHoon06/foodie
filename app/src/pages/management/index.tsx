@@ -4,7 +4,7 @@ import {BasicLayout} from "@layouts/BasicLayout";
 import Image from "next/image";
 import {Typography} from "@components/common/typography/Typography";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import * as styles from './ManagementPage.css';
+import * as styles from '@styles/pages/ManagementPage.css';
 import {KakaoButton} from "@components/buttons/KakaoButton";
 
 const ManagementPage: NextPage = (): ReactElement => {

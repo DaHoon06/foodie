@@ -3,7 +3,7 @@ import {BasicLayout} from "@layouts/BasicLayout";
 import {ReactElement} from "react";
 import {Typography} from "@components/common/typography/Typography";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import * as styles from './FeedPage.css';
+import * as styles from '@styles/pages/FeedPage.css';
 import {FeedCard} from "@components/cards/FeedCard";
 
 
