@@ -24,7 +24,11 @@ export const HomeContainer = () => {
   return (
     <div className={styles.homeContainerLayout}>
       <Carousel/>
-      <div className={styles.homeListsFilterContainer}>
+      <div className={styles.homeListsFilterContainer}
+        style={{
+          borderColor: !filterOpen ? '#ededed' : 'transparent'
+        }}
+      >
         <HeadlessSelect items={selectOptions} onChange={onChangeSelectBox}/>
         <button type={"button"} onClick={() => setFilterOpen(!filterOpen)} className={styles.filterButton}>
           <FlexBox direction={'row'} gap={6}>
@@ -35,7 +39,10 @@ export const HomeContainer = () => {
           </FlexBox>
         </button>
       </div>
-      <div style={{display: filterOpen ? 'inline-block' : 'none'}} className={styles.filterLists}>
+      <div style={{
+        display: filterOpen ? 'inline-block' : 'none',
+        borderColor: filterOpen ? '#ededed' : 'transparent'
+      }} className={styles.filterLists}>
         <NavBar />
       </div>
       <StoreLists sort={sort}/>

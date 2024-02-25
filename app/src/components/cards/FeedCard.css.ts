@@ -40,3 +40,7 @@ export const storeInfoBox = style({
   padding: '1em',
   margin: '10px auto'
 })
+
+export const storeOptions = style({
+  padding: '1em 0'
+})

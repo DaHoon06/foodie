@@ -33,7 +33,8 @@ export const homeListsFilterContainer = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: '0 1em',
-  zIndex: 99
+  zIndex: 99,
+  borderBottom: '1px solid transparent',
 })
 
 export const filterButton = style({
@@ -44,5 +45,6 @@ export const filterButton = style({
 
 export const filterLists = style({
   position: 'sticky',
-  top: 97
+  top: 96,
+  borderBottom: '1px solid transparent',
 })

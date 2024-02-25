@@ -74,7 +74,7 @@ export const SearchContainer = () => {
           {keywords.length ? (
             keywords.map((keyword) => (
               <li className={styles.recentSearchKeywordItems} key={keyword.id}>
-                <FlexBox direction={'row'} gap={8}>
+                <FlexBox direction={'row'} gap={8} justifyContent={"flex-start"}>
                   <IoIosSearch size={18} color={'#a2a2a2'}/>
                   <Typography as={'span'} fontSize={12} color={'gray400'}>{keyword.text}</Typography>
                 </FlexBox>

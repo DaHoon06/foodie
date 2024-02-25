@@ -9,7 +9,7 @@ import {KakaoButton} from "@components/buttons/KakaoButton";
 
 const ManagementPage: NextPage = (): ReactElement => {
   return (
-    <BasicLayout>
+    <BasicLayout options={{backgroundColor: '#fff'}}>
       <FlexBox justifyContent={'center'} gap={8} className={styles.managementPageLayout}>
         <Image className={styles.logo} src={'/images/logo.svg'} alt={'foodie_logo'} width={200} height={100}/>
         <Typography fontWeight={700} letterSpacing={'-0.5'} fontSize={16}>미식가들의 식도락 여행기

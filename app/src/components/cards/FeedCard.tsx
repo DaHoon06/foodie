@@ -40,14 +40,14 @@ export const FeedCard = (): ReactElement => {
           제주 제주시 한경면 중간서로 3285
         </Typography>
       </div>
-      <FlexBox direction={'row'} justifyContent={'flex-start'} gap={10}>
+      <FlexBox direction={'row'} justifyContent={'flex-start'} gap={10} className={styles.storeOptions}>
         <FaRegHeart color={'#888888'} />
         <Typography fontSize={14} fontWeight={'300'} color={"gray400"}>
-          좋아요 11개
+          11
         </Typography>
         <FaComment color={'#888888'} />
         <Typography fontSize={14} fontWeight={'300'} color={"gray400"}>
-          댓글 2개
+          2
         </Typography>
       </FlexBox>
     </article>
