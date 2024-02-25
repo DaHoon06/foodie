@@ -27,7 +27,7 @@ export const homeListsFilterContainer = style({
   position: "sticky",
   width: '100%',
   height: 48,
-  top: 50,
+  top: 49,
   backgroundColor: vars.colors.white000,
   display: 'flex',
   alignItems: 'center',
@@ -44,5 +44,5 @@ export const filterButton = style({
 
 export const filterLists = style({
   position: 'sticky',
-  top: 98
+  top: 97
 })

@@ -25,9 +25,7 @@ export const HomeContainer = () => {
     <div className={styles.homeContainerLayout}>
       <Carousel/>
       <div className={styles.homeListsFilterContainer}>
-        <div>
-          <HeadlessSelect items={selectOptions} onChange={onChangeSelectBox}/>
-        </div>
+        <HeadlessSelect items={selectOptions} onChange={onChangeSelectBox}/>
         <button type={"button"} onClick={() => setFilterOpen(!filterOpen)} className={styles.filterButton}>
           <FlexBox direction={'row'} gap={6}>
             <VscSettings size={14} color={'#8c8c8c'}/>

@@ -3,16 +3,19 @@ import {vars} from "@styles/theme.css";
 
 export const feedListsTitle = style({
   width: '100%',
-  backgroundColor: vars.colors.white000
+  backgroundColor: vars.colors.white000,
+  position: 'sticky',
+  top: 0,
+  left: 0,
+  borderBottom: '1px solid #dddddd'
 })
 
 export const feedListsLayout = style({
   width: '100%',
   height: '100%',
   backgroundColor: vars.colors.backgroundColor,
-  borderTop: '1px solid #dddddd',
   display: "flex",
   flexDirection: 'column',
-  padding: '1em 1.25em',
-  gap: 16
+  gap: 16,
+  padding: '1em 0'
 })

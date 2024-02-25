@@ -19,7 +19,7 @@ export const appContainer = style({
   maxWidth: '428px !important',
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: vars.colors.white000,
+  backgroundColor: vars.colors.backgroundColor,
   boxShadow: "0px 0px 16px rgb(50 50 50 / 12%)",
   justifyContent: "space-between"
 })

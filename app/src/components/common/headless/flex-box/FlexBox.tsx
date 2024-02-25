@@ -22,7 +22,7 @@ const FlexBox = forwardRef(
       justifyContent = 'center',
       alignItems = 'center',
       gap = 0,
-      width = 'fix-content',
+      width = '100%',
       height = 'auto',
       ...rest
     }: PropsWithChildren<FlexBoxProps>,
