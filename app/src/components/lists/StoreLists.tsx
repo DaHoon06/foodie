@@ -6,6 +6,8 @@ import {AxiosError, AxiosResponse} from "axios";
 import {queryKeys} from "@services/keys/queryKeys";
 import {getRestaurantListsApi} from "@services/apis/restaurant";
 import {useIntersectionObserver} from "@hooks/useIntersectionObserver";
+import {list} from "postcss";
+import {SpinnerUi} from "@components/ui/spinner/SpinnerUi";
 
 interface Props {
   sort: string;
@@ -17,27 +19,27 @@ export const StoreLists = (props: Props): ReactElement => {
   const {
     data: listQueryData,
     isLoading,
+    isError,
     fetchNextPage,
+    isFetchingNextPage,
     hasNextPage
-  } = useInfiniteQuery<AxiosResponse, AxiosError, ResponseReturnValue<{ data: StoreCardItem[] }>>(
+  } = useInfiniteQuery<AxiosResponse, AxiosError, ResponseReturnValue<StoreCardItem[]>>(
     [queryKeys.lists.restaurantLists],
     ({pageParam = 1}) => getRestaurantListsApi(sort, {pageParam}),
     {
       getNextPageParam: (lastPage, allPages) => {
         const nextPage = allPages.length + 1;
-        return lastPage.data.length === 0 ? undefined : nextPage;
+        return lastPage.data.data.length === 0 ? undefined : nextPage;
       },
       select: (data) => ({
         pages: data?.pages.flatMap((page) => page.data),
         pageParams: data.pageParams
-      })
+      }),
+      keepPreviousData: true,
+      staleTime: 60 * 10000,
+      cacheTime: 60 * 10000,
     }
   )
-
-  // const {data: listQueryData, isLoading} = useRestaurantQuery(sort);
-  // useEffect(() => {
-  //   prefetchingRestaurantList().then();
-  // }, []);
 
   const {setTarget} = useIntersectionObserver({
     hasNextPage,
@@ -45,25 +47,33 @@ export const StoreLists = (props: Props): ReactElement => {
   });
 
   if (isLoading) return <div>...isLoading</div>
-  //todo: 데이터가 없을 경우에 대한 처리 필요
-  if (!listQueryData) return <div>데이터가 존재하지 않습니다.</div>
+
+  if (isError) return <div>...isError</div>
 
   return (
     <>
       <article className={styles.storeListsLayout}>
         <div className={styles.storeListsContainer}>
-          {listQueryData.data.data.map((store: StoreCardItem, index: number) => {
+          {listQueryData.pages.map((page: {data: StoreCardItem[]}, index) => {
             return (
-              <div key={index}>
-                <StoreCard
-                  items={store}
-                />
-              </div>
+              <>
+                {page.data.map((store: StoreCardItem) => {
+                  return (
+                    <div key={crypto.randomUUID()}>
+                      <StoreCard
+                        items={store}
+                      />
+                    </div>
+                  )
+                })}
+              </>
             )
           })}
+
         </div>
       </article>
-      <div ref={setTarget}/>
+
+      {!isFetchingNextPage ? (<SpinnerUi isLoading={true} />) : (<div ref={setTarget}/>)}
     </>
 
   )

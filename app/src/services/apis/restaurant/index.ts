@@ -4,6 +4,6 @@ import {AxiosResponse} from "axios";
 
 const DOMAIN = `/restaurant`
 
-export const getRestaurantListsApi = async (sort: string): Promise<AxiosResponse<ResponseReturnValue<StoreCardItem[]>>> => {
-  return axiosInstance.get(`${DOMAIN}?sort=${sort}`);
+export const getRestaurantListsApi = async (sort: string, page: {pageParam: number}): Promise<AxiosResponse<ResponseReturnValue<StoreCardItem[]>>> => {
+  return axiosInstance.get(`${DOMAIN}?page=${page.pageParam}`);
 }
