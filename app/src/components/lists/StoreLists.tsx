@@ -73,7 +73,7 @@ export const StoreLists = (props: Props): ReactElement => {
         </div>
       </article>
 
-      {!isFetchingNextPage ? (<SpinnerUi isLoading={true} />) : (<div ref={setTarget}/>)}
+      {isFetchingNextPage ? (<SpinnerUi isLoading={true} />) : (<div ref={setTarget}/>)}
     </>
 
   )
