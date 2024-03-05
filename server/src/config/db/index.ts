@@ -1,13 +1,35 @@
-import {ConfigService} from "@nestjs/config";
-import {TypeOrmModuleOptions} from "@nestjs/typeorm";
+import {AsyncModelFactory, MongooseModule} from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { DynamicModule } from '@nestjs/common';
+import { MongoDataBase } from './mongoCollections';
+import {UserFactory} from "@modules/users/schema/user.schema";
 
-export const DbConfig = (config: ConfigService): TypeOrmModuleOptions => ({
-  type: 'mysql',
-  host: config.get('DB_HOST'),
-  port: config.get<number>('DB_PORT'),
-  username: config.get('DB_USER'),
-  password: config.get('DB_PASSWORD'),
-  database: config.get('DB_NAME'),
-  entities: [],
-  synchronize: true,
-});
+export const GoFoodieConfig = async (
+  configService: ConfigService,
+): Promise<{ uri: string; dbName: string }> => {
+  const mongouri = configService.get<string>('MONGO_URI') as string;
+  return {
+    uri: mongouri,
+    dbName: MongoDataBase.FOODIE,
+  };
+};
+
+export class MongoConnector {
+  get GoFoodieDatabase(): DynamicModule {
+    return MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      connectionName: MongoDataBase.FOODIE,
+      useFactory: GoFoodieConfig,
+      inject: [ConfigService],
+    });
+  }
+}
+
+const foodieFactory: AsyncModelFactory[] = [
+  UserFactory,
+];
+
+export const GoFoodieFeature = MongooseModule.forFeatureAsync(
+  foodieFactory,
+  MongoDataBase.FOODIE,
+);

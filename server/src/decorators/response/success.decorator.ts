@@ -1,7 +1,7 @@
 import { applyDecorators, HttpStatus, Type } from '@nestjs/common';
 import { ApiExtraModels, ApiResponse, getSchemaPath } from '@nestjs/swagger';
-import { ResponseSuccessDto } from '@common/decorators/response/dto/response-success.dto';
-import { makeInstanceByApiProperty } from '@common/decorators/response/makeInstanceByApiProperty';
+import { ResponseSuccessDto } from './dto/response-success.dto';
+import { makeInstanceByApiProperty } from './makeInstanceByApiProperty';
 
 interface SuccessResponseOption {
   /**

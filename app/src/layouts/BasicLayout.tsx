@@ -16,7 +16,7 @@ export const BasicLayout = ({children,options}: Props): ReactElement => {
       <MetaHead/>
       <div className={styles.appLayout}>
         <AppLanding/>
-        <div className={styles.appContainer} style={{backgroundColor: options?.backgroundColor | '#fff'}}>
+        <div className={styles.appContainer}>
           <main className={styles.appMainContainer}>
             {children}
           </main>

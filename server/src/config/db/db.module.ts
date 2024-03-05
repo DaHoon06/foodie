@@ -1,13 +1,10 @@
-import {Module} from "@nestjs/common";
-import {TypeOrmModule} from "@nestjs/typeorm";
-import {ConfigModule, ConfigService} from "@nestjs/config";
-import {DbConfig} from "@config/db/index";
+import { Module } from '@nestjs/common';
+import { MongoConnector } from '@config/db/index';
+
+const mongoConnector = new MongoConnector();
 
 @Module({
-  imports: [TypeOrmModule.forRootAsync({
-    imports: [ConfigModule],
-    inject: [ConfigService],
-    useFactory: DbConfig,
-  }),],
+  imports: [mongoConnector.GoFoodieDatabase],
+  // providers: [UnisurveyFeature],
 })
-export class DbModule {}
+export class DataBaseModule {}

@@ -1,5 +1,5 @@
-import {Controller, Get, HttpStatus} from '@nestjs/common';
-import {SuccessResponse} from "@common/decorators/response/success.decorator";
+import { Controller, Get, HttpStatus } from '@nestjs/common';
+import { SuccessResponse } from '@decorators/response/success.decorator';
 
 @Controller()
 export class AppController {
@@ -13,7 +13,7 @@ export class AppController {
       exampleTitle: '헬시체크',
       overwriteValue: true,
       isDataSingle: true,
-    }
+    },
   ])
   healthCheck(): string {
     return 'hello world';

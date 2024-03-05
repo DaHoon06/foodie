@@ -18,8 +18,14 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@common/*": [
-        "src/common/*"
+      "@decorators/*": [
+        "src/decorators/*"
+      ],
+      "@filters/*": [
+        "src/filters/*"
+      ],
+      "@interceptors/*": [
+        "src/interceptors/*"
       ],
       "@modules/*": [
         "src/modules/*"

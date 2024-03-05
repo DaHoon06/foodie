@@ -5,8 +5,8 @@ interface FlexProps {
   justifyContent?: CSSProperties['justifyContent'];
   alignItems?: CSSProperties['alignItems'];
   gap?: number;
-  width?: string;
-  height?: string;
+  width?: string | number;
+  height?: string | number;
 }
 
 export interface FlexBoxProps

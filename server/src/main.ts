@@ -1,15 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import {Logger, ValidationPipe} from "@nestjs/common";
-import {HttpExceptionFilter} from "@common/filters/http-exception.filter";
-import {LoggingInterceptor} from "@common/interceptors/logger.interceptor";
-import {TimeoutInterceptor} from "@common/interceptors/time-out.interceptor";
-import {ResponseInterceptor} from "@common/interceptors/response.interceptor";
+import { Logger, ValidationPipe } from '@nestjs/common';
+import { HttpExceptionFilter } from '@filters/http-exception.filter';
+import { LoggingInterceptor } from '@interceptors/logger.interceptor';
+import { TimeoutInterceptor } from '@interceptors/time-out.interceptor';
+import { ResponseInterceptor } from '@interceptors/response.interceptor';
 import * as cookieParser from 'cookie-parser';
-import {setupSwagger} from "@config/swagger";
+import { setupSwagger } from '@config/swagger';
 
 const PORT = 4800;
-const HTTP_DOMAIN = 'http://localhost:6000';
+const HTTP_DOMAIN = 'http://localhost:4888';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('/api');
@@ -26,7 +26,6 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggingInterceptor(new Logger('NestJS')));
   // Note: 일정 시간이 지나도록 응답이 없으면 요청을 취소하고 에러를 발생시킨다.
   app.useGlobalInterceptors(new TimeoutInterceptor());
-
   app.useGlobalInterceptors(new ResponseInterceptor());
 
   app.use(cookieParser());
