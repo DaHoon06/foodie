@@ -17,10 +17,12 @@ const selectOptions = [
 export const HomeContainer = () => {
   const [sort, setSort] = useState('1');
   const [filterOpen, setFilterOpen] = useState(false);
+
   const onChangeSelectBox = (payload: string) => {
     const index = selectOptions.findIndex(v => v.label === payload);
     setSort(selectOptions[index].key);
   }
+
   return (
     <div className={styles.homeContainerLayout}>
       <Carousel/>

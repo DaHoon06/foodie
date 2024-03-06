@@ -6,7 +6,6 @@ import {AxiosError, AxiosResponse} from "axios";
 import {queryKeys} from "@services/keys/queryKeys";
 import {getRestaurantListsApi} from "@services/apis/restaurant";
 import {useIntersectionObserver} from "@hooks/useIntersectionObserver";
-import {list} from "postcss";
 import {SpinnerUi} from "@components/ui/spinner/SpinnerUi";
 
 interface Props {
@@ -54,7 +53,7 @@ export const StoreLists = (props: Props): ReactElement => {
     <>
       <article className={styles.storeListsLayout}>
         <div className={styles.storeListsContainer}>
-          {listQueryData.pages.map((page: {data: StoreCardItem[]}, index) => {
+          {listQueryData.pages.map((page: {data: StoreCardItem[]}) => {
             return (
               <>
                 {page.data.map((store: StoreCardItem) => {
@@ -69,10 +68,8 @@ export const StoreLists = (props: Props): ReactElement => {
               </>
             )
           })}
-
         </div>
       </article>
-
       {isFetchingNextPage ? (<SpinnerUi isLoading={true} />) : (<div ref={setTarget}/>)}
     </>
 
