@@ -1,15 +1,15 @@
-import {AsyncModelFactory, MongooseModule} from '@nestjs/mongoose';
+import { AsyncModelFactory, MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DynamicModule } from '@nestjs/common';
 import { MongoDataBase } from './mongoCollections';
-import {UserFactory} from "@modules/users/schema/user.schema";
+import { UserFactory } from '@modules/users/schema/user.schema';
 
 export const GoFoodieConfig = async (
   configService: ConfigService,
 ): Promise<{ uri: string; dbName: string }> => {
-  const mongouri = configService.get<string>('MONGO_URI') as string;
+  const mongoUri = configService.get<string>('MONGO_URI') as string;
   return {
-    uri: mongouri,
+    uri: mongoUri,
     dbName: MongoDataBase.FOODIE,
   };
 };
@@ -25,9 +25,7 @@ export class MongoConnector {
   }
 }
 
-const foodieFactory: AsyncModelFactory[] = [
-  UserFactory,
-];
+const foodieFactory: AsyncModelFactory[] = [UserFactory];
 
 export const GoFoodieFeature = MongooseModule.forFeatureAsync(
   foodieFactory,
