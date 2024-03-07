@@ -68,6 +68,13 @@
       "ts"
     ],
     "rootDir": "src",
+    "moduleNameMapper": {
+      "^@filters/(.*)$": "<rootDir>/filters/$1",
+      "^@decorators/(.*)$": "<rootDir>/decorators/$1",
+      "^@interceptors/(.*)$": "<rootDir>/interceptors/$1",
+      "^@config/(.*)$": "<rootDir>/config/$1",
+      "^@modules/(.*)$": "<rootDir>/modules/$1"
+    },
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
