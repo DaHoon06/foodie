@@ -5,6 +5,5 @@ const mongoConnector = new MongoConnector();
 
 @Module({
   imports: [mongoConnector.GoFoodieDatabase],
-  // providers: [UnisurveyFeature],
 })
 export class DataBaseModule {}
