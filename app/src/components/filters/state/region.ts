@@ -1,9 +1,5 @@
 export const regionDo = [
   {
-    label: "전체",
-    key: "all",
-  },
-  {
     label: "서울",
     key: "seoul",
     children: [

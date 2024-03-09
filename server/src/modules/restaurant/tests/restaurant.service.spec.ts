@@ -52,6 +52,7 @@ describe('restaurantService Test Case', () => {
         storeName: '치킨시대',
         userId: 'dahoon06',
         region: {
+          major: '서울',
           district: '구로구',
           town: '구로동',
         },
@@ -80,10 +81,15 @@ describe('restaurantService Test Case', () => {
         point: 4.7,
       },
     ];
+    const filters = {
+      page: 1,
+      region: '서울',
+      sort: 'grade',
+    };
     jest
       .spyOn(repository, 'findManyRestaurantLists')
       .mockImplementationOnce(() => Promise.resolve(stroeData));
-    const storeLists = await service.getLists();
+    const storeLists = await service.getLists(filters);
     expect(storeLists).toStrictEqual(expectedData);
   });
 });

@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { RestaurantService } from '@modules/restaurant/restaurant.service';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RestaurantListsDto } from '@modules/restaurant/dto/restaurant.lists.dto';
@@ -21,9 +21,9 @@ export class RestaurantController {
   })
   @Get('/lists')
   async restaurantLists(
-    @Param('page') page: number,
-    @Param('sort') sort: string,
-    @Param('region') region: string,
+    @Query('page') page: number,
+    @Query('sort') sort: string,
+    @Query('region') region: string,
   ): Promise<RestaurantListsDto[]> {
     const filters: FilterDto = {
       page,

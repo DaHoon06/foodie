@@ -8,7 +8,7 @@ import { makeCategoryTag, makeRegionTag } from './utiils/lists';
 export class RestaurantService {
   constructor(private readonly restaurantRepository: RestaurantRepository) {}
 
-  async getLists(filters?: FilterDto): Promise<RestaurantListsDto[]> {
+  async getLists(filters: FilterDto): Promise<RestaurantListsDto[]> {
     const data =
       await this.restaurantRepository.findManyRestaurantLists(filters);
     return data.map((store) => {

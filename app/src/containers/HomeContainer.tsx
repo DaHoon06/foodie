@@ -9,9 +9,9 @@ import { Typography } from "@components/common/typography/Typography";
 import { RegionFilter } from "@components/filters/RegionFilter";
 
 const selectOptions = [
-  { id: "1", key: "gradeCount", label: "평점순" },
-  { id: "2", key: "reviewCount", label: "리뷰순" },
-  { id: "3", key: "viewCount", label: "조회순" },
+  { id: "1", key: "grade", label: "평점순" },
+  { id: "2", key: "review", label: "리뷰순" },
+  { id: "3", key: "view", label: "조회순" },
 ];
 
 export interface Filter {
@@ -21,8 +21,8 @@ export interface Filter {
 
 export const HomeContainer = () => {
   const [filter, setFilter] = useState<Filter>({
-    sort: "",
-    region: "",
+    sort: "grade",
+    region: "seoul",
   });
   const [filterOpen, setFilterOpen] = useState(false);
 

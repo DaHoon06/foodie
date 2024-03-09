@@ -5,6 +5,9 @@ import { Base } from '@common/schema/base.schema';
 
 export class Region {
   @Prop()
+  major: string;
+
+  @Prop()
   district: string;
 
   @Prop()
@@ -36,10 +39,7 @@ export class Point {
   timestamps: true,
 })
 export class Restaurant extends Base {
-  @Prop({
-    required: true,
-    unique: true,
-  })
+  @Prop()
   _id: Types.ObjectId;
 
   @Prop()

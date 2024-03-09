@@ -11,7 +11,7 @@ export const HorizontalNavBar = ({
   lists,
   onClickHandle,
 }: HorizontalNavBarProps) => {
-  const [active, setActive] = useState('');
+  const [active, setActive] = useState("seoul");
 
   const onClickItem = (value: string) => {
     onClickHandle(value);
@@ -20,7 +20,7 @@ export const HorizontalNavBar = ({
 
   const itemActive = (value: string): boolean => {
     return value === active;
-  }
+  };
 
   return (
     <nav className={styles.navBarLayout}>
@@ -28,7 +28,10 @@ export const HorizontalNavBar = ({
         {lists.map((list) => {
           return (
             <li
-              className={classNames(styles.navBarItems, itemActive(list.key) && styles.active)}
+              className={classNames(
+                styles.navBarItems,
+                itemActive(list.key) && styles.active
+              )}
               key={crypto.randomUUID()}
               onClick={() => onClickItem(list.key)}
             >
@@ -42,5 +45,3 @@ export const HorizontalNavBar = ({
     </nav>
   );
 };
-
-
