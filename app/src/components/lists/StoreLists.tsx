@@ -7,13 +7,14 @@ import {queryKeys} from "@services/keys/queryKeys";
 import {getRestaurantListsApi} from "@services/apis/restaurant";
 import {useIntersectionObserver} from "@hooks/useIntersectionObserver";
 import {SpinnerUi} from "@components/ui/spinner/SpinnerUi";
+import { Filter } from "@containers/HomeContainer";
 
 interface Props {
-  sort: string;
+  filter: Filter;
 }
 
 export const StoreLists = (props: Props): ReactElement => {
-  const {sort} = props;
+  const {filter} = props;
 
   const {
     data: listQueryData,
@@ -23,8 +24,8 @@ export const StoreLists = (props: Props): ReactElement => {
     isFetchingNextPage,
     hasNextPage
   } = useInfiniteQuery<AxiosResponse, AxiosError, ResponseReturnValue<StoreCardItem[]>>(
-    [queryKeys.lists.restaurantLists],
-    ({pageParam = 1}) => getRestaurantListsApi(sort, {pageParam}),
+    [queryKeys.lists.restaurantLists, filter],
+    ({pageParam = 1}) => getRestaurantListsApi(filter, {pageParam}),
     {
       getNextPageParam: (lastPage, allPages) => {
         const nextPage = allPages.length + 1;
