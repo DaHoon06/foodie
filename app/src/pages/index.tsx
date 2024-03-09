@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import { NextPage } from "next";
 import { queryClient } from "@libs/tanstack";
 import { queryKeys } from "@services/keys/queryKeys";
-import { getRestaurantListsApi } from "@services/apis/restaurant";
+import { getRestaurantListsApi } from "@apis/restaurant";
 import { dehydrate } from "@tanstack/react-query";
 
 const HomePage: NextPage = (): ReactElement => {
