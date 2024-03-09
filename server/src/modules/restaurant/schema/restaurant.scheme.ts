@@ -1,6 +1,7 @@
 import { MongooseModule, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 import { MongoCollections, MongoDataBase } from '@config/db/mongoCollections';
+import { Base } from '@common/schema/base.schema';
 
 export class Region {
   @Prop()
@@ -19,13 +20,13 @@ export class Categories {
 }
 
 export class Point {
-  @Prop()
+  @Prop({ default: 0 })
   view: number;
 
-  @Prop()
+  @Prop({ default: 0 })
   review: number;
 
-  @Prop()
+  @Prop({ default: 0 })
   average: number;
 }
 
@@ -34,7 +35,13 @@ export class Point {
   collection: MongoCollections.Restaurant,
   timestamps: true,
 })
-export class Restaurant {
+export class Restaurant extends Base {
+  @Prop({
+    required: true,
+    unique: true,
+  })
+  _id: Types.ObjectId;
+
   @Prop()
   storeId: string;
 
@@ -52,6 +59,9 @@ export class Restaurant {
 
   @Prop()
   point: Point;
+
+  @Prop({ default: false })
+  isDeleted: boolean;
 }
 
 export type RestaurantDocument = HydratedDocument<Restaurant>;

@@ -1,10 +1,10 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class FilterDto {
   @ApiProperty({
     description: '필터 - 정렬 방법 선택',
-    example: '1',
+    example: 'gradeCount',
     type: String,
   })
   @IsString()
@@ -13,10 +13,19 @@ export class FilterDto {
 
   @ApiProperty({
     description: '필터 - 지역 선택',
-    example: '1',
+    example: 'all',
     type: String,
   })
   @IsString()
   @IsOptional()
-  location: string;
+  region: string;
+
+  @ApiProperty({
+    description: '페이지 번호',
+    example: 1,
+    type: Number,
+  })
+  @IsNumber()
+  @IsOptional()
+  page: number;
 }

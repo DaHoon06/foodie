@@ -1,7 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { RestaurantService } from '@modules/restaurant/restaurant.service';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RestaurantListsDto } from '@modules/restaurant/dto/restaurant.lists.dto';
+import { FilterDto } from './dto/filter.dto';
 
 @Controller({
   path: 'restaurant',
@@ -16,10 +17,19 @@ export class RestaurantController {
   })
   @ApiCreatedResponse({
     description: '식당 목록 조회 성공',
-    type: RestaurantListsDto,
+    type: Array<RestaurantListsDto>,
   })
   @Get('/lists')
-  async restaurantLists() {
-    return this.restaurantService.getLists();
+  async restaurantLists(
+    @Param('page') page: number,
+    @Param('sort') sort: string,
+    @Param('region') region: string,
+  ): Promise<RestaurantListsDto[]> {
+    const filters: FilterDto = {
+      page,
+      sort,
+      region,
+    };
+    return this.restaurantService.getLists(filters);
   }
 }
