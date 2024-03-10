@@ -34,8 +34,8 @@ export class RestaurantRepository {
       },
       { $limit: this.listLimit },
       { $skip },
-      { $sort: { [sorting]: -1 } },
       { $sort: { _id: -1 } },
+      { $sort: { [sorting]: -1 } },
     ]);
   }
 
