@@ -2,7 +2,7 @@ import * as styles from "./HomeContainer.css";
 import { Carousel } from "@components/ui/carousel/CarouselUi";
 import { StoreLists } from "@components/lists/StoreLists";
 import { VscSettings } from "react-icons/vsc";
-import { SelectBox } from "@components/common/headless/selectbox";
+import { SelectBox } from "@components/common/select-box";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { useState } from "react";
 import { Typography } from "@components/common/typography/Typography";

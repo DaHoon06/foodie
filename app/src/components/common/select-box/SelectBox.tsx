@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as styles from "./SelectBox.css";
 import { Typography } from "@components/common/typography/Typography";
 
@@ -18,9 +18,27 @@ export const SelectBox = (props: SelectBoxProps) => {
   const [currentValue, setCurrentValue] = useState(items[0].label);
   const [showOptions, setShowOptions] = useState(false);
 
-  const onClickSelectOptions = (value: string) => {
+  const selectRef = useRef<HTMLUListElement | null>(null);
+
+  const handleClickSelectOptions = (value: string) => {
     setCurrentValue(value);
     onChange(value);
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      selectRef.current &&
+      !selectRef.current.contains(event.target as HTMLUListElement)
+    ) {
+      setShowOptions(false);
+    }
   };
 
   return (
@@ -32,6 +50,7 @@ export const SelectBox = (props: SelectBoxProps) => {
         {currentValue}
       </Typography>
       <ul
+        ref={selectRef}
         className={styles.selectBoxOptions}
         style={{ maxHeight: showOptions ? "none" : 0 }}
       >
@@ -41,7 +60,7 @@ export const SelectBox = (props: SelectBoxProps) => {
               className={styles.selectBoxOption}
               key={`${option.key}_${index}_${option.id}`}
               value={option.key}
-              onClick={() => onClickSelectOptions(option.label)}
+              onClick={() => handleClickSelectOptions(option.label)}
             >
               {option.label}
             </li>
