@@ -4,8 +4,7 @@ import { BasicLayout } from "@layouts/BasicLayout";
 import { Typography } from "@components/common/typography/Typography";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import * as styles from "@styles/pages/ManagementPage.css";
-import { KakaoButton } from "@components/buttons/KakaoButton";
-import { CgProfile } from "react-icons/cg";
+import { FaUser } from "react-icons/fa6";
 
 const ManagementPage: NextPage = (): ReactElement => {
   return (
@@ -28,7 +27,7 @@ const ManagementPage: NextPage = (): ReactElement => {
           justifyContent="space-between"
         >
           <div className={styles.profileBox}>
-            <CgProfile color="#7d7d7d" size={40} />
+            <FaUser color="#b7b7b7" size={26} />
           </div>
           <button>프로필 수정</button>
         </FlexBox>

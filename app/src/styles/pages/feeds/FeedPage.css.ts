@@ -17,5 +17,5 @@ export const feedListsLayout = style({
   display: "flex",
   flexDirection: "column",
   gap: 8,
-  padding: "8px 0",
+  padding: 0,
 });
