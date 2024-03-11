@@ -1,5 +1,5 @@
-import {style} from '@vanilla-extract/css';
-import {vars} from "@styles/theme.css";
+import { style } from "@vanilla-extract/css";
+import { vars } from "@styles/theme.css";
 
 export const appLayout = style({
   width: "100%",
@@ -11,26 +11,27 @@ export const appLayout = style({
   paddingLeft: "0 !important",
   paddingRight: "0 !important",
   justifyContent: "center",
-  backgroundColor: vars.colors.backgroundColor
+  backgroundColor: vars.colors.backgroundColor,
 });
 
 export const appContainer = style({
-  width: '100%',
-  maxWidth: '428px !important',
-  display: 'flex',
-  flexDirection: 'column',
+  width: "100%",
+  maxWidth: "428px !important",
+  display: "flex",
+  flexDirection: "column",
   backgroundColor: vars.colors.backgroundColor,
   boxShadow: "0px 0px 16px rgb(50 50 50 / 12%)",
-  justifyContent: "space-between"
-})
+  justifyContent: "space-between",
+});
 
 export const appMainContainer = style({
-  width: '100%',
-  maxWidth: '428px !important',
+  width: "100%",
+  maxWidth: "428px !important",
   position: "relative",
   top: 0,
   left: 0,
   right: 0,
   bottom: 0,
-  height: "calc(100% - 162px)",
-})
+  height: "100%",
+});
+// height: "calc(100% - 162px)",
