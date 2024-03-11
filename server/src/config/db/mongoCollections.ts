@@ -3,5 +3,6 @@ export const enum MongoDataBase {
 }
 
 export const enum MongoCollections {
-  USER = 'USER',
+  Restaurant = 'Restaurant',
+  User = 'User',
 }

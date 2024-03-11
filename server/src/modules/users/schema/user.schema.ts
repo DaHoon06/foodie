@@ -6,16 +6,15 @@ import {
   Schema,
   SchemaFactory,
 } from '@nestjs/mongoose';
-import { ObjectId } from 'mongodb';
 import { Document, HydratedDocument } from 'mongoose';
 
-@Schema({ versionKey: false, collection: MongoCollections.USER })
+@Schema({ versionKey: false, collection: MongoCollections.User })
 export class UserSchema extends Document {
-  @Prop({ required: true, type: ObjectId })
-  _id: string;
+  @Prop()
+  userId: string;
 
   @Prop({ required: true, type: String })
-  NAME: string;
+  name: string;
 }
 
 export const schema = SchemaFactory.createForClass(UserSchema);
@@ -25,7 +24,7 @@ export const schema = SchemaFactory.createForClass(UserSchema);
 // });
 
 export const UserFeature = MongooseModule.forFeature(
-  [{ name: UserSchema.name, schema }],
+  [{ name: UserSchema.name, schema, collection: MongoCollections.User }],
   MongoDataBase.FOODIE,
 );
 

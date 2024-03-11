@@ -1,28 +1,47 @@
-import * as styles from "@components/nav/NavBar.css";
-import {Typography} from "@components/common/typography/Typography";
+import * as styles from "./HorizontalBar.css";
+import { Typography } from "@components/common/typography/Typography";
+import classNames from "classnames";
+import { useState } from "react";
 
-interface Items {
-  label: string;
-  value: string;
+interface HorizontalNavBarProps {
+  lists: any[];
+  onClickHandle: (value: string) => void;
 }
+export const HorizontalNavBar = ({
+  lists,
+  onClickHandle,
+}: HorizontalNavBarProps) => {
+  const [active, setActive] = useState("seoul");
 
-interface Props {
-  items: Items[]
-}
+  const onClickItem = (value: string) => {
+    onClickHandle(value);
+    setActive(value);
+  };
 
-export const HorizontalBar = (props: Props) => {
-  const {items} = props;
+  const itemActive = (value: string): boolean => {
+    return value === active;
+  };
+
   return (
     <nav className={styles.navBarLayout}>
       <ul className={styles.navBarLists}>
-        {items.map((item) => {
+        {lists.map((list) => {
           return (
-            <li className={styles.navBarItems} key={crypto.randomUUID()}>
-              <Typography color={"gray400"} fontSize={14}>{item.label}</Typography>
+            <li
+              className={classNames(
+                styles.navBarItems,
+                itemActive(list.key) && styles.active
+              )}
+              key={crypto.randomUUID()}
+              onClick={() => onClickItem(list.key)}
+            >
+              <Typography color={"gray400"} fontSize={14}>
+                {list.label}
+              </Typography>
             </li>
-          )
+          );
         })}
       </ul>
     </nav>
-  )
-}
+  );
+};

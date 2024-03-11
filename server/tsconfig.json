@@ -32,6 +32,9 @@
       ],
       "@config/*": [
         "src/config/*"
+      ],
+      "@common/*": [
+        "src/common/*"
       ]
     }
   }
