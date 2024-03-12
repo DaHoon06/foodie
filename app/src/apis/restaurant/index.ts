@@ -10,7 +10,6 @@ export const getRestaurantListsApi = async (
   page: { pageParam: number }
 ): Promise<AxiosResponse<ResponseReturnValue<StoreCardItem[]>>> => {
   const { region, sort } = filter;
-  return axiosInstance.get(
-    `${DOMAIN}/lists?page=${page.pageParam}&sort=${sort}&region=${region}`
-  );
+  const url = `${DOMAIN}/lists?page=${page.pageParam}&sort=${sort}&region=${region}`
+  return axiosInstance.get(url);
 };

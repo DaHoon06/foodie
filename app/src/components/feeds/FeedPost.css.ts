@@ -17,4 +17,11 @@ export const FeedTextarea = style({
   padding: "1em",
   outline: "none",
   color: "black",
+  whiteSpace: 'pre-wrap',
+
+  selectors: {
+    '&::-webkit-scrollbar': {
+      display: 'none'
+    }
+  }
 });
