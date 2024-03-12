@@ -51,6 +51,7 @@ const CustomHead = ({
         property="twitter:url"
         content={url}
       />
+      <title>{title}</title>
     </Head>
   )
 }
