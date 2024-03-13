@@ -1,6 +1,9 @@
-import React, {ReactElement} from "react";
-import {TypographyProps, Variant} from "@components/common/typography/Typography.type";
-import {vars} from "@styles/theme.css";
+import React, { ReactElement } from "react";
+import {
+  TypographyProps,
+  Variant,
+} from "@components/common/typography/Typography.type";
+import { vars } from "@styles/theme.css";
 
 const element: { [key in Variant]: string } = {
   h1: "h1",
@@ -20,7 +23,7 @@ function baseElement(props: TypographyProps) {
     fontSize = 16,
     color = "black100",
     lineHeight = 18,
-    letterSpacing = 1,
+    letterSpacing = "-0.5",
     children,
     as,
     ...rest
@@ -34,11 +37,11 @@ function baseElement(props: TypographyProps) {
         fontWeight,
         fontSize: `min(5vw, ${fontSize}px)`,
         lineHeight: `${lineHeight}px`,
-        letterSpacing: `${letterSpacing}px`
+        letterSpacing: `${letterSpacing}px`,
       },
       ...rest,
     },
-    children,
+    children
   );
 }
 

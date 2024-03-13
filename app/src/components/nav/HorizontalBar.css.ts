@@ -9,6 +9,15 @@ export const navBarLayout = style({
   margin: "0 auto",
   height: 46,
 });
+export const customNavBarLayout = style({
+  backgroundColor: vars.colors.white000,
+  width: "100%",
+  overflow: "hidden",
+  display: "flex",
+  margin: "0 auto",
+  height: "auto",
+  borderRadius: 6,
+});
 
 export const navBarLists = style({
   display: "flex",
