@@ -16,6 +16,7 @@ import { SearchBar } from "@components/form/SearchBar";
 import { primaryIconColor } from "@styles/theme.css";
 import Image from "next/image";
 import { CustomHorizontalBar } from "@components/nav/CustomHorizontalBar";
+import { StarRating } from "@components/ui/rating/star";
 
 type Props = {
   keyword: string;
@@ -74,6 +75,9 @@ const SearchResultPage = ({ keyword }: Props): ReactElement => {
                   <Typography as={"span"} fontSize={14} color={"gray400"}>
                     2.6
                   </Typography>
+                  <div>
+                    <StarRating average={2.5} />
+                  </div>
                   <span>별 2.5 표현해보자</span>
                   <Typography as={"span"} fontSize={14} color={"gray400"}>
                     리뷰 34명
