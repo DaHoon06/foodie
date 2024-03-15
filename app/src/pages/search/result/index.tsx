@@ -1,29 +1,34 @@
-import { Button } from "@components/buttons";
+import {Button} from "@components/buttons";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { Typography } from "@components/common/typography/Typography";
-import { BasicLayout } from "@layouts/BasicLayout";
+import {Typography} from "@components/common/typography/Typography";
+import {BasicLayout} from "@layouts/BasicLayout";
 import CustomHead from "@layouts/heads/CustomHead";
 import {
   GetServerSideProps,
   GetServerSidePropsContext,
   GetServerSidePropsResult,
 } from "next";
-import { ReactElement, useState } from "react";
-import { FaPlus } from "react-icons/fa6";
+import {ReactElement, useState} from "react";
+import {FaPlus} from "react-icons/fa6";
 import * as styles from "@styles/pages/search/result/SearchResultPage.css";
-import { IoIosArrowBack } from "react-icons/io";
-import { SearchBar } from "@components/form/SearchBar";
-import { primaryIconColor } from "@styles/theme.css";
+import {IoIosArrowBack} from "react-icons/io";
+import {SearchBar} from "@components/form/SearchBar";
+import {primaryIconColor} from "@styles/theme.css";
 import Image from "next/image";
-import { CustomHorizontalBar } from "@components/nav/CustomHorizontalBar";
-import { StarRating } from "@components/ui/rating/star";
+import {CustomHorizontalBar} from "@components/nav/CustomHorizontalBar";
+import {StarRating} from "@components/ui/rating/star";
+import {MdOutlineRestaurantMenu, MdAccessTime} from "react-icons/md";
+import {LuParkingCircle} from "react-icons/lu";
+import {GrLocation} from "react-icons/gr";
+import {AiFillLike, AiFillDislike} from "react-icons/ai";
+import {ReviewCard} from "@components/cards/ReviewCard";
 
 type Props = {
   keyword: string;
 };
 
-const SearchResultPage = ({ keyword }: Props): ReactElement => {
-  const [keywords, setKeyowrds] = useState(keyword);
+const SearchResultPage = ({keyword}: Props): ReactElement => {
+  const [keywords, setKeywords] = useState(keyword);
   const title = keyword ? `${keyword} - 고푸디` : `고푸디`;
 
   const handleAddKeyword = (text: string) => {
@@ -37,12 +42,12 @@ const SearchResultPage = ({ keyword }: Props): ReactElement => {
 
   return (
     <>
-      <CustomHead title={title} />
+      <CustomHead title={title}/>
       <BasicLayout>
         <div className={styles.searchResultLayout}>
           <div className={styles.customResultPageBackButtonWrapper}>
             <button type={"button"} aria-label={"close_search_page_button"}>
-              <IoIosArrowBack size={24} color={primaryIconColor} />
+              <IoIosArrowBack size={24} color={primaryIconColor}/>
             </button>
 
             <Button
@@ -52,7 +57,7 @@ const SearchResultPage = ({ keyword }: Props): ReactElement => {
               variant={"primary"}
             >
               <FlexBox direction="row" gap={8}>
-                <FaPlus color={"#fff"} size={14} />
+                <FaPlus color={"#fff"} size={14}/>
                 <Typography
                   as={"span"}
                   fontSize={12}
@@ -65,39 +70,48 @@ const SearchResultPage = ({ keyword }: Props): ReactElement => {
             </Button>
           </div>
 
-          <SearchBar keyword={keywords} onAddKeyword={handleAddKeyword} />
+          <SearchBar keyword={keywords} onAddKeyword={handleAddKeyword}/>
 
-          <FlexBox>
+          <FlexBox gap={10}>
             <div className={styles.searchResultContainer}>
-              <div>
+              <FlexBox direction={'column'} gap={4} alignItems={'flex-start'}>
                 <Typography fontSize={16}>라크라센타</Typography>
-                <div>
+
+                <FlexBox justifyContent={'flex-start'} direction={'row'} gap={10}>
                   <Typography as={"span"} fontSize={14} color={"gray400"}>
                     2.6
                   </Typography>
                   <div>
-                    <StarRating average={2.5} />
+                    <StarRating average={2.5}/>
                   </div>
-                  <span>별 2.5 표현해보자</span>
+
                   <Typography as={"span"} fontSize={14} color={"gray400"}>
-                    리뷰 34명
+                    34 명
                   </Typography>
-                </div>
-                <div>
+                </FlexBox>
+
+                <FlexBox direction={'row'} justifyContent={"flex-start"} alignItems={"flex-start"} gap={4}>
+                  <MdOutlineRestaurantMenu color={'#9a9a9a'} style={14}/>
                   <Typography as={"span"} fontSize={14} color={"gray500"}>
                     브런치
                   </Typography>
-                </div>
-                <div>
+                  <GrLocation color={'#9a9a9a'} style={14}/>
                   <Typography fontSize={14} color={"gray500"}>
                     구로구/구로동
                   </Typography>
-                </div>
-                <div>
+                </FlexBox>
+
+                <FlexBox alignItems={'center'} direction={'row'} justifyContent={'flex-start'} gap={4}>
+                  <MdAccessTime color={'#9a9a9a'} style={14}/>
                   <Typography fontSize={14} color={"gray500"}>
-                    영업종료 | 주차가능
+                    영업종료
                   </Typography>
-                </div>
+                  <LuParkingCircle color={'#9a9a9a'} style={14}/>
+                  <Typography fontSize={14} color={"gray500"}>
+                    주차가능
+                  </Typography>
+                </FlexBox>
+
                 <CustomHorizontalBar>
                   <Image
                     className={styles.itemThumbnail}
@@ -143,10 +157,19 @@ const SearchResultPage = ({ keyword }: Props): ReactElement => {
                   />
                 </CustomHorizontalBar>
 
-                <div>리뷰글</div>
-              </div>
+              </FlexBox>
             </div>
           </FlexBox>
+          <FlexBox gap={8}>
+            <ReviewCard/>
+            <ReviewCard/>
+            <ReviewCard/>
+            <ReviewCard/>
+            <ReviewCard/>
+            <ReviewCard/>
+          </FlexBox>
+
+
         </div>
       </BasicLayout>
     </>
@@ -154,11 +177,9 @@ const SearchResultPage = ({ keyword }: Props): ReactElement => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({
-  query,
-}: GetServerSidePropsContext): Promise<
-  GetServerSidePropsResult<{ keyword: string }>
-> => {
-  const { keyword } = query as { keyword: string };
+                                                               query,
+                                                             }: GetServerSidePropsContext): Promise<GetServerSidePropsResult<{ keyword: string }>> => {
+  const {keyword} = query as { keyword: string };
 
   //todo 검색 조회
 

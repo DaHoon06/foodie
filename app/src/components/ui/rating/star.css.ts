@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import {style} from "@vanilla-extract/css";
 
 
 export const starRatings = style({
@@ -8,7 +8,7 @@ export const starRatings = style({
   width: "max-content",
   WebkitTextFillColor: "transparent",
   WebkitTextStrokeWidth: "1.3px",
-  WebkitTextStrokeColor: "transparent",
+  WebkitTextStrokeColor: "#ededed",
 });
 export const starRatingsFill = style({
   color: "#fff58c",

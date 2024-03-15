@@ -1,4 +1,5 @@
-import { style } from "@vanilla-extract/css";
+import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
 export const searchResultLayout = style({
   width: "100%",
@@ -31,7 +32,8 @@ export const customResultPageBackButtonWrapper = style({
   height: 38,
   marginBottom: 10,
   display: "flex",
-justifyContent: 'space-between'});
+  justifyContent: 'space-between'
+});
 
 export const searchResultContainer = style({
   width: "100%",
@@ -56,12 +58,3 @@ export const itemThumbnail = style({
   },
 });
 
-export const addStoreContainer = style({
-  width: "100%",
-  height: "100%",
-  minHeight: 300,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "flex-end",
-});
