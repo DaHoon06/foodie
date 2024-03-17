@@ -1,5 +1,7 @@
 import {Head, Html, Main, NextScript} from "next/document";
 
+const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
+
 export default function Document() {
   return (
     <Html lang="kr">

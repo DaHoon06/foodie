@@ -7,6 +7,7 @@ import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {useState} from "react";
 import {Typography} from "@components/common/typography/Typography";
 import {RegionFilter} from "@components/filters/RegionFilter";
+import {KakaoMap} from "@components/kakao/KakaoMap";
 
 const selectOptions = [
   {id: "1", key: "grade", label: "평점순"},
@@ -61,9 +62,8 @@ export const HomeContainer = () => {
   return (
     <div className={styles.homeContainerLayout}>
       {/*<Carousel />*/}
-      <div>
-        오늘은 어떠한
-      </div>
+     
+      <KakaoMap/>
       <div
         className={styles.homeListsFilterContainer}
         style={{
