@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { useRouter } from "next/router";
+import React, {useCallback, useState} from "react";
+import {useRouter} from "next/router";
 import * as styles from "@components/form/SearchBar.css";
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   keyword?: string;
 };
 
-export const SearchBar = ({ onAddKeyword, keyword }: Props) => {
+export const SearchBar = ({onAddKeyword, keyword}: Props) => {
   const [searchValue, setSearchValue] = useState(keyword || "");
 
   const router = useRouter();
@@ -26,10 +26,9 @@ export const SearchBar = ({ onAddKeyword, keyword }: Props) => {
         alert("키워드를 입력해 주세요.");
         return;
       }
-      await router.push(`/search?keyword=${searchValue}`);
+      await router.push(`/search/result?keyword=${encodeURIComponent(searchValue)}`);
       onAddKeyword(searchValue);
       setSearchValue("");
-      router.push(`/search/result?keyword=${encodeURIComponent(searchValue)}`);
     },
     [searchValue, router, onAddKeyword]
   );

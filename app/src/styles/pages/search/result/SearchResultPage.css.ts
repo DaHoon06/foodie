@@ -11,6 +11,7 @@ export const searchResultLayout = style({
   marginRight: "unset",
   boxShadow: "0 0 16px rgb(50, 50, 50 / 12%)",
   padding: "1em 1.5em",
+  backgroundColor: vars.colors.white000,
 
   "@media": {
     "screen and (max-width: 1024px)": {

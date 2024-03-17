@@ -3,7 +3,7 @@ import {vars} from "@styles/theme.css";
 
 export const reviewCardLayout = style({
   width: '100%',
-  backgroundColor: vars.colors.white000,
+  backgroundColor: '#f9f9f98a',
   border: '1px solid #ededed',
   borderRadius: 4,
   padding: '1em'

@@ -1,17 +1,17 @@
 import * as styles from "./HomeContainer.css";
-import { Carousel } from "@components/ui/carousel/CarouselUi";
-import { StoreLists } from "@components/lists/StoreLists";
-import { VscSettings } from "react-icons/vsc";
-import { SelectBox } from "@components/common/select-box";
+import {Carousel} from "@components/ui/carousel/CarouselUi";
+import {StoreLists} from "@components/lists/StoreLists";
+import {VscSettings} from "react-icons/vsc";
+import {SelectBox} from "@components/common/select-box";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { useState } from "react";
-import { Typography } from "@components/common/typography/Typography";
-import { RegionFilter } from "@components/filters/RegionFilter";
+import {useState} from "react";
+import {Typography} from "@components/common/typography/Typography";
+import {RegionFilter} from "@components/filters/RegionFilter";
 
 const selectOptions = [
-  { id: "1", key: "grade", label: "평점순" },
-  { id: "2", key: "review", label: "리뷰순" },
-  { id: "3", key: "view", label: "조회순" },
+  {id: "1", key: "grade", label: "평점순"},
+  {id: "2", key: "review", label: "리뷰순"},
+  {id: "3", key: "view", label: "조회순"},
 ];
 
 export interface Filter {
@@ -49,7 +49,7 @@ export const HomeContainer = () => {
         className={styles.filterButton}
       >
         <FlexBox direction={"row"} gap={6}>
-          <VscSettings size={14} color={"#8c8c8c"} />
+          <VscSettings size={14} color={"#8c8c8c"}/>
           <Typography color={"gray400"} fontSize={12}>
             필터
           </Typography>
@@ -60,16 +60,19 @@ export const HomeContainer = () => {
 
   return (
     <div className={styles.homeContainerLayout}>
-      <Carousel />
+      {/*<Carousel />*/}
+      <div>
+        오늘은 어떠한
+      </div>
       <div
         className={styles.homeListsFilterContainer}
         style={{
           borderColor: !filterOpen ? "#ededed" : "transparent",
         }}
       >
-        <SelectBox items={selectOptions} onChange={onChangeSelectBox} />
+        <SelectBox items={selectOptions} onChange={onChangeSelectBox}/>
 
-        <FilterButton />
+        <FilterButton/>
       </div>
       <div
         style={{
@@ -78,9 +81,9 @@ export const HomeContainer = () => {
         }}
         className={styles.filterLists}
       >
-        <RegionFilter filter={setFilters} />
+        <RegionFilter filter={setFilters}/>
       </div>
-      <StoreLists filter={filter} />
+      <StoreLists filter={filter}/>
     </div>
   );
 };

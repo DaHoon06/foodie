@@ -160,6 +160,9 @@ const SearchResultPage = ({keyword}: Props): ReactElement => {
               </FlexBox>
             </div>
           </FlexBox>
+          <Typography>
+            {keywords} 에 대한 6 건의 리뷰
+          </Typography>
           <FlexBox gap={8}>
             <ReviewCard/>
             <ReviewCard/>
