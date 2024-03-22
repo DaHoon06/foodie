@@ -6,7 +6,7 @@ export const headerLayout = style({
   alignItems: 'center',
   width: '100%',
   maxWidth: 428,
-  height: 54,
+  height: 66,
   margin: '0 auto',
   minHeight: 'unset !important',
   padding: '0 20px',

@@ -12,8 +12,7 @@ export const KakaoMap = (): ReactElement => {
     document.head.appendChild(script);
 
     script.onload = () => {
-      const {kakao} = window;
-
+      const kakao: any = (window as any).kakao;
       kakao.maps.load(() => {
         const mapElement = document.getElementById('map');
         navigator.geolocation.getCurrentPosition(function (position) {
