@@ -14,6 +14,11 @@ export class Region {
   town: string;
 }
 
+export class Coordinate {
+  iat: number;
+  lon: number;
+}
+
 export class Categories {
   @Prop()
   majorCategory: string;
@@ -43,22 +48,22 @@ export class Restaurant extends Base {
   _id: Types.ObjectId;
 
   @Prop()
-  storeId: string;
-
-  @Prop()
-  storeName: string;
+  restaurnatName: string;
 
   @Prop()
   userId: string;
 
-  @Prop()
+  @Prop({ type: Region })
   region: Region;
 
-  @Prop()
+  @Prop({ type: Categories })
   categories: Categories;
 
-  @Prop()
+  @Prop({ type: Point, default: { view: 0, review: 0, average: 0 } })
   point: Point;
+
+  @Prop({ type: Coordinate })
+  coordinate: Coordinate;
 
   @Prop({ default: false })
   isDeleted: boolean;

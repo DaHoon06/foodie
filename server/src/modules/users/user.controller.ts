@@ -1,13 +1,13 @@
-import {Controller, Post} from "@nestjs/common";
+import { Controller, Post } from '@nestjs/common';
 
 @Controller({
-  path: 'users'
+  path: 'users',
 })
 export class UserController {
   constructor() {}
 
   @Post()
   async tesCode(): Promise<string> {
-    return 'say hello'
+    return 'say hello';
   }
 }

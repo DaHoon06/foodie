@@ -12,11 +12,11 @@ export class RestaurantService {
     const data =
       await this.restaurantRepository.findManyRestaurantLists(filters);
     return data.map((store) => {
-      const { region, categories, point, storeName } = store;
+      const { region, categories, point, restaurnatName } = store;
       const regionTag = makeRegionTag(region);
       const categoryTag = makeCategoryTag(categories);
       return {
-        title: storeName,
+        title: restaurnatName,
         location: regionTag,
         categories: categoryTag,
         point: point.average,

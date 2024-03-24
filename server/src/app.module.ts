@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DataBaseModule } from '@config/db/db.module';
 import { UserModule } from '@modules/users/user.module';
 import { RestaurantModule } from '@modules/restaurant/restaurant.module';
+import { FeedModule } from '@modules/feeds/feed.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { RestaurantModule } from '@modules/restaurant/restaurant.module';
     DataBaseModule,
     UserModule,
     RestaurantModule,
+    FeedModule,
   ],
   controllers: [AppController],
   providers: [],

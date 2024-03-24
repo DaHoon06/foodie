@@ -5,4 +5,5 @@ export const enum MongoDataBase {
 export const enum MongoCollections {
   Restaurant = 'Restaurant',
   User = 'User',
+  Feed = 'Feed',
 }
