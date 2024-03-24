@@ -10,7 +10,7 @@ export const ThumbnailCard = () => {
         <div className={styles.thumbnailImageBox}>
           <Image
             className={styles.thumbnailImage}
-            src={"/images/food1.webp"}
+            src={"/images/banner2.webp"}
             alt={"profile_image"}
             width={120}
             height={110}

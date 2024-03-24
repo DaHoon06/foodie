@@ -6,8 +6,45 @@ import { ThumbnailCard } from "@components/ui/cards/thumbnail/ThumbnailCard";
 import { CustomHorizontalBar } from "@components/ui/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { FollowCard } from "@components/ui/cards/FollowCard";
+import { useState } from "react";
+import { RegionFilter } from "@components/filters/RegionFilter";
+import { VscSettings } from "react-icons/vsc";
+
+export interface Filter {
+  region: string;
+}
 
 export const HomeContainer = () => {
+  const [filter, setFilter] = useState<Filter>({
+    region: "seoul",
+  });
+
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  const setFilters = (value: string) => {
+    setFilter({
+      ...filter,
+      region: value,
+    });
+  };
+
+  function FilterButton() {
+    return (
+      <button
+        type={"button"}
+        onClick={() => setFilterOpen(!filterOpen)}
+        className={styles.filterButton}
+      >
+        <FlexBox direction={"row"} gap={6}>
+          <VscSettings size={14} color={"#8c8c8c"} />
+          <Typography color={"gray400"} fontSize={12}>
+            필터
+          </Typography>
+        </FlexBox>
+      </button>
+    );
+  }
+
   return (
     <div className={styles.homeContainerLayout}>
       <KakaoMap />
@@ -32,12 +69,27 @@ export const HomeContainer = () => {
           </CustomHorizontalBar>
         </FlexBox>
       </div>
+      <div
+        className={styles.homeListsFilterContainer}
+        style={{
+          borderColor: !filterOpen ? "#ededed" : "transparent",
+        }}
+      >
+        <Typography variant="h2">여행기</Typography>
 
-      <div>
-        <Typography>피드</Typography>
+        <FilterButton />
+      </div>
+      <div
+        style={{
+          display: filterOpen ? "inline-block" : "none",
+          borderColor: filterOpen ? "#ededed" : "transparent",
+        }}
+        className={styles.filterLists}
+      >
+        <RegionFilter filter={setFilters} />
       </div>
 
-      <div>
+      <div className={styles.feedListsLayout}>
         <FeedCard />
         <FeedCard />
         <FeedCard />

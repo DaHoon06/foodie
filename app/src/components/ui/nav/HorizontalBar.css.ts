@@ -35,14 +35,17 @@ export const navBarItems = style({
   padding: "0 0.5em",
   selectors: {
     "&:nth-child(1)": {
-      marginLeft: "12px",
+      marginLeft: 12,
+    },
+    "&:last-child": {
+      marginRight: 12,
     },
   },
 });
 
 export const active = style({
-  backgroundColor: "#ededed",
+  backgroundColor: vars.colors.primary,
   borderRadius: 50,
   padding: "4px 8px",
-  borderColor: "#dbdbdb",
+  color: vars.colors.white000,
 });

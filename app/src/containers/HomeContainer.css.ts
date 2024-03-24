@@ -32,7 +32,7 @@ export const homeListsFilterContainer = style({
   position: "sticky",
   width: "100%",
   height: 48,
-  top: 49,
+  top: 62,
   backgroundColor: vars.colors.white000,
   display: "flex",
   alignItems: "center",
@@ -50,6 +50,16 @@ export const filterButton = style({
 
 export const filterLists = style({
   position: "sticky",
-  top: 96,
+  top: 100,
   borderBottom: "1px solid transparent",
+});
+
+export const feedListsLayout = style({
+  padding: 0,
+  width: "100%",
+  height: "100%",
+  backgroundColor: vars.colors.backgroundColor,
+  display: "flex",
+  flexDirection: "column",
+  gap: 8,
 });

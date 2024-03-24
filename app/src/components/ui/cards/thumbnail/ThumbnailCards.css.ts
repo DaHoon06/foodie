@@ -3,7 +3,7 @@ import { style } from "@vanilla-extract/css";
 
 export const thumbnailCardLayout = style({
   maxWidth: 210,
-  height: 202,
+  height: 220,
   backgroundColor: vars.colors.white000,
   borderRadius: 10,
   border: "1px solid #F4F4F4",
@@ -22,6 +22,7 @@ export const thumbnailImage = style({
   display: "block",
   width: "100%",
   height: "100%",
+  maxHeight: 110,
   objectFit: "cover",
   borderRadius: 8,
 });
