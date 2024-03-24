@@ -1,6 +1,6 @@
 import useModalStore from "@store/modalStore";
 import {ModalHandler} from "@components/common/modal/ModalHandler";
-import {SignInAlertBox} from "@components/alert-box/SignInAlertBox";
+import {SignInAlertBox} from "@components/common/alert-box/SignInAlertBox";
 
 export const ModalContainer = () => {
   const {type} = useModalStore();

@@ -35,7 +35,10 @@ export const HorizontalNavBar = ({
               key={crypto.randomUUID()}
               onClick={() => onClickItem(list.key)}
             >
-              <Typography color={"gray400"} fontSize={14}>
+              <Typography
+                color={itemActive(list.key) ? "white000" : "gray400"}
+                fontSize={14}
+              >
                 {list.label}
               </Typography>
             </li>

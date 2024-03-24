@@ -3,7 +3,7 @@ import {Typography} from "@components/common/typography/Typography";
 import * as styles from './SignInAlertBox.css';
 import Image from "next/image";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import {KakaoButton} from "@components/buttons/KakaoButton";
+import {KakaoButton} from "@components/kakao/KakaoButton";
 
 export const SignInAlertBox = (): ReactElement => {
   return (
@@ -18,7 +18,7 @@ export const SignInAlertBox = (): ReactElement => {
           들려주세요.</Typography>
       </FlexBox>
       <FlexBox className={styles.buttonWrapper}>
-        <KakaoButton />
+        <KakaoButton/>
       </FlexBox>
 
     </div>

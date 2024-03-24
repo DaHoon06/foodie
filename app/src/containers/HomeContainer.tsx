@@ -1,38 +1,25 @@
 import * as styles from "./HomeContainer.css";
-import {Carousel} from "@components/ui/carousel/CarouselUi";
-import {StoreLists} from "@components/lists/StoreLists";
-import {VscSettings} from "react-icons/vsc";
-import {SelectBox} from "@components/common/select-box";
+import { KakaoMap } from "@components/kakao/KakaoMap";
+import { FeedCard } from "@components/ui/cards/feeds/FeedCard";
+import { Typography } from "@components/common/typography/Typography";
+import { ThumbnailCard } from "@components/ui/cards/thumbnail/ThumbnailCard";
+import { CustomHorizontalBar } from "@components/ui/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import {useState} from "react";
-import {Typography} from "@components/common/typography/Typography";
-import {RegionFilter} from "@components/filters/RegionFilter";
-
-const selectOptions = [
-  {id: "1", key: "grade", label: "평점순"},
-  {id: "2", key: "review", label: "리뷰순"},
-  {id: "3", key: "view", label: "조회순"},
-];
+import { FollowCard } from "@components/ui/cards/FollowCard";
+import { useState } from "react";
+import { RegionFilter } from "@components/filters/RegionFilter";
+import { VscSettings } from "react-icons/vsc";
 
 export interface Filter {
-  sort: string;
   region: string;
 }
 
 export const HomeContainer = () => {
   const [filter, setFilter] = useState<Filter>({
-    sort: "grade",
     region: "seoul",
   });
-  const [filterOpen, setFilterOpen] = useState(false);
 
-  const onChangeSelectBox = (payload: string) => {
-    const index = selectOptions.findIndex((v) => v.label === payload);
-    setFilter({
-      ...filter,
-      sort: selectOptions[index].key,
-    });
-  };
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const setFilters = (value: string) => {
     setFilter({
@@ -49,7 +36,7 @@ export const HomeContainer = () => {
         className={styles.filterButton}
       >
         <FlexBox direction={"row"} gap={6}>
-          <VscSettings size={14} color={"#8c8c8c"}/>
+          <VscSettings size={14} color={"#8c8c8c"} />
           <Typography color={"gray400"} fontSize={12}>
             필터
           </Typography>
@@ -60,9 +47,27 @@ export const HomeContainer = () => {
 
   return (
     <div className={styles.homeContainerLayout}>
-      {/*<Carousel />*/}
-      <div>
-        오늘은 어떠한
+      <KakaoMap />
+      <div className={styles.homeContainer}>
+        <FlexBox alignItems={"flex-start"} gap={10}>
+          <Typography variant="h2">최근 다녀온 여행기</Typography>
+          <CustomHorizontalBar>
+            <ThumbnailCard />
+            <ThumbnailCard />
+            <ThumbnailCard />
+            <ThumbnailCard />
+          </CustomHorizontalBar>
+        </FlexBox>
+
+        <FlexBox alignItems={"flex-start"} gap={10}>
+          <Typography variant="h2">오늘의 추천 미식가</Typography>
+          <CustomHorizontalBar>
+            <FollowCard />
+            <FollowCard />
+            <FollowCard />
+            <FollowCard />
+          </CustomHorizontalBar>
+        </FlexBox>
       </div>
       <div
         className={styles.homeListsFilterContainer}
@@ -70,9 +75,9 @@ export const HomeContainer = () => {
           borderColor: !filterOpen ? "#ededed" : "transparent",
         }}
       >
-        <SelectBox items={selectOptions} onChange={onChangeSelectBox}/>
+        <Typography variant="h2">여행기</Typography>
 
-        <FilterButton/>
+        <FilterButton />
       </div>
       <div
         style={{
@@ -81,9 +86,16 @@ export const HomeContainer = () => {
         }}
         className={styles.filterLists}
       >
-        <RegionFilter filter={setFilters}/>
+        <RegionFilter filter={setFilters} />
       </div>
-      <StoreLists filter={filter}/>
+
+      <div className={styles.feedListsLayout}>
+        <FeedCard />
+        <FeedCard />
+        <FeedCard />
+        <FeedCard />
+        <FeedCard />
+      </div>
     </div>
   );
 };
