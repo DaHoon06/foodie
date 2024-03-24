@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import * as styles from "./StoreLists.css";
-import { StoreCard, StoreCardItem } from "@components/cards/StoreCard";
+import { StoreCard, StoreCardItem } from "@components/ui/cards/StoreCard";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 import { SpinnerUi } from "@components/ui/spinner/SpinnerUi";
 import { Filter } from "@containers/HomeContainer";

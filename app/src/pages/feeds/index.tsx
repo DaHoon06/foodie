@@ -4,7 +4,7 @@ import { ReactElement } from "react";
 import { Typography } from "@components/common/typography/Typography";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import * as styles from "@styles/pages/feeds/FeedPage.css";
-import { FeedCard } from "@components/cards/FeedCard";
+import { FeedCard } from "@components/ui/cards/FeedCard";
 
 const FeedsPage: NextPage = (): ReactElement => {
   return (

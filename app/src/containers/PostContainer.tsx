@@ -3,53 +3,53 @@ import { Typography } from "@components/common/typography/Typography";
 import { FeedPost } from "@components/feeds/FeedPost";
 import { Avatar } from "@components/ui";
 import Image from "next/image";
-import {FormEventHandler, ReactElement, useState} from "react";
+import { FormEventHandler, ReactElement, useState } from "react";
 import { FiMapPin } from "react-icons/fi";
 import * as styles from "./PostContainer.css";
-import { FileUploadButton } from "@components/buttons/FileUploadButton";
-import {Button} from "@components/buttons";
-import {useRouter} from "next/router";
-import {FeedPostBody} from "@interfaces/feeds/feedPost";
-import {feedSubmitApi} from "@apis/feed";
+import { FileUploadButton } from "@components/common/buttons/FileUploadButton";
+import { Button } from "@components/common/buttons";
+import { useRouter } from "next/router";
+import { FeedPostBody } from "@interfaces/feeds/feedPost";
+import { feedSubmitApi } from "@apis/feed";
 
 export const FeedPostContainer = (): ReactElement => {
   const [previewUrl, setPreviewUrl] = useState<string[]>([]);
   const [postForm, setPostForm] = useState<FeedPostBody>({
-    content: '',
+    content: "",
     items: {
-      name: '',
+      name: "",
       description: "",
-      location: '',
-      thumbnail: '',
+      location: "",
+      thumbnail: "",
     },
     files: [],
-  })
+  });
   const router = useRouter();
 
   const handleChangeFile = (previewUrls: string[], fileList: File[]) => {
     setPreviewUrl(previewUrls);
     setPostForm({
       ...postForm,
-      files: fileList
-    })
+      files: fileList,
+    });
   };
 
   const onChangeTextarea = (content: string) => {
     setPostForm({
       ...postForm,
-      content
-    })
-  }
+      content,
+    });
+  };
 
   const handleSubmitFeedPost: FormEventHandler<HTMLFormElement> = async (e) => {
     try {
       e.preventDefault();
-      alert('저장');
+      alert("저장");
       await feedSubmitApi(postForm);
     } catch (e) {
-      alert('error')
+      alert("error");
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmitFeedPost} className={styles.postLayout}>
@@ -64,7 +64,7 @@ export const FeedPostContainer = (): ReactElement => {
             취소
           </Typography>
         </button>
-        <Button type="submit" >
+        <Button type="submit">
           <Typography as="span" fontSize={12} color={"white000"}>
             포스팅
           </Typography>

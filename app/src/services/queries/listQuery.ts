@@ -3,7 +3,7 @@ import { queryKeys } from "@services/keys/queryKeys";
 import { getRestaurantListsApi } from "@apis/restaurant";
 import { queryClient } from "@libs/tanstack";
 import { AxiosError, AxiosResponse } from "axios";
-import { StoreCardItem } from "@components/cards/StoreCard";
+import { StoreCardItem } from "@components/ui/cards/StoreCard";
 import { Filter } from "@containers/HomeContainer";
 
 export const prefetchingRestaurantList = async (
