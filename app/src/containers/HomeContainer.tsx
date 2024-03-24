@@ -1,17 +1,36 @@
 import * as styles from "./HomeContainer.css";
 import { KakaoMap } from "@components/kakao/KakaoMap";
-import { FeedCard } from "@components/ui/cards/FeedCard";
+import { FeedCard } from "@components/ui/cards/feeds/FeedCard";
 import { Typography } from "@components/common/typography/Typography";
-import { HorizontalNavBar } from "@components/ui/nav/HorizontalBar";
+import { ThumbnailCard } from "@components/ui/cards/thumbnail/ThumbnailCard";
+import { CustomHorizontalBar } from "@components/ui/nav/CustomHorizontalBar";
+import FlexBox from "@components/common/headless/flex-box/FlexBox";
+import { FollowCard } from "@components/ui/cards/FollowCard";
 
 export const HomeContainer = () => {
   return (
     <div className={styles.homeContainerLayout}>
       <KakaoMap />
+      <div className={styles.homeContainer}>
+        <FlexBox alignItems={"flex-start"} gap={10}>
+          <Typography variant="h2">최근 다녀온 여행기</Typography>
+          <CustomHorizontalBar>
+            <ThumbnailCard />
+            <ThumbnailCard />
+            <ThumbnailCard />
+            <ThumbnailCard />
+          </CustomHorizontalBar>
+        </FlexBox>
 
-      <div>
-        <Typography>최근 다녀온 여행기</Typography>
-        <div></div>
+        <FlexBox alignItems={"flex-start"} gap={10}>
+          <Typography variant="h2">오늘의 추천 미식가</Typography>
+          <CustomHorizontalBar>
+            <FollowCard />
+            <FollowCard />
+            <FollowCard />
+            <FollowCard />
+          </CustomHorizontalBar>
+        </FlexBox>
       </div>
 
       <div>

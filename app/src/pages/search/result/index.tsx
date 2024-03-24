@@ -100,11 +100,11 @@ const SearchResultPage = ({ keyword }: Props): ReactElement => {
                   alignItems={"flex-start"}
                   gap={4}
                 >
-                  <MdOutlineRestaurantMenu color={"#9a9a9a"} style={14} />
+                  <MdOutlineRestaurantMenu color={"#9a9a9a"} size={14} />
                   <Typography as={"span"} fontSize={14} color={"gray500"}>
                     브런치
                   </Typography>
-                  <GrLocation color={"#9a9a9a"} style={14} />
+                  <GrLocation color={"#9a9a9a"} size={14} />
                   <Typography fontSize={14} color={"gray500"}>
                     구로구/구로동
                   </Typography>
@@ -116,11 +116,11 @@ const SearchResultPage = ({ keyword }: Props): ReactElement => {
                   justifyContent={"flex-start"}
                   gap={4}
                 >
-                  <MdAccessTime color={"#9a9a9a"} style={14} />
+                  <MdAccessTime color={"#9a9a9a"} size={14} />
                   <Typography fontSize={14} color={"gray500"}>
                     영업종료
                   </Typography>
-                  <LuParkingCircle color={"#9a9a9a"} style={14} />
+                  <LuParkingCircle color={"#9a9a9a"} size={14} />
                   <Typography fontSize={14} color={"gray500"}>
                     주차가능
                   </Typography>

@@ -27,6 +27,7 @@ export const navBarLists = style({
   whiteSpace: "nowrap",
   scrollbarWidth: "none",
   overflow: "auto hidden",
+  gap: 10,
 });
 
 export const navBarItems = style({
