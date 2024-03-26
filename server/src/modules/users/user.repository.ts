@@ -1,13 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { UserDocument, UserSchema } from '@modules/users/schema/user.schema';
-import { MongoDataBase } from '@config/db/mongoCollections';
-import { Model } from 'mongoose';
+import { DataSource, Repository } from 'typeorm';
+import { UserEntity } from './entities/user.entity';
 
 @Injectable()
-export class UserRepository {
-  constructor(
-    @InjectModel(UserSchema.name, MongoDataBase.FOODIE)
-    private readonly userModel: Model<UserDocument>,
-  ) {}
+export class UserRepository extends Repository<UserEntity> {
+  constructor(private readonly dataSource: DataSource) {
+    super(UserEntity, dataSource.createEntityManager());
+  }
 }

@@ -1,3 +1,6 @@
+import { FeedLikeEntity } from '@modules/feeds/entities/feed-like.entity';
+import { FeedEntity } from '@modules/feeds/entities/feed.entity';
+import { UserEntity } from '@modules/users/entities/user.entity';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
@@ -43,6 +46,7 @@ export const TYPEORM_OPTION = async (
     username: dbUsername,
     password: dbPassword,
     database: dbDatabase,
-    entities: [],
+    entities: [FeedEntity, FeedLikeEntity, UserEntity],
+    synchronize: true,
   };
 };
