@@ -9,4 +9,12 @@ export class FeedRepository extends Repository<FeedEntity> {
   constructor(private readonly dataSource: DataSource) {
     super(FeedEntity, dataSource.createEntityManager());
   }
+
+  async findAll() {
+    return this.createQueryBuilder('feed')
+      .where('feed.user_id is NOT NULL AND feed.deleted = false')
+      .innerJoinAndSelect('feed.user', 'user')
+      .select([])
+      .getMany();
+  }
 }
