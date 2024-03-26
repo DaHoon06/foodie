@@ -9,6 +9,7 @@ export const navBarLayout = style({
   margin: "0 auto",
   height: 46,
 });
+
 export const customNavBarLayout = style({
   backgroundColor: vars.colors.white000,
   width: "100%",
@@ -27,18 +28,14 @@ export const navBarLists = style({
   whiteSpace: "nowrap",
   scrollbarWidth: "none",
   overflow: "auto hidden",
-  gap: 10,
-});
+  gap: 20,
 
-export const navBarItems = style({
-  border: "1px solid transparent",
-  padding: "0 0.5em",
   selectors: {
     "&:nth-child(1)": {
-      marginLeft: 12,
+      paddingLeft: "20px !important",
     },
     "&:last-child": {
-      marginRight: 12,
+      paddingRight: "20px !important",
     },
   },
 });

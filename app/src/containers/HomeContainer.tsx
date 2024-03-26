@@ -50,7 +50,10 @@ export const HomeContainer = () => {
       <KakaoMap />
       <div className={styles.homeContainer}>
         <FlexBox alignItems={"flex-start"} gap={10}>
-          <Typography variant="h2">최근 다녀온 여행기</Typography>
+          <div className={styles.titleWrapper}>
+            <Typography variant="h2">최근 다녀온 여행기</Typography>
+          </div>
+
           <CustomHorizontalBar>
             <ThumbnailCard />
             <ThumbnailCard />
@@ -60,7 +63,10 @@ export const HomeContainer = () => {
         </FlexBox>
 
         <FlexBox alignItems={"flex-start"} gap={10}>
-          <Typography variant="h2">오늘의 추천 미식가</Typography>
+          <div className={styles.titleWrapper}>
+            <Typography variant="h2">오늘의 추천 미식가</Typography>
+          </div>
+
           <CustomHorizontalBar>
             <FollowCard />
             <FollowCard />

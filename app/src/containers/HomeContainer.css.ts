@@ -24,8 +24,17 @@ export const homeContainerLayout = style({
 });
 
 export const homeContainer = style({
-  padding: 20,
+  padding: "20px 0",
   width: "100%",
+});
+
+export const titleWrapper = style({
+  width: "100%",
+  height: 30,
+  padding: "0 20px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
 });
 
 export const homeListsFilterContainer = style({
