@@ -10,7 +10,7 @@ import { FileUploadButton } from "@components/common/buttons/FileUploadButton";
 import { Button } from "@components/common/buttons";
 import { useRouter } from "next/router";
 import { FeedPostBody } from "@interfaces/feeds/feedPost";
-import { feedSubmitApi } from "@apis/feed";
+import { feedSubmitApi } from "@apis/feeds";
 
 export const FeedPostContainer = (): ReactElement => {
   const [previewUrl, setPreviewUrl] = useState<string[]>([]);
