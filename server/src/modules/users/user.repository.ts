@@ -7,4 +7,12 @@ export class UserRepository extends Repository<UserEntity> {
   constructor(private readonly dataSource: DataSource) {
     super(UserEntity, dataSource.createEntityManager());
   }
+
+  async findOneUser(username: string): Promise<UserEntity> {
+    return this.createQueryBuilder('user')
+      .where('user.username = :username', {
+        username,
+      })
+      .getOne();
+  }
 }

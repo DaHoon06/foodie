@@ -9,7 +9,7 @@ import { JwtPayload } from './dto/jwt.dto';
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(private readonly configService: ConfigService) {
     super({
-      jwtFroRequest: ExtractJwt.fromExtractors([
+      jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
           return request?.cookies[this.configService.get('COOKIE_SECRET')];
         },

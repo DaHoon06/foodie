@@ -9,12 +9,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('/sign-in')
-  async signIn(@Body() body: SignInDto) {
+  async signIn(@Body() body: SignInDto): Promise<string> {
     return this.userService.signIn(body);
-  }
-
-  @Post()
-  async tesCode(): Promise<string> {
-    return 'say hello';
   }
 }
