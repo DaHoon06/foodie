@@ -6,7 +6,12 @@ const withVanillaExtract = createVanillaExtractPlugin();
 const nextConfig = {
   reactStrictMode: true,
   async rewrites() {
-    return [];
+    return [
+      {
+        source: "/api/server/:path*/",
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
+      },
+    ];
   },
   images: {
     dangerouslyAllowSVG: true,
