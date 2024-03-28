@@ -8,6 +8,7 @@ import {
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserType } from '../enum/user.type.enum';
 
 @Entity()
 @Unique(['hashname'])
@@ -28,6 +29,6 @@ export class UserEntity extends BaseEntity {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @Column()
-  type: string; // 로그인 타입
+  @Column({ type: 'enum', enum: UserType, default: UserType.KAKAO })
+  type: UserType; // 로그인 타입
 }

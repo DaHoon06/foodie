@@ -9,7 +9,7 @@ import * as cookieParser from 'cookie-parser';
 import { setupSwagger } from '@config/swagger';
 
 const PORT = 4800;
-const HTTP_DOMAIN = 'http://localhost:4888';
+const HTTP_DOMAIN = 'http://localhost:3000';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

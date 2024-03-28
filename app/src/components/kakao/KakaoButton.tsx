@@ -1,37 +1,35 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import * as styles from "./KakaoButton.css";
 import Image from "next/image";
 import { Typography } from "@components/common/typography/Typography";
 import { useRouter } from "next/router";
-import { signInApi } from "@apis/users/user.api";
-import { AxiosError, AxiosResponse } from "axios";
+import { getProviders, signIn } from "next-auth/react";
 
 export const KakaoButton = (): ReactElement => {
   const router = useRouter();
 
-  const handleClickKakaoLogin = async () => {
-    //router.push('/feeds/post');
-    await signIn();
-  };
+  const [providers, setProviders] = useState(null);
 
-  const signIn = async () => {
-    try {
-      await signInApi();
-    } catch (e: unknown) {
-      const error = e as unknown as AxiosError;
-      if (error.response) {
-        const { status, data } = error.response as AxiosResponse;
-        const message = data.message as { message: string };
-        alert(`${message} : ${status}`);
-      }
-    }
+  useEffect(() => {
+    (async () => {
+      const res: any = await getProviders();
+      setProviders(res);
+    })();
+  }, []);
+
+  const handleKakao = async () => {
+    const result = await signIn("kakao", {
+      redirect: true,
+      callbackUrl: "/",
+    });
+    console.log(result);
   };
 
   return (
     <button
       type={"button"}
       className={styles.kakaoLoginButton}
-      onClick={handleClickKakaoLogin}
+      onClick={handleKakao}
     >
       <Image
         className={styles.kakaoLogo}
