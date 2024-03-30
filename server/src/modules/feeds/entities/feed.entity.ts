@@ -30,6 +30,6 @@ export class FeedEntity extends BaseEntity {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @Column({ default: false })
-  deleted: boolean;
+  @Column({ type: 'boolean', nullable: false })
+  deleted: boolean = false;
 }

@@ -17,4 +17,27 @@ export class FeedRepository extends Repository<FeedEntity> {
       .select([])
       .getMany();
   }
+
+  async findRecentlyFeed(userId: string) {
+    const feeds = await this.createQueryBuilder('feed')
+      .leftJoinAndSelect('feed.user', 'user')
+      .where('feed.user_id = :userId', { userId })
+      .select(['feed', 'user'])
+      .take(10)
+      .getMany();
+
+    const transformedData = feeds.map((feed) => ({
+      id: feed._id,
+      content: feed.content,
+      user: {
+        id: feed.user._id,
+        username: feed.user.username,
+        hashname: feed.user.hashname,
+        type: feed.user.type,
+      },
+      created_at: feed.created_at,
+    }));
+
+    return transformedData;
+  }
 }

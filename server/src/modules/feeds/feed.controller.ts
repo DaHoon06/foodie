@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { FeedService } from './feed.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateFeedDto } from './dto/create.feed.dto';
@@ -13,5 +13,10 @@ export class FeedController {
   @Post()
   async createFeed(@Body() body: CreateFeedDto) {
     return this.feedService.createFeed(body);
+  }
+
+  @Get('/recently/:creatorId')
+  async findRecentlyFeed(@Param('creatorId') creatorId: string) {
+    return this.feedService.findRecentlyFeed(creatorId);
   }
 }
