@@ -9,3 +9,13 @@ export class SignInDto {
   @IsNotEmpty()
   token: string;
 }
+
+export class UserDto {
+  @IsString()
+  @IsNotEmpty()
+  username: string;
+
+  @IsString()
+  @IsNotEmpty()
+  id: string;
+}

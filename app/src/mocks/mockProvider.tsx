@@ -1,14 +1,14 @@
-import {PropsWithChildren, useEffect, useState} from 'react';
+import { PropsWithChildren, useEffect, useState } from "react";
 
-const isAPIMockingMode = process.env.NEXT_PUBLIC_API_MOCKING === 'enabled';
+const isAPIMockingMode = process.env.NEXT_PUBLIC_API_MOCKING === "enabled";
 
-const MSWProvider = ({children}: PropsWithChildren) => {
+const MSWProvider = ({ children }: PropsWithChildren) => {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const init = async () => {
       if (isAPIMockingMode) {
-        await import('@mocks/index');
+        await import("@mocks/index");
         setIsReady(true);
       }
     };

@@ -1,7 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserRepository } from '@modules/users/user.repository';
-import { SignInDto } from './dto/sign-in.dto';
+import { UserDto } from './dto/sign-in.dto';
 import { AuthService } from '@modules/auth/auth.service';
+import { UserEntity } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -10,17 +11,16 @@ export class UserService {
     private readonly userRepository: UserRepository,
   ) {}
 
-  async signIn(body: SignInDto): Promise<string> {
-    const findUser = await this.userRepository.findOneUser(body.username);
-    if (!findUser) {
-      throw new NotFoundException('로그인 정보를 다시 확인해주세요.');
-    }
+  async findOneUserByCreatorId(id: string): Promise<UserEntity> {
+    return this.userRepository.findOneUserByCreateorId(id);
+  }
 
-    const token = this.authService.createToken({
-      username: body.username,
-      id: body.token,
+  async createUser(user: UserDto) {
+    const userEntity = UserEntity.create({
+      username: user.username,
+      creatorId: user.id,
+      hashname: 'hash',
     });
-
-    return token;
+    return this.userRepository.createUser(userEntity);
   }
 }

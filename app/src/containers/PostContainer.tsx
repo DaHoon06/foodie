@@ -11,8 +11,10 @@ import { Button } from "@components/common/buttons";
 import { useRouter } from "next/router";
 import { FeedPostBody } from "@interfaces/feeds/feedPost";
 import { feedSubmitApi } from "@apis/feeds";
+import { useSession } from "next-auth/react";
 
 export const FeedPostContainer = (): ReactElement => {
+  const { data: session } = useSession();
   const [previewUrl, setPreviewUrl] = useState<string[]>([]);
   const [postForm, setPostForm] = useState<FeedPostBody>({
     content: "",
@@ -44,10 +46,19 @@ export const FeedPostContainer = (): ReactElement => {
   const handleSubmitFeedPost: FormEventHandler<HTMLFormElement> = async (e) => {
     try {
       e.preventDefault();
-      alert("저장");
-      await feedSubmitApi(postForm);
+      console.log(session);
+      const user = {
+        username: session.username,
+        id: session.id,
+      };
+      const body = {
+        user,
+        ...postForm,
+      };
+      console.log(session);
+      await feedSubmitApi(body);
     } catch (e) {
-      alert("error");
+      console.log(e);
     }
   };
 

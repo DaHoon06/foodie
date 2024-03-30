@@ -5,8 +5,14 @@ interface LocationItem {
   thumbnail: string;
 }
 
+interface User {
+  username: string;
+  id: string;
+}
+
 export interface FeedPostBody {
   content: string;
   files: File[];
-  items: LocationItem
+  items: LocationItem;
+  user: User;
 }

@@ -7,7 +7,6 @@ import { Hydrate, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MetaHead from "@layouts/heads/MetaHead";
 import { SessionProvider } from "next-auth/react";
-
 export default function App({ Component, pageProps }: AppProps) {
   const [queryState] = useState(() => queryClient);
 

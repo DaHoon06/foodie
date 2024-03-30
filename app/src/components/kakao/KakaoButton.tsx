@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Typography } from "@components/common/typography/Typography";
 import { useRouter } from "next/router";
 import { getProviders, signIn } from "next-auth/react";
+import { User } from "next-auth";
+import { axiosInstance } from "@libs/axios";
 
 export const KakaoButton = (): ReactElement => {
   const router = useRouter();
@@ -17,19 +19,25 @@ export const KakaoButton = (): ReactElement => {
     })();
   }, []);
 
-  const handleKakao = async () => {
-    const result = await signIn("kakao", {
-      redirect: true,
-      callbackUrl: "/",
-    });
-    console.log(result);
+  const handleClickKakaoSignIn = async () => {
+    try {
+      const user: any = await signIn("kakao");
+
+      const body = {
+        username: user.name,
+        token: user.id,
+      };
+      const { data } = await axiosInstance.post("/users/sign-in", body);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <button
       type={"button"}
       className={styles.kakaoLoginButton}
-      onClick={handleKakao}
+      onClick={handleClickKakaoSignIn}
     >
       <Image
         className={styles.kakaoLogo}
