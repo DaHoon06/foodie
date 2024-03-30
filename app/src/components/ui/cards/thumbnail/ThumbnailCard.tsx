@@ -3,7 +3,17 @@ import * as styles from "./ThumbnailCards.css";
 import Image from "next/image";
 import { Typography } from "@components/common/typography/Typography";
 
-export const ThumbnailCard = () => {
+interface Props {
+  thumbnail?: string;
+  content: string;
+}
+
+interface ThumbnainProps {
+  item: Props;
+}
+
+export const ThumbnailCard = (props: ThumbnainProps) => {
+  const { content } = props.item;
   return (
     <article className={styles.thumbnailCardLayout}>
       <FlexBox gap={8} justifyContent={"flex-start"}>
@@ -34,7 +44,7 @@ export const ThumbnailCard = () => {
             fontWeight={300}
             color={"gray500"}
           >
-            시간이 맞는 친구와 함께 다녀온 브런치 맛집 추천합니다아.
+            {content}
           </Typography>
         </div>
       </FlexBox>

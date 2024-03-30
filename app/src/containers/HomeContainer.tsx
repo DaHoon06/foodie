@@ -1,3 +1,4 @@
+"use client";
 import * as styles from "./HomeContainer.css";
 import { KakaoMap } from "@components/kakao/KakaoMap";
 import { FeedCard } from "@components/ui/cards/feeds/FeedCard";
@@ -6,18 +7,28 @@ import { ThumbnailCard } from "@components/ui/cards/thumbnail/ThumbnailCard";
 import { CustomHorizontalBar } from "@components/ui/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { FollowCard } from "@components/ui/cards/FollowCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RegionFilter } from "@components/filters/RegionFilter";
 import { VscSettings } from "react-icons/vsc";
+import { useSession } from "next-auth/react";
+import { recentlyFeedApi } from "@apis/feeds";
 
 export interface Filter {
   region: string;
 }
 
+interface User {
+  username: string;
+  id: string;
+  profile: string;
+}
+
 export const HomeContainer = () => {
+  const { data: sessionData } = useSession();
   const [filter, setFilter] = useState<Filter>({
     region: "seoul",
   });
+  const [recentlyFeeds, setRecentlyFeeds] = useState([]);
 
   const [filterOpen, setFilterOpen] = useState(false);
 
@@ -27,6 +38,21 @@ export const HomeContainer = () => {
       region: value,
     });
   };
+
+  const findFeed = async () => {
+    try {
+      const session = sessionData as unknown as User;
+      const creatorId = session.id;
+      const { data } = await recentlyFeedApi(creatorId);
+      setRecentlyFeeds(data.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    if (sessionData) findFeed();
+  }, [sessionData]);
 
   function FilterButton() {
     return (
@@ -55,10 +81,13 @@ export const HomeContainer = () => {
           </div>
 
           <CustomHorizontalBar>
-            <ThumbnailCard />
-            <ThumbnailCard />
-            <ThumbnailCard />
-            <ThumbnailCard />
+            {recentlyFeeds.map((feed) => {
+              return (
+                <div key={feed._id}>
+                  <ThumbnailCard item={feed} />
+                </div>
+              );
+            })}
           </CustomHorizontalBar>
         </FlexBox>
 
