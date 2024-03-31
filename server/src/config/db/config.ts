@@ -1,6 +1,7 @@
 import { FeedLikeEntity } from '@modules/feeds/entities/feed-like.entity';
 import { FeedEntity } from '@modules/feeds/entities/feed.entity';
 import { FeedThumbnailEntity } from '@modules/feeds/entities/feed.thumbnail.entity';
+import { ShopEntity } from '@modules/shop/entities/shop.entity';
 import { UserEntity } from '@modules/users/entities/user.entity';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
@@ -47,7 +48,13 @@ export const TYPEORM_OPTION = async (
     username: dbUsername,
     password: dbPassword,
     database: dbDatabase,
-    entities: [FeedEntity, FeedLikeEntity, FeedThumbnailEntity, UserEntity],
+    entities: [
+      FeedEntity,
+      FeedLikeEntity,
+      FeedThumbnailEntity,
+      UserEntity,
+      ShopEntity,
+    ],
     synchronize: true,
   };
 };
