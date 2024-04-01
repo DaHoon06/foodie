@@ -21,6 +21,8 @@ export class FeedService {
       if (!findUser) {
         findUser = await this.userService.createUser(body.user);
       }
+
+      
       const feed = FeedEntity.create({
         content: body.content,
         user: findUser,

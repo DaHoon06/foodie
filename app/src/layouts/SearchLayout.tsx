@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import * as styles from "./SearchLayout.css";
 import { AppLanding } from "@layouts/landing/AppLading";
-import { NavBarBottom } from "@components/ui/nav/NavBarBottom";
+import { NavBarBottom } from "@components/nav/NavBarBottom";
 import { ModalContainer } from "@containers/ModalContainer";
 
 type Props = PropsWithChildren;

@@ -4,7 +4,7 @@ import { KakaoMap } from "@components/kakao/KakaoMap";
 import { FeedCard } from "@components/ui/cards/feeds/FeedCard";
 import { Typography } from "@components/common/typography/Typography";
 import { ThumbnailCard } from "@components/ui/cards/thumbnail/ThumbnailCard";
-import { CustomHorizontalBar } from "@components/ui/nav/CustomHorizontalBar";
+import { CustomHorizontalBar } from "@components/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { FollowCard } from "@components/ui/cards/FollowCard";
 import { useEffect, useState } from "react";

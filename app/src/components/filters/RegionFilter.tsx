@@ -1,4 +1,4 @@
-import { HorizontalNavBar } from "@components/ui/nav/HorizontalBar";
+import { HorizontalNavBar } from "@components/nav/HorizontalBar";
 import { regionDo } from "./state/region";
 
 interface RegionFilterProps {

@@ -8,6 +8,20 @@ import {
   IsString,
 } from 'class-validator';
 
+export class LocationItem {
+  @IsString()
+  title: string;
+
+  @IsString()
+  category: string;
+
+  @IsString()
+  sigungu: string;
+
+  @IsString()
+  dong: string;
+}
+
 export class CreateFeedDto {
   @IsString()
   content: string;
@@ -22,5 +36,7 @@ export class CreateFeedDto {
   files: [];
 
   @IsOptional()
-  items: any; // 아직 구성이 정해지지 않음
+  @Type(() => LocationItem)
+  @IsObject()
+  item: LocationItem; // 아직 구성이 정해지지 않음
 }

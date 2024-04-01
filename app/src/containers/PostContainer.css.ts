@@ -11,13 +11,28 @@ export const postBodyContainer = style({
   backgroundColor: vars.colors.white000,
   width: "100%",
   padding: "1em",
-  borderBottom: "1px solid #f5f5f5",
 });
 
 export const postOptionContainer = style({
   height: "60px !important",
   padding: "0.5em 1.25em",
   backgroundColor: vars.colors.white000,
+});
+
+export const locationItemContainer = style({
+  width: "100%",
+  borderBottom: "1px solid #f5f5f5",
+  padding: "1em",
+  margin: "10px auto",
+});
+
+export const locationItemBox = style({
+  width: "100%",
+  backgroundColor: vars.colors.backgroundColor,
+  borderRadius: 4,
+  border: "1px solid #ededed",
+  padding: "1em",
+  margin: "10px auto",
 });
 
 export const imagesContainer = style({
@@ -35,7 +50,6 @@ export const images = style({
   width: "100%",
   height: "100%",
 });
-
 
 export const feedListsTitle = style({
   width: "100%",

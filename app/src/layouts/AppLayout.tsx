@@ -2,7 +2,7 @@ import { PropsWithChildren, ReactElement } from "react";
 import * as styles from "@layouts/AppLayout.css";
 import { AppLanding } from "@layouts/landing/AppLading";
 import { Header } from "@components/header/Header";
-import { NavBarBottom } from "@components/ui/nav/NavBarBottom";
+import { NavBarBottom } from "@components/nav/NavBarBottom";
 import { Footer } from "@layouts/footer/Footer";
 import { ModalContainer } from "@containers/ModalContainer";
 

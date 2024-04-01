@@ -1,11 +1,4 @@
-interface LocationItem {
-  name: string;
-  description: string;
-  location: string;
-  thumbnail: string;
-}
-
-interface User {
+export interface FeedUser {
   username: string;
   id: string;
 }
@@ -13,6 +6,13 @@ interface User {
 export interface FeedPostBody {
   content: string;
   files: File[];
-  items: LocationItem;
-  user: User;
+  item: FeedItem;
+  user?: FeedUser;
+}
+
+export interface FeedItem {
+  title: string;
+  category: string;
+  sigungu: string;
+  dong: string;
 }

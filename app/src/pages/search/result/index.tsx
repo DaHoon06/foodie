@@ -15,7 +15,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { SearchBar } from "@components/form/SearchBar";
 import { primaryIconColor } from "@styles/theme.css";
 import Image from "next/image";
-import { CustomHorizontalBar } from "@components/ui/nav/CustomHorizontalBar";
+import { CustomHorizontalBar } from "@components/nav/CustomHorizontalBar";
 import { StarRating } from "@components/ui/rating/star";
 import { MdOutlineRestaurantMenu, MdAccessTime } from "react-icons/md";
 import { LuParkingCircle } from "react-icons/lu";

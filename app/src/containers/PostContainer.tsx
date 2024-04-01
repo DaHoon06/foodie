@@ -3,30 +3,41 @@ import { Typography } from "@components/common/typography/Typography";
 import { FeedPost } from "@components/feeds/FeedPost";
 import { Avatar } from "@components/ui";
 import Image from "next/image";
-import { FormEventHandler, ReactElement, useState } from "react";
+import { FormEventHandler, ReactElement, useEffect, useState } from "react";
 import { FiMapPin } from "react-icons/fi";
 import * as styles from "./PostContainer.css";
 import { FileUploadButton } from "@components/common/buttons/FileUploadButton";
 import { Button } from "@components/common/buttons";
 import { useRouter } from "next/router";
-import { FeedPostBody } from "@interfaces/feeds/feedPost";
+import { FeedPostBody, FeedUser } from "@interfaces/feeds/feedPost";
 import { feedSubmitApi } from "@apis/feeds";
 import { useSession } from "next-auth/react";
+import useModalStore from "@store/modalStore";
+import useFeedStore from "@store/feedStore";
 
 export const FeedPostContainer = (): ReactElement => {
+  const { setIsOpen, setModalType } = useModalStore();
+  const { item } = useFeedStore();
   const { data: session } = useSession();
   const [previewUrl, setPreviewUrl] = useState<string[]>([]);
   const [postForm, setPostForm] = useState<FeedPostBody>({
     content: "",
-    items: {
-      name: "",
-      description: "",
-      location: "",
-      thumbnail: "",
+    item: {
+      title: "",
+      category: "",
+      sigungu: "",
+      dong: "",
     },
     files: [],
   });
   const router = useRouter();
+
+  useEffect(() => {
+    setPostForm({
+      ...postForm,
+      item,
+    });
+  }, [item]);
 
   const handleChangeFile = (previewUrls: string[], fileList: File[]) => {
     setPreviewUrl(previewUrls);
@@ -46,20 +57,24 @@ export const FeedPostContainer = (): ReactElement => {
   const handleSubmitFeedPost: FormEventHandler<HTMLFormElement> = async (e) => {
     try {
       e.preventDefault();
-      console.log(session);
+      const userSession = session as unknown as FeedUser;
       const user = {
-        username: session.username,
-        id: session.id,
+        username: userSession.username,
+        id: userSession.id,
       };
       const body = {
         user,
         ...postForm,
       };
-      console.log(session);
       await feedSubmitApi(body);
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const handleClickLocation = async () => {
+    setModalType("registerShop");
+    setIsOpen(true);
   };
 
   return (
@@ -92,6 +107,19 @@ export const FeedPostContainer = (): ReactElement => {
           <Avatar alt={"dahoon"} src={"/images/dh.png"} />
           <FeedPost onChangeTextarea={onChangeTextarea} />
         </FlexBox>
+        <div className={styles.locationItemContainer}>
+          <div className={styles.locationItemBox}>
+            <Typography fontSize={14} fontWeight={500}>
+              {item.title}
+            </Typography>
+            <Typography color={"gray400"} fontSize={14} fontWeight={300}>
+              {item.category}
+            </Typography>
+            <Typography color={"gray400"} fontSize={14} fontWeight={300}>
+              {item.sigungu} {item.dong}
+            </Typography>
+          </div>
+        </div>
 
         <FlexBox
           direction="row"
@@ -99,12 +127,15 @@ export const FeedPostContainer = (): ReactElement => {
           className={styles.postOptionContainer}
         >
           <FileUploadButton onFileChange={handleChangeFile} />
-          <FlexBox direction="row" justifyContent="flex-end" gap={4}>
-            <FiMapPin color={"#FF7101"} />
-            <Typography color="primary" as="span" fontSize={14}>
-              장소
-            </Typography>
-          </FlexBox>
+
+          <button type={"button"} onClick={handleClickLocation}>
+            <FlexBox direction="row" justifyContent="flex-end" gap={4}>
+              <FiMapPin color={"#FF7101"} />
+              <Typography color="primary" as="span" fontSize={14}>
+                장소
+              </Typography>
+            </FlexBox>
+          </button>
         </FlexBox>
         <div className={styles.imagesContainer}>
           {previewUrl.map((url, index) => (
