@@ -1,5 +1,5 @@
-import { vars } from "@styles/theme.css";
-import { style } from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
+import {style} from "@vanilla-extract/css";
 
 export const feedLocationLaoyout = style({
   width: "100%",
@@ -12,7 +12,7 @@ export const feedLocationLaoyout = style({
 
 export const feedLocationContainer = style({
   width: "100%",
-  height: "90%",
+  height: "100%",
 });
 
 export const input = style({

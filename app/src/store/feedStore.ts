@@ -1,6 +1,6 @@
-import { FeedItem } from "@interfaces/feeds/feedPost";
-import { create } from "zustand";
-import { combine, devtools } from "zustand/middleware";
+import {FeedItem} from "@interfaces/feeds/feedPost";
+import {create} from "zustand";
+import {combine, devtools} from "zustand/middleware";
 
 type FeedInitialState = {
   item: FeedItem;
@@ -12,10 +12,15 @@ type SetFeedStore = {
 
 const initialState: FeedInitialState = {
   item: {
-    title: "",
-    category: "",
-    sigungu: "",
-    dong: "",
+    title: '',
+    category: '',
+    address: {
+      name: '',
+      sigungu: '',
+      sido: '',
+      x: '',
+      y: '',
+    }
   },
 };
 

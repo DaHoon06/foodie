@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateFeedDto } from './dto/create.feed.dto';
 import { FeedRepository } from './feed.repository';
 import { UserService } from '@modules/users/user.service';
@@ -22,7 +26,6 @@ export class FeedService {
         findUser = await this.userService.createUser(body.user);
       }
 
-      
       const feed = FeedEntity.create({
         content: body.content,
         user: findUser,
@@ -37,6 +40,9 @@ export class FeedService {
   async findRecentlyFeed(creatorId: string) {
     const findUser: UserEntity =
       await this.userService.findOneUserByCreatorId(creatorId);
+    console.log(creatorId);
+    if (!findUser)
+      throw new NotFoundException('로그인 정보가 유효하지 않습니다.');
     return this.feedRepository.findRecentlyFeed(findUser._id);
   }
 

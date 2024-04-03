@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { CSSProperties, ComponentProps, ReactElement } from "react";
+import {ComponentProps, CSSProperties, ReactElement} from "react";
 import * as styles from "./Button.css";
 
 export type ButtonType = "button" | "submit" | "reset";
@@ -36,7 +36,7 @@ export const Button = (props: ButtonProps): ReactElement => {
 
   return (
     <button
-      className={classNames(className, styles.primary)}
+      className={classNames(className, styles[variant])}
       type={type}
       disabled={disabled}
       {...rest}

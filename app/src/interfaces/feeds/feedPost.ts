@@ -10,9 +10,16 @@ export interface FeedPostBody {
   user?: FeedUser;
 }
 
+interface Address {
+  name: string;
+  sigungu: string,
+  sido: string,
+  x: string;
+  y: string;
+}
+
 export interface FeedItem {
   title: string;
   category: string;
-  sigungu: string;
-  dong: string;
+  address: Address;
 }

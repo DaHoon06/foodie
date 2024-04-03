@@ -1,17 +1,17 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { Typography } from "@components/common/typography/Typography";
-import { FeedPost } from "@components/feeds/FeedPost";
-import { Avatar } from "@components/ui";
+import {Typography} from "@components/common/typography/Typography";
+import {FeedPost} from "@components/feeds/FeedPost";
+import {Avatar} from "@components/ui";
 import Image from "next/image";
-import { FormEventHandler, ReactElement, useEffect, useState } from "react";
-import { FiMapPin } from "react-icons/fi";
+import {FormEventHandler, ReactElement, useEffect, useState} from "react";
+import {FiMapPin} from "react-icons/fi";
 import * as styles from "./PostContainer.css";
-import { FileUploadButton } from "@components/common/buttons/FileUploadButton";
-import { Button } from "@components/common/buttons";
-import { useRouter } from "next/router";
-import { FeedPostBody, FeedUser } from "@interfaces/feeds/feedPost";
-import { feedSubmitApi } from "@apis/feeds";
-import { useSession } from "next-auth/react";
+import {FileUploadButton} from "@components/common/buttons/FileUploadButton";
+import {Button} from "@components/common/buttons";
+import {useRouter} from "next/router";
+import {FeedPostBody, FeedUser} from "@interfaces/feeds/feedPost";
+import {feedSubmitApi} from "@apis/feeds";
+import {useSession} from "next-auth/react";
 import useModalStore from "@store/modalStore";
 import useFeedStore from "@store/feedStore";
 
@@ -25,8 +25,13 @@ export const FeedPostContainer = (): ReactElement => {
     item: {
       title: "",
       category: "",
-      sigungu: "",
-      dong: "",
+      address: {
+        name: '',
+        sigungu: '',
+        sido: '',
+        x: '',
+        y: '',
+      }
     },
     files: [],
   });
@@ -107,7 +112,7 @@ export const FeedPostContainer = (): ReactElement => {
           <Avatar alt={"dahoon"} src={"/images/dh.png"} />
           <FeedPost onChangeTextarea={onChangeTextarea} />
         </FlexBox>
-        <div className={styles.locationItemContainer}>
+        {postForm.item.title.length > 0 && (<div className={styles.locationItemContainer}>
           <div className={styles.locationItemBox}>
             <Typography fontSize={14} fontWeight={500}>
               {item.title}
@@ -116,10 +121,11 @@ export const FeedPostContainer = (): ReactElement => {
               {item.category}
             </Typography>
             <Typography color={"gray400"} fontSize={14} fontWeight={300}>
-              {item.sigungu} {item.dong}
+              {item.address.name} {item.address.sido} / {item.address.sigungu}
             </Typography>
           </div>
-        </div>
+        </div>)}
+
 
         <FlexBox
           direction="row"
