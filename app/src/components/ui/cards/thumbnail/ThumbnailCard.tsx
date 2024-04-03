@@ -23,7 +23,6 @@ interface ThumbnailProps {
 
 export const ThumbnailCard = (props: ThumbnailProps) => {
   const { content, thumbnail, shop } = props.item;
-  console.log(shop)
   return (
     <article className={styles.thumbnailCardLayout}>
       <FlexBox gap={8} justifyContent={"flex-start"}>
