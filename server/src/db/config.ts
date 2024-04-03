@@ -1,11 +1,6 @@
-import { FeedLikeEntity } from '@modules/feeds/entities/feed-like.entity';
-import { FeedEntity } from '@modules/feeds/entities/feed.entity';
-import { FeedThumbnailEntity } from '@modules/feeds/entities/feed.thumbnail.entity';
-import { ShopEntity } from '@modules/shop/entities/shop.entity';
-import { UserEntity } from '@modules/users/entities/user.entity';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { FileImageEntity } from '@modules/file/entities/file.image.entity';
+import { entities } from './entities';
 
 export const CONFIG_OPTION = () => {
   const env = process.env.NODE_ENV || 'development';
@@ -30,7 +25,7 @@ export const CONFIG_OPTION = () => {
   }
   return {
     isGlobal: true,
-    envFilePath: '.env',
+    envFilePath: ['.env', envFilePath],
   };
 };
 
@@ -49,14 +44,7 @@ export const TYPEORM_OPTION = async (
     username: dbUsername,
     password: dbPassword,
     database: dbDatabase,
-    entities: [
-      FeedEntity,
-      FeedLikeEntity,
-      FeedThumbnailEntity,
-      UserEntity,
-      ShopEntity,
-      FileImageEntity,
-    ],
+    entities,
     synchronize: true,
   };
 };
