@@ -44,7 +44,7 @@ export const KakaoMap = (): ReactElement => {
               lon = position.coords.longitude; // 경도
             const options = {
               center: new kakao.maps.LatLng(lat, lon),
-              level: 5
+              level: 7
             }
             const map = new kakao.maps.Map(mapElement, options);
 
