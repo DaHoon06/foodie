@@ -5,6 +5,7 @@ import { ShopEntity } from '@modules/shop/entities/shop.entity';
 import { UserEntity } from '@modules/users/entities/user.entity';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { FileImageEntity } from '@modules/file/entities/file.image.entity';
 
 export const CONFIG_OPTION = () => {
   const env = process.env.NODE_ENV || 'development';
@@ -54,6 +55,7 @@ export const TYPEORM_OPTION = async (
       FeedThumbnailEntity,
       UserEntity,
       ShopEntity,
+      FileImageEntity,
     ],
     synchronize: true,
   };
