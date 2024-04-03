@@ -47,6 +47,23 @@ export const KakaoMap = (): ReactElement => {
               level: 5
             }
             const map = new kakao.maps.Map(mapElement, options);
+
+            // 카카오 맵 클릭 이벤트 (위도 경도 추가 가능)
+            kakao.maps.event.addListener(map, 'click', function(mouseEvent: any) {
+              // 클릭한 위도, 경도 정보를 가져옵니다
+              var latlng = mouseEvent.latLng;
+
+              var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+              message += '경도는 ' + latlng.getLng() + ' 입니다';
+
+              var resultDiv = document.getElementById('result');
+              resultDiv.innerHTML = message;
+
+            });
+
+            // 교통 정보
+            //map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+            map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC); // 교통 정보 삭제
             const locPosition = new kakao.maps.LatLng(lat, lon);
 
             if (mapData.length > 0) {
@@ -64,14 +81,36 @@ export const KakaoMap = (): ReactElement => {
                 const imageSize = new kakao.maps.Size(24, 35);
                 const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-                new kakao.maps.Marker({
+                var infowindow = new kakao.maps.InfoWindow({
+                  content: `<div>${positions[i].title}</div>` // 인포윈도우에 표시할 내용
+                });
+
+                const marker = new kakao.maps.Marker({
                   map: map, // 마커를 표시할 지도
                   position: positions[i].latlng, // 마커를 표시할 위치
                   title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                   image: markerImage // 마커 이미지
                 });
+
+                kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+                kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+
+                function makeOverListener(map: any, marker: any, infowindow: any) {
+                  return function() {
+                    infowindow.open(map, marker);
+                  };
+                }
+
+                // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+                function makeOutListener(infowindow: any) {
+                  return function() {
+                    infowindow.close();
+                  };
+                }
+
               }
             }
+
             new kakao.maps.Marker({
               map: map,
               position: locPosition
@@ -85,9 +124,13 @@ export const KakaoMap = (): ReactElement => {
 
 
   return (
-    <div id={'map'} ref={mapContainer} style={{
-      width: '100%',
-      height: 300
-    }}/>
+    <>
+      <div id={'map'} ref={mapContainer} style={{
+        width: '100%',
+        height: 300
+      }}/>
+      <div id={'result'} />
+    </>
+
   )
 }
