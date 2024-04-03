@@ -12,7 +12,7 @@ export class UserService {
   ) {}
 
   async findOneUserByCreatorId(id: string): Promise<UserEntity> {
-    return this.userRepository.findOneUserByCreateorId(id);
+    return this.userRepository.findOneUserByCreatorId(id);
   }
 
   async createUser(user: UserDto) {

@@ -12,7 +12,7 @@ export class UserRepository extends Repository<UserEntity> {
     return UserEntity.create(user).save();
   }
 
-  async findOneUserByCreateorId(id: string): Promise<UserEntity> {
+  async findOneUserByCreatorId(id: string): Promise<UserEntity> {
     return this.createQueryBuilder('user')
       .where('user.creatorId = :id', {
         id,

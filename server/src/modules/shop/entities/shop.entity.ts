@@ -8,6 +8,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 export class ShopEntity extends BaseEntity {
@@ -18,20 +19,32 @@ export class ShopEntity extends BaseEntity {
   @Column()
   title: string;
 
-  @Column()
+  @Column({ nullable: true })
+  @IsOptional()
   description: string;
 
-  @Column()
+  @Column({ nullable: true })
+  @IsOptional()
   salesHours: string;
 
-  @Column()
+  @Column({ nullable: true })
+  @IsOptional()
   dayOff: string;
 
   @Column()
-  location: string;
+  fullAddress: string;
 
   @Column()
-  sigugu: string;
+  sigungu: string;
+
+  @Column()
+  sido: string;
+
+  @Column()
+  x: string;
+
+  @Column()
+  y: string;
 
   @Column()
   category: string;

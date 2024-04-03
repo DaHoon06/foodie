@@ -10,6 +10,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { ShopEntity } from '@modules/shop/entities/shop.entity';
 
 @Entity()
 export class FeedEntity extends BaseEntity {
@@ -23,6 +24,10 @@ export class FeedEntity extends BaseEntity {
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
+
+  @ManyToOne(() => ShopEntity)
+  @JoinColumn({ name: 'shop_id' })
+  shop: ShopEntity;
 
   @CreateDateColumn()
   created_at: Date;

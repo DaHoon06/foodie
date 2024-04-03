@@ -7,19 +7,36 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { UserEntity } from '@modules/users/entities/user.entity';
+import { ShopEntity } from '@modules/shop/entities/shop.entity';
 
-export class LocationItem {
+export class Address {
+  @IsString()
+  name: string;
+
+  @IsString()
+  sigungu: string;
+
+  @IsString()
+  sido: string;
+
+  @IsString()
+  x: string;
+
+  @IsString()
+  y: string;
+}
+
+export class ShopDto {
   @IsString()
   title: string;
 
   @IsString()
   category: string;
 
-  @IsString()
-  sigungu: string;
-
-  @IsString()
-  dong: string;
+  @IsObject()
+  @Type(() => Address)
+  address: Address;
 }
 
 export class CreateFeedDto {
@@ -36,7 +53,22 @@ export class CreateFeedDto {
   files: [];
 
   @IsOptional()
-  @Type(() => LocationItem)
+  @Type(() => ShopDto)
   @IsObject()
-  item: LocationItem; // 아직 구성이 정해지지 않음
+  item: ShopDto; // 아직 구성이 정해지지 않음
+}
+
+export class CreateFeedDataDto {
+  @IsString()
+  content: string;
+
+  @IsObject()
+  @Type(() => UserEntity)
+  @IsNotEmpty()
+  user: UserEntity;
+
+  @IsObject()
+  @IsOptional()
+  @Type(() => ShopEntity)
+  shop?: ShopEntity;
 }
