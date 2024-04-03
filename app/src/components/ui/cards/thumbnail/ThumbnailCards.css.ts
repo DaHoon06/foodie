@@ -1,8 +1,8 @@
-import { vars } from "@styles/theme.css";
-import { style } from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
+import {style} from "@vanilla-extract/css";
 
 export const thumbnailCardLayout = style({
-  maxWidth: 210,
+  width: 210,
   height: 220,
   backgroundColor: vars.colors.white000,
   borderRadius: 10,

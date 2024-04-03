@@ -49,7 +49,7 @@ export class FeedService {
         // 없으면 추가
         try {
           if (!shop) {
-            shop = await this.shopService.createShop(item);
+            shop = await this.shopService.createShop(findUser, item);
           }
 
           createData.shop = shop;

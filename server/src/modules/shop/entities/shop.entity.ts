@@ -5,10 +5,13 @@ import {
   DeleteDateColumn,
   Entity,
   Generated,
+  JoinColumn,
+  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { IsOptional } from 'class-validator';
+import { UserEntity } from '@modules/users/entities/user.entity';
 
 @Entity()
 export class ShopEntity extends BaseEntity {
@@ -60,4 +63,8 @@ export class ShopEntity extends BaseEntity {
 
   @Column({ type: 'boolean', nullable: false })
   deleted: boolean = false;
+
+  @ManyToOne(() => UserEntity)
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 }

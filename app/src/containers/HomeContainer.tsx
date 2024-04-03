@@ -1,17 +1,17 @@
 "use client";
 import * as styles from "./HomeContainer.css";
-import { KakaoMap } from "@components/kakao/KakaoMap";
-import { FeedCard } from "@components/ui/cards/feeds/FeedCard";
-import { Typography } from "@components/common/typography/Typography";
-import { ThumbnailCard } from "@components/ui/cards/thumbnail/ThumbnailCard";
-import { CustomHorizontalBar } from "@components/nav/CustomHorizontalBar";
+import {KakaoMap} from "@components/kakao/KakaoMap";
+import {FeedCard} from "@components/ui/cards/feeds/FeedCard";
+import {Typography} from "@components/common/typography/Typography";
+import {ThumbnailCard} from "@components/ui/cards/thumbnail/ThumbnailCard";
+import {CustomHorizontalBar} from "@components/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { FollowCard } from "@components/ui/cards/FollowCard";
-import { useEffect, useState } from "react";
-import { RegionFilter } from "@components/filters/RegionFilter";
-import { VscSettings } from "react-icons/vsc";
-import { useSession } from "next-auth/react";
-import { recentlyFeedApi } from "@apis/feeds";
+import {FollowCard} from "@components/ui/cards/FollowCard";
+import {useEffect, useState} from "react";
+import {RegionFilter} from "@components/filters/RegionFilter";
+import {VscSettings} from "react-icons/vsc";
+import {useSession} from "next-auth/react";
+import {recentlyFeedApi} from "@apis/feeds";
 
 export interface Filter {
   region: string;
@@ -79,16 +79,16 @@ export const HomeContainer = () => {
           <div className={styles.titleWrapper}>
             <Typography variant="h2">최근 다녀온 여행기</Typography>
           </div>
-
-          <CustomHorizontalBar>
-            {recentlyFeeds.map((feed) => {
+          {recentlyFeeds.length > 0 ? (<CustomHorizontalBar>
+            {recentlyFeeds.map((feed, index) => {
               return (
-                <div key={feed._id}>
+                <div key={`${feed._id}_${index}`}>
                   <ThumbnailCard item={feed} />
                 </div>
               );
             })}
-          </CustomHorizontalBar>
+          </CustomHorizontalBar>) : (<div>최근 포스터가 없어요.</div>)}
+
         </FlexBox>
 
         <FlexBox alignItems={"flex-start"} gap={10}>
