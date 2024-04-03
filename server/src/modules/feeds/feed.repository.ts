@@ -23,7 +23,8 @@ export class FeedRepository extends Repository<FeedEntity> {
       .where('feed.user_id = :userId', { userId })
       .leftJoinAndSelect('feed.shop', 'shop')
       .select(['feed', 'shop'])
-      .take(10)
+      .orderBy('feed.created_at', 'DESC')
+      .limit(10)
       .getMany();
     const transformedData = feeds.map((feed) => {
       let shop = null;
