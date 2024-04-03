@@ -107,7 +107,6 @@ export const KakaoMap = (): ReactElement => {
                     infowindow.close();
                   };
                 }
-
               }
             }
 
@@ -117,8 +116,18 @@ export const KakaoMap = (): ReactElement => {
             });
             map.setCenter(locPosition)
           });
-
       })
+    }
+
+    return () => {
+      console.log('언마운트')
+      const scripts = document.head.getElementsByTagName('script');
+      for (let i = 0; i < scripts.length; i++) {
+        const script = scripts[i];
+        if (script.src && script.src.includes('dapi.kakao.com')) {
+          script.parentNode.removeChild(script);
+        }
+      }
     }
   }, [mapContainer, mapData])
 

@@ -1,5 +1,5 @@
-import { style } from "@vanilla-extract/css";
-import { vars } from "@styles/theme.css";
+import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
 export const selectBox = style({
   position: "relative",
@@ -10,7 +10,7 @@ export const selectBox = style({
   alignSelf: "center",
   cursor: "pointer",
   color: vars.colors.black100,
-
+  zIndex: 99,
   selectors: {
     "&::before": {
       content: "⌵",
@@ -34,6 +34,7 @@ export const selectBoxOptions = style({
   padding: 0,
   borderRadius: 4,
   backgroundColor: "#606060",
+  zIndex: 99,
 });
 
 export const selectBoxOption = style({

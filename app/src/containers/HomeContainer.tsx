@@ -1,6 +1,5 @@
-"use client";
 import * as styles from "./HomeContainer.css";
-import {KakaoMap} from "@components/kakao/KakaoMap";
+import {KakaoMap} from "@components/kakao/maps/KakaoMap";
 import {FeedCard} from "@components/ui/cards/feeds/FeedCard";
 import {Typography} from "@components/common/typography/Typography";
 import {ThumbnailCard} from "@components/ui/cards/thumbnail/ThumbnailCard";
