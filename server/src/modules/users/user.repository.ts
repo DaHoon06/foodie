@@ -12,10 +12,10 @@ export class UserRepository extends Repository<UserEntity> {
     return UserEntity.create(user).save();
   }
 
-  async findOneUserByCreatorId(id: string): Promise<UserEntity> {
+  async findOneUserByCreatorId(creatorId: string): Promise<UserEntity> {
     return this.createQueryBuilder('user')
-      .where('user.creatorId = :id', {
-        id,
+      .where('user.creatorId = :creatorId', {
+        creatorId,
       })
       .getOne();
   }
@@ -26,5 +26,14 @@ export class UserRepository extends Repository<UserEntity> {
         username,
       })
       .getOne();
+  }
+
+  async randomRecommendUser(creatorId: string) {
+    const userGroup = await this.createQueryBuilder('user')
+      .where('user.creatorId != :creatorId', { creatorId })
+      .orderBy('RAND()')
+      .limit(10)
+      .getMany();
+    console.log(userGroup);
   }
 }

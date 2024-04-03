@@ -23,4 +23,9 @@ export class UserService {
     });
     return this.userRepository.createUser(userEntity);
   }
+
+  // 오늘의 사용자 조회
+  async randomRecommendUser(creatorId: string) {
+    return this.userRepository.randomRecommendUser(creatorId);
+  }
 }

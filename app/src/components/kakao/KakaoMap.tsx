@@ -1,5 +1,5 @@
 import {ReactElement, useEffect, useRef, useState} from "react";
-import {getMarkerApi} from "@apis/shop";
+import {getMarkerApi} from "@apis/shop/shop";
 import {useSession} from "next-auth/react";
 import {User} from "@containers/HomeContainer";
 

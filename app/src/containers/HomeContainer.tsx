@@ -11,7 +11,8 @@ import {useEffect, useState} from "react";
 import {RegionFilter} from "@components/filters/RegionFilter";
 import {VscSettings} from "react-icons/vsc";
 import {useSession} from "next-auth/react";
-import {recentlyFeedApi} from "@apis/feeds";
+import {recentlyFeedApi} from "@apis/feeds/feed.api";
+import {todayRecommendUserApi} from "@apis/users/user.api";
 
 export interface Filter {
   region: string;
@@ -50,8 +51,22 @@ export const HomeContainer = () => {
     }
   };
 
+  const findRecommendUser = async () => {
+    try {
+      const session = sessionData as unknown as User;
+      const creatorId = session.id;
+      const {data} = await todayRecommendUserApi(creatorId);
+      console.log(data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
-    if (sessionData) findFeed();
+    if (sessionData) {
+      findFeed();
+      findRecommendUser();
+    }
   }, [sessionData]);
 
   function FilterButton() {
@@ -79,7 +94,8 @@ export const HomeContainer = () => {
           <div className={styles.titleWrapper}>
             <Typography variant="h2">최근 다녀온 여행기</Typography>
           </div>
-          {recentlyFeeds.length > 0 ? (<CustomHorizontalBar>
+          {recentlyFeeds.length > 0 ? (
+            <CustomHorizontalBar>
             {recentlyFeeds.map((feed, index) => {
               return (
                 <div key={`${feed._id}_${index}`}>
@@ -88,7 +104,6 @@ export const HomeContainer = () => {
               );
             })}
           </CustomHorizontalBar>) : (<div>최근 포스터가 없어요.</div>)}
-
         </FlexBox>
 
         <FlexBox alignItems={"flex-start"} gap={10}>
