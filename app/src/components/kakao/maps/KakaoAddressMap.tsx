@@ -1,7 +1,7 @@
 import {ReactElement, useEffect, useRef, useState} from "react";
 import useFeedStore from "@store/feedStore";
 import * as styles from './KakaoAddressMap.css';
-import {AddressState} from "@interfaces/feeds/feedPost";
+import {AddressState} from "@interfaces/feeds/feed.post";
 
 const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
 

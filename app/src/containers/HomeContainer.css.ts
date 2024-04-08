@@ -51,7 +51,7 @@ export const homeListsFilterContainer = style({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "0 1em",
+  padding: "1em",
   zIndex: 99,
   borderBottom: "1px solid transparent",
 });

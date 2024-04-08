@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import DaumPostcodeEmbed, {Address} from 'react-daum-postcode';
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {KakaoAddressDocument} from "@interfaces/kakao";
-import {AddressState} from "@interfaces/feeds/feedPost";
+import {AddressState} from "@interfaces/feeds/feed.post";
 
 const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_REST_KEY;
 

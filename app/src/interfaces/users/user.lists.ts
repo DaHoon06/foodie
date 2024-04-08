@@ -1,0 +1,1 @@
+export interface RecommendUserLists extends RecommendUserListsApi {}

@@ -1,6 +1,6 @@
 import * as styles from "./HomeContainer.css";
 import {KakaoMap} from "@components/kakao/maps/KakaoMap";
-import {FeedCard, FeedLists} from "@components/ui/cards/feeds/FeedCard";
+import {FeedCard} from "@components/ui/cards/feeds/FeedCard";
 import {Typography} from "@components/common/typography/Typography";
 import {ThumbnailCard} from "@components/ui/cards/thumbnail/ThumbnailCard";
 import {CustomHorizontalBar} from "@components/nav/CustomHorizontalBar";
@@ -12,53 +12,38 @@ import {VscSettings} from "react-icons/vsc";
 import {useSession} from "next-auth/react";
 import {feedListsApi, recentlyFeedApi} from "@apis/feeds/feed.api";
 import {todayRecommendUserApi} from "@apis/users/user.api";
-
-export interface Filter {
-  region: string;
-}
-
-export interface User {
-  username: string;
-  id: string;
-  profile: string;
-}
-
-interface RecommendUser {
-  _id: string;
-  username: string;
-}
-
-
-
-
+import {UserSession} from "@interfaces/users/user.session";
+import {FeedFilter} from "@interfaces/feeds/feed.filter";
+import {FeedListsState, RecentlyFeedListsState} from "@interfaces/feeds/feed.lists";
+import {RecommendUserLists} from "@interfaces/users/user.lists";
 
 export const HomeContainer = () => {
   const { data: sessionData } = useSession();
-  const [filter, setFilter] = useState<Filter>({
-    region: "seoul",
+  const [filter, setFilter] = useState<FeedFilter>({
+    sido: "서울",
   });
   // 최근 다녀온 여행기
-  const [recentlyFeeds, setRecentlyFeeds] = useState([]);
+  const [recentlyFeeds, setRecentlyFeeds] = useState<RecentlyFeedListsState[]>([]);
   // 오늘의 추천 미식가
-  const [recommendUser, setRecommendUser] = useState<RecommendUser[]>([]);
+  const [recommendUser, setRecommendUser] = useState<RecommendUserLists[]>([]);
   // 피드 리스트
-  const [feedLists, setFeedLists] = useState<FeedLists[]>([]);
+  const [feedLists, setFeedLists] = useState<FeedListsState[]>([]);
 
   const [filterOpen, setFilterOpen] = useState(false);
 
   const setFilters = (value: string) => {
     setFilter({
       ...filter,
-      region: value,
+      sido: value,
     });
   };
 
   const findFeed = async () => {
     try {
-      const session = sessionData as unknown as User;
+      const session = sessionData as unknown as UserSession;
       const creatorId = session.id;
-      const { data } = await recentlyFeedApi(creatorId);
-      setRecentlyFeeds(data.data);
+      const data = await recentlyFeedApi(creatorId);
+      if (data) setRecentlyFeeds(data);
     } catch (e) {
       console.log(e);
     }
@@ -66,10 +51,11 @@ export const HomeContainer = () => {
 
   const findRecommendUser = async () => {
     try {
-      const session = sessionData as unknown as User;
+      const session = sessionData as unknown as UserSession;
       const creatorId = session.id;
-      const {data} = await todayRecommendUserApi(creatorId);
-      setRecommendUser(data.data);
+      const data = await todayRecommendUserApi(creatorId);
+      if (data) setRecommendUser(data);
+
     } catch (e) {
       console.log(e)
     }
@@ -77,8 +63,8 @@ export const HomeContainer = () => {
 
   const findFeedLists = async () => {
     try {
-      const {data} = await feedListsApi();
-      setFeedLists(data.data);
+      const data = await feedListsApi();
+      if (data) setFeedLists(data);
     } catch (e) {
       console.log(e);
     }

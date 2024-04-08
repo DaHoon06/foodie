@@ -4,35 +4,12 @@ import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {Typography} from "@components/common/typography/Typography";
 import Image from "next/image";
 import {FaComment, FaRegHeart} from "react-icons/fa6";
+import {FeedListsState} from "@apis/feeds/interfaces/feed";
 
-export interface FeedListUser {
-  userId: string;
-  username: string;
-  thumbnail?: string;
-}
-
-export interface FeedListShop {
-  shopId: string;
-  shopName: string;
-  shopDescription: string;
-  category: string;
-  shopAddress: {
-    sido: string;
-    sigungu: string;
-    fullAddress: string;
-  }
-}
-
-export interface FeedLists {
-  feedId: string;
-  feedContent: string;
-  feedCreatedDate: string;
-  user: FeedListUser;
-  shop: FeedListShop | null;
-}
+export type FeedListType = FeedListsState;
 
 interface Props {
-  feedCard: FeedLists
+  feedCard: FeedListType
 }
 
 export const FeedCard = (props: Props): ReactElement => {

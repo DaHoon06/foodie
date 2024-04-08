@@ -9,7 +9,7 @@ import * as styles from "./PostContainer.css";
 import {FileUploadButton} from "@components/common/buttons/FileUploadButton";
 import {Button} from "@components/common/buttons";
 import {useRouter} from "next/router";
-import {FeedPostBody, FeedUser} from "@interfaces/feeds/feedPost";
+import {FeedPostBody, FeedUser} from "@interfaces/feeds/feed.post";
 import {feedSubmitApi} from "@apis/feeds/feed.api";
 import {useSession} from "next-auth/react";
 import useModalStore from "@store/modalStore";
