@@ -20,7 +20,7 @@ import {RecommendUserLists} from "@interfaces/users/user.lists";
 export const HomeContainer = () => {
   const { data: sessionData } = useSession();
   const [filter, setFilter] = useState<FeedFilter>({
-    sido: "서울",
+    sido: "전체",
   });
   // 최근 다녀온 여행기
   const [recentlyFeeds, setRecentlyFeeds] = useState<RecentlyFeedListsState[]>([]);

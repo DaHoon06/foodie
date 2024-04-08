@@ -1,5 +1,5 @@
-import { style } from "@vanilla-extract/css";
-import { vars } from "@styles/theme.css";
+import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
 export const navBarLayout = style({
   backgroundColor: vars.colors.white000,
@@ -28,7 +28,7 @@ export const navBarLists = style({
   whiteSpace: "nowrap",
   scrollbarWidth: "none",
   overflow: "auto hidden",
-  gap: 20,
+  gap: 16,
 
   selectors: {
     "&:nth-child(1)": {

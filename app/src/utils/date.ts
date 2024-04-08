@@ -2,7 +2,7 @@
  * @param {Date} payload
  * date 포맷 변환
  */
-export const dateConvert = (payload: Date | undefined) => {
+export const dateConvert = (payload: Date | undefined | string) => {
   if (!payload) return "";
   const date = new Date(payload);
   const year = date.getFullYear();

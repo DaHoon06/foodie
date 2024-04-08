@@ -4,8 +4,8 @@ import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {Typography} from "@components/common/typography/Typography";
 import Image from "next/image";
 import {FaComment, FaRegHeart} from "react-icons/fa6";
-import {FeedListsState} from "@apis/feeds/interfaces/feed";
 import {dateConvert} from "@utils/date";
+import {FeedListsState} from "@interfaces/feeds/feed.lists";
 
 export type FeedListType = FeedListsState;
 

@@ -71,7 +71,8 @@ export const filterLists = style({
 export const feedListsLayout = style({
   padding: 0,
   width: "100%",
-  height: "100%",
+  height: "auto",
+  maxHeight: '100%',
   backgroundColor: vars.colors.backgroundColor,
   display: "flex",
   flexDirection: "column",

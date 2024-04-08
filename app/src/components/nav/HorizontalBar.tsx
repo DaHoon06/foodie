@@ -1,21 +1,24 @@
 import * as styles from "./HorizontalBar.css";
-import { Typography } from "@components/common/typography/Typography";
+import {Typography} from "@components/common/typography/Typography";
 import classNames from "classnames";
-import { useState } from "react";
+import {useState} from "react";
 
 interface HorizontalNavBarProps {
   lists: any[];
   onClickHandle: (value: string) => void;
 }
+
+const DEFAULT = '전체'
+
 export const HorizontalNavBar = ({
   lists,
   onClickHandle,
 }: HorizontalNavBarProps) => {
-  const [active, setActive] = useState("seoul");
+  const [active, setActive] = useState(DEFAULT);
 
-  const onClickItem = (value: string) => {
+  const onClickItem = (key: string, value: string) => {
     onClickHandle(value);
-    setActive(value);
+    setActive(key);
   };
 
   const itemActive = (value: string): boolean => {
@@ -29,11 +32,10 @@ export const HorizontalNavBar = ({
           return (
             <li
               className={classNames(
-                styles.navBarItems,
                 itemActive(list.key) && styles.active
               )}
               key={crypto.randomUUID()}
-              onClick={() => onClickItem(list.key)}
+              onClick={() => onClickItem(list.key, list.value)}
             >
               <Typography
                 color={itemActive(list.key) ? "white000" : "gray400"}
