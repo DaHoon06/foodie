@@ -1,13 +1,28 @@
 import {ReactElement, useEffect, useRef, useState} from "react";
 import useFeedStore from "@store/feedStore";
 import * as styles from './KakaoAddressMap.css';
+import {AddressState} from "@interfaces/feeds/feedPost";
 
 const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
 
 export const KakaoAddressMap = (): ReactElement => {
   const mapContainer = useRef();
   const {setFeedItem, item} = useFeedStore();
+  const [address, setAddress] = useState<AddressState>({
+    name: '',
+    x: '',
+    y: '',
+    sido: '',
+    sigungu: '',
+  })
   const [pending, setPending] = useState(true);
+
+  useEffect(() => {
+    setFeedItem({
+      ...item,
+      address
+    })
+  }, [address]);
 
   useEffect(() => {
     setPending(true);
@@ -60,17 +75,13 @@ export const KakaoAddressMap = (): ReactElement => {
                 infowindow.open(map, marker);
                 const x = String(mouseEvent.latLng.getLng());
                 const y = String(mouseEvent.latLng.getLat());
-                setFeedItem({
-                  ...item,
-                  address: {
-                    x, y,
-                    name: address_name,
-                    sido: region_1depth_name,
-                    sigungu: region_2depth_name
-                  }
-                })
-                console.log(item)
-
+                const address = {
+                  x, y,
+                  name: address_name,
+                  sido: region_1depth_name,
+                  sigungu: region_2depth_name
+                }
+                setAddress(address);
               }
             });
           });

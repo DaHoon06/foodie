@@ -1,11 +1,11 @@
 import React, {ReactElement, useState} from "react";
 import * as styles from "./FeedLocation.css";
 import useModalStore from "@store/modalStore";
-import {IoAdd, IoClose, IoLocation, IoLocate} from "react-icons/io5";
+import {IoAdd, IoClose, IoLocate, IoLocation} from "react-icons/io5";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {Button} from "@components/common/buttons";
 import {Typography} from "@components/common/typography/Typography";
-import useFeedStore from "@store/feedStore";
+import useFeedStore, {LocationState} from "@store/feedStore";
 import {KakaoAddressMap} from "@components/kakao/maps/KakaoAddressMap";
 import {KakaoAddressSearch} from "@components/kakao/KakaoAddressSearch";
 import {SelectBox} from "@components/common/select-box";
@@ -32,6 +32,7 @@ const categories = [
 
 export const FeedLocation = (): ReactElement => {
   const {setIsOpen, setModalType} = useModalStore();
+  const [locationData, setLocationData] = useState<LocationState>({title: '', category: '',});
   const {setFeedItem, item} = useFeedStore();
   const [locationType, setLocationType] = useState('address');
 
@@ -42,7 +43,8 @@ export const FeedLocation = (): ReactElement => {
 
   const handleClickSendLocationData = () => {
     setFeedItem({
-      ...item
+      ...item,
+      ...locationData,
     });
     handleClickLocationForm();
   };
@@ -51,19 +53,15 @@ export const FeedLocation = (): ReactElement => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const {name, value} = e.target;
-    setFeedItem({
-      ...item,
+    setLocationData({
+      ...locationData,
       [name]: value,
     });
   };
-
-  const disabled = (): boolean => {
-    return item.address.name.length === 0 || item.address.sido.length === 0 || item.address.sigungu.length === 0 || item.address.x.length === 0 || item.address.y.length === 0
-  }
-
+2
   const onChangeCategorySelectBox = (value: string) => {
-    setFeedItem({
-      ...item,
+    setLocationData({
+      ...locationData,
       category: value,
     })
   }
@@ -78,6 +76,21 @@ export const FeedLocation = (): ReactElement => {
 
       <Typography>카테고리</Typography>
       <SelectBox items={categories} onChange={onChangeCategorySelectBox}/>
+
+      <div className={styles.feedLocationContainer}>
+        <section>
+          <label>
+            이름
+            <input
+              name="title"
+              value={locationData.title}
+              onChange={handleChange}
+              className={styles.input}
+              type="text"
+            />
+          </label>
+        </section>
+      </div>
 
       <section>
         <Button
@@ -109,23 +122,6 @@ export const FeedLocation = (): ReactElement => {
           type="text"
         />
       </label>
-
-
-      <div className={styles.feedLocationContainer}>
-        <section>
-          <label>
-            이름
-            <input
-              disabled={disabled()}
-              name="title"
-              value={item.title}
-              onChange={handleChange}
-              className={styles.input}
-              type="text"
-            />
-          </label>
-        </section>
-      </div>
 
       <FlexBox>
         <Button

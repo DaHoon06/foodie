@@ -10,7 +10,7 @@ export interface FeedPostBody {
   user?: FeedUser;
 }
 
-interface Address {
+export interface AddressState {
   name: string;
   sigungu: string,
   sido: string,
@@ -21,5 +21,5 @@ interface Address {
 export interface FeedItem {
   title: string;
   category: string;
-  address: Address;
+  address: AddressState;
 }

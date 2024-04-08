@@ -6,6 +6,8 @@ type FeedInitialState = {
   item: FeedItem;
 };
 
+export type LocationState = Omit<FeedItem, 'address'>
+
 type SetFeedStore = {
   setFeedItem: (item: FeedItem) => void;
 };

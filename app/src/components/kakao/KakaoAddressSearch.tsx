@@ -1,18 +1,30 @@
 import useFeedStore from "@store/feedStore";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import DaumPostcodeEmbed, {Address} from 'react-daum-postcode';
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {KakaoAddressDocument} from "@interfaces/kakao";
+import {AddressState} from "@interfaces/feeds/feedPost";
 
 const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_REST_KEY;
 
 export const KakaoAddressSearch = () => {
   const {setFeedItem, item} = useFeedStore();
+  const [address, setAddress] = useState<AddressState>({
+    name: '',
+    x: '',
+    y: '',
+    sido: '',
+    sigungu: '',
+  });
+
+  useEffect(() => {
+    setFeedItem({
+      ...item,
+      address
+    })
+  }, [address]);
 
   const handleComplete = (data: Address) => {
-    let fullAddress = data.address;
-    let extraAddress = '';
-
     const headers = {
       'content-type': "application/json;charset=UTF-8",
       'Authorization': `KakaoAK ${kakaoAppKey}`
@@ -33,13 +45,9 @@ export const KakaoAddressSearch = () => {
           y
         }
 
-        setFeedItem({
-          ...item,
-          address: addressData
-        })
+        setAddress(addressData);
       }
     })
-    console.log(data)
   };
 
   return (
