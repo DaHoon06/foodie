@@ -26,6 +26,9 @@ export class UserEntity extends BaseEntity {
   @Column()
   hashname: string;
 
+  @Column()
+  description: string;
+
   @CreateDateColumn()
   created_at: Date;
 

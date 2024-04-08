@@ -23,13 +23,20 @@ export interface User {
   profile: string;
 }
 
+interface RecommendUser {
+  _id: string;
+  username: string;
+}
+
 export const HomeContainer = () => {
   const { data: sessionData } = useSession();
   const [filter, setFilter] = useState<Filter>({
     region: "seoul",
   });
+  // 최근 다녀온 여행기
   const [recentlyFeeds, setRecentlyFeeds] = useState([]);
-
+  // 오늘의 추천 미식가
+  const [recommendUser, setRecommentUser] = useState<RecommendUser[]>([])
   const [filterOpen, setFilterOpen] = useState(false);
 
   const setFilters = (value: string) => {
@@ -55,7 +62,7 @@ export const HomeContainer = () => {
       const session = sessionData as unknown as User;
       const creatorId = session.id;
       const {data} = await todayRecommendUserApi(creatorId);
-      console.log(data)
+      setRecommentUser(data.data);
     } catch (e) {
       console.log(e)
     }
@@ -102,20 +109,27 @@ export const HomeContainer = () => {
                 </div>
               );
             })}
-          </CustomHorizontalBar>) : (<div>최근 포스터가 없어요.</div>)}
+          </CustomHorizontalBar>) : (<div className={styles.emptyLabel}><Typography>최근 작성된 미식 기록이 없어요.</Typography></div>)}
         </FlexBox>
 
         <FlexBox alignItems={"flex-start"} gap={10}>
           <div className={styles.titleWrapper}>
             <Typography variant="h2">오늘의 추천 미식가</Typography>
           </div>
-
-          <CustomHorizontalBar>
-            <FollowCard />
-            <FollowCard />
-            <FollowCard />
-            <FollowCard />
-          </CustomHorizontalBar>
+          
+          
+            {recommendUser.length > 0 ? (
+              <CustomHorizontalBar>
+                {recommendUser.map((user, index) => {
+                  return (
+                    <div key={`${crypto.randomUUID()}_${user._id}`}>
+                      <FollowCard user={user} />
+                    </div>
+                  )
+                })}
+              </CustomHorizontalBar>  
+            ) : (<div className={styles.emptyLabel}><Typography>추천 미식가가 없어요.</Typography></div>)}
+            
         </FlexBox>
       </div>
       <div

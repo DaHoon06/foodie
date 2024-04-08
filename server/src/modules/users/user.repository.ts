@@ -31,9 +31,10 @@ export class UserRepository extends Repository<UserEntity> {
   async randomRecommendUser(creatorId: string) {
     const userGroup = await this.createQueryBuilder('user')
       .where('user.creatorId != :creatorId', { creatorId })
+      .select(['user._id', 'user.username'])
       .orderBy('RAND()')
       .limit(10)
       .getMany();
-    console.log(userGroup);
+    return userGroup;
   }
 }

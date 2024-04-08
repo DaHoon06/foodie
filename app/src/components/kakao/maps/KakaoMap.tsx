@@ -120,7 +120,6 @@ export const KakaoMap = (): ReactElement => {
     }
 
     return () => {
-      console.log('언마운트')
       const scripts = document.head.getElementsByTagName('script');
       for (let i = 0; i < scripts.length; i++) {
         const script = scripts[i];

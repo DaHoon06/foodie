@@ -1,5 +1,5 @@
-import { style } from "@vanilla-extract/css";
-import { vars } from "@styles/theme.css";
+import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
 export const homeContainerLayout = style({
   width: "100%",
@@ -28,10 +28,15 @@ export const homeContainer = style({
   width: "100%",
 });
 
+export const emptyLabel = style({
+  width: '100%',
+  textAlign: 'center',
+  marginBottom: 20
+})
+
 export const titleWrapper = style({
   width: "100%",
-  height: 30,
-  padding: "0 20px",
+  padding: "1em 20px",
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-start",

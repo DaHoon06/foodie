@@ -5,18 +5,24 @@ import {Typography} from "@components/common/typography/Typography";
 import {Button} from "@components/common/buttons";
 
 interface FollowCardProps {
-  name: string;
-  follow: number;
-  description: number;
-  userId: string;
+  _id: string;
+  username: string;
+  follow?: number;
+  description?: number;
   thumbnail?: string;
 }
 
-export const FollowCard = () => {
+interface Props {
+  user: FollowCardProps;
+}
 
-  const handleClickFollowButton = (userId: string) => {
-    alert('팔로우')
+export const FollowCard = (props: Props) => {
+  const {username, _id, description, follow, thumbnail} = props.user;
+  const handleClickFollowButton = () => {
+    alert(`${_id}_팔로우`)
   }
+
+  const thumbnailUrl = thumbnail ? thumbnail : "/images/profile.png"
 
   return (
     <article className={styles.followCardLayout}>
@@ -24,7 +30,7 @@ export const FollowCard = () => {
         <div className={styles.thumbnailImageBox}>
           <Image
             className={styles.thumbnailImage}
-            src={"/images/profile.png"}
+            src={thumbnailUrl}
             alt={"profile_image"}
             width={70}
             height={70}
@@ -32,19 +38,21 @@ export const FollowCard = () => {
         </div>
 
         <FlexBox justifyContent={"space-between"} alignItems={"center"}>
-          <Typography fontWeight={600}>전다훈</Typography>
-          <Typography fontWeight={300} color={"gray500"} fontSize={12}>
-            팔로우 11 명
-          </Typography>
+          <Typography fontWeight={600}>{username}</Typography>
+          {!!follow &&
+            (<Typography fontWeight={300} color={"gray500"} fontSize={12}>
+            팔로우 {follow} 명
+          </Typography>)}
+
           <Typography
             fontWeight={300}
             color={"gray500"}
             className={styles.profileDescription}
           >
-            아뇽하세요 맛도리 입니다. 아뇽하세요 맛도리 입니다.
+            {description}
           </Typography>
         </FlexBox>
-        <Button width={90} height={32} onClick={() => handleClickFollowButton('userId')}>
+        <Button width={90} height={32} onClick={handleClickFollowButton}>
           <Typography as={"span"} color={'white000'}>
             팔로우
           </Typography>
