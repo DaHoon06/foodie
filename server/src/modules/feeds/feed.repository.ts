@@ -10,23 +10,59 @@ export class FeedRepository extends Repository<FeedEntity> {
     super(FeedEntity, dataSource.createEntityManager());
   }
 
-  async findAll() {
-    return this.createQueryBuilder('feed')
-      .where('feed.user_id is NOT NULL AND feed.deleted = false')
-      .innerJoinAndSelect('feed.user', 'user')
-      .select([])
+  async findManyFeedLists() {
+    const lists = await this.createQueryBuilder('feed')
+      .where('feed.deleted = false')
+      .leftJoinAndSelect('feed.shop', 'shop')
+      .leftJoinAndSelect('feed.user', 'user')
+      .orderBy('feed.created_at', 'DESC')
+      .limit(this.listLimit)
       .getMany();
+    return lists.map((list) => {
+      let user = null;
+      let shop = null;
+
+      if (list.user) {
+        user = {
+          userId: list.user._id,
+          username: list.user.username,
+          thumbnail: '',
+        };
+      }
+
+      if (list.shop) {
+        shop = {
+          shopId: list.shop._id,
+          shopName: list.shop.title,
+          shopDescription: list.shop.description,
+          category: list.shop.category,
+          shopAddress: {
+            sido: list.shop.sido,
+            sigungu: list.shop.sigungu,
+            fullAddress: list.shop.fullAddress,
+          },
+        };
+      }
+
+      return {
+        feedId: list._id,
+        feedContent: list.content,
+        feedCreatedDate: list.created_at,
+        user,
+        shop,
+      };
+    });
   }
 
   async findRecentlyFeed(userId: string) {
     const feeds = await this.createQueryBuilder('feed')
-      .where('feed.user_id = :userId', { userId })
+      .where('feed.user_id = :userId AND feed.deleted = false', { userId })
       .leftJoinAndSelect('feed.shop', 'shop')
       .select(['feed', 'shop'])
       .orderBy('feed.created_at', 'DESC')
       .limit(10)
       .getMany();
-    const transformedData = feeds.map((feed) => {
+    return feeds.map((feed) => {
       let shop = null;
 
       if (feed.shop) {
@@ -46,7 +82,5 @@ export class FeedRepository extends Repository<FeedEntity> {
         created_at: feed.created_at,
       };
     });
-
-    return transformedData;
   }
 }

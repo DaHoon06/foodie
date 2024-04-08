@@ -78,6 +78,12 @@ export class FeedService {
     return true;
   }
 
+  // 최신 피드
+  //todo 필터링
+  async findManyFeedLists() {
+    return this.feedRepository.findManyFeedLists();
+  }
+
   async findRecentlyFeed(creatorId: string) {
     const findUser: UserEntity =
       await this.userService.findOneUserByCreatorId(creatorId);
@@ -85,9 +91,5 @@ export class FeedService {
     if (!findUser)
       throw new NotFoundException('로그인 정보가 유효하지 않습니다.');
     return this.feedRepository.findRecentlyFeed(findUser._id);
-  }
-
-  async findAll() {
-    return this.feedRepository.findAll();
   }
 }

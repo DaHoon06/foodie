@@ -1,6 +1,6 @@
 import * as styles from "./HomeContainer.css";
 import {KakaoMap} from "@components/kakao/maps/KakaoMap";
-import {FeedCard} from "@components/ui/cards/feeds/FeedCard";
+import {FeedCard, FeedLists} from "@components/ui/cards/feeds/FeedCard";
 import {Typography} from "@components/common/typography/Typography";
 import {ThumbnailCard} from "@components/ui/cards/thumbnail/ThumbnailCard";
 import {CustomHorizontalBar} from "@components/nav/CustomHorizontalBar";
@@ -10,7 +10,7 @@ import {useEffect, useState} from "react";
 import {RegionFilter} from "@components/filters/RegionFilter";
 import {VscSettings} from "react-icons/vsc";
 import {useSession} from "next-auth/react";
-import {recentlyFeedApi} from "@apis/feeds/feed.api";
+import {feedListsApi, recentlyFeedApi} from "@apis/feeds/feed.api";
 import {todayRecommendUserApi} from "@apis/users/user.api";
 
 export interface Filter {
@@ -28,6 +28,10 @@ interface RecommendUser {
   username: string;
 }
 
+
+
+
+
 export const HomeContainer = () => {
   const { data: sessionData } = useSession();
   const [filter, setFilter] = useState<Filter>({
@@ -36,7 +40,10 @@ export const HomeContainer = () => {
   // 최근 다녀온 여행기
   const [recentlyFeeds, setRecentlyFeeds] = useState([]);
   // 오늘의 추천 미식가
-  const [recommendUser, setRecommentUser] = useState<RecommendUser[]>([])
+  const [recommendUser, setRecommendUser] = useState<RecommendUser[]>([]);
+  // 피드 리스트
+  const [feedLists, setFeedLists] = useState<FeedLists[]>([]);
+
   const [filterOpen, setFilterOpen] = useState(false);
 
   const setFilters = (value: string) => {
@@ -62,9 +69,18 @@ export const HomeContainer = () => {
       const session = sessionData as unknown as User;
       const creatorId = session.id;
       const {data} = await todayRecommendUserApi(creatorId);
-      setRecommentUser(data.data);
+      setRecommendUser(data.data);
     } catch (e) {
       console.log(e)
+    }
+  }
+
+  const findFeedLists = async () => {
+    try {
+      const {data} = await feedListsApi();
+      setFeedLists(data.data);
+    } catch (e) {
+      console.log(e);
     }
   }
 
@@ -73,6 +89,7 @@ export const HomeContainer = () => {
       findFeed();
       findRecommendUser();
     }
+    findFeedLists();
   }, [sessionData]);
 
   function FilterButton() {
@@ -153,11 +170,17 @@ export const HomeContainer = () => {
       </div>
 
       <div className={styles.feedListsLayout}>
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
+        {feedLists.length > 0 ? (
+          <>
+            {feedLists.map((feed) => {
+              return (
+                <div key={`${crypto.randomUUID()}_${feed.feedId}`}>
+                  <FeedCard feedCard={feed} />
+                </div>
+              )
+            })}
+          </>
+        ) : (<div className={styles.emptyLabel}><Typography>추천 미식가가 없어요.</Typography></div>)}
       </div>
     </div>
   );

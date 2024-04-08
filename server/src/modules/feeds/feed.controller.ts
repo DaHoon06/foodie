@@ -15,6 +15,11 @@ export class FeedController {
     return this.feedService.createFeed(body);
   }
 
+  @Get('/lists')
+  async getFeedLists() {
+    return this.feedService.findManyFeedLists();
+  }
+
   @Get('/recently/:creatorId')
   async findRecentlyFeed(@Param('creatorId') creatorId: string) {
     return this.feedService.findRecentlyFeed(creatorId);
