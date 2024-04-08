@@ -46,7 +46,7 @@ export const homeListsFilterContainer = style({
   position: "sticky",
   width: "100%",
   height: 48,
-  top: 62,
+  top: 59,
   backgroundColor: vars.colors.white000,
   display: "flex",
   alignItems: "center",

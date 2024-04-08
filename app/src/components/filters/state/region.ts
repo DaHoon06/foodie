@@ -1,5 +1,5 @@
 export const regionDo = [
-  {label: '전체', key: '전체', value: ''},
+  {label: '전체', key: '전체', value: '전체'},
   {
     label: "서울",
     key: "서울",

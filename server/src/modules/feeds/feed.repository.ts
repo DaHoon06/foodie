@@ -11,14 +11,24 @@ export class FeedRepository extends Repository<FeedEntity> {
   }
 
   async findManyFeedLists(region: string, page: number) {
-    const lists = await this.createQueryBuilder('feed')
+    let queryBuilder = this.createQueryBuilder('feed')
       .where('feed.deleted = false')
       .leftJoinAndSelect('feed.shop', 'shop')
-      .leftJoinAndSelect('feed.user', 'user')
+      .leftJoinAndSelect('feed.user', 'user');
+
+    if (region !== '전체')
+      queryBuilder = queryBuilder.andWhere('shop.sido = :sido', {
+        sido: region,
+      });
+
+    const offset = (page - 1) * this.listLimit;
+    const listsData = await queryBuilder
       .orderBy('feed.created_at', 'DESC')
-      .limit(this.listLimit)
+      .skip(offset)
+      .take(this.listLimit)
       .getMany();
-    return lists.map((list) => {
+
+    return listsData.map((list) => {
       let user = null;
       let shop = null;
 
