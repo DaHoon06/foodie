@@ -1,18 +1,23 @@
-import { style } from "@vanilla-extract/css";
+import {style} from "@vanilla-extract/css";
 
 export const FeedPostLayout = style({
   width: "100%",
-  minHeight: "70vh",
+  maxHeight: "70vh",
   height: "auto",
 });
 
 export const FeedTextarea = style({
+  all: 'unset',
+  "-webkit-appearance": 'none',
+  "-moz-appearance": 'none',
+  appearance: 'none',
   width: "100%",
-  height: "100%",
+  height: '1.7em',
+  maxHeight: 600,
   background: "white",
   border: "none",
   resize: "none",
-  minHeight: 400,
+  overflow: 'auto',
   boxSizing: "border-box",
   padding: "1em",
   outline: "none",

@@ -14,10 +14,11 @@ import {feedSubmitApi} from "@apis/feeds/feed.api";
 import {useSession} from "next-auth/react";
 import useModalStore from "@store/modalStore";
 import useFeedStore from "@store/feedStore";
+import {IoTrashOutline} from "react-icons/io5";
 
 export const FeedPostContainer = (): ReactElement => {
   const { setIsOpen, setModalType } = useModalStore();
-  const { item } = useFeedStore();
+  const { item, setFeedItem } = useFeedStore();
   const { data: session } = useSession();
   const [previewUrl, setPreviewUrl] = useState<string[]>([]);
   const [postForm, setPostForm] = useState<FeedPostBody>({
@@ -82,6 +83,20 @@ export const FeedPostContainer = (): ReactElement => {
     setIsOpen(true);
   };
 
+  const handleClickRemoveLocationData = () => {
+    setFeedItem({
+      title: '',
+      category: '',
+      address: {
+        name: '',
+        sigungu: '',
+        sido: '',
+        x: '',
+        y: ''
+      }
+    });
+  }
+
   return (
     <form onSubmit={handleSubmitFeedPost} className={styles.postLayout}>
       <FlexBox
@@ -102,60 +117,72 @@ export const FeedPostContainer = (): ReactElement => {
         </Button>
       </FlexBox>
 
-      <div className={styles.postLayout}>
-        <FlexBox
-          className={styles.postBodyContainer}
-          direction="row"
-          alignItems="flex-center"
-          justifyContent="flex-start"
-        >
-          <Avatar alt={"dahoon"} src={"/images/dh.png"} />
-          <FeedPost onChangeTextarea={onChangeTextarea} />
-        </FlexBox>
-        {postForm.item.title.length > 0 && (<div className={styles.locationItemContainer}>
-          <div className={styles.locationItemBox}>
-            <Typography fontSize={14} fontWeight={500}>
-              {item.title}
-            </Typography>
-            <Typography color={"gray400"} fontSize={14} fontWeight={300}>
-              {item.category}
-            </Typography>
-            <Typography color={"gray400"} fontSize={14} fontWeight={300}>
-              {item.address.name} {item.address.sido} / {item.address.sigungu}
-            </Typography>
-          </div>
-        </div>)}
+        <div className={styles.postLayout}>
+            <div>
+              <FlexBox
+                className={styles.postBodyContainer}
+                direction="row"
+                alignItems="flex-center"
+                justifyContent="flex-start"
+              >
+                <Avatar alt={"dahoon"} src={"/images/dh.png"} />
+                <FeedPost onChangeTextarea={onChangeTextarea} />
+              </FlexBox>
+              {postForm.item.title.length > 0 && (<div className={styles.locationItemContainer}>
+                <div className={styles.locationItemBox}>
+                  <FlexBox direction={'row'} justifyContent={'space-between'} gap={2}>
+                    <FlexBox justifyContent={'flex-start'} alignItems={'flex-start'}>
+                      <Typography fontSize={14} fontWeight={500}>
+                        {item.title}
+                      </Typography>
+                      <Typography color={"gray400"} fontSize={14} fontWeight={300}>
+                        {item.category}
+                      </Typography>
+                      <Typography color={"gray400"} fontSize={14} fontWeight={300}>
+                        {item.address.name} {item.address.sido} / {item.address.sigungu}
+                      </Typography>
+                    </FlexBox>
 
+                    <Button className={styles.removeLocationButton} variant={'icon'} onClick={handleClickRemoveLocationData}>
+                      <IoTrashOutline size={24} color={'#d3d3d3'} />
+                    </Button>
+                  </FlexBox>
+                </div>
+              </div>)}
+            </div>
 
-        <FlexBox
-          direction="row"
-          justifyContent="space-between"
-          className={styles.postOptionContainer}
-        >
-          <FileUploadButton onFileChange={handleChangeFile} />
+            <div>
+              <FlexBox
+                direction="row"
+                justifyContent="space-between"
+                className={styles.postOptionContainer}
+              >
+                <FileUploadButton onFileChange={handleChangeFile} />
 
-          <button type={"button"} onClick={handleClickLocation}>
-            <FlexBox direction="row" justifyContent="flex-end" gap={4}>
-              <FiMapPin color={"#FF7101"} />
-              <Typography color="primary" as="span" fontSize={14}>
-                장소
-              </Typography>
-            </FlexBox>
-          </button>
-        </FlexBox>
-        <div className={styles.imagesContainer}>
-          {previewUrl.map((url, index) => (
-            <Image
-              width={40}
-              height={40}
-              key={index}
-              src={url}
-              alt={`Preview ${index}`}
-              className={styles.images}
-            />
-          ))}
+                <button type={"button"} onClick={handleClickLocation}>
+                  <FlexBox direction="row" justifyContent="flex-end" gap={4}>
+                    <FiMapPin color={"#FF7101"} />
+                    <Typography color="primary" as="span" fontSize={14}>
+                      장소
+                    </Typography>
+                  </FlexBox>
+                </button>
+              </FlexBox>
+              <div className={styles.imagesContainer}>
+                {previewUrl.map((url, index) => (
+                  <Image
+                    width={40}
+                    height={40}
+                    key={index}
+                    src={url}
+                    alt={`Preview ${index}`}
+                    className={styles.images}
+                  />
+                ))}
+              </div>
+            </div>
+
         </div>
-      </div>
     </form>
   );
 };
