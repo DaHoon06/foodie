@@ -5,6 +5,7 @@ import {Typography} from "@components/common/typography/Typography";
 import Image from "next/image";
 import {FaComment, FaRegHeart} from "react-icons/fa6";
 import {FeedListsState} from "@apis/feeds/interfaces/feed";
+import {dateConvert} from "@utils/date";
 
 export type FeedListType = FeedListsState;
 
@@ -34,7 +35,7 @@ export const FeedCard = (props: Props): ReactElement => {
             {user.username}
           </Typography>
           <Typography as={"span"} color={"gray400"} fontSize={12}>
-            {feedCreatedDate}
+            {dateConvert(feedCreatedDate)}
           </Typography>
         </FlexBox>
       </FlexBox>
