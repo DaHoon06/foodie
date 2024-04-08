@@ -39,8 +39,8 @@ export const KakaoAddressSearch = () => {
         const {address_name, region_1depth_name, region_2depth_name, x, y} = address;
         const addressData = {
           name: address_name,
-          sigungu: region_1depth_name,
-          sido: region_2depth_name,
+          sido: region_1depth_name,
+          sigungu: region_2depth_name,
           x,
           y
         }
