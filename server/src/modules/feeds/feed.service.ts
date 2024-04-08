@@ -14,6 +14,7 @@ import { UserEntity } from '@modules/users/entities/user.entity';
 import { FeedEntity } from './entities/feed.entity';
 import { ShopService } from '@modules/shop/shop.service';
 import { ShopEntity } from '@modules/shop/entities/shop.entity';
+import { FilterDto } from '@modules/feeds/dto/filter.dto';
 
 @Injectable()
 export class FeedService {
@@ -80,8 +81,12 @@ export class FeedService {
 
   // 최신 피드
   //todo 필터링
-  async findManyFeedLists() {
-    return this.feedRepository.findManyFeedLists();
+  async findManyFeedLists(filters: FilterDto) {
+    const { region, page: filterPage } = filters;
+    let page = +filterPage;
+    if (isNaN(page)) page = 1;
+    //todo 페이징 처리
+    return this.feedRepository.findManyFeedLists(region, page);
   }
 
   async findRecentlyFeed(creatorId: string) {

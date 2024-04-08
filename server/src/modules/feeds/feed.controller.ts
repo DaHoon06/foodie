@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { FeedService } from './feed.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateFeedDto } from './dto/create.feed.dto';
+import { FilterDto } from '@modules/feeds/dto/filter.dto';
 
 @Controller({
   path: 'feeds',
@@ -16,8 +17,8 @@ export class FeedController {
   }
 
   @Get('/lists')
-  async getFeedLists() {
-    return this.feedService.findManyFeedLists();
+  async getFeedLists(@Query() filters: FilterDto) {
+    return this.feedService.findManyFeedLists(filters);
   }
 
   @Get('/recently/:creatorId')

@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class FilterDto {
@@ -16,7 +16,7 @@ export class FilterDto {
     example: 1,
     type: Number,
   })
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  page: number;
+  page: string;
 }

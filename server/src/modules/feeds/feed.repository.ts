@@ -10,7 +10,7 @@ export class FeedRepository extends Repository<FeedEntity> {
     super(FeedEntity, dataSource.createEntityManager());
   }
 
-  async findManyFeedLists() {
+  async findManyFeedLists(region: string, page: number) {
     const lists = await this.createQueryBuilder('feed')
       .where('feed.deleted = false')
       .leftJoinAndSelect('feed.shop', 'shop')
