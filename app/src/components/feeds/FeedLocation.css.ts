@@ -1,13 +1,40 @@
 import {vars} from "@styles/theme.css";
 import {style} from "@vanilla-extract/css";
 
-export const feedLocationLaoyout = style({
+export const feedLocationLayout = style({
   width: "100%",
   height: "100%",
   paddingRight: "2em",
   paddingLeft: "2em",
   paddingTop: "2em",
   paddingBottom: "4em",
+});
+
+export const addressSearchTab = style({
+  width: "100%",
+  height: 30,
+});
+
+export const currentTabActive = style({
+  backgroundColor: vars.colors.white000,
+  border: `1px solid ${vars.colors.gray000}`
+});
+
+export const currentTabUnActive = style({
+  backgroundColor: '#f8f8f8',
+  border: `1px solid ${vars.colors.gray000}`
+});
+
+export const tabButton = style({
+  padding: '0.5em',
+  borderRadius: '6px 6px 0 0',
+  borderColor: "transparent",
+  display: "flex",
+  alignItems: "center",
+  gap: 4,
+  borderTop: '1px solid #f6f6f6',
+  borderLeft: '1px solid #f6f6f6',
+  borderRight: '1px solid #f6f6f6',
 });
 
 export const addressSearchContainer = style({

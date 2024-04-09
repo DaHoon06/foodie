@@ -68,26 +68,26 @@ export const FeedLocation = (): ReactElement => {
   }
 
   return (
-    <div className={styles.feedLocationLaoyout}>
+    <div className={styles.feedLocationLayout}>
       <FlexBox justifyContent="flex-end" alignItems="flex-end">
         <button type="button" onClick={handleClickLocationForm}>
           <IoClose size={24} color={"#FF7101"}/>
         </button>
       </FlexBox>
 
-      <FlexBox direction={'row'} alignItems={"flex-start"} justifyContent={"flex-start"} gap={20}>
-        <Button variant={"icon"}
+      <FlexBox className={styles.addressSearchTab} direction={'row'} alignItems={"flex-start"} justifyContent={"flex-start"} >
+        <button className={classNames(styles.tabButton, `${locationType === 'map' ? styles.currentTabActive : styles.currentTabUnActive}`)}
                 onClick={() => setLocationType('map')}>
-          <IoLocation color={primaryIconColor} size={20}/>
-          <Typography as={'span'} color={"primary"}>지도로 검색</Typography>
-        </Button>
-        <Button
-          variant={"icon"}
+          <IoLocation color={locationType === 'map' ? primaryIconColor : '#e3e3e3'} size={20}/>
+          <Typography as={'span'} color={locationType === 'map' ? 'primary' : "gray300"} fontSize={14}>지도로 검색</Typography>
+        </button>
+        <button
+          className={classNames(styles.tabButton, `${locationType === 'address' ? styles.currentTabActive : styles.currentTabUnActive}`)}
           onClick={() => setLocationType('address')}
         >
-          <IoLocate color={primaryIconColor} size={20}/>
-          <Typography as={'span'} color={"primary"}>주소로 검색</Typography>
-        </Button>
+          <IoLocate color={locationType === 'address' ? primaryIconColor : '#e3e3e3'} size={20}/>
+          <Typography as={'span'} color={locationType === 'address' ? 'primary' : "gray300"} fontWeight={300} fontSize={14}>주소로 검fk색</Typography>
+        </button>
       </FlexBox>
 
       <FlexBox className={classNames(styles.locationItemWrapper)} alignItems={"flex-start"} gap={8}>
