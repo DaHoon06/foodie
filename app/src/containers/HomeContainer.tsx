@@ -87,9 +87,9 @@ export const HomeContainer = () => {
     <div className={styles.homeContainerLayout}>
       <KakaoMap />
       <div className={styles.homeContainer}>
-        <FlexBox alignItems={"flex-start"} gap={10}>
+        <FlexBox className={styles.recentlyFeedContainer} alignItems={"flex-start"}>
           <div className={styles.titleWrapper}>
-            <Typography variant="h2">최근 다녀온 여행기</Typography>
+            <Typography variant="h2" fontWeight={600} color={"black100"}>최근 다녀온 여행기</Typography>
           </div>
           {recentlyFeeds.length > 0 ? (
             <CustomHorizontalBar>
@@ -103,12 +103,11 @@ export const HomeContainer = () => {
           </CustomHorizontalBar>) : (<div className={styles.emptyLabel}><Typography>최근 작성된 미식 기록이 없어요.</Typography></div>)}
         </FlexBox>
 
-        <FlexBox alignItems={"flex-start"} gap={10}>
+        <FlexBox className={styles.userContainer} alignItems={"flex-start"}>
           <div className={styles.titleWrapper}>
-            <Typography variant="h2">오늘의 추천 미식가</Typography>
+            <Typography variant="h2" fontWeight={600} color={"black100"}>오늘의 추천 미식가</Typography>
           </div>
-          
-          
+
             {recommendUser.length > 0 ? (
               <CustomHorizontalBar>
                 {recommendUser.map((user, index) => {
@@ -129,8 +128,7 @@ export const HomeContainer = () => {
           borderColor: !filterOpen ? "#ededed" : "transparent",
         }}
       >
-        <Typography variant="h2">여행기</Typography>
-
+        <Typography variant="h2" fontWeight={600} color={"black100"}>미식가 여행기</Typography>
         <FilterButton />
       </div>
       <div
@@ -142,7 +140,6 @@ export const HomeContainer = () => {
       >
         <RegionFilter filter={setFilters} />
       </div>
-
       <FeedLists filter={filter} />
     </div>
   );

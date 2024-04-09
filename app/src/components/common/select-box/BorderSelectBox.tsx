@@ -1,5 +1,5 @@
-import {useEffect, useRef, useState} from "react";
-import * as styles from "./SelectBox.css";
+import {ReactElement, useEffect, useRef, useState} from "react";
+import * as styles from "./BorderSelectBox.css";
 import {Typography} from "@components/common/typography/Typography";
 
 export type Items = {
@@ -12,7 +12,7 @@ export interface SelectBoxProps {
   onChange: (value: string) => void;
 }
 
-export const SelectBox = (props: SelectBoxProps) => {
+export const BorderSelectBox = (props: SelectBoxProps): ReactElement => {
   const {items, onChange} = props;
   const [currentValue, setCurrentValue] = useState(items[0].label);
   const [showOptions, setShowOptions] = useState(false);
@@ -42,7 +42,9 @@ export const SelectBox = (props: SelectBoxProps) => {
 
   return (
     <div
-      className={styles.selectBox}
+      aria-selected={true}
+      role={''}
+      className={styles.BorderSelectBox}
       onClick={() => setShowOptions((prev) => !prev)}
     >
       <Typography as={"span"} color={"gray400"} fontSize={14}>
@@ -56,6 +58,8 @@ export const SelectBox = (props: SelectBoxProps) => {
         {items.map((option, index) => {
           return (
             <li
+              aria-selected={true}
+              role={'option'}
               className={styles.selectBoxOption}
               key={`${option.key}_${index}_${crypto.randomUUID()}`}
               value={option.key}
@@ -68,4 +72,4 @@ export const SelectBox = (props: SelectBoxProps) => {
       </ul>
     </div>
   );
-};
+}

@@ -72,11 +72,13 @@ export const FeedPostContainer = (): ReactElement => {
         user,
         ...postForm,
       };
-      await feedSubmitApi(body);
+      const {data} = await feedSubmitApi(body);
+      if (data.result) await router.push('/');
     } catch (e) {
       console.log(e);
     }
   };
+
 
   const handleClickLocation = async () => {
     setModalType("registerShop");
@@ -139,7 +141,10 @@ export const FeedPostContainer = (): ReactElement => {
                         {item.category}
                       </Typography>
                       <Typography color={"gray400"} fontSize={14} fontWeight={300}>
-                        {item.address.name} {item.address.sido} / {item.address.sigungu}
+                        {item.address.name}
+                      </Typography>
+                      <Typography color={"gray400"} fontSize={14} fontWeight={300}>
+                        {item.address.sido} / {item.address.sigungu}
                       </Typography>
                     </FlexBox>
 

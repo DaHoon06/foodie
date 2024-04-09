@@ -8,8 +8,9 @@ import {Typography} from "@components/common/typography/Typography";
 import useFeedStore, {LocationState} from "@store/feedStore";
 import {KakaoAddressMap} from "@components/kakao/maps/KakaoAddressMap";
 import {KakaoAddressSearch} from "@components/kakao/KakaoAddressSearch";
-import {SelectBox} from "@components/common/select-box";
+import {BorderSelectBox} from "@components/common/select-box";
 import {primaryIconColor} from "@styles/theme.css";
+import classNames from "classnames";
 
 
 const categories = [
@@ -32,9 +33,9 @@ const categories = [
 
 export const FeedLocation = (): ReactElement => {
   const {setIsOpen, setModalType} = useModalStore();
-  const [locationData, setLocationData] = useState<LocationState>({title: '', category: '',});
+  const [locationData, setLocationData] = useState<LocationState>({title: '', category: '한식',});
   const {setFeedItem, item} = useFeedStore();
-  const [locationType, setLocationType] = useState('address');
+  const [locationType, setLocationType] = useState('map');
 
   const handleClickLocationForm = () => {
     setIsOpen(false);
@@ -58,7 +59,7 @@ export const FeedLocation = (): ReactElement => {
       [name]: value,
     });
   };
-2
+
   const onChangeCategorySelectBox = (value: string) => {
     setLocationData({
       ...locationData,
@@ -74,25 +75,12 @@ export const FeedLocation = (): ReactElement => {
         </button>
       </FlexBox>
 
-      <Typography>카테고리</Typography>
-      <SelectBox items={categories} onChange={onChangeCategorySelectBox}/>
-
-      <div className={styles.feedLocationContainer}>
-        <section>
-          <label>
-            이름
-            <input
-              name="title"
-              value={locationData.title}
-              onChange={handleChange}
-              className={styles.input}
-              type="text"
-            />
-          </label>
-        </section>
-      </div>
-
-      <section>
+      <FlexBox direction={'row'} alignItems={"flex-start"} justifyContent={"flex-start"} gap={20}>
+        <Button variant={"icon"}
+                onClick={() => setLocationType('map')}>
+          <IoLocation color={primaryIconColor} size={20}/>
+          <Typography as={'span'} color={"primary"}>지도로 검색</Typography>
+        </Button>
         <Button
           variant={"icon"}
           onClick={() => setLocationType('address')}
@@ -100,32 +88,52 @@ export const FeedLocation = (): ReactElement => {
           <IoLocate color={primaryIconColor} size={20}/>
           <Typography as={'span'} color={"primary"}>주소로 검색</Typography>
         </Button>
-        <Button variant={"icon"}
-                onClick={() => setLocationType('map')}>
-          <IoLocation color={primaryIconColor} size={20}/>
-          <Typography as={'span'} color={"primary"}>지도로 검색</Typography>
-        </Button>
+      </FlexBox>
 
+      <FlexBox className={classNames(styles.locationItemWrapper)} alignItems={"flex-start"} gap={8}>
+        <Typography color={"gray500"} fontSize={14} fontWeight={500}>카테고리</Typography>
+        <div>
+          <BorderSelectBox items={categories} onChange={onChangeCategorySelectBox} />
+        </div>
+      </FlexBox>
+
+      <section className={classNames(styles.locationItemWrapper)}>
+        <FlexBox justifyContent={"flex-start"} alignItems={'flex-start'} gap={8}>
+          <Typography color={"gray500"} fontSize={14} fontWeight={500}>이름</Typography>
+          <input
+            name="title"
+            value={locationData.title}
+            onChange={handleChange}
+            className={styles.input}
+            type="text"
+            placeholder={'방문한 장소의 이름을 입력해주세요.'}
+          />
+        </FlexBox>
       </section>
-      {locationType === 'address' ? (
-        <KakaoAddressSearch/>
-      ) : (
-        <KakaoAddressMap/>
-      )}
+
+      <section className={styles.addressSearchContainer}>
+        {locationType === 'address' ? (
+          <KakaoAddressSearch/>
+        ) : (
+          <KakaoAddressMap/>
+        )}
+      </section>
 
       <label className={styles.feedLocationContainer}>
         <input
           disabled={true}
           readOnly={true}
           value={item.address.name}
-          className={styles.input}
+          className={styles.fullAddressInput}
           type="text"
+          placeholder={'전체 주소'}
+
         />
       </label>
 
       <FlexBox>
         <Button
-          borderRadius={10}
+          borderRadius={4}
           width={200}
           onClick={handleClickSendLocationData}
         >

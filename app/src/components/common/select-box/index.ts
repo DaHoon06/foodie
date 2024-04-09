@@ -1,5 +1,7 @@
-import { SelectBox } from "./SelectBox";
+import {SelectBox} from "./SelectBox";
+import {BorderSelectBox} from './BorderSelectBox';
 
 export {
-  SelectBox
+  SelectBox,
+  BorderSelectBox
 }

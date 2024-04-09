@@ -24,10 +24,22 @@ export const homeContainerLayout = style({
 });
 
 export const homeContainer = style({
-  padding: "20px 0",
+  padding: "0",
   width: "100%",
+  backgroundColor: vars.colors.backgroundColor,
 });
 
+export const recentlyFeedContainer = style({
+  backgroundColor: vars.colors.white000,
+  paddingBottom: 20,
+  marginBottom: 8
+})
+
+export const userContainer = style({
+  backgroundColor: vars.colors.white000,
+  margin: '8px 0',
+  paddingBottom: 20
+})
 export const emptyLabel = style({
   width: '100%',
   textAlign: 'center',

@@ -10,15 +10,28 @@ export const feedLocationLaoyout = style({
   paddingBottom: "4em",
 });
 
+export const addressSearchContainer = style({
+  margin: '1em 0',
+});
+
 export const feedLocationContainer = style({
   width: "100%",
   height: "100%",
+  display: 'inline-block',
+  marginBottom: '1em'
 });
+
+export const locationItemWrapper = style({
+  margin: '0.5em 0',
+  width: "100%",
+  height: "100%",
+  display: 'inline-block',
+})
 
 export const input = style({
   boxSizing: "border-box",
   backgroundColor: vars.colors.backgroundColor,
-  borderRadius: 10,
+  borderRadius: 2,
   border: `1px solid ${vars.colors.gray000}`,
   color: vars.colors.black500,
   width: "100%",
@@ -30,6 +43,27 @@ export const input = style({
     "&:focus": {
       borderColor: vars.colors.primary,
       backgroundColor: vars.colors.white000,
+    },
+    "&::placeholder": {
+      color: vars.colors.gray300
+    },
+  },
+});
+
+export const fullAddressInput = style({
+  boxSizing: "border-box",
+  backgroundColor: vars.colors.backgroundColor,
+  borderRadius: 2,
+  border: `1px solid ${vars.colors.gray000}`,
+  color: vars.colors.black500,
+  width: "100%",
+  height: 38,
+  outline: "none",
+  padding: "0.2em 0.8em",
+
+  selectors: {
+    "&::placeholder": {
+      color: vars.colors.gray300
     },
   },
 });
