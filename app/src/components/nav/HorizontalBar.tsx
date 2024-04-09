@@ -32,7 +32,7 @@ export const HorizontalNavBar = ({
           return (
             <li
               className={classNames(
-                itemActive(list.key) && styles.active
+                itemActive(list.key) && styles.active, styles.filterLabel
               )}
               key={crypto.randomUUID()}
               onClick={() => onClickItem(list.key, list.value)}

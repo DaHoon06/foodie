@@ -46,7 +46,7 @@ export const homeListsFilterContainer = style({
   position: "sticky",
   width: "100%",
   height: 48,
-  top: 59,
+  top: 60,
   backgroundColor: vars.colors.white000,
   display: "flex",
   alignItems: "center",
@@ -64,7 +64,7 @@ export const filterButton = style({
 
 export const filterLists = style({
   position: "sticky",
-  top: 100,
+  top: 108,
   borderBottom: "1px solid transparent",
 });
 

@@ -39,10 +39,11 @@ export const navBarLists = style({
     },
   },
 });
-
-export const active = style({
-  backgroundColor: vars.colors.primary,
+export const filterLabel = style({
   borderRadius: 50,
   padding: "4px 8px",
+})
+export const active = style({
+  backgroundColor: vars.colors.primary,
   color: vars.colors.white000,
 });
