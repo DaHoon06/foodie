@@ -86,7 +86,7 @@ export const FeedLocation = (): ReactElement => {
           onClick={() => setLocationType('address')}
         >
           <IoLocate color={locationType === 'address' ? primaryIconColor : '#e3e3e3'} size={20}/>
-          <Typography as={'span'} color={locationType === 'address' ? 'primary' : "gray300"} fontWeight={300} fontSize={14}>주소로 검fk색</Typography>
+          <Typography as={'span'} color={locationType === 'address' ? 'primary' : "gray300"} fontWeight={300} fontSize={14}>주소로 검색</Typography>
         </button>
       </FlexBox>
 

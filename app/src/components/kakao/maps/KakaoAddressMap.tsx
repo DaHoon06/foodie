@@ -45,7 +45,7 @@ export const KakaoAddressMap = (): ReactElement => {
             level: 4
           }
           const map = new kakao.maps.Map(mapElement, options);
-          var geocoder = new kakao.maps.services.Geocoder();
+          const geocoder = new kakao.maps.services.Geocoder();
           const marker = new kakao.maps.Marker(); // 클릭한 위치를 표시할 마커입니다
           const infowindow = new kakao.maps.InfoWindow({zindex: 1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
 
@@ -61,8 +61,7 @@ export const KakaoAddressMap = (): ReactElement => {
                 var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
                 detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
 
-                var content = '<div class="bAddr">' +
-                  '<span class="title">법정동 주소정보</span>' +
+                const content = '<div class="map_label">' +
                   detailAddr +
                   '</div>';
 
