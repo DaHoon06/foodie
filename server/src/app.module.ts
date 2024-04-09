@@ -5,9 +5,17 @@ import { UserModule } from '@modules/users/user.module';
 import { FeedModule } from '@modules/feeds/feed.module';
 import { ShopModule } from '@modules/shop/shop.module';
 import { FileModule } from '@modules/file/file.module';
+import { SseModule } from '@modules/sse/sse.module';
 
 @Module({
-  imports: [DataBaseModule, UserModule, FeedModule, ShopModule, FileModule],
+  imports: [
+    DataBaseModule,
+    UserModule,
+    FeedModule,
+    ShopModule,
+    FileModule,
+    SseModule,
+  ],
   controllers: [AppController],
   providers: [],
 })

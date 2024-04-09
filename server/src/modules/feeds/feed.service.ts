@@ -60,7 +60,7 @@ export class FeedService {
       }
 
       const feed = FeedEntity.create({ ...createData });
-      await this.feedRepository.save(feed);
+      return this.feedRepository.save(feed);
     } catch (e) {
       throw new BadRequestException('피드 작성 실패');
     }

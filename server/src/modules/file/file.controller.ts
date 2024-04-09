@@ -1,5 +1,6 @@
 import {
   Controller,
+  Param,
   Post,
   UploadedFiles,
   UseInterceptors,
@@ -10,7 +11,7 @@ import * as path from 'path';
 import * as fs from 'node:fs';
 import { FileService } from '@modules/file/file.service';
 
-@Controller('file')
+@Controller('files')
 export class FileController {
   private readonly filesPath: string;
 
@@ -37,8 +38,11 @@ export class FileController {
       }),
     }),
   )
-  @Post('/upload')
-  uploadFile(@UploadedFiles() files: Express.Multer.File[]) {
-    return this.fileService.fileUploadToS3(files);
+  @Post('/upload/:id')
+  uploadFile(
+    @Param('id') id: string,
+    @UploadedFiles() files: Array<Express.Multer.File>,
+  ) {
+    return this.fileService.createFileData(files, id);
   }
 }

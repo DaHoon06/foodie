@@ -3,12 +3,16 @@ import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
 import { FileToS3 } from '@modules/file/enum/file.enum';
+import { FileImageRepository } from './file.image.repository';
 
 @Injectable()
 export class FileService {
   private readonly s3Client: S3Client;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor(
+    private readonly fileImageRepository: FileImageRepository,
+    private readonly configService: ConfigService,
+  ) {
     this.s3Client = new S3Client({
       region: 'ap-northeast-2',
       credentials: {
@@ -18,7 +22,15 @@ export class FileService {
     });
   }
 
-  async fileUploadToS3(files: Express.Multer.File[]) {
+  async createFileData(files: Array<Express.Multer.File>, id: string) {
+    console.log(files, id);
+    // todo s3에 업로드
+    await this.fileUploadToS3(files);
+
+    //todo file entity에 업데이트 (s3 upload 주소도 함께 포함)
+  }
+
+  async fileUploadToS3(files: Array<Express.Multer.File>) {
     const fileSend: { fileName?: string; fileKey?: string }[] = [];
     if (files.length === 0) return fileSend;
     /** @description formData 배열로 올 경우 for으로 하나씩 업로드를 진행 */

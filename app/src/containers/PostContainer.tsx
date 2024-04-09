@@ -1,20 +1,21 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import {Typography} from "@components/common/typography/Typography";
-import {FeedPost} from "@components/feeds/FeedPost";
-import {Avatar} from "@components/ui";
+import { Typography } from "@components/common/typography/Typography";
+import { FeedPost } from "@components/feeds/FeedPost";
+import { Avatar } from "@components/ui";
 import Image from "next/image";
-import {FormEventHandler, ReactElement, useEffect, useState} from "react";
-import {FiMapPin} from "react-icons/fi";
+import { FormEventHandler, ReactElement, useEffect, useState } from "react";
+import { FiMapPin } from "react-icons/fi";
 import * as styles from "./PostContainer.css";
-import {FileUploadButton} from "@components/common/buttons/FileUploadButton";
-import {Button} from "@components/common/buttons";
-import {useRouter} from "next/router";
-import {FeedPostBody, FeedUser} from "@interfaces/feeds/feed.post";
-import {feedSubmitApi} from "@apis/feeds/feed.api";
-import {useSession} from "next-auth/react";
+import { FileUploadButton } from "@components/common/buttons/FileUploadButton";
+import { Button } from "@components/common/buttons";
+import { useRouter } from "next/router";
+import { FeedPostBody, FeedUser } from "@interfaces/feeds/feed.post";
+import { feedSubmitApi } from "@apis/feeds/feed.api";
+import { useSession } from "next-auth/react";
 import useModalStore from "@store/modalStore";
 import useFeedStore from "@store/feedStore";
-import {IoTrashOutline} from "react-icons/io5";
+import { IoTrashOutline } from "react-icons/io5";
+import { axiosInstance } from "@libs/axios";
 
 export const FeedPostContainer = (): ReactElement => {
   const { setIsOpen, setModalType } = useModalStore();
@@ -27,12 +28,12 @@ export const FeedPostContainer = (): ReactElement => {
       title: "",
       category: "",
       address: {
-        name: '',
-        sigungu: '',
-        sido: '',
-        x: '',
-        y: '',
-      }
+        name: "",
+        sigungu: "",
+        sido: "",
+        x: "",
+        y: "",
+      },
     },
     files: [],
   });
@@ -60,6 +61,26 @@ export const FeedPostContainer = (): ReactElement => {
     });
   };
 
+  const fileUpload = async (postId: string) => {
+    const { files } = postForm;
+    const formData = new FormData();
+
+    files.forEach((file) => {
+      formData.append(`files`, file);
+    });
+    const headers = {
+      "Content-Type": "multipart/form-data",
+    };
+
+    try {
+      await axiosInstance.post(`/files/upload/${postId}`, formData, {
+        headers,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const handleSubmitFeedPost: FormEventHandler<HTMLFormElement> = async (e) => {
     try {
       e.preventDefault();
@@ -72,13 +93,20 @@ export const FeedPostContainer = (): ReactElement => {
         user,
         ...postForm,
       };
-      const {data} = await feedSubmitApi(body);
-      if (data.result) await router.push('/');
+      await fileUpload("postId");
+      const { data } = await feedSubmitApi(body);
+      if (data.result) {
+        //todo 만약 파일이 있으면?
+        if (postForm.files.length > 0) {
+          const { _id } = data.data;
+          await fileUpload(_id);
+        }
+        await router.push("/");
+      }
     } catch (e) {
       console.log(e);
     }
   };
-
 
   const handleClickLocation = async () => {
     setModalType("registerShop");
@@ -87,17 +115,17 @@ export const FeedPostContainer = (): ReactElement => {
 
   const handleClickRemoveLocationData = () => {
     setFeedItem({
-      title: '',
-      category: '',
+      title: "",
+      category: "",
       address: {
-        name: '',
-        sigungu: '',
-        sido: '',
-        x: '',
-        y: ''
-      }
+        name: "",
+        sigungu: "",
+        sido: "",
+        x: "",
+        y: "",
+      },
     });
-  }
+  };
 
   return (
     <form onSubmit={handleSubmitFeedPost} className={styles.postLayout}>
@@ -119,75 +147,99 @@ export const FeedPostContainer = (): ReactElement => {
         </Button>
       </FlexBox>
 
-        <div className={styles.postLayout}>
-            <div>
-              <FlexBox
-                className={styles.postBodyContainer}
-                direction="row"
-                alignItems="flex-center"
-                justifyContent="flex-start"
-              >
-                <Avatar alt={"dahoon"} src={"/images/dh.png"} />
-                <FeedPost onChangeTextarea={onChangeTextarea} />
-              </FlexBox>
-              {postForm.item.title.length > 0 && (<div className={styles.locationItemContainer}>
-                <div className={styles.locationItemBox}>
-                  <FlexBox direction={'row'} justifyContent={'space-between'} gap={2}>
-                    <FlexBox justifyContent={'flex-start'} alignItems={'flex-start'}>
-                      <Typography fontSize={14} fontWeight={500}>
-                        {item.title}
-                      </Typography>
-                      <Typography color={"gray400"} fontSize={14} fontWeight={300}>
-                        {item.category}
-                      </Typography>
-                      <Typography color={"gray400"} fontSize={14} fontWeight={300}>
-                        {item.address.name}
-                      </Typography>
-                      <Typography color={"gray400"} fontSize={14} fontWeight={300}>
-                        {item.address.sido} / {item.address.sigungu}
-                      </Typography>
-                    </FlexBox>
-
-                    <Button className={styles.removeLocationButton} variant={'icon'} onClick={handleClickRemoveLocationData}>
-                      <IoTrashOutline size={24} color={'#d3d3d3'} />
-                    </Button>
-                  </FlexBox>
-                </div>
-              </div>)}
-            </div>
-
-            <div>
-              <FlexBox
-                direction="row"
-                justifyContent="space-between"
-                className={styles.postOptionContainer}
-              >
-                <FileUploadButton onFileChange={handleChangeFile} />
-
-                <button type={"button"} onClick={handleClickLocation}>
-                  <FlexBox direction="row" justifyContent="flex-end" gap={4}>
-                    <FiMapPin color={"#FF7101"} />
-                    <Typography color="primary" as="span" fontSize={14}>
-                      장소
+      <div className={styles.postLayout}>
+        <div>
+          <FlexBox
+            className={styles.postBodyContainer}
+            direction="row"
+            alignItems="flex-center"
+            justifyContent="flex-start"
+          >
+            <Avatar alt={"dahoon"} src={"/images/dh.png"} />
+            <FeedPost onChangeTextarea={onChangeTextarea} />
+          </FlexBox>
+          {postForm.item.title.length > 0 && (
+            <div className={styles.locationItemContainer}>
+              <div className={styles.locationItemBox}>
+                <FlexBox
+                  direction={"row"}
+                  justifyContent={"space-between"}
+                  gap={2}
+                >
+                  <FlexBox
+                    justifyContent={"flex-start"}
+                    alignItems={"flex-start"}
+                  >
+                    <Typography fontSize={14} fontWeight={500}>
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      color={"gray400"}
+                      fontSize={14}
+                      fontWeight={300}
+                    >
+                      {item.category}
+                    </Typography>
+                    <Typography
+                      color={"gray400"}
+                      fontSize={14}
+                      fontWeight={300}
+                    >
+                      {item.address.sido} / {item.address.sigungu}
+                    </Typography>
+                    <Typography
+                      color={"gray400"}
+                      fontSize={14}
+                      fontWeight={300}
+                    >
+                      {item.address.name}
                     </Typography>
                   </FlexBox>
-                </button>
-              </FlexBox>
-              <div className={styles.imagesContainer}>
-                {previewUrl.map((url, index) => (
-                  <Image
-                    width={40}
-                    height={40}
-                    key={index}
-                    src={url}
-                    alt={`Preview ${index}`}
-                    className={styles.images}
-                  />
-                ))}
+
+                  <Button
+                    className={styles.removeLocationButton}
+                    variant={"icon"}
+                    onClick={handleClickRemoveLocationData}
+                  >
+                    <IoTrashOutline size={24} color={"#d3d3d3"} />
+                  </Button>
+                </FlexBox>
               </div>
             </div>
-
+          )}
         </div>
+
+        <div>
+          <FlexBox
+            direction="row"
+            justifyContent="space-between"
+            className={styles.postOptionContainer}
+          >
+            <FileUploadButton onFileChange={handleChangeFile} />
+
+            <button type={"button"} onClick={handleClickLocation}>
+              <FlexBox direction="row" justifyContent="flex-end" gap={4}>
+                <FiMapPin color={"#FF7101"} />
+                <Typography color="primary" as="span" fontSize={14}>
+                  장소
+                </Typography>
+              </FlexBox>
+            </button>
+          </FlexBox>
+          <div className={styles.imagesContainer}>
+            {previewUrl.map((url, index) => (
+              <Image
+                width={40}
+                height={40}
+                key={index}
+                src={url}
+                alt={`Preview ${index}`}
+                className={styles.images}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     </form>
   );
 };

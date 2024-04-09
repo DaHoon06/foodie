@@ -7,4 +7,6 @@ export class FileImageRepository extends Repository<FileImageEntity> {
   constructor(private readonly dataSource: DataSource) {
     super(FileImageEntity, dataSource.createEntityManager());
   }
+
+  async createFileData() {}
 }
