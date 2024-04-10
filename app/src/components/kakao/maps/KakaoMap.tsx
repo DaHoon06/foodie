@@ -3,11 +3,13 @@ import { getMarkerApi } from "@apis/shop/shop.api";
 import { useSession } from "next-auth/react";
 import { UserSession } from "@interfaces/users/user.session";
 import { KakaoMarker } from "@interfaces/map/kakao";
+import { Skeleton } from "@components/ui/skeleton/Skeleton";
 
 const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
 
 export const KakaoMap = (): ReactElement => {
   const mapContainer = useRef();
+  const [pending, setPending] = useState(true);
   const [mapData, setMapData] = useState<KakaoMarker[]>([]);
   const { data: sessionData } = useSession();
 
@@ -23,6 +25,7 @@ export const KakaoMap = (): ReactElement => {
   };
 
   useEffect(() => {
+    setPending(true);
     const script = document.createElement("script");
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&autoload=false`;
     script.type = "text/javascript";
@@ -81,6 +84,7 @@ export const KakaoMap = (): ReactElement => {
                 "mouseover",
                 makeOverListener(map, marker, infowindow)
               );
+
               kakao.maps.event.addListener(
                 marker,
                 "mouseout",
@@ -105,12 +109,7 @@ export const KakaoMap = (): ReactElement => {
               }
             }
           }
-
-          // 현재 위치 마커 삭제
-          // new kakao.maps.Marker({
-          //   map: map,
-          //   position: locPosition
-          // });
+          setPending(false);
           map.setCenter(locPosition);
         });
       });
@@ -129,6 +128,7 @@ export const KakaoMap = (): ReactElement => {
 
   return (
     <>
+      {<Skeleton isLoading={pending} />}
       <div
         id={"map"}
         ref={mapContainer}

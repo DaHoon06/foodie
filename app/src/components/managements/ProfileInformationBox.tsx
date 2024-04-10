@@ -6,8 +6,14 @@ import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { FaUser } from "react-icons/fa6";
 import { Typography } from "@components/common/typography/Typography";
 import { Button } from "@components/common/buttons";
+import { useRouter } from "next/router";
 
 export const ProfileInformationBox = (): ReactElement => {
+  const router = useRouter();
+
+  const handleClickProfileEdit = () => {
+    router.push("/management/edit");
+  };
   return (
     <FlexBox gap={20} className={classNames(styles.cardLayout)}>
       <FlexBox direction="row" gap={8} justifyContent="space-between">
@@ -77,7 +83,7 @@ export const ProfileInformationBox = (): ReactElement => {
           </div>
         </FlexBox>
 
-        <Button width={120} height={38}>
+        <Button width={120} height={38} onClick={handleClickProfileEdit}>
           프로필 수정
         </Button>
       </FlexBox>
