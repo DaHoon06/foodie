@@ -1,4 +1,10 @@
-import { Column, Entity, Generated, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  Generated,
+  PrimaryColumn,
+} from 'typeorm';
 
 @Entity()
 export class FileImageEntity {
@@ -7,5 +13,17 @@ export class FileImageEntity {
   _id: string;
 
   @Column()
-  fileName: string;
+  name: string;
+
+  @Column()
+  size: string;
+
+  @Column()
+  path1: string;
+
+  @Column()
+  path2: string;
+
+  @CreateDateColumn()
+  created_at: Date;
 }

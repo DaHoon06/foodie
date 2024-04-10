@@ -6,7 +6,6 @@ import {
   RiStarSLine,
   RiUserLine,
 } from "react-icons/ri";
-import { Typography } from "@components/common/typography/Typography";
 import { useRouter } from "next/router";
 import { FontColorType } from "@components/common/typography/Typography.type";
 import { useEffect, useState } from "react";
@@ -63,34 +62,20 @@ export const NavBarBottom = () => {
       <ul className={styles.navBarBottomContainer}>
         <li className={styles.navBarLeftBox}>
           <button
+            aria-label="home-button"
             type={"button"}
             className={styles.navBarBottomItems}
             onClick={() => onClickHandlerMenu(link.home.to)}
           >
             <RiHome5Line size={22} color={iconActive(link.home.to)} />
-            <Typography
-              as={"span"}
-              color={textActive(link.home.to)}
-              fontWeight={500}
-              fontSize={12}
-            >
-              {link.home.label}
-            </Typography>
           </button>
           <button
+            aria-label="pick-button"
             type={"button"}
             className={styles.navBarBottomItems}
             onClick={() => onClickHandlerMenu(link.likes.to)}
           >
             <RiStarSLine size={22} color={iconActive(link.likes.to)} />
-            <Typography
-              as={"span"}
-              color={textActive(link.likes.to)}
-              fontWeight={500}
-              fontSize={12}
-            >
-              {link.likes.label}
-            </Typography>
           </button>
         </li>
         <li className={styles.navBarCenterBox}>
@@ -105,34 +90,20 @@ export const NavBarBottom = () => {
         </li>
         <li className={styles.navBarRightBox}>
           <button
+            aria-label="message-button"
             type={"button"}
             className={styles.navBarBottomItems}
             onClick={() => onClickHandlerMenu(link.feeds.to)}
           >
             <RiMessage3Line size={22} color={iconActive(link.feeds.to)} />
-            <Typography
-              as={"span"}
-              color={textActive(link.feeds.to)}
-              fontWeight={500}
-              fontSize={12}
-            >
-              {link.feeds.label}
-            </Typography>
           </button>
           <button
+            aria-label="management-button"
             type={"button"}
             className={styles.navBarBottomItems}
             onClick={() => onClickHandlerMenu(link.management.to)}
           >
             <RiUserLine size={22} color={iconActive(link.management.to)} />
-            <Typography
-              as={"span"}
-              color={textActive(link.management.to)}
-              fontWeight={500}
-              fontSize={12}
-            >
-              {link.management.label}
-            </Typography>
           </button>
         </li>
       </ul>

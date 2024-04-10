@@ -19,7 +19,7 @@ function baseElement(props: TypographyProps) {
   const {
     className,
     variant = "p",
-    fontWeight = 400,
+    fontWeight = 300,
     fontSize = 16,
     color = "black100",
     lineHeight = 18,
