@@ -1,6 +1,9 @@
 import NextAuth from "next-auth/next";
 import KakaoProvider from "next-auth/providers/kakao";
 import { AuthOptions } from "next-auth";
+import { axiosInstance } from "@libs/axios";
+import axios from "axios";
+import { AdapterUser } from "next-auth/adapters";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -10,11 +13,10 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user }): Promise<any> {
+    async signIn({ user }: { user: AdapterUser }): Promise<any> {
       try {
-        return {
-          ...user,
-        };
+        await userCheck(user);
+        return true;
       } catch (e) {
         console.log(e);
         return null;
@@ -30,6 +32,17 @@ export const authOptions: AuthOptions = {
       return { ...payload };
     },
   },
+  secret: process.env.AUTH_SCRET_KEY,
 };
 
 export default NextAuth(authOptions);
+
+interface User {
+  id: string;
+  name: string;
+  image?: string;
+}
+
+async function userCheck(user: AdapterUser) {
+  const res = await axios.post("http://localhost:4800/api/users/checked", user);
+}

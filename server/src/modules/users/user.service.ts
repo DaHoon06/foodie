@@ -28,4 +28,20 @@ export class UserService {
   async randomRecommendUser(creatorId: string) {
     return this.userRepository.randomRecommendUser(creatorId);
   }
+
+  async userChecked(user: any) {
+    const { id, name } = user;
+    const findUser = await this.findOneUserByCreatorId(id);
+
+    let userData = findUser;
+    if (!findUser) {
+      const data = {
+        username: name,
+        id,
+      };
+      userData = await this.createUser(data);
+    }
+    console.log(userData);
+    // token 생성
+  }
 }

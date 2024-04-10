@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -12,5 +12,10 @@ export class UserController {
   @Get('/recommend/:creatorId')
   async recommendUser(@Param('creatorId') creatorId: string) {
     return this.userService.randomRecommendUser(creatorId);
+  }
+
+  @Post('/checked')
+  async test(@Body() user: any) {
+    return this.userService.userChecked(user);
   }
 }
