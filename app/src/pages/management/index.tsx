@@ -7,8 +7,13 @@ import * as styles from "@styles/pages/ManagementPage.css";
 import { FaUser } from "react-icons/fa6";
 import { Button } from "@components/common/buttons";
 import classNames from "classnames";
+import { signOut } from "next-auth/react";
 
 const ManagementPage: NextPage = (): ReactElement => {
+  const handleClickSignOut = async () => {
+    await signOut();
+  };
+
   return (
     <BasicLayout>
       <FlexBox height={56} className={styles.pageTitle}>
@@ -113,9 +118,16 @@ const ManagementPage: NextPage = (): ReactElement => {
         <section className={classNames(styles.managementItemContainer)}>
           <ul className={styles.managementItemList}>
             <li className={styles.managementItem}>
-              <Typography fontSize={14} color={"gray400"} fontWeight={300}>
-                로그아웃
-              </Typography>
+              <button type="button" onClick={handleClickSignOut}>
+                <Typography
+                  as={"span"}
+                  fontSize={14}
+                  color={"gray400"}
+                  fontWeight={300}
+                >
+                  로그아웃
+                </Typography>
+              </button>
             </li>
             <li className={styles.managementItem}>
               <Typography fontSize={14} color={"gray400"} fontWeight={300}>
