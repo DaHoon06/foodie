@@ -15,9 +15,11 @@ import { RecentlyFeedListsState } from "@interfaces/feeds/feed.lists";
 import { RecommendUserLists } from "@interfaces/users/user.lists";
 import { FeedLists } from "@components/feeds/FeedLists";
 import { useAuth } from "@providers/authProvider";
+import { Skeleton } from "@components/ui/skeleton/Skeleton";
 
 export const HomeContainer = () => {
   const { userId, isLogin } = useAuth();
+  const [pending, setPending] = useState(true);
   const [filter, setFilter] = useState<FeedFilter>({
     sido: "전체",
   });
@@ -57,8 +59,10 @@ export const HomeContainer = () => {
 
   useEffect(() => {
     if (isLogin) {
+      setPending(true);
       findFeed();
       findRecommendUser();
+      setPending(false);
     }
   }, [isLogin, userId]);
 
@@ -92,20 +96,46 @@ export const HomeContainer = () => {
               최근 다녀온 여행기
             </Typography>
           </div>
-          {recentlyFeeds.length > 0 ? (
+          {pending ? (
             <CustomHorizontalBar>
-              {recentlyFeeds.map((feed, index) => {
-                return (
-                  <div key={`${feed._id}_${index}`}>
-                    <ThumbnailCard item={feed} />
+              <div>
+                <FlexBox gap={8} direction="row">
+                  <div style={{ width: "210px", height: "220px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
                   </div>
-                );
-              })}
+                  <div style={{ width: "210px", height: "220px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "210px", height: "220px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "210px", height: "220px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "210px", height: "220px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                </FlexBox>
+              </div>
             </CustomHorizontalBar>
           ) : (
-            <div className={styles.emptyLabel}>
-              <Typography>최근 작성된 미식 기록이 없어요.</Typography>
-            </div>
+            <>
+              {recentlyFeeds.length > 0 ? (
+                <CustomHorizontalBar>
+                  {recentlyFeeds.map((feed, index) => {
+                    return (
+                      <div key={`${feed._id}_${index}`}>
+                        <ThumbnailCard item={feed} />
+                      </div>
+                    );
+                  })}
+                </CustomHorizontalBar>
+              ) : (
+                <div className={styles.emptyLabel}>
+                  <Typography>최근 작성된 미식 기록이 없어요.</Typography>
+                </div>
+              )}
+            </>
           )}
         </FlexBox>
 
@@ -115,21 +145,46 @@ export const HomeContainer = () => {
               오늘의 추천 미식가
             </Typography>
           </div>
-
-          {recommendUser.length > 0 ? (
+          {pending ? (
             <CustomHorizontalBar>
-              {recommendUser.map((user, index) => {
-                return (
-                  <div key={`${crypto.randomUUID()}_${user._id}`}>
-                    <FollowCard user={user} />
+              <div>
+                <FlexBox gap={8} direction="row">
+                  <div style={{ width: "140px", height: "210px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
                   </div>
-                );
-              })}
+                  <div style={{ width: "140px", height: "210px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "140px", height: "210px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "140px", height: "210px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "140px", height: "210px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                </FlexBox>
+              </div>
             </CustomHorizontalBar>
           ) : (
-            <div className={styles.emptyLabel}>
-              <Typography>추천 미식가가 없어요.</Typography>
-            </div>
+            <>
+              {recommendUser.length > 0 ? (
+                <CustomHorizontalBar>
+                  {recommendUser.map((user, index) => {
+                    return (
+                      <div key={`${crypto.randomUUID()}_${user._id}`}>
+                        <FollowCard user={user} />
+                      </div>
+                    );
+                  })}
+                </CustomHorizontalBar>
+              ) : (
+                <div className={styles.emptyLabel}>
+                  <Typography>추천 미식가가 없어요.</Typography>
+                </div>
+              )}
+            </>
           )}
         </FlexBox>
       </div>

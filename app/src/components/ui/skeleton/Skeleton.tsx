@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { CSSProperties, ReactElement } from "react";
 import * as styles from "./Skeleton.css";
 
 interface SkeletonProps {
@@ -8,7 +8,20 @@ interface SkeletonProps {
 }
 
 export const Skeleton = (props: SkeletonProps): ReactElement => {
-  const { isLoading } = props;
+  const { isLoading, width, height } = props;
 
-  return <>{isLoading ? <div className={styles.LoadingMapOverlay} /> : null}</>;
+  let inlineStlye: CSSProperties = {
+    width: `${width}px`,
+    height: `${height}px`,
+  };
+  if (width && height) {
+  }
+
+  return (
+    <>
+      {isLoading ? (
+        <div style={inlineStlye} className={styles.LoadingMapOverlay} />
+      ) : null}
+    </>
+  );
 };

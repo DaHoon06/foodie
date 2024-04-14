@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { getMarkerApi } from "@apis/shop/shop.api";
 import { KakaoMarker } from "@interfaces/map/kakao";
@@ -12,14 +14,18 @@ export const KakaoMap = (): ReactElement => {
   const [mapData, setMapData] = useState<KakaoMarker[]>([]);
   const { userId, isLogin } = useAuth();
 
-  useEffect(() => {
-    if (isLogin) load();
-  }, [userId, isLogin]);
-
   const load = async () => {
-    const data = await getMarkerApi(userId);
-    if (data) setMapData(data);
+    try {
+      const data = await getMarkerApi(userId);
+      if (data) setMapData(data);
+    } catch (e) {
+      console.log(e);
+    }
   };
+
+  useEffect(() => {
+    if (isLogin && pending) load();
+  }, [userId, isLogin]);
 
   useEffect(() => {
     setPending(true);

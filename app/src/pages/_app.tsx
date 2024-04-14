@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <AuthProvider>
               <MetaHead />
               <Component {...pageProps} />
-              <ServerEventHandler />
+              {/* <ServerEventHandler /> */}
             </AuthProvider>
           </SessionProvider>
           <ReactQueryDevtools initialIsOpen={false} />
