@@ -4,7 +4,7 @@ import * as styles from "./KakaoAddressMap.css";
 import { AddressState } from "@interfaces/feeds/feed.post";
 import { Skeleton } from "@components/ui/skeleton/Skeleton";
 
-const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
+const kakaoAppKey = process.env.KAKAO_API_KEY;
 
 export const KakaoAddressMap = (): ReactElement => {
   const mapContainer = useRef();

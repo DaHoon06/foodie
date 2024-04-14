@@ -6,7 +6,7 @@ import { KakaoMarker } from "@interfaces/map/kakao";
 import { Skeleton } from "@components/ui/skeleton/Skeleton";
 import { useAuth } from "@providers/authProvider";
 
-const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
+const kakaoAppKey = process.env.KAKAO_API_KEY;
 
 export const KakaoMap = (): ReactElement => {
   const mapContainer = useRef();

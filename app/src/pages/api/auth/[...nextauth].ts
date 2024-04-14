@@ -2,7 +2,7 @@ import NextAuth from "next-auth/next";
 import KakaoProvider from "next-auth/providers/kakao";
 import { AuthOptions } from "next-auth";
 import axios from "axios";
-import { AdapterUser } from "next-auth/adapters";
+import { userCheckApi } from "@apis/users/user.api";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -15,7 +15,7 @@ export const authOptions: AuthOptions = {
     async jwt({ user, token, account }) {
       if (user) {
         const id = account.providerAccountId;
-        const apiToken = await userCheck(user);
+        const apiToken = await userCheckApi(user as User);
         token.apiToken = apiToken;
         token.id = id;
       }
@@ -32,16 +32,10 @@ export const authOptions: AuthOptions = {
 
 export default NextAuth(authOptions);
 
-interface User {
+export interface User {
   id: string;
   name: string;
   image?: string;
+  email?: string;
 }
 
-async function userCheck(user: any): Promise<string> {
-  const { data } = await axios.post(
-    "http://localhost:4800/api/users/checked",
-    user
-  );
-  return data.data;
-}

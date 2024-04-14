@@ -5,7 +5,7 @@ import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {KakaoAddressDocument} from "@interfaces/kakao";
 import {AddressState} from "@interfaces/feeds/feed.post";
 
-const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_REST_KEY;
+const kakaoAppKey = process.env.KAKAO_REST_KEY;
 
 export const KakaoAddressSearch = () => {
   const {setFeedItem, item} = useFeedStore();
