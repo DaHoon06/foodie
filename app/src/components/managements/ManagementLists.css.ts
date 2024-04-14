@@ -24,7 +24,8 @@ export const managementItem = style({
   borderBottom: `1px solid ${vars.colors.gray000}`,
 
   selectors: {
-    "&:nth-child(1)": {
+    "&:nth-child(2)": {
+      borderTop: "none",
       borderBottom: "none",
     },
   },

@@ -8,7 +8,6 @@ import { ProfileInformationBox } from "@components/managements/ProfileInformatio
 import { ManagementLists } from "@components/managements/ManagementLists";
 
 const ManagementPage: NextPage = (): ReactElement => {
-  
   return (
     <BasicLayout>
       <FlexBox height={56} className={styles.pageTitle}>
