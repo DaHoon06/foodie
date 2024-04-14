@@ -8,17 +8,16 @@ import { FollowCard } from "@components/ui/cards/FollowCard";
 import { useEffect, useState } from "react";
 import { RegionFilter } from "@components/filters/RegionFilter";
 import { VscSettings } from "react-icons/vsc";
-import { useSession } from "next-auth/react";
 import { recentlyFeedApi } from "@apis/feeds/feed.api";
 import { todayRecommendUserApi } from "@apis/users/user.api";
-import { UserSession } from "@interfaces/users/user.session";
 import { FeedFilter } from "@interfaces/feeds/feed.filter";
 import { RecentlyFeedListsState } from "@interfaces/feeds/feed.lists";
 import { RecommendUserLists } from "@interfaces/users/user.lists";
 import { FeedLists } from "@components/feeds/FeedLists";
+import { useAuth } from "@providers/authProvider";
 
 export const HomeContainer = () => {
-  const { data: sessionData } = useSession();
+  const { userId, isLogin } = useAuth();
   const [filter, setFilter] = useState<FeedFilter>({
     sido: "전체",
   });
@@ -40,9 +39,7 @@ export const HomeContainer = () => {
 
   const findFeed = async () => {
     try {
-      const session = sessionData as unknown as UserSession;
-      const creatorId = session.id;
-      const data = await recentlyFeedApi(creatorId);
+      const data = await recentlyFeedApi(userId);
       if (data) setRecentlyFeeds(data);
     } catch (e) {
       console.log(e);
@@ -51,9 +48,7 @@ export const HomeContainer = () => {
 
   const findRecommendUser = async () => {
     try {
-      const session = sessionData as unknown as UserSession;
-      const creatorId = session.id;
-      const data = await todayRecommendUserApi(creatorId);
+      const data = await todayRecommendUserApi(userId);
       if (data) setRecommendUser(data);
     } catch (e) {
       console.log(e);
@@ -61,11 +56,11 @@ export const HomeContainer = () => {
   };
 
   useEffect(() => {
-    if (sessionData) {
+    if (isLogin) {
       findFeed();
       findRecommendUser();
     }
-  }, [sessionData]);
+  }, [isLogin, userId]);
 
   function FilterButton() {
     return (

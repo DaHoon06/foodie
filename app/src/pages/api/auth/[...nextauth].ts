@@ -1,7 +1,6 @@
 import NextAuth from "next-auth/next";
 import KakaoProvider from "next-auth/providers/kakao";
 import { AuthOptions } from "next-auth";
-import { axiosInstance } from "@libs/axios";
 import axios from "axios";
 import { AdapterUser } from "next-auth/adapters";
 
@@ -13,23 +12,19 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user }: { user: AdapterUser }): Promise<any> {
-      try {
-        await userCheck(user);
-        return true;
-      } catch (e) {
-        console.log(e);
-        return null;
+    async jwt({ user, token, account }) {
+      if (user) {
+        const id = account.providerAccountId;
+        const apiToken = await userCheck(user);
+        token.apiToken = apiToken;
+        token.id = id;
       }
+      return token;
     },
-    async session(session) {
-      const { token } = session;
-      const payload = {
-        username: token.name,
-        profile: token.picture,
-        id: token.sub,
-      };
-      return { ...payload };
+    async session({ token, session }) {
+      session.apiToken = token.apiToken;
+      session.id = token.id;
+      return session;
     },
   },
   secret: process.env.AUTH_SCRET_KEY,
@@ -43,6 +38,10 @@ interface User {
   image?: string;
 }
 
-async function userCheck(user: AdapterUser) {
-  const res = await axios.post("http://localhost:4800/api/users/checked", user);
+async function userCheck(user: any): Promise<string> {
+  const { data } = await axios.post(
+    "http://localhost:4800/api/users/checked",
+    user
+  );
+  return data.data;
 }

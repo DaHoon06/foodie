@@ -29,7 +29,7 @@ export class UserService {
     return this.userRepository.randomRecommendUser(creatorId);
   }
 
-  async userChecked(user: any) {
+  async userChecked(user: any): Promise<string> {
     const { id, name } = user;
     const findUser = await this.findOneUserByCreatorId(id);
 
@@ -43,5 +43,6 @@ export class UserService {
     }
     console.log(userData);
     // token 생성
+    return this.authService.createToken({ id, username: name });
   }
 }

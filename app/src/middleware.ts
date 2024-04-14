@@ -1,3 +1,4 @@
+import { getServerSession } from "next-auth";
 import { getToken } from "next-auth/jwt";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -7,12 +8,8 @@ const SCRET_KEY = process.env.AUTH_SCRET_KEY;
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
   const url = request.nextUrl.clone();
-  const session = await getToken({
-    req: request,
-    secret: SCRET_KEY,
-    raw: true,
-  });
-  console.log(session);
+  // const test = getServerSession();
+  // console.log(test);
   // if (request.nextUrl.pathname.startsWith('/posts')) {
   //   url.pathname = '/';
   //   // posts는 로그인이 필요하다.

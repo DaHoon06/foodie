@@ -9,6 +9,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import MetaHead from "@layouts/heads/MetaHead";
 import { SessionProvider } from "next-auth/react";
 import ServerEventHandler from "@services/sse/SeverEventHandler";
+import AuthProvider from "@providers/authProvider";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryState] = useState(() => queryClient);
@@ -18,9 +19,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryState}>
         <Hydrate state={pageProps.dehydratedState}>
           <SessionProvider>
-            <MetaHead />
-            <Component {...pageProps} />
-            <ServerEventHandler />
+            <AuthProvider>
+              <MetaHead />
+              <Component {...pageProps} />
+              <ServerEventHandler />
+            </AuthProvider>
           </SessionProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>

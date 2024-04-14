@@ -1,9 +1,8 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { getMarkerApi } from "@apis/shop/shop.api";
-import { useSession } from "next-auth/react";
-import { UserSession } from "@interfaces/users/user.session";
 import { KakaoMarker } from "@interfaces/map/kakao";
 import { Skeleton } from "@components/ui/skeleton/Skeleton";
+import { useAuth } from "@providers/authProvider";
 
 const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
 
@@ -11,16 +10,14 @@ export const KakaoMap = (): ReactElement => {
   const mapContainer = useRef();
   const [pending, setPending] = useState(true);
   const [mapData, setMapData] = useState<KakaoMarker[]>([]);
-  const { data: sessionData } = useSession();
+  const { userId, isLogin } = useAuth();
 
   useEffect(() => {
-    if (sessionData) load();
-  }, [sessionData]);
+    if (isLogin) load();
+  }, [userId, isLogin]);
 
   const load = async () => {
-    const session = sessionData as unknown as UserSession;
-    const creatorId = session.id;
-    const data = await getMarkerApi(creatorId);
+    const data = await getMarkerApi(userId);
     if (data) setMapData(data);
   };
 
