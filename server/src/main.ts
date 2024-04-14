@@ -1,15 +1,15 @@
-import {NestFactory} from '@nestjs/core';
-import {AppModule} from './app.module';
-import {Logger, ValidationPipe} from '@nestjs/common';
-import {HttpExceptionFilter} from '@filters/http-exception.filter';
-import {LoggingInterceptor} from '@interceptors/logger.interceptor';
-import {TimeoutInterceptor} from '@interceptors/time-out.interceptor';
-import {ResponseInterceptor} from '@interceptors/response.interceptor';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { Logger, ValidationPipe } from '@nestjs/common';
+import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
+import { LoggingInterceptor } from '@common/interceptors/logger.interceptor';
+import { TimeoutInterceptor } from '@common/interceptors/time-out.interceptor';
+import { ResponseInterceptor } from '@common/interceptors/response.interceptor';
 import * as cookieParser from 'cookie-parser';
-import {setupSwagger} from '@config/swagger';
+import { setupSwagger } from '@config/swagger';
 
 const PORT = 4800;
-const HTTP_DOMAIN = 'http://localhost:4888';
+const HTTP_DOMAIN = 'http://localhost:3000';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

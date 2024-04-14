@@ -1,5 +1,5 @@
 import { Controller, Get, HttpStatus } from '@nestjs/common';
-import { SuccessResponse } from '@decorators/response/success.decorator';
+import { SuccessResponse } from '@common/decorators/response/success.decorator';
 
 @Controller()
 export class AppController {

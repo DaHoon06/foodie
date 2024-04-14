@@ -1,11 +1,20 @@
-import { ReactElement } from "react";
+import {ReactElement} from "react";
 import * as styles from "./FeedCard.css";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { Typography } from "@components/common/typography/Typography";
+import {Typography} from "@components/common/typography/Typography";
 import Image from "next/image";
-import { FaRegHeart, FaComment } from "react-icons/fa6";
+import {FaComment, FaRegHeart} from "react-icons/fa6";
+import {dateConvert} from "@utils/date";
+import {FeedListsState} from "@interfaces/feeds/feed.lists";
 
-export const FeedCard = (): ReactElement => {
+export type FeedListType = FeedListsState;
+
+interface Props {
+  feedCard: FeedListType
+}
+
+export const FeedCard = (props: Props): ReactElement => {
+  const {feedId, feedContent, feedCreatedDate, user, shop} = props.feedCard;
   return (
     <article className={styles.feedCardLayout}>
       <FlexBox gap={10} direction={"row"} justifyContent={"flex-start"}>
@@ -23,16 +32,16 @@ export const FeedCard = (): ReactElement => {
           alignItems={"flex-start"}
         >
           <Typography as={"span"} fontSize={14} fontWeight={500}>
-            dahoon06
+            {user.username}
           </Typography>
           <Typography as={"span"} color={"gray400"} fontSize={12}>
-            2 분전
+            {dateConvert(feedCreatedDate)}
           </Typography>
         </FlexBox>
       </FlexBox>
       <div className={styles.contentBox}>
         <Typography fontSize={14} fontWeight={300}>
-          친구가 가보자고 해서 방문한 브런치 카페, 커피 한 잔의 여유를 즐김~ :)
+          {feedContent}
         </Typography>
       </div>
 
@@ -48,10 +57,10 @@ export const FeedCard = (): ReactElement => {
 
       <div className={styles.storeInfoBox}>
         <Typography fontSize={14} fontWeight={500}>
-          농부와 돌집
+          {shop?.shopName}
         </Typography>
         <Typography color={"gray400"} fontSize={14} fontWeight={300}>
-          제주 제주시 한경면 중간서로 3285
+          {shop?.shopAddress.fullAddress}
         </Typography>
       </div>
       <FlexBox

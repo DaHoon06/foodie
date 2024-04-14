@@ -4,7 +4,8 @@ import { BasicLayout } from "@layouts/BasicLayout";
 import { Typography } from "@components/common/typography/Typography";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import * as styles from "@styles/pages/ManagementPage.css";
-import { FaUser } from "react-icons/fa6";
+import { ProfileInformationBox } from "@components/managements/ProfileInformationBox";
+import { ManagementLists } from "@components/managements/ManagementLists";
 
 const ManagementPage: NextPage = (): ReactElement => {
   return (
@@ -16,40 +17,14 @@ const ManagementPage: NextPage = (): ReactElement => {
           fontSize={16}
           fontWeight={500}
         >
-          마이
+          마이페이지
         </Typography>
       </FlexBox>
-      <div className={styles.profileContainer}>
-        <FlexBox
-          direction="row"
-          gap={8}
-          className={styles.managementPageLayout}
-          justifyContent="space-between"
-        >
-          <div className={styles.profileBox}>
-            <FaUser color="#b7b7b7" size={26} />
-          </div>
-          <button>프로필 수정</button>
-        </FlexBox>
-        <FlexBox alignItems="flex-start">
-          <Typography>훈</Typography>
-          <Typography>안녕하세요.</Typography>
-        </FlexBox>
-        <FlexBox direction="row" justifyContent="flex-start">
-          <div>
-            <Typography>0</Typography>
-            <Typography>팔로잉</Typography>
-          </div>
-          <div>
-            <Typography>0</Typography>
-            <Typography>팔로워</Typography>
-          </div>
-        </FlexBox>
-      </div>
 
-      <FlexBox>찜한 식당</FlexBox>
-      <FlexBox direction="row" justifyContent="flex-start">
-        포스트 아직 작성한 포스트가 없습니다.
+      <FlexBox justifyContent="flex-start" gap={10}>
+        <ProfileInformationBox />
+
+        <ManagementLists />
       </FlexBox>
     </BasicLayout>
   );

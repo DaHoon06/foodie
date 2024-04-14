@@ -3,9 +3,9 @@ import { AppLayout } from "@layouts/AppLayout";
 import { ReactElement } from "react";
 import { NextPage } from "next";
 import { queryClient } from "@libs/tanstack";
-import { queryKeys } from "@services/keys/queryKeys";
-import { getRestaurantListsApi } from "@apis/restaurant";
 import { dehydrate } from "@tanstack/react-query";
+import { queryKeys } from "@services/keys/queryKeys";
+import { feedListsApi } from "@apis/feeds/feed.api";
 
 const HomePage: NextPage = (): ReactElement => {
   return (
@@ -19,13 +19,13 @@ export default HomePage;
 
 export async function getStaticProps() {
   const filter = {
-    sort: "gradeCount",
-    region: "all",
+    sido: "전체",
   };
   await queryClient.prefetchInfiniteQuery(
-    [queryKeys.lists.restaurantLists],
-    ({ pageParam = 1 }) => getRestaurantListsApi(filter, { pageParam })
+    [queryKeys.feeds.lists],
+    ({ pageParam = 1 }) => feedListsApi(filter, { pageParam })
   );
+
   return {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),

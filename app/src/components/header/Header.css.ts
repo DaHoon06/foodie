@@ -1,12 +1,14 @@
 import {style} from "@vanilla-extract/css";
 import {vars} from "@styles/theme.css";
 
+const height = 66;
+
 export const headerLayout = style({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
   maxWidth: 428,
-  height: 66,
+  height,
   margin: '0 auto',
   minHeight: 'unset !important',
   padding: '0 20px',
@@ -23,7 +25,7 @@ export const headerLists = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   width: '100%',
-  height: '100%'
+  height
 })
 
 export const logo = style({

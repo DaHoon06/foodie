@@ -2,7 +2,6 @@ import {style} from "@vanilla-extract/css";
 
 export const signInAlertBoxLayout = style({
   width: '100%',
-  height: 500,
   paddingRight: '2em',
   paddingLeft: '2em',
   paddingTop: '2em',

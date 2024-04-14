@@ -1,32 +1,70 @@
 import * as styles from "./HomeContainer.css";
-import { KakaoMap } from "@components/kakao/KakaoMap";
-import { FeedCard } from "@components/ui/cards/feeds/FeedCard";
+import { KakaoMap } from "@components/kakao/maps/KakaoMap";
 import { Typography } from "@components/common/typography/Typography";
 import { ThumbnailCard } from "@components/ui/cards/thumbnail/ThumbnailCard";
-import { CustomHorizontalBar } from "@components/ui/nav/CustomHorizontalBar";
+import { CustomHorizontalBar } from "@components/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { FollowCard } from "@components/ui/cards/FollowCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RegionFilter } from "@components/filters/RegionFilter";
 import { VscSettings } from "react-icons/vsc";
-
-export interface Filter {
-  region: string;
-}
+import { recentlyFeedApi } from "@apis/feeds/feed.api";
+import { todayRecommendUserApi } from "@apis/users/user.api";
+import { FeedFilter } from "@interfaces/feeds/feed.filter";
+import { RecentlyFeedListsState } from "@interfaces/feeds/feed.lists";
+import { RecommendUserLists } from "@interfaces/users/user.lists";
+import { FeedLists } from "@components/feeds/FeedLists";
+import { useAuth } from "@providers/authProvider";
+import { Skeleton } from "@components/ui/skeleton/Skeleton";
 
 export const HomeContainer = () => {
-  const [filter, setFilter] = useState<Filter>({
-    region: "seoul",
+  const { userId, isLogin } = useAuth();
+  const [pending, setPending] = useState(true);
+  const [filter, setFilter] = useState<FeedFilter>({
+    sido: "전체",
   });
+  // 최근 다녀온 여행기
+  const [recentlyFeeds, setRecentlyFeeds] = useState<RecentlyFeedListsState[]>(
+    []
+  );
+  // 오늘의 추천 미식가
+  const [recommendUser, setRecommendUser] = useState<RecommendUserLists[]>([]);
 
   const [filterOpen, setFilterOpen] = useState(false);
 
   const setFilters = (value: string) => {
     setFilter({
       ...filter,
-      region: value,
+      sido: value,
     });
   };
+
+  const findFeed = async () => {
+    try {
+      const data = await recentlyFeedApi(userId);
+      if (data) setRecentlyFeeds(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const findRecommendUser = async () => {
+    try {
+      const data = await todayRecommendUserApi(userId);
+      if (data) setRecommendUser(data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    if (isLogin) {
+      setPending(true);
+      findFeed();
+      findRecommendUser();
+      setPending(false);
+    }
+  }, [isLogin, userId]);
 
   function FilterButton() {
     return (
@@ -49,24 +87,105 @@ export const HomeContainer = () => {
     <div className={styles.homeContainerLayout}>
       <KakaoMap />
       <div className={styles.homeContainer}>
-        <FlexBox alignItems={"flex-start"} gap={10}>
-          <Typography variant="h2">최근 다녀온 여행기</Typography>
-          <CustomHorizontalBar>
-            <ThumbnailCard />
-            <ThumbnailCard />
-            <ThumbnailCard />
-            <ThumbnailCard />
-          </CustomHorizontalBar>
+        <FlexBox
+          className={styles.recentlyFeedContainer}
+          alignItems={"flex-start"}
+        >
+          <div className={styles.titleWrapper}>
+            <Typography variant="h2" fontWeight={600} color={"black100"}>
+              최근 다녀온 여행기
+            </Typography>
+          </div>
+          {pending ? (
+            <CustomHorizontalBar>
+              <div>
+                <FlexBox gap={8} direction="row">
+                  <div style={{ width: "210px", height: "220px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "210px", height: "220px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "210px", height: "220px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "210px", height: "220px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "210px", height: "220px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                </FlexBox>
+              </div>
+            </CustomHorizontalBar>
+          ) : (
+            <>
+              {recentlyFeeds.length > 0 ? (
+                <CustomHorizontalBar>
+                  {recentlyFeeds.map((feed, index) => {
+                    return (
+                      <div key={`${feed._id}_${index}`}>
+                        <ThumbnailCard item={feed} />
+                      </div>
+                    );
+                  })}
+                </CustomHorizontalBar>
+              ) : (
+                <div className={styles.emptyLabel}>
+                  <Typography>최근 작성된 미식 기록이 없어요.</Typography>
+                </div>
+              )}
+            </>
+          )}
         </FlexBox>
 
-        <FlexBox alignItems={"flex-start"} gap={10}>
-          <Typography variant="h2">오늘의 추천 미식가</Typography>
-          <CustomHorizontalBar>
-            <FollowCard />
-            <FollowCard />
-            <FollowCard />
-            <FollowCard />
-          </CustomHorizontalBar>
+        <FlexBox className={styles.userContainer} alignItems={"flex-start"}>
+          <div className={styles.titleWrapper}>
+            <Typography variant="h2" fontWeight={600} color={"black100"}>
+              오늘의 추천 미식가
+            </Typography>
+          </div>
+          {pending ? (
+            <CustomHorizontalBar>
+              <div>
+                <FlexBox gap={8} direction="row">
+                  <div style={{ width: "140px", height: "210px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "140px", height: "210px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "140px", height: "210px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "140px", height: "210px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                  <div style={{ width: "140px", height: "210px" }}>
+                    <Skeleton width={210} height={200} isLoading={true} />
+                  </div>
+                </FlexBox>
+              </div>
+            </CustomHorizontalBar>
+          ) : (
+            <>
+              {recommendUser.length > 0 ? (
+                <CustomHorizontalBar>
+                  {recommendUser.map((user, index) => {
+                    return (
+                      <div key={`${crypto.randomUUID()}_${user._id}`}>
+                        <FollowCard user={user} />
+                      </div>
+                    );
+                  })}
+                </CustomHorizontalBar>
+              ) : (
+                <div className={styles.emptyLabel}>
+                  <Typography>추천 미식가가 없어요.</Typography>
+                </div>
+              )}
+            </>
+          )}
         </FlexBox>
       </div>
       <div
@@ -75,8 +194,9 @@ export const HomeContainer = () => {
           borderColor: !filterOpen ? "#ededed" : "transparent",
         }}
       >
-        <Typography variant="h2">여행기</Typography>
-
+        <Typography variant="h2" fontWeight={600} color={"black100"}>
+          미식가 여행기
+        </Typography>
         <FilterButton />
       </div>
       <div
@@ -88,14 +208,7 @@ export const HomeContainer = () => {
       >
         <RegionFilter filter={setFilters} />
       </div>
-
-      <div className={styles.feedListsLayout}>
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-        <FeedCard />
-      </div>
+      <FeedLists filter={filter} />
     </div>
   );
 };

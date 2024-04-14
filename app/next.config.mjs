@@ -1,4 +1,4 @@
-import {createVanillaExtractPlugin} from '@vanilla-extract/next-plugin';
+import { createVanillaExtractPlugin } from "@vanilla-extract/next-plugin";
 
 const withVanillaExtract = createVanillaExtractPlugin();
 
@@ -8,7 +8,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/:path*/",
+        source: "/api/server/:path*/",
         destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
       },
     ];

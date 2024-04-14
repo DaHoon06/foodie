@@ -28,6 +28,8 @@ export type FontColorType =
   | "black000"
   | "black100"
   | "white000"
+  | "gray000"
+  | "gray300"
   | "gray400"
   | 'gray500'
   | "primary"

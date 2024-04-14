@@ -1,5 +1,5 @@
-import { style } from "@vanilla-extract/css";
-import { vars } from "@styles/theme.css";
+import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
 export const homeContainerLayout = style({
   width: "100%",
@@ -24,20 +24,46 @@ export const homeContainerLayout = style({
 });
 
 export const homeContainer = style({
-  padding: 20,
+  padding: "0",
   width: "100%",
+  backgroundColor: vars.colors.backgroundColor,
+});
+
+export const recentlyFeedContainer = style({
+  backgroundColor: vars.colors.white000,
+  paddingBottom: 20,
+  marginBottom: 8
+})
+
+export const userContainer = style({
+  backgroundColor: vars.colors.white000,
+  margin: '8px 0',
+  paddingBottom: 20
+})
+export const emptyLabel = style({
+  width: '100%',
+  textAlign: 'center',
+  marginBottom: 20
+})
+
+export const titleWrapper = style({
+  width: "100%",
+  padding: "1em 20px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
 });
 
 export const homeListsFilterContainer = style({
   position: "sticky",
   width: "100%",
   height: 48,
-  top: 62,
+  top: 60,
   backgroundColor: vars.colors.white000,
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "0 1em",
+  padding: "1em",
   zIndex: 99,
   borderBottom: "1px solid transparent",
 });
@@ -50,16 +76,7 @@ export const filterButton = style({
 
 export const filterLists = style({
   position: "sticky",
-  top: 100,
+  top: 108,
   borderBottom: "1px solid transparent",
 });
 
-export const feedListsLayout = style({
-  padding: 0,
-  width: "100%",
-  height: "100%",
-  backgroundColor: vars.colors.backgroundColor,
-  display: "flex",
-  flexDirection: "column",
-  gap: 8,
-});

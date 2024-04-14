@@ -1,6 +1,6 @@
 import * as styles from "@layouts/BasicLayout.css";
 import { AppLanding } from "@layouts/landing/AppLading";
-import { NavBarBottom } from "@components/ui/nav/NavBarBottom";
+import { NavBarBottom } from "@components/nav/NavBarBottom";
 import { PropsWithChildren, ReactElement } from "react";
 import { ModalContainer } from "@containers/ModalContainer";
 

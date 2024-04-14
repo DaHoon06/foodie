@@ -18,24 +18,13 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@decorators/*": [
-        "src/decorators/*"
-      ],
-      "@filters/*": [
-        "src/filters/*"
-      ],
-      "@interceptors/*": [
-        "src/interceptors/*"
-      ],
-      "@modules/*": [
-        "src/modules/*"
-      ],
-      "@config/*": [
-        "src/config/*"
-      ],
-      "@common/*": [
-        "src/common/*"
-      ]
+      "@decorators/*": ["src/common/decorators/*"],
+      "@filters/*": ["src/common/filters/*"],
+      "@interceptors/*": ["src/common/interceptors/*"],
+      "@modules/*": ["src/modules/*"],
+      "@config/*": ["src/config/*"],
+      "@enums/*": ["src/common/enum/*"],
+      "@common/*": ["src/common/*"]
     }
   }
 }

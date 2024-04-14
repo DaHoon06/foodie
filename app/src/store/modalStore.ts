@@ -1,28 +1,28 @@
-import {create} from "zustand";
-import {combine, devtools} from "zustand/middleware";
+import { create } from "zustand";
+import { combine, devtools } from "zustand/middleware";
 
 type ModalInitialState = {
   isOpen: boolean;
   type: string;
-}
+};
 
 type SetModalStore = {
-  setIsOpen: (payload: boolean) => void,
-  setModalType: (type: string) => void
-}
+  setIsOpen: (payload: boolean) => void;
+  setModalType: (type: string | null) => void;
+};
 
 const initialState: ModalInitialState = {
   isOpen: false,
-  type: 'slide'
+  type: "slide",
 };
 
 const useModalStore = create(
   devtools(
     combine<ModalInitialState, SetModalStore>(initialState, (set) => ({
-      setIsOpen: (payload: boolean) => set(() => ({isOpen: payload})),
-      setModalType: (type: string) => set(() => ({type})),
+      setIsOpen: (payload: boolean) => set(() => ({ isOpen: payload })),
+      setModalType: (type: string | null) => set(() => ({ type })),
     }))
   )
-)
+);
 
 export default useModalStore;
