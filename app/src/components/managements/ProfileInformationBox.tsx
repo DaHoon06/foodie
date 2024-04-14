@@ -7,7 +7,7 @@ import { FaUser } from "react-icons/fa6";
 import { Typography } from "@components/common/typography/Typography";
 import { Button } from "@components/common/buttons";
 import { useRouter } from "next/router";
-import { useAuth } from "@providers/authProvider";
+import { useAuth } from "@providers/AuthProvider";
 import { KakaoButton } from "@components/kakao/KakaoButton";
 
 export const ProfileInformationBox = (): ReactElement => {

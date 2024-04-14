@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { ReactElement } from "react";
 import * as styles from "./ManagementLists.css";
 import { signOut } from "next-auth/react";
-import { useAuth } from "@providers/authProvider";
+import { useAuth } from "@providers/AuthProvider";
 
 export const ManagementLists = (): ReactElement => {
   const { isLogin } = useAuth();

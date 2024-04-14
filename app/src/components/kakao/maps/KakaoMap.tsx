@@ -4,7 +4,7 @@ import { ReactElement, useEffect, useRef, useState } from "react";
 import { getMarkerApi } from "@apis/shop/shop.api";
 import { KakaoMarker } from "@interfaces/map/kakao";
 import { Skeleton } from "@components/ui/skeleton/Skeleton";
-import { useAuth } from "@providers/authProvider";
+import { useAuth } from "@providers/AuthProvider";
 
 const kakaoAppKey = process.env.KAKAO_API_KEY;
 

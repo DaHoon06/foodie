@@ -14,7 +14,7 @@ import { FeedFilter } from "@interfaces/feeds/feed.filter";
 import { RecentlyFeedListsState } from "@interfaces/feeds/feed.lists";
 import { RecommendUserLists } from "@interfaces/users/user.lists";
 import { FeedLists } from "@components/feeds/FeedLists";
-import { useAuth } from "@providers/authProvider";
+import { useAuth } from "@providers/AuthProvider";
 import { Skeleton } from "@components/ui/skeleton/Skeleton";
 
 export const HomeContainer = () => {
