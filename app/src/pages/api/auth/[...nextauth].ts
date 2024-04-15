@@ -30,8 +30,8 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({token, session}) {
-      session.apiToken = token.apiToken;
-      session.id = token.id;
+      session.apiToken = token.apiToken as unknown as string;
+      session.id = token.id as unknown as string;
       return session;
     },
   },
