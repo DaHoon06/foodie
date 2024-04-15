@@ -1,8 +1,8 @@
 "use client";
 import useCookies from "@hooks/useCookie";
-import { Session } from "next-auth";
-import { useSession } from "next-auth/react";
-import { createContext, useContext, useEffect, useState } from "react";
+import {Session} from "next-auth";
+import {useSession} from "next-auth/react";
+import {createContext, useContext, useEffect, useState} from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -28,19 +28,18 @@ type AuthContextType = {
 
 export const AuthContext = createContext<AuthContextType>(null!);
 
-const AuthProvider = ({ children }: Props) => {
-  const { status, data: session }: SessionType = useSession();
+const AuthProvider = ({children}: Props) => {
+  const {status, data: session}: SessionType = useSession();
   const isLogin = !!session && status === "authenticated";
   const apiToken = isLogin ? session.apiToken : "";
   const userId = isLogin ? session.id : "";
-  const { setCookie, getCookie } = useCookies();
+  const {setCookie, getCookie} = useCookies();
   const [id, setUserId] = useState("");
 
   useEffect(() => {
-    if (isLogin) {
-      setCookie("Authorization", apiToken);
-      setUserId(userId);
-    }
+    const token = getCookie('Authorization')
+    if (!token && apiToken) setCookie("Authorization", apiToken);
+    if (isLogin) setUserId(userId)
   }, [isLogin]);
 
   const value = {

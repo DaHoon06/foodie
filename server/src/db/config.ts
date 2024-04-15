@@ -25,7 +25,7 @@ export const CONFIG_OPTION = () => {
   }
   return {
     isGlobal: true,
-    envFilePath: ['.env', envFilePath],
+    envFilePath: [envFilePath],
   };
 };
 

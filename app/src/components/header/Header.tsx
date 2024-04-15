@@ -15,7 +15,8 @@ export const Header = () => {
     <header className={styles.headerLayout}>
       <ul className={styles.headerLists}>
         <li>
-          <Image className={styles.logo} src={'/images/logo.svg'} alt={'foodie_logo'} width={120} height={60}/>
+          <Image priority={true} className={styles.logo} src={'/images/logo.svg'} alt={'foodie_logo'} width={120}
+                 height={60}/>
         </li>
         <li>
           <button type={'button'} aria-label={'search_button'} onClick={onClickHandlerSearchButton}>

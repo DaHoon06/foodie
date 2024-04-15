@@ -5,7 +5,12 @@ import axios, {
   AxiosStatic,
 } from "axios";
 
-const baseURL = "/api/server";
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_PRODUCTION_API_URL
+    : process.env.NEXT_PUBLIC_LOCAL_API_URL;
+
+const baseURL = `${BASE_URL}/api`;
 const instance: AxiosInstance = axios.create({
   baseURL,
   headers: {

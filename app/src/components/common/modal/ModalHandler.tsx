@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, ReactElement, ReactNode, useEffect, useRef} from "react";
+import React, {PropsWithChildren, ReactElement, ReactNode, useEffect, useRef, useState} from "react";
 import ReactDOM from "react-dom";
 import {BottomSlideModal} from "@components/common/modal/slide/BottomSlide";
 import useModalStore from "@store/modalStore";
@@ -13,6 +13,7 @@ export type ModalProps = {
 } & Modal;
 
 export const ModalHandler: React.FC<Modal> = (props) => {
+  const [showChild, setShowChild] = useState(false);
   const {children} = props;
   const {isOpen} = useModalStore();
   const ele = useRef<HTMLDivElement>(null);
@@ -24,13 +25,18 @@ export const ModalHandler: React.FC<Modal> = (props) => {
     (document.querySelector("#modal") as HTMLDivElement);
 
   useEffect(() => {
+    setShowChild(true);
+  }, []);
+
+  useEffect(() => {
     const html = document.querySelector("html");
     if (html) {
       isOpen ? (html.style.overflow = "hidden") : (html.style.overflow = "");
     }
   }, [isOpen]);
 
-  if (!element) return null;
+  if (!showChild) return null;
+
 
   const modalHandler = (children: ReactNode): ReactElement => {
     return (
@@ -46,6 +52,8 @@ export const ModalHandler: React.FC<Modal> = (props) => {
       </>
     )
   };
-  return <>{ReactDOM.createPortal(modalHandler(children), element)}</>
+  
+  if (!element) return <></>;
+  else return <>{ReactDOM.createPortal(modalHandler(children), element)}</>
 }
 

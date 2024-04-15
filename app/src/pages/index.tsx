@@ -1,16 +1,16 @@
-import { HomeContainer } from "@containers/HomeContainer";
-import { AppLayout } from "@layouts/AppLayout";
-import { ReactElement } from "react";
-import { NextPage } from "next";
-import { queryClient } from "@libs/tanstack";
-import { dehydrate } from "@tanstack/react-query";
-import { queryKeys } from "@services/keys/queryKeys";
-import { feedListsApi } from "@apis/feeds/feed.api";
+import {HomeContainer} from "@containers/HomeContainer";
+import {AppLayout} from "@layouts/AppLayout";
+import {ReactElement} from "react";
+import {NextPage} from "next";
+import {queryClient} from "@libs/tanstack";
+import {dehydrate} from "@tanstack/react-query";
+import {queryKeys} from "@services/keys/queryKeys";
+import {feedListsApi} from "@apis/feeds/feed.api";
 
 const HomePage: NextPage = (): ReactElement => {
   return (
     <AppLayout>
-      <HomeContainer />
+      <HomeContainer/>
     </AppLayout>
   );
 };
@@ -23,7 +23,7 @@ export async function getStaticProps() {
   };
   await queryClient.prefetchInfiniteQuery(
     [queryKeys.feeds.lists],
-    ({ pageParam = 1 }) => feedListsApi(filter, { pageParam })
+    ({pageParam = 1}) => feedListsApi(filter, {pageParam})
   );
 
   return {

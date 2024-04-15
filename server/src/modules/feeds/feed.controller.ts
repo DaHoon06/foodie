@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { FeedService } from './feed.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateFeedDto } from './dto/create.feed.dto';
@@ -12,8 +20,8 @@ import { JwtGuard } from '@modules/auth/jwt.guard';
 export class FeedController {
   constructor(private readonly feedService: FeedService) {}
 
-  @UseGuards(JwtGuard)
   @Post()
+  @UseGuards(JwtGuard)
   async createFeed(@Body() body: CreateFeedDto) {
     return this.feedService.createFeed(body);
   }

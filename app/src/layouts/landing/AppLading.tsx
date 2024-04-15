@@ -7,7 +7,8 @@ export const AppLanding = () => {
     <div className={styles.appLandingLayout}>
       <div className={styles.appLandingContainer}>
         <div className={styles.bannerWrapper}>
-          <Image className={styles.bannerImage} src={'/images/banner2.webp'} alt={'thumbnail_banner'} width={200}
+          <Image priority={true} className={styles.bannerImage} src={'/images/banner2.webp'} alt={'thumbnail_banner'}
+                 width={200}
                  height={300}/>
         </div>
         <div className={styles.contentsBoxDownloadGuid}>

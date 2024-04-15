@@ -32,6 +32,7 @@ export const FollowCard = (props: Props) => {
             className={styles.thumbnailImage}
             src={thumbnailUrl}
             alt={"profile_image"}
+            priority={true}
             width={70}
             height={70}
           />
@@ -41,8 +42,8 @@ export const FollowCard = (props: Props) => {
           <Typography fontWeight={600}>{username}</Typography>
           {!!follow &&
             (<Typography fontWeight={300} color={"gray500"} fontSize={12}>
-            팔로우 {follow} 명
-          </Typography>)}
+              팔로우 {follow} 명
+            </Typography>)}
 
           <Typography
             fontWeight={300}
