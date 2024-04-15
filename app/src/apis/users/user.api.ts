@@ -13,6 +13,7 @@ const IS_PROD = process.env.NODE_ENV === "production";
 export const todayRecommendUserApi = async (
   creatorId: string
 ): Promise<RecommendUserListsApi[] | null> => {
+  if (!creatorId) return null;
   const url = `${DOMAIN}/recommend/${creatorId}`;
   const {data} = await axiosInstance.get<
     AxiosRequestConfig,
@@ -23,7 +24,7 @@ export const todayRecommendUserApi = async (
 
 export const userCheckApi = async (user: User) => {
   const BASE_URL =
-    process.env.NODE_ENV === "production"
+    IS_PROD
       ? process.env.NEXT_PUBLIC_PRODUCTION_API_URL
       : process.env.NEXT_PUBLIC_LOCAL_API_URL;
   return axios.post(`${BASE_URL}/api${DOMAIN}/checked`, user);

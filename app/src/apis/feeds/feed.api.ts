@@ -12,12 +12,15 @@ export const feedSubmitApi = async (body: FeedPostBody) => {
 };
 
 export const recentlyFeedApi = async (creatorId: string): Promise<RecentlyFeedListsStateApi[] | null> => {
+  if (!creatorId) return null;
   const url = `${DOMAIN}/recently/${creatorId}`;
   const {data} = await axiosInstance.get<AxiosRequestConfig, AxiosResponse<AxiosResponseData<RecentlyFeedListsStateApi[]>>>(url);
   return axiosResponseData<RecentlyFeedListsStateApi[]>(data);
 };
 
-export const feedListsApi = async (filter: FeedFilter, {pageParam}: {pageParam: number}): Promise<FeedListsStateApi[] | null> => {
+export const feedListsApi = async (filter: FeedFilter, {pageParam}: {
+  pageParam: number
+}): Promise<FeedListsStateApi[] | null> => {
 
   let page = 1;
   if (!isNaN(pageParam)) page = pageParam;
