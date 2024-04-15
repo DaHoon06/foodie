@@ -1,23 +1,26 @@
 "use client";
 
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { getMarkerApi } from "@apis/shop/shop.api";
-import { KakaoMarker } from "@interfaces/map/kakao";
-import { Skeleton } from "@components/ui/skeleton/Skeleton";
-import { useAuth } from "@providers/AuthProvider";
+import {ReactElement, useEffect, useRef, useState} from "react";
+import {getMarkerApi} from "@apis/shop/shop.api";
+import {KakaoMarker} from "@interfaces/map/kakao";
+import {Skeleton} from "@components/ui/skeleton/Skeleton";
+import {useAuth} from "@providers/AuthProvider";
 
-const kakaoAppKey = process.env.KAKAO_API_KEY;
+const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
 
 export const KakaoMap = (): ReactElement => {
   const mapContainer = useRef();
   const [pending, setPending] = useState(true);
   const [mapData, setMapData] = useState<KakaoMarker[]>([]);
-  const { userId, isLogin } = useAuth();
+  const {userId, isLogin} = useAuth();
 
   const load = async () => {
     try {
       const data = await getMarkerApi(userId);
-      if (data) setMapData(data);
+      if (data) {
+        setMapData(data);
+      }
+
     } catch (e) {
       console.log(e);
     }
@@ -54,7 +57,7 @@ export const KakaoMap = (): ReactElement => {
 
           if (mapData.length > 0) {
             const positions = mapData.map((value) => {
-              const { x, y, title } = value;
+              const {x, y, title} = value;
               return {
                 title,
                 latlng: new kakao.maps.LatLng(+y, +x),
@@ -127,11 +130,11 @@ export const KakaoMap = (): ReactElement => {
         }
       }
     };
-  }, [mapContainer, mapData]);
+  }, [mapData]);
 
   return (
     <>
-      {<Skeleton isLoading={pending} />}
+      {<Skeleton isLoading={pending}/>}
       <div
         id={"map"}
         ref={mapContainer}
