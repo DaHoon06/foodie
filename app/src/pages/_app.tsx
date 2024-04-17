@@ -10,6 +10,7 @@ import MetaHead from "@layouts/heads/MetaHead";
 import {getSession, SessionProvider} from "next-auth/react";
 import AuthProvider from "@providers/AuthProvider";
 import {NextComponentType} from "next";
+import {CustomToastify} from "@components/common/toast/Toast";
 
 const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Component, pageProps }) => {
   const {session} = pageProps;
@@ -22,6 +23,7 @@ const App: NextComponentType<AppContext, AppInitialProps, AppProps> = ({ Compone
           <Hydrate state={pageProps.dehydratedState}>
               <AuthProvider>
                 <MetaHead />
+                <CustomToastify />
                 <Component {...pageProps} />
                 {/* <ServerEventHandler /> */}
               </AuthProvider>

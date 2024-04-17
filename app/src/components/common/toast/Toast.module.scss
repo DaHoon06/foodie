@@ -1,0 +1,21 @@
+.toast {
+  .Toastify__toast {
+    background-color: #b9ccff;
+    color: #fff;
+    border: 1px solid transparent;
+
+    font-size: 14px;
+  }
+
+  .Toastify__toast--info {
+    border: 1px solid transparent;
+  }
+
+  .Toastify__toast--success {
+    border: 1px solid #f99c1c;
+  }
+
+  .Toastify__toast--error {
+    background-color: #e74c3c;
+  }
+}
