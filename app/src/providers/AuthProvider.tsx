@@ -1,6 +1,5 @@
 "use client";
 import useCookies from "@hooks/useCookie";
-import {Session} from "next-auth";
 import {useSession} from "next-auth/react";
 import {createContext, useContext, useEffect, useState} from "react";
 
@@ -38,7 +37,9 @@ const AuthProvider = ({children}: Props) => {
 
   useEffect(() => {
     const token = getCookie('Authorization')
-    if (!token && apiToken) setCookie("Authorization", apiToken);
+    if (!token && apiToken) setCookie("Authorization", apiToken, {
+      path: '/'
+    });
     if (isLogin) setUserId(userId)
   }, [isLogin]);
 

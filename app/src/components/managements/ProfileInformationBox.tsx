@@ -1,14 +1,14 @@
-import { ReactElement } from "react";
+import {ReactElement} from "react";
 
 import * as styles from "./ProfileInformationBox.css";
 import classNames from "classnames";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { FaUser } from "react-icons/fa6";
-import { Typography } from "@components/common/typography/Typography";
-import { Button } from "@components/common/buttons";
-import { useRouter } from "next/router";
-import { useAuth } from "@providers/AuthProvider";
-import { KakaoButton } from "@components/kakao/KakaoButton";
+import {FaUser} from "react-icons/fa6";
+import {Typography} from "@components/common/typography/Typography";
+import {Button} from "@components/common/buttons";
+import {useRouter} from "next/router";
+import {useAuth} from "@providers/AuthProvider";
+import {KakaoButton} from "@components/kakao/KakaoButton";
 
 export const ProfileInformationBox = (): ReactElement => {
   const { isLogin } = useAuth();
@@ -89,7 +89,9 @@ export const ProfileInformationBox = (): ReactElement => {
             </FlexBox>
 
             <Button width={120} height={38} onClick={handleClickProfileEdit}>
-              프로필 수정
+              <Typography fontSize={14} color={'white000'} fontWeight={500}>
+                프로필 수정
+              </Typography>
             </Button>
           </FlexBox>
 

@@ -1,4 +1,3 @@
-"use client";
 import * as styles from "./HomeContainer.css";
 import {KakaoMap} from "@components/kakao/maps/KakaoMap";
 import {Typography} from "@components/common/typography/Typography";
@@ -59,15 +58,20 @@ export const HomeContainer = () => {
   };
 
   useEffect(() => {
-    setPending(true);
-
-    if (isLogin) {
-      findFeed();
-      findRecommendUser();
-    }
-
-    setPending(false);
+      all();
   }, [isLogin, userId]);
+
+  const all = async () => {
+    setPending(true);
+    try {
+      await findFeed();
+      await findRecommendUser();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setPending(false);
+    }
+  }
 
   function FilterButton() {
     return (

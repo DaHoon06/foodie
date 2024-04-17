@@ -23,7 +23,6 @@ export const useFeedListsQuery = async (filter: FeedFilter, page: {pageParam: nu
           message: string;
         };
         if (statusCode === 404) {
-          console.log(message)
           return null;
         }
       }
@@ -41,7 +40,18 @@ export const useFeedListsQuery = async (filter: FeedFilter, page: {pageParam: nu
 export const useFeedListsInfinityScroll = (filter: FeedFilter) => {
   return useInfiniteQuery(
     [queryKeys.feeds.lists, filter],
-    ({ pageParam = 1 }) => feedListsApi(filter, { pageParam }),
+    ({ pageParam = 1 }) => feedListsApi(filter, { pageParam }).catch(e => {
+      const error = e as unknown as AxiosError;
+      if (error.response && error.response.data) {
+        const { statusCode, message } = error.response.data as {
+          statusCode: number;
+          message: string;
+        };
+        if (statusCode === 404) {
+          return null;
+        }
+      }
+    }),
     {
       getNextPageParam: (lastPage, allPages) => {
         const nextPage = allPages.length + 1;
