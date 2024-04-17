@@ -32,6 +32,16 @@ export const navBarLists = style({
   paddingTop: 8,
   paddingBottom: 8,
 
+  //todo device에 따라서 다르게 줘야하는데..
+  // "@media": {
+  //   "screen and (max-width: 1024px)": {
+  //     overflow: "auto hidden",
+  //   },
+  //   "screen and (max-width: 480px)": {
+  //     overflow: "auto hidden",
+  //   },
+  // },
+
   selectors: {
     "&:nth-child(1)": {
       paddingLeft: "20px !important",

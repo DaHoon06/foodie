@@ -32,6 +32,7 @@ export const ThumbnailCard = (props: ThumbnailProps) => {
               className={styles.thumbnailImage}
               src={"/images/banner2.webp"}
               alt={"profile_image"}
+              priority={true}
               width={120}
               height={110}
             />
