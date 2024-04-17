@@ -65,25 +65,6 @@ export const profileEditorContainer = style({
   gap: 20
 })
 
-export const editInput = style({
-  boxSizing: "border-box",
-  backgroundColor: vars.colors.backgroundColor,
-  borderRadius: 2,
-  fontSize: 14,
-  border: `1px solid ${vars.colors.gray000}`,
-  color: vars.colors.black500,
-  width: "100%",
-  height: 38,
-  outline: "none",
-  padding: "0.2em 0.8em",
-
-  selectors: {
-    "&::placeholder": {
-      color: vars.colors.gray300
-    },
-  },
-});
-
 export const editTextareaWrapper = style({
   width: "100%",
   maxHeight: "70vh",
@@ -114,6 +95,7 @@ export const editTextarea = style({
       display: 'none'
     },
     "&::placeholder": {
+      fontWeight: 300,
       color: vars.colors.gray300
     },
   }

@@ -7,6 +7,7 @@ import * as styles from '@styles/pages/management/ProfileEdit.css';
 import {MdCameraAlt, MdOutlineKeyboardArrowLeft} from "react-icons/md";
 import {useRouter} from "next/router";
 import Image from "next/image";
+import BasicInput from "@components/common/inputs/BasicInput";
 
 const ProfileEditPage: NextPage = (): ReactElement => {
   const router = useRouter();
@@ -23,6 +24,13 @@ const ProfileEditPage: NextPage = (): ReactElement => {
     e.preventDefault();
     console.log(e)
   }
+  const handleClickProfileUpdate = async () => {
+    try {
+      alert('저장 뾰로롱')
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <BasicLayout>
@@ -37,7 +45,7 @@ const ProfileEditPage: NextPage = (): ReactElement => {
           fontWeight={500}>
           프로필 수정
         </Typography>
-        <button aria-label={'profile-editor-save-button'} type={'button'}>
+        <button aria-label={'profile-editor-save-button'} type={'button'} onClick={handleClickProfileUpdate}>
           <Typography as={"span"} color={'primary'} fontSize={14} fontWeight={500}>저장</Typography>
         </button>
       </FlexBox>
@@ -59,10 +67,7 @@ const ProfileEditPage: NextPage = (): ReactElement => {
           </div>
         </section>
         <section className={styles.profileEditorContainer}>
-          <FlexBox alignItems={"flex-start"} gap={10}>
-            <label><Typography fontWeight={400} color={'gray500'} fontSize={14}>닉네임</Typography></label>
-            <input placeholder={'변경할 닉네임을 입력해 주세요!'} type={"text"} className={styles.editInput} />
-          </FlexBox>
+          <BasicInput label={'닉네임'} />
 
           <FlexBox alignItems={"flex-start"} gap={10}>
             <label><Typography fontWeight={400} color={'gray500'} fontSize={14}>소개 문구</Typography></label>
