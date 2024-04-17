@@ -1,21 +1,21 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { Typography } from "@components/common/typography/Typography";
-import { FeedPost } from "@components/feeds/FeedPost";
-import { Avatar } from "@components/ui";
+import {Typography} from "@components/common/typography/Typography";
+import {Avatar} from "@components/ui";
 import Image from "next/image";
-import { FormEventHandler, ReactElement, useEffect, useState } from "react";
-import { FiMapPin } from "react-icons/fi";
+import {FormEventHandler, ReactElement, useEffect, useState} from "react";
+import {FiMapPin} from "react-icons/fi";
 import * as styles from "./PostContainer.css";
-import { FileUploadButton } from "@components/common/buttons/FileUploadButton";
-import { Button } from "@components/common/buttons";
-import { useRouter } from "next/router";
-import { FeedPostBody, FeedUser } from "@interfaces/feeds/feed.post";
-import { feedSubmitApi } from "@apis/feeds/feed.api";
-import { useSession } from "next-auth/react";
+import {FileUploadButton} from "@components/common/buttons/FileUploadButton";
+import {Button} from "@components/common/buttons";
+import {useRouter} from "next/router";
+import {FeedPostBody, FeedUser} from "@interfaces/feeds/feed.post";
+import {feedSubmitApi} from "@apis/feeds/feed.api";
+import {useSession} from "next-auth/react";
 import useModalStore from "@store/modalStore";
 import useFeedStore from "@store/feedStore";
-import { IoTrashOutline } from "react-icons/io5";
-import { axiosInstance } from "@libs/axios";
+import {IoTrashOutline} from "react-icons/io5";
+import {axiosInstance} from "@libs/axios";
+import {Textarea} from "@components/common/textarea/Textarea";
 
 export const FeedPostContainer = (): ReactElement => {
   const { setIsOpen, setModalType } = useModalStore();
@@ -156,7 +156,7 @@ export const FeedPostContainer = (): ReactElement => {
             justifyContent="flex-start"
           >
             <Avatar alt={"dahoon"} src={"/images/dh.png"} />
-            <FeedPost onChangeTextarea={onChangeTextarea} />
+            <Textarea onChangeTextarea={onChangeTextarea} />
           </FlexBox>
           {postForm.item.title.length > 0 && (
             <div className={styles.locationItemContainer}>

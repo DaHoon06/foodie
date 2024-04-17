@@ -1,12 +1,12 @@
 import {style} from "@vanilla-extract/css";
 
-export const FeedPostLayout = style({
+export const textareaLayout = style({
   width: "100%",
   maxHeight: "70vh",
   height: "auto",
 });
 
-export const FeedTextarea = style({
+export const textarea = style({
   all: 'unset',
   "-webkit-appearance": 'none',
   "-moz-appearance": 'none',
