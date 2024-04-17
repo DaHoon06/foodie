@@ -33,7 +33,7 @@ export const FeedLists = (props: Props) => {
   return (
     <>
       <section className={styles.feedListsLayout}>
-        {listQueryData.pages.map((page: FeedListsState[], index: number) => {
+        {listQueryData?.pages.map((page: FeedListsState[], index: number) => {
           return page.length === 0 && index === 0 ? (
             <FlexBox
               className={styles.emptyLabel}
