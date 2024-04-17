@@ -8,6 +8,7 @@ export const thumbnailCardLayout = style({
   borderRadius: 10,
   border: "1px solid #F4F4F4",
   padding: 20,
+  boxShadow: '0px 2px 2px 1px rgb(239 239 239)'
 });
 
 export const thumbnailImageBox = style({

@@ -29,6 +29,8 @@ export const navBarLists = style({
   scrollbarWidth: "none",
   overflow: "auto hidden",
   gap: 16,
+  paddingTop: 8,
+  paddingBottom: 8,
 
   selectors: {
     "&:nth-child(1)": {

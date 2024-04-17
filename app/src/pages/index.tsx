@@ -17,7 +17,7 @@ const HomePage: NextPage = (): ReactElement => {
 
 export default HomePage;
 
-export async function getStaticProps() {
+export async function getStaticProps(context: any) {
   const filter = {
     sido: "전체",
   };

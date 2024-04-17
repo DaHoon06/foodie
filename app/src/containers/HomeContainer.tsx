@@ -58,7 +58,11 @@ export const HomeContainer = () => {
   };
 
   useEffect(() => {
+    setPending(true);
       all();
+    if (typeof window !== 'undefined' && !isLogin && userId) {
+      setPending(false);
+    }
   }, [isLogin, userId]);
 
   const all = async () => {
@@ -66,10 +70,9 @@ export const HomeContainer = () => {
     try {
       await findFeed();
       await findRecommendUser();
+      setPending(false);
     } catch (e) {
       console.log(e);
-    } finally {
-      setPending(false);
     }
   }
 
