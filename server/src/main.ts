@@ -9,7 +9,11 @@ import * as cookieParser from 'cookie-parser';
 import { setupSwagger } from '@config/swagger';
 
 const PORT = 4800;
-const HTTP_DOMAIN = 'http://localhost:3000';
+const HTTP_DOMAIN = [
+  'http://localhost:3000',
+  'https://gofoodie.co.kr',
+  'https://www.gofoodie.co.kr',
+];
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -30,7 +34,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   app.enableCors({
-    origin: [HTTP_DOMAIN],
+    origin: HTTP_DOMAIN,
     credentials: true,
   });
 
