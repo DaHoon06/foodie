@@ -1,4 +1,4 @@
-import { Controller, HttpStatus } from '@nestjs/common';
+import { Controller, Get, HttpStatus } from '@nestjs/common';
 import { SuccessResponse } from '@common/decorators/response/success.decorator';
 
 @Controller()

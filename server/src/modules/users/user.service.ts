@@ -20,6 +20,7 @@ export class UserService {
       username: user.username,
       creatorId: user.id,
       hashname: 'hash',
+      description: '',
     });
     return this.userRepository.createUser(userEntity);
   }
