@@ -1,11 +1,11 @@
-import { Controller, HttpStatus, Post } from '@nestjs/common';
+import { Controller, HttpStatus } from '@nestjs/common';
 import { SuccessResponse } from '@common/decorators/response/success.decorator';
 
 @Controller()
 export class AppController {
   constructor() {}
 
-  @Post('/healthy-check')
+  @Get('/healthy-check')
   @SuccessResponse(HttpStatus.CREATED, [
     {
       model: String,
