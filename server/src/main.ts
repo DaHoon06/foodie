@@ -15,6 +15,7 @@ const HTTP_DOMAIN = [
   'https://www.gofoodie.co.kr',
   'www.gofoodie.co.kr',
   'gofoodie.co.kr',
+  '.gofoodie.co.kr',
 ];
 
 async function bootstrap() {
@@ -43,6 +44,16 @@ async function bootstrap() {
   });
 
   setupSwagger(app);
+
+  app.use((req, res, next) => {
+    // 쿠키 설정
+    res.cookie('cookieName', 'cookieValue', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
+    next();
+  });
 
   console.log(`Server listen to Port ${PORT}`);
   await app.listen(PORT);
