@@ -33,11 +33,13 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TimeoutInterceptor());
   app.useGlobalInterceptors(new ResponseInterceptor());
 
-  app.use(cookieParser());
+  app.use(cookieParser(process.env.COOKIE_SECRET));
 
   app.enableCors({
     origin: HTTP_DOMAIN,
     credentials: true,
+    methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+    optionsSuccessStatus: 200,
   });
 
   setupSwagger(app);
