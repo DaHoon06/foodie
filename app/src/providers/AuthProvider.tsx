@@ -37,8 +37,13 @@ const AuthProvider = ({children}: Props) => {
 
   useEffect(() => {
     const token = getCookie('Authorization')
+    const isProd = process.env.NODE_ENV !== 'development';
+    const domain = isProd ? process.env.NEXT_PUBLIC_PROD : process.env.NEXT_PUBLIC_LOCAL;
     if (!token && apiToken) setCookie("Authorization", apiToken, {
-      path: '/'
+      path: '/',
+      domain: domain,
+      sameSite: "none",
+      secure: true
     });
     if (isLogin) setUserId(userId)
   }, [isLogin]);
