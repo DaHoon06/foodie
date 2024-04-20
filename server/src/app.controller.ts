@@ -5,7 +5,7 @@ import { SuccessResponse } from '@common/decorators/response/success.decorator';
 export class AppController {
   constructor() {}
 
-  @Get('/healthy-check')
+  @Get('/api/healthy-check')
   @SuccessResponse(HttpStatus.CREATED, [
     {
       model: String,
