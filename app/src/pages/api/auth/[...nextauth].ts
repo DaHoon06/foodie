@@ -21,7 +21,7 @@ export const authOptions: AuthOptions = {
       }
     },
     async jwt({user, token, account}) {
-      if (user) {
+      if (user && Object.entries(user)) {
         const id = account.providerAccountId;
         const {data} = await userCheckApi(user as User);
         token.apiToken = data.data;

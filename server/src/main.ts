@@ -13,6 +13,8 @@ const HTTP_DOMAIN = [
   'http://localhost:3000',
   'https://gofoodie.co.kr',
   'https://www.gofoodie.co.kr',
+  'www.gofoodie.co.kr',
+  'gofoodie.co.kr',
 ];
 
 async function bootstrap() {
