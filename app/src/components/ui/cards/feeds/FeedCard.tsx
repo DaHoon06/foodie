@@ -55,25 +55,31 @@ export const FeedCard = (props: Props): ReactElement => {
         />
       </div>
 
-      <div className={styles.storeInfoBox}>
-        <Typography fontSize={14} fontWeight={500}>
-          {shop?.shopName}
-        </Typography>
-        <Typography color={"gray400"} fontSize={14} fontWeight={300}>
-          {shop?.shopAddress.fullAddress}
-        </Typography>
-      </div>
+      {
+        shop && Object.entries(shop) && (
+          <div className={styles.storeInfoBox}>
+            <Typography fontSize={14} fontWeight={500}>
+              {shop?.shopName}
+            </Typography>
+            <Typography color={"gray400"} fontSize={14} fontWeight={300}>
+              {shop?.shopAddress.fullAddress}
+            </Typography>
+          </div>
+        )
+      }
+
+
       <FlexBox
         direction={"row"}
         justifyContent={"flex-start"}
         gap={10}
         className={styles.storeOptions}
       >
-        <FaRegHeart color={"#888888"} />
+        <FaRegHeart color={"#888888"}/>
         <Typography fontSize={14} fontWeight={300} color={"gray400"}>
           11
         </Typography>
-        <FaComment color={"#888888"} />
+        <FaComment color={"#888888"}/>
         <Typography fontSize={14} fontWeight={300} color={"gray400"}>
           2
         </Typography>

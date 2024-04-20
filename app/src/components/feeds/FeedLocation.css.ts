@@ -39,6 +39,8 @@ export const tabButton = style({
 
 export const addressSearchContainer = style({
   margin: '1em 0',
+  width: "100%",
+  position: "relative"
 });
 
 export const feedLocationContainer = style({
