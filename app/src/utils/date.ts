@@ -51,3 +51,29 @@ export const remainTime = (startDate: Date, endDate: Date): string => {
     return `${hoursRemainder} 시간 ${minutesRemainder} 분`;
   else return `${minutesRemainder}분`;
 };
+
+export const formatDate = (date: Date): string => {
+  const now = new Date();
+  const diffMilliseconds = now.getTime() - date.getTime();
+  const diffSeconds = Math.floor(diffMilliseconds / 1000);
+  const diffMinutes = Math.floor(diffSeconds / 60);
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
+  const diffMonths = Math.floor(diffDays / 30);
+
+  if (diffMonths > 0) {
+    return `${date.getFullYear()}년 ${padZero(date.getMonth() + 1)}월 ${padZero(date.getDate())}일`;
+  } else if (diffDays > 0) {
+    return `${diffDays}일 전`;
+  } else if (diffHours > 0) {
+    return `${diffHours}시간 전`;
+  } else if (diffMinutes > 0) {
+    return `${diffMinutes}분 전`;
+  } else {
+    return '방금';
+  }
+}
+
+function padZero(num: number): string {
+  return num < 10 ? `0${num}` : `${num}`;
+}
