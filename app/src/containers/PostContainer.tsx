@@ -18,9 +18,9 @@ import {axiosInstance} from "@libs/axios";
 import {Textarea} from "@components/common/textarea/Textarea";
 
 export const FeedPostContainer = (): ReactElement => {
-  const { setIsOpen, setModalType } = useModalStore();
-  const { item, setFeedItem } = useFeedStore();
-  const { data: session } = useSession();
+  const {setIsOpen, setModalType} = useModalStore();
+  const {item, setFeedItem} = useFeedStore();
+  const {data: session} = useSession();
   const [previewUrl, setPreviewUrl] = useState<string[]>([]);
   const [postForm, setPostForm] = useState<FeedPostBody>({
     content: "",
@@ -62,7 +62,7 @@ export const FeedPostContainer = (): ReactElement => {
   };
 
   const fileUpload = async (postId: string) => {
-    const { files } = postForm;
+    const {files} = postForm;
     const formData = new FormData();
 
     files.forEach((file) => {
@@ -94,11 +94,11 @@ export const FeedPostContainer = (): ReactElement => {
         ...postForm,
       };
       await fileUpload("postId");
-      const { data } = await feedSubmitApi(body);
+      const {data} = await feedSubmitApi(body);
       if (data.result) {
         //todo 만약 파일이 있으면?
         if (postForm.files.length > 0) {
-          const { _id } = data.data;
+          const {_id} = data.data;
           await fileUpload(_id);
         }
         await router.push("/");
@@ -141,7 +141,7 @@ export const FeedPostContainer = (): ReactElement => {
           </Typography>
         </button>
         <Button type="submit">
-          <Typography as="span" fontSize={12} color={"white000"}>
+          <Typography as="span" fontSize={14} color={"white000"} fontWeight={300}>
             포스팅
           </Typography>
         </Button>
@@ -155,8 +155,8 @@ export const FeedPostContainer = (): ReactElement => {
             alignItems="flex-center"
             justifyContent="flex-start"
           >
-            <Avatar alt={"dahoon"} src={"/images/dh.png"} />
-            <Textarea onChangeTextarea={onChangeTextarea} />
+            <Avatar alt={"dahoon"} src={"/images/dh.png"}/>
+            <Textarea placeholder={'여러분의 이야기를 들려주세요.'} onChangeTextarea={onChangeTextarea}/>
           </FlexBox>
           {postForm.item.title.length > 0 && (
             <div className={styles.locationItemContainer}>
@@ -201,7 +201,7 @@ export const FeedPostContainer = (): ReactElement => {
                     variant={"icon"}
                     onClick={handleClickRemoveLocationData}
                   >
-                    <IoTrashOutline size={24} color={"#d3d3d3"} />
+                    <IoTrashOutline size={24} color={"#d3d3d3"}/>
                   </Button>
                 </FlexBox>
               </div>
@@ -215,11 +215,11 @@ export const FeedPostContainer = (): ReactElement => {
             justifyContent="space-between"
             className={styles.postOptionContainer}
           >
-            <FileUploadButton onFileChange={handleChangeFile} />
+            <FileUploadButton onFileChange={handleChangeFile}/>
 
             <button type={"button"} onClick={handleClickLocation}>
               <FlexBox direction="row" justifyContent="flex-end" gap={4}>
-                <FiMapPin color={"#FF7101"} />
+                <FiMapPin color={"#FF7101"}/>
                 <Typography color="primary" as="span" fontSize={14}>
                   장소
                 </Typography>

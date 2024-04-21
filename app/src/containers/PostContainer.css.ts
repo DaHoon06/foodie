@@ -53,6 +53,7 @@ export const imagesContainer = style({
   justifyItems: "center",
   gap: 6,
   marginBottom: 40,
+  padding: '0.2em 0.6em'
 });
 
 export const images = style({

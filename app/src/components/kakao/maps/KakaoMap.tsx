@@ -87,30 +87,21 @@ export const KakaoMap = (): ReactElement => {
 
               kakao.maps.event.addListener(
                 marker,
-                "mouseover",
-                makeOverListener(map, marker, infowindow)
+                "click",
+                makeClickListener(map, marker, infowindow)
               );
 
-              kakao.maps.event.addListener(
-                marker,
-                "mouseout",
-                makeOutListener(infowindow)
-              );
+              let isOpen = false;
 
-              function makeOverListener(
+              function makeClickListener(
                 map: any,
                 marker: any,
                 infowindow: any
               ) {
                 return function () {
-                  infowindow.open(map, marker);
-                };
-              }
-
-              // 인포윈도우를 닫는 클로저를 만드는 함수입니다
-              function makeOutListener(infowindow: any) {
-                return function () {
-                  infowindow.close();
+                  isOpen = !isOpen;
+                  if (isOpen) infowindow.open(map, marker);
+                  else infowindow.close();
                 };
               }
             }

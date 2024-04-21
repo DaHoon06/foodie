@@ -75,25 +75,29 @@ export const FeedLocation = (): ReactElement => {
         </button>
       </FlexBox>
 
-      <FlexBox className={styles.addressSearchTab} direction={'row'} alignItems={"flex-start"} justifyContent={"flex-start"} >
-        <button className={classNames(styles.tabButton, `${locationType === 'map' ? styles.currentTabActive : styles.currentTabUnActive}`)}
-                onClick={() => setLocationType('map')}>
+      <FlexBox className={styles.addressSearchTab} direction={'row'} alignItems={"flex-start"}
+               justifyContent={"flex-start"}>
+        <button
+          className={classNames(styles.tabButton, `${locationType === 'map' ? styles.currentTabActive : styles.currentTabUnActive}`)}
+          onClick={() => setLocationType('map')}>
           <IoLocation color={locationType === 'map' ? primaryIconColor : '#e3e3e3'} size={20}/>
-          <Typography as={'span'} color={locationType === 'map' ? 'primary' : "gray300"} fontSize={14}>지도로 검색</Typography>
+          <Typography as={'span'} color={locationType === 'map' ? 'primary' : "gray300"} fontSize={14}>지도로
+            검색</Typography>
         </button>
         <button
           className={classNames(styles.tabButton, `${locationType === 'address' ? styles.currentTabActive : styles.currentTabUnActive}`)}
           onClick={() => setLocationType('address')}
         >
           <IoLocate color={locationType === 'address' ? primaryIconColor : '#e3e3e3'} size={20}/>
-          <Typography as={'span'} color={locationType === 'address' ? 'primary' : "gray300"} fontWeight={300} fontSize={14}>주소로 검색</Typography>
+          <Typography as={'span'} color={locationType === 'address' ? 'primary' : "gray300"} fontWeight={300}
+                      fontSize={14}>주소로 검색</Typography>
         </button>
       </FlexBox>
 
       <FlexBox className={classNames(styles.locationItemWrapper)} alignItems={"flex-start"} gap={8}>
         <Typography color={"gray500"} fontSize={14} fontWeight={500}>카테고리</Typography>
         <div>
-          <BorderSelectBox items={categories} onChange={onChangeCategorySelectBox} />
+          <BorderSelectBox items={categories} onChange={onChangeCategorySelectBox}/>
         </div>
       </FlexBox>
 
@@ -140,7 +144,7 @@ export const FeedLocation = (): ReactElement => {
           <FlexBox direction="row" gap={8}>
             <IoAdd size={24} color={"#fff"}/>
             <Typography as={"span"} color="white000">
-              직접 등록
+              장소 등록
             </Typography>
           </FlexBox>
         </Button>
