@@ -16,6 +16,8 @@ import useFeedStore from "@store/feedStore";
 import {IoTrashOutline} from "react-icons/io5";
 import {axiosInstance} from "@libs/axios";
 import {Textarea} from "@components/common/textarea/Textarea";
+import {queryClient} from "@libs/tanstack";
+import {queryKeys} from "@services/keys/queryKeys";
 
 export const FeedPostContainer = (): ReactElement => {
   const {setIsOpen, setModalType} = useModalStore();
@@ -99,6 +101,11 @@ export const FeedPostContainer = (): ReactElement => {
           const {_id} = data.data;
           await fileUpload(_id);
         }
+
+        await queryClient.invalidateQueries([
+          queryKeys.feeds.lists,
+          queryKeys.maps.marker
+        ]);
         await router.push("/");
       }
     } catch (e) {
