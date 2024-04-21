@@ -78,5 +78,6 @@ export const filterLists = style({
   position: "sticky",
   top: 108,
   borderBottom: "1px solid transparent",
+  zIndex: 99
 });
 

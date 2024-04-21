@@ -19,7 +19,7 @@ interface Props {
 }
 
 
-export const Carousel = (props: Props) => {
+export const CarouselSwipe = (props: Props) => {
   const {items, options} = props;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -30,12 +30,8 @@ export const Carousel = (props: Props) => {
   return (
     <div className={styles.carouselLayout}>
       <Swiper
-        centeredSlides={true}
         {...options}
-        spaceBetween={30}
-        slidesPerView={1}
         onSlideChange={(swiper) => onChangeCarousel(swiper)}
-        modules={[Autoplay]}
         loop={true}
         className={styles.carouselContainer}
       >

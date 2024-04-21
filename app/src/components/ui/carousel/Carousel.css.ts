@@ -25,17 +25,21 @@ export const carouselBannerImage = style({
   display: 'block',
   width: '100%',
   height: '100%',
-  objectFit: 'cover'
+  objectFit: 'cover',
+  zIndex: 1
 })
 
 export const carouselCountWrapper = style({
-  position: 'absolute'
+  position: 'absolute',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'flex-end'
 });
 
 export const carouselCount = style({
   position: "relative",
   bottom: 40,
-  left: 290,
+  right: 40,
   zIndex: 1,
   backgroundColor: 'rgba(79,79,79,0.61)',
   width: 46,
