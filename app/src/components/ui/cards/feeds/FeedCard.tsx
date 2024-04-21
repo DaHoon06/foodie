@@ -67,11 +67,11 @@ export const FeedCard = (props: Props): ReactElement => {
       >
         <FaRegHeart color={"#888888"}/>
         <Typography fontSize={14} fontWeight={300} color={"gray400"}>
-          11
+          0
         </Typography>
         <FaComment color={"#888888"}/>
         <Typography fontSize={14} fontWeight={300} color={"gray400"}>
-          2
+          0
         </Typography>
       </FlexBox>
     </article>
