@@ -30,8 +30,6 @@ export class FileService {
 
   async createFileData(files: Array<Express.Multer.File>, id: string) {
     const fileObjs = await this.fileUploadToS3(files);
-
-    //todo file entity에 업데이트 (s3 upload 주소도 함께 포함)
     const feed: FeedEntity = await this.feedService.findOneById(id);
     for (const file of fileObjs) {
       const createData = {

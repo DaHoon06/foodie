@@ -6,8 +6,21 @@ import {Autoplay} from 'swiper/modules';
 import * as styles from './Carousel.css';
 import Image from "next/image";
 import {useState} from "react";
+import {SwiperProps} from "swiper/swiper-react";
 
-export const Carousel = () => {
+interface CarouselItems {
+  name: string;
+  path: string;
+}
+
+interface Props {
+  items: CarouselItems[];
+  options?: SwiperProps;
+}
+
+
+export const Carousel = (props: Props) => {
+  const {items, options} = props;
   const [currentPage, setCurrentPage] = useState(1);
 
   const onChangeCarousel = (swiper: SwiperClass) => {
@@ -18,10 +31,7 @@ export const Carousel = () => {
     <div className={styles.carouselLayout}>
       <Swiper
         centeredSlides={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        {...options}
         spaceBetween={30}
         slidesPerView={1}
         onSlideChange={(swiper) => onChangeCarousel(swiper)}
@@ -29,32 +39,27 @@ export const Carousel = () => {
         loop={true}
         className={styles.carouselContainer}
       >
-        <SwiperSlide>
-          <div className={styles.carouselBanner}>
-            <Image className={styles.carouselBannerImage} src={'/images/sample1.webp'} alt={'sample'} width={300}
-                   height={300}/>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.carouselBanner}>
-            <Image className={styles.carouselBannerImage} src={'/images/sample2.webp'} alt={'sample'} width={300}
-                   height={300}/>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.carouselBanner}>
-            <Image className={styles.carouselBannerImage} src={'/images/sample3.webp'} alt={'sample'} width={300}
-                   height={300}/>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className={styles.carouselBanner}>
-            <Image className={styles.carouselBannerImage} src={'/images/sample4.webp'} alt={'sample'} width={300}
-                   height={300}/>
-          </div>
-        </SwiperSlide>
+        {items.map(item => {
+          return (
+            <SwiperSlide key={crypto.randomUUID()}>
+              <div className={styles.carouselBanner}>
+                <Image
+                  className={styles.carouselBannerImage}
+                  src={item.path}
+                  alt={item.name}
+                  width={300}
+                  height={200}/>
+              </div>
+            </SwiperSlide>
+          )
+        })}
+
       </Swiper>
-      <div className={styles.carouselCountWrapper}>{currentPage}/4</div>
+      <div className={styles.carouselCountWrapper}>
+        <span className={styles.carouselCount}>
+          {currentPage}/{items.length}
+        </span>
+      </div>
     </div>
 
   )

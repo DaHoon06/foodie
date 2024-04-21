@@ -21,7 +21,8 @@ export class FeedRepository extends Repository<FeedEntity> {
     let queryBuilder = this.createQueryBuilder('feed')
       .where('feed.deleted = false')
       .leftJoinAndSelect('feed.shop', 'shop')
-      .leftJoinAndSelect('feed.user', 'user');
+      .leftJoinAndSelect('feed.user', 'user')
+      .leftJoinAndSelect('feed.files', 'files');
 
     if (region !== '전체')
       queryBuilder = queryBuilder.andWhere('shop.sido = :sido', {
@@ -67,6 +68,12 @@ export class FeedRepository extends Repository<FeedEntity> {
         feedCreatedDate: list.created_at,
         user,
         shop,
+        files: list.files.map((file) => {
+          return {
+            name: file.originName,
+            path: file.path1,
+          };
+        }),
       };
     });
   }
@@ -75,13 +82,19 @@ export class FeedRepository extends Repository<FeedEntity> {
     const feeds = await this.createQueryBuilder('feed')
       .where('feed.user_id = :userId AND feed.deleted = false', { userId })
       .leftJoinAndSelect('feed.shop', 'shop')
-      .select(['feed', 'shop'])
+      .leftJoinAndSelect('feed.files', 'files')
+      .select(['feed', 'shop', 'files'])
       .orderBy('feed.created_at', 'DESC')
       .limit(10)
       .getMany();
     return feeds.map((feed) => {
       let shop = null;
+      let thumbnail = '';
 
+      if (feed.files && feed.files.length > 0) {
+        const firstFile = feed.files[0];
+        thumbnail = firstFile.path1;
+      }
       if (feed.shop) {
         shop = {
           title: feed.shop.title,
@@ -96,6 +109,7 @@ export class FeedRepository extends Repository<FeedEntity> {
         id: feed._id,
         content: feed.content,
         shop,
+        thumbnail,
         created_at: feed.created_at,
       };
     });

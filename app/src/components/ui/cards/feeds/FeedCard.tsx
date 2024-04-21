@@ -6,6 +6,7 @@ import Image from "next/image";
 import {FaComment, FaRegHeart} from "react-icons/fa6";
 import {dateConvert} from "@utils/date";
 import {FeedListsState} from "@interfaces/feeds/feed.lists";
+import {Carousel} from "@components/ui";
 
 export type FeedListType = FeedListsState;
 
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export const FeedCard = (props: Props): ReactElement => {
-  const {feedId, feedContent, feedCreatedDate, user, shop} = props.feedCard;
+  const {feedId, feedContent, feedCreatedDate, user, shop, files} = props.feedCard;
   return (
     <article className={styles.feedCardLayout}>
       <FlexBox gap={10} direction={"row"} justifyContent={"flex-start"}>
@@ -45,16 +46,7 @@ export const FeedCard = (props: Props): ReactElement => {
         </Typography>
       </div>
 
-      <div className={styles.imageBox}>
-        <Image
-          className={styles.images}
-          src={"/images/banner2.webp"}
-          alt={"thumbnail_banner"}
-          width={200}
-          height={300}
-        />
-      </div>
-
+      {files && files.length > 0 && (<Carousel items={files}/>)}
       {
         shop && Object.entries(shop) && (
           <div className={styles.storeInfoBox}>
@@ -67,7 +59,7 @@ export const FeedCard = (props: Props): ReactElement => {
           </div>
         )
       }
-
+      {}
       <FlexBox
         direction={"row"}
         justifyContent={"flex-start"}

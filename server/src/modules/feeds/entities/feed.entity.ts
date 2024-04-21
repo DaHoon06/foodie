@@ -7,10 +7,12 @@ import {
   Generated,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { ShopEntity } from '@modules/shop/entities/shop.entity';
+import { FileImageEntity } from '@modules/file/entities/file.image.entity';
 
 @Entity()
 export class FeedEntity extends BaseEntity {
@@ -28,6 +30,9 @@ export class FeedEntity extends BaseEntity {
   @ManyToOne(() => ShopEntity)
   @JoinColumn({ name: 'shop_id' })
   shop: ShopEntity;
+
+  @OneToMany(() => FileImageEntity, (files) => files.feed)
+  files: FileImageEntity[];
 
   @CreateDateColumn()
   created_at: Date;

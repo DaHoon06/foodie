@@ -41,11 +41,9 @@ export class FileImageEntity extends BaseEntity {
   @CreateDateColumn()
   created_at: Date;
 
-  @ManyToOne(() => FeedEntity)
-  @JoinColumn({ name: 'feed_id' })
+  @ManyToOne(() => FeedEntity, (feed) => feed.files)
   feed: FeedEntity;
 
   @ManyToOne(() => UserEntity)
-  @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 }

@@ -22,7 +22,11 @@ interface ThumbnailProps {
 }
 
 export const ThumbnailCard = (props: ThumbnailProps) => {
-  const {content, thumbnail, shop} = props.item;
+  const {
+    content,
+    thumbnail,
+    shop,
+  } = props.item;
   return (
     <article className={styles.thumbnailCardLayout}>
       <FlexBox gap={8} justifyContent={"flex-start"}>
@@ -30,11 +34,11 @@ export const ThumbnailCard = (props: ThumbnailProps) => {
           <div className={styles.thumbnailImageBox}>
             <Image
               className={styles.thumbnailImage}
-              src={"/images/banner2.webp"}
+              src={thumbnail}
               alt={"profile_image"}
               priority={true}
               width={120}
-              height={110}
+              height={96}
             />
           </div>
         )}
@@ -53,7 +57,7 @@ export const ThumbnailCard = (props: ThumbnailProps) => {
               direction={"row"}
               alignItems={"flex-start"}
               justifyContent={"flex-start"}
-              gap={10}>
+              gap={4}>
               <Typography fontWeight={300} color={"gray500"} fontSize={12}>
                 {shop.category}
               </Typography>
@@ -61,14 +65,13 @@ export const ThumbnailCard = (props: ThumbnailProps) => {
                 {shop.sido} / {shop.sigungu}
               </Typography>
             </FlexBox>
-
           </FlexBox>
         )}
 
         <div className={styles.thumbnailCardContentBox}>
           <Typography
             className={styles.thumbnailCardContent}
-            fontWeight={300}
+            fontWeight={400}
             color={"gray500"}
           >
             {content}

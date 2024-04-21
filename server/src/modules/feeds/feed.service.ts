@@ -78,7 +78,7 @@ export class FeedService {
   async findRecentlyFeed(creatorId: string) {
     const findUser: UserEntity =
       await this.userService.findOneUserByCreatorId(creatorId);
-    console.log(creatorId);
+
     if (!findUser)
       throw new NotFoundException('로그인 정보가 유효하지 않습니다.');
     return this.feedRepository.findRecentlyFeed(findUser._id);

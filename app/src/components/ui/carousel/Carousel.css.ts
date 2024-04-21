@@ -3,18 +3,23 @@ import {vars} from "@styles/theme.css";
 
 export const carouselLayout = style({
   width: '100%',
-  height: 280
+  height: 280,
+  backgroundColor: 'rgba(227,227,227,0.7)',
+
 })
 
 export const carouselContainer = style({
   width: '100%',
   height: '100%',
+
 })
 
 export const carouselBanner = style({
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  width: '100%',
+  height: '100%',
 })
 export const carouselBannerImage = style({
   display: 'block',
@@ -24,9 +29,13 @@ export const carouselBannerImage = style({
 })
 
 export const carouselCountWrapper = style({
+  position: 'absolute'
+});
+
+export const carouselCount = style({
   position: "relative",
-  bottom: 42,
-  left: '86%',
+  bottom: 40,
+  left: 290,
   zIndex: 1,
   backgroundColor: 'rgba(79,79,79,0.61)',
   width: 46,

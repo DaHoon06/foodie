@@ -22,8 +22,9 @@ export const thumbnailImageBox = style({
 export const thumbnailImage = style({
   display: "block",
   width: "100%",
-  height: "100%",
-  maxHeight: 110,
+  minHeight: "100%",
+  height: 96,
+  maxHeight: 96,
   objectFit: "cover",
   borderRadius: 8,
 });
@@ -43,6 +44,6 @@ export const thumbnailCardContent = style({
 });
 /**
  * white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+ overflow: hidden;
+ text-overflow: ellipsis;
  */
