@@ -18,6 +18,7 @@ const customJestConfig = {
     "^@styles/(.*)$": "<rootDir>/src/styles/$1",
     "^@public/(.*)$": "<rootDir>/public/$1",
     "^@images/(.*)$": "<rootDir>/public/images/$1",
+    "^@utils/(.*)$": "<rootDir>/src/utils/$1",
   },
   moduleDirectories: ["node_modules", "<rootDir>/"],
   verbose: true,

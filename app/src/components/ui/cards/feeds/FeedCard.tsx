@@ -4,9 +4,9 @@ import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {Typography} from "@components/common/typography/Typography";
 import Image from "next/image";
 import {FaComment, FaRegHeart} from "react-icons/fa6";
-import {dateConvert} from "@utils/date";
+import {formatDate} from "@utils/date";
 import {FeedListsState} from "@interfaces/feeds/feed.lists";
-import {Carousel} from "@components/ui";
+import {CarouselSwipe} from "@components/ui/carousel/CarouselSwipe";
 
 export type FeedListType = FeedListsState;
 
@@ -36,7 +36,7 @@ export const FeedCard = (props: Props): ReactElement => {
             {user.username}
           </Typography>
           <Typography as={"span"} color={"gray400"} fontSize={12}>
-            {dateConvert(feedCreatedDate)}
+            {formatDate(new Date(feedCreatedDate))}
           </Typography>
         </FlexBox>
       </FlexBox>
@@ -46,7 +46,7 @@ export const FeedCard = (props: Props): ReactElement => {
         </Typography>
       </div>
 
-      {files && files.length > 0 && (<Carousel items={files}/>)}
+      {files && files.length > 0 && (<CarouselSwipe items={files}/>)}
       {
         shop && Object.entries(shop) && (
           <div className={styles.storeInfoBox}>
@@ -59,7 +59,6 @@ export const FeedCard = (props: Props): ReactElement => {
           </div>
         )
       }
-      {}
       <FlexBox
         direction={"row"}
         justifyContent={"flex-start"}

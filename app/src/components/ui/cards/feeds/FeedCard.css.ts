@@ -1,9 +1,10 @@
-import { style } from "@vanilla-extract/css";
-import { vars } from "@styles/theme.css";
+import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
 export const feedCardLayout = style({
   backgroundColor: vars.colors.white000,
-  minHeight: 400,
+  // minHeight: 400,
+  height: 'auto',
   padding: "1em",
 });
 
