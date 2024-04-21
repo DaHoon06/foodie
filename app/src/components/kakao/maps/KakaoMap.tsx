@@ -2,32 +2,34 @@
 
 import {ReactElement, useEffect, useRef, useState} from "react";
 import {getMarkerApi} from "@apis/shop/shop.api";
-import {KakaoMarker} from "@interfaces/map/kakao";
 import {Skeleton} from "@components/ui/skeleton/Skeleton";
 import {useAuth} from "@providers/AuthProvider";
+import {prefetchingMarker} from "@services/queries/maps/useMarkerQuery";
+import {useQuery} from "@tanstack/react-query";
+import {queryKeys} from "@services/keys/queryKeys";
 
 const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
 
 export const KakaoMap = (): ReactElement => {
   const mapContainer = useRef();
   const [pending, setPending] = useState(true);
-  const [mapData, setMapData] = useState<KakaoMarker[]>([]);
   const {userId, isLogin} = useAuth();
 
-  const load = async () => {
-    try {
-      const data = await getMarkerApi(userId);
-      if (data) {
-        setMapData(data);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   useEffect(() => {
-    if (isLogin && pending) load();
-  }, [userId, isLogin]);
+    prefetchingMarker(userId);
+  }, []);
+
+  const {data: mapData, isLoading} = useQuery(
+    [queryKeys.maps.marker, userId],
+    () => getMarkerApi(userId),
+    {
+      staleTime: 60 * 1000,
+      cacheTime: 5 * 60 * 1000,
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      useErrorBoundary: false,
+    }
+  );
 
   useEffect(() => {
     setPending(true);
@@ -53,7 +55,7 @@ export const KakaoMap = (): ReactElement => {
           map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC); // 교통 정보 삭제
           const locPosition = new kakao.maps.LatLng(lat, lon);
 
-          if (mapData.length > 0) {
+          if (mapData && mapData.length > 0) {
             const positions = mapData.map((value: any) => {
               const {x, y, title, shopId, fullAddress, sido, sigungu, category} = value;
               return {
@@ -79,7 +81,7 @@ export const KakaoMap = (): ReactElement => {
               const content = '<div class="wrap">' +
                 '    <div class="info">' +
                 '        <div class="title">' +
-                `            <span class="title">${positions[i].title}</span>` +
+                `            <span >${positions[i].title}</span>` +
                 '        </div>' +
                 '        <div class="body">' +
                 '            <div class="desc">' +
@@ -141,7 +143,7 @@ export const KakaoMap = (): ReactElement => {
     //     }
     //   }
     // };
-  }, [mapData]);
+  }, [mapData, isLoading]);
 
   return (
     <>

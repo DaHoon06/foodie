@@ -1,6 +1,7 @@
+"use client";
+
 import {ReactElement, useEffect, useRef, useState} from "react";
 import useFeedStore from "@store/feedStore";
-import * as styles from "./KakaoAddressMap.css";
 import {AddressState} from "@interfaces/feeds/feed.post";
 import {Skeleton} from "@components/ui/skeleton/Skeleton";
 

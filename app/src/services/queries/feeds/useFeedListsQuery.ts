@@ -5,20 +5,20 @@ import {FeedFilter} from "@interfaces/feeds/feed.filter";
 import {useInfiniteQuery, useQuery} from "@tanstack/react-query";
 import {AxiosError} from "axios";
 
-export const prefetchingFeedLists = async (filter: FeedFilter, page: {pageParam: number}) => {
-  queryClient.prefetchQuery(
+export const prefetchingFeedLists = async (filter: FeedFilter, page: { pageParam: number }) => {
+  await queryClient.prefetchQuery(
     [queryKeys.feeds.lists, filter, page],
     () => feedListsApi(filter, page),
   );
 };
 
-export const useFeedListsQuery = async (filter: FeedFilter, page: {pageParam: number}) => {
+export const useFeedListsQuery = async (filter: FeedFilter, page: { pageParam: number }) => {
   return useQuery(
     [queryKeys.feeds.lists, filter, page],
     () => feedListsApi(filter, page).catch((e) => {
       const error = e as unknown as AxiosError;
       if (error.response && error.response.data) {
-        const { statusCode, message } = error.response.data as {
+        const {statusCode, message} = error.response.data as {
           statusCode: number;
           message: string;
         };
@@ -40,10 +40,10 @@ export const useFeedListsQuery = async (filter: FeedFilter, page: {pageParam: nu
 export const useFeedListsInfinityScroll = (filter: FeedFilter) => {
   return useInfiniteQuery(
     [queryKeys.feeds.lists, filter],
-    ({ pageParam = 1 }) => feedListsApi(filter, { pageParam }).catch(e => {
+    ({pageParam = 1}) => feedListsApi(filter, {pageParam}).catch(e => {
       const error = e as unknown as AxiosError;
       if (error.response && error.response.data) {
-        const { statusCode, message } = error.response.data as {
+        const {statusCode, message} = error.response.data as {
           statusCode: number;
           message: string;
         };
