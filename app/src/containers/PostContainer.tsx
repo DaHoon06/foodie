@@ -95,12 +95,11 @@ export const FeedPostContainer = (): ReactElement => {
       };
       const {data} = await feedSubmitApi(body);
       if (data.result) {
-        //todo 만약 파일이 있으면?
         if (postForm.files.length > 0) {
           const {_id} = data.data;
           await fileUpload(_id);
         }
-        // await router.push("/");
+        await router.push("/");
       }
     } catch (e) {
       console.log(e);
