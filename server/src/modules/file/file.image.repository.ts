@@ -8,5 +8,8 @@ export class FileImageRepository extends Repository<FileImageEntity> {
     super(FileImageEntity, dataSource.createEntityManager());
   }
 
-  async createFileData() {}
+  async createFileData(createDto) {
+    const fileEntity: FileImageEntity = FileImageEntity.create(createDto);
+    return this.create(fileEntity).save();
+  }
 }

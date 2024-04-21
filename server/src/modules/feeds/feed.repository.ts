@@ -10,6 +10,13 @@ export class FeedRepository extends Repository<FeedEntity> {
     super(FeedEntity, dataSource.createEntityManager());
   }
 
+  async findOneFeedAndUser(_id: string) {
+    return this.createQueryBuilder('feed')
+      .where('feed._id = :_id', { _id })
+      .leftJoinAndSelect('feed.user', 'user')
+      .getOne();
+  }
+
   async findManyFeedLists(region: string, page: number) {
     let queryBuilder = this.createQueryBuilder('feed')
       .where('feed.deleted = false')

@@ -68,7 +68,6 @@ export const FeedCard = (props: Props): ReactElement => {
         )
       }
 
-
       <FlexBox
         direction={"row"}
         justifyContent={"flex-start"}

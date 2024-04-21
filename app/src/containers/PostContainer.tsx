@@ -93,7 +93,6 @@ export const FeedPostContainer = (): ReactElement => {
         user,
         ...postForm,
       };
-      await fileUpload("postId");
       const {data} = await feedSubmitApi(body);
       if (data.result) {
         //todo 만약 파일이 있으면?
@@ -101,7 +100,7 @@ export const FeedPostContainer = (): ReactElement => {
           const {_id} = data.data;
           await fileUpload(_id);
         }
-        await router.push("/");
+        // await router.push("/");
       }
     } catch (e) {
       console.log(e);

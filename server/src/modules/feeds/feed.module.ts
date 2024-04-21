@@ -9,6 +9,6 @@ import { ShopModule } from '@modules/shop/shop.module';
   imports: [UserModule, ShopModule],
   controllers: [FeedController],
   providers: [FeedService, FeedRepository],
-  exports: [],
+  exports: [FeedService],
 })
 export class FeedModule {}

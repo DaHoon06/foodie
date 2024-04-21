@@ -66,6 +66,32 @@ export class FeedService {
     }
   }
 
+  async findManyFeedLists(filters: FilterDto) {
+    const { region, page: filterPage } = filters;
+    let page = +filterPage;
+    if (isNaN(page)) page = 1;
+    return this.feedRepository.findManyFeedLists(region, page);
+  }
+
+  // 최신 피드
+
+  async findRecentlyFeed(creatorId: string) {
+    const findUser: UserEntity =
+      await this.userService.findOneUserByCreatorId(creatorId);
+    console.log(creatorId);
+    if (!findUser)
+      throw new NotFoundException('로그인 정보가 유효하지 않습니다.');
+    return this.feedRepository.findRecentlyFeed(findUser._id);
+  }
+
+  // async findOneById(_id: string) {
+  //   return this.feedRepository.findOneBy({ _id });
+  // }
+
+  async findOneById(_id: string) {
+    return this.feedRepository.findOneFeedAndUser(_id);
+  }
+
   private addressItemCheck(item: ShopDto): boolean {
     for (const key in item) {
       if (typeof item[key] === 'object') {
@@ -77,24 +103,5 @@ export class FeedService {
       }
     }
     return true;
-  }
-
-  // 최신 피드
-  //todo 필터링
-  async findManyFeedLists(filters: FilterDto) {
-    const { region, page: filterPage } = filters;
-    let page = +filterPage;
-    if (isNaN(page)) page = 1;
-    //todo 페이징 처리
-    return this.feedRepository.findManyFeedLists(region, page);
-  }
-
-  async findRecentlyFeed(creatorId: string) {
-    const findUser: UserEntity =
-      await this.userService.findOneUserByCreatorId(creatorId);
-    console.log(creatorId);
-    if (!findUser)
-      throw new NotFoundException('로그인 정보가 유효하지 않습니다.');
-    return this.feedRepository.findRecentlyFeed(findUser._id);
   }
 }
