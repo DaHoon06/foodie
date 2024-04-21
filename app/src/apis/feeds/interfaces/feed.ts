@@ -17,8 +17,8 @@ export interface FeedListShop {
 }
 
 export interface FeedThumbnail {
-  name: string;
-  path: string;
+  originName: string;
+  path1: string;
 }
 
 /**@description 전체 피드 리스트 (최신순)*/

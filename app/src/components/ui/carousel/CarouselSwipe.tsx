@@ -9,15 +9,14 @@ import {useState} from "react";
 import {SwiperProps} from "swiper/swiper-react";
 
 interface CarouselItems {
-  name: string;
-  path: string;
+  originName: string;
+  path1: string;
 }
 
 interface Props {
   items: CarouselItems[];
   options?: SwiperProps;
 }
-
 
 export const CarouselSwipe = (props: Props) => {
   const {items, options} = props;
@@ -32,7 +31,8 @@ export const CarouselSwipe = (props: Props) => {
       <Swiper
         {...options}
         onSlideChange={(swiper) => onChangeCarousel(swiper)}
-        loop={true}
+        slidesPerView={items.length > 0 ? items.length : 1}
+        loop={items.length > 1}
         className={styles.carouselContainer}
       >
         {items.map(item => {
@@ -41,8 +41,9 @@ export const CarouselSwipe = (props: Props) => {
               <div className={styles.carouselBanner}>
                 <Image
                   className={styles.carouselBannerImage}
-                  src={item.path}
-                  alt={item.name}
+                  src={item.path1}
+                  alt={item.originName}
+                  priority={true}
                   width={300}
                   height={200}/>
               </div>

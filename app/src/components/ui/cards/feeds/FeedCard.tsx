@@ -7,6 +7,7 @@ import {FaComment, FaRegHeart} from "react-icons/fa6";
 import {formatDate} from "@utils/date";
 import {FeedListsState} from "@interfaces/feeds/feed.lists";
 import {CarouselSwipe} from "@components/ui/carousel/CarouselSwipe";
+import {useRouter} from "next/router";
 
 export type FeedListType = FeedListsState;
 
@@ -16,9 +17,19 @@ interface Props {
 
 export const FeedCard = (props: Props): ReactElement => {
   const {feedId, feedContent, feedCreatedDate, user, shop, files} = props.feedCard;
+  const router = useRouter();
+
+  const handleClickFeedDetail = async () => {
+    try {
+      router.push(`/feeds/${feedId}`)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <article className={styles.feedCardLayout}>
-      <FlexBox gap={10} direction={"row"} justifyContent={"flex-start"}>
+      <FlexBox gap={10} direction={"row"} justifyContent={"flex-start"} onClick={handleClickFeedDetail}>
         <div className={styles.profileBox}>
           <Image
             src={"/images/dh.png"}

@@ -35,4 +35,9 @@ export class FeedController {
   async findRecentlyFeed(@Param('creatorId') creatorId: string) {
     return this.feedService.findRecentlyFeed(creatorId);
   }
+
+  @Get('/detail/:feedId')
+  async feedDetail(@Param('feedId') feedId: string) {
+    return this.feedService.findOneFeedByFeedId(feedId);
+  }
 }

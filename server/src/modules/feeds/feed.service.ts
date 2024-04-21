@@ -84,12 +84,12 @@ export class FeedService {
     return this.feedRepository.findRecentlyFeed(findUser._id);
   }
 
-  // async findOneById(_id: string) {
-  //   return this.feedRepository.findOneBy({ _id });
-  // }
-
   async findOneById(_id: string) {
     return this.feedRepository.findOneFeedAndUser(_id);
+  }
+
+  async findOneFeedByFeedId(_id: string) {
+    return this.feedRepository.findOneFeedByFeedId(_id);
   }
 
   private addressItemCheck(item: ShopDto): boolean {

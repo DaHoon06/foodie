@@ -17,13 +17,23 @@ export class FeedRepository extends Repository<FeedEntity> {
       .getOne();
   }
 
+  async findOneFeedByFeedId(_id: string) {
+    return this.createQueryBuilder('feed')
+      .where('feed._id = :_id', { _id })
+      .leftJoinAndSelect('feed.shop', 'shop')
+      .leftJoinAndSelect('feed.user', 'user')
+      .leftJoinAndSelect('feed.files', 'files')
+      .select(['feed', 'shop', 'user', 'files.originName', 'files.path1'])
+      .getOne();
+  }
+
   async findManyFeedLists(region: string, page: number) {
     let queryBuilder = this.createQueryBuilder('feed')
       .where('feed.deleted = false')
       .leftJoinAndSelect('feed.shop', 'shop')
       .leftJoinAndSelect('feed.user', 'user')
-      .leftJoinAndSelect('feed.files', 'files');
-
+      .leftJoinAndSelect('feed.files', 'files')
+      .select(['feed', 'shop', 'user', 'files.originName', 'files.path1']);
     if (region !== '전체')
       queryBuilder = queryBuilder.andWhere('shop.sido = :sido', {
         sido: region,
@@ -68,12 +78,7 @@ export class FeedRepository extends Repository<FeedEntity> {
         feedCreatedDate: list.created_at,
         user,
         shop,
-        files: list.files.map((file) => {
-          return {
-            name: file.originName,
-            path: file.path1,
-          };
-        }),
+        files: list.files,
       };
     });
   }

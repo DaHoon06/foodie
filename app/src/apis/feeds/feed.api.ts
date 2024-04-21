@@ -29,3 +29,9 @@ export const feedListsApi = async (filter: FeedFilter, {pageParam}: {
   const {data} = await axiosInstance.get<AxiosRequestConfig, AxiosResponse<AxiosResponseData<FeedListsStateApi[]>>>(url)
   return axiosResponseData<FeedListsStateApi[]>(data);
 }
+
+export const feedDetailApi = async (feedId: string): Promise<FeedListsStateApi> => {
+  const url = `${DOMAIN}/detail/${feedId}`;
+  const {data} = await axiosInstance.get<AxiosRequestConfig, AxiosResponse<AxiosResponseData<FeedListsStateApi>>>(url)
+  return axiosResponseData<FeedListsStateApi>(data)
+}
