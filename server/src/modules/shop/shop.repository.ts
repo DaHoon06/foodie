@@ -9,19 +9,21 @@ export class ShopRepository extends Repository<ShopEntity> {
   }
 
   async findManyShopCoordinate(userId: string) {
-    const shops = await this.createQueryBuilder('shop')
+    return this.createQueryBuilder('shop')
       .where('shop.user_id = :userId', { userId })
       .leftJoinAndSelect('shop.user', 'user')
-      .select(['shop', 'user'])
+      .select(['shop'])
       .getMany();
-    return shops.map((shop) => {
-      return {
-        shopId: shop._id,
-        title: shop.title,
-        x: shop.x,
-        y: shop.y,
-        createDate: shop.created_at,
-      };
-    });
+    // return shops.map((shop) => {
+    //   return {
+    //     shopId: shop._id,
+    //     title: shop.title,
+    //     x: shop.x,
+    //     y: shop.y,
+    //     fullAddress: shop.fullAddress,
+    //
+    //     createDate: shop.created_at,
+    //   };
+    // });
   }
 }

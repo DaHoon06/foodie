@@ -50,17 +50,18 @@ export const KakaoMap = (): ReactElement => {
             level: 7,
           };
           const map = new kakao.maps.Map(mapElement, options);
-          // map.setMinLevel(7);
-          // map.setMaxLevel(7);
           map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC); // 교통 정보 삭제
           const locPosition = new kakao.maps.LatLng(lat, lon);
 
           if (mapData.length > 0) {
             const positions = mapData.map((value: any) => {
-              const {x, y, title, shopId} = value;
+              const {x, y, title, shopId, fullAddress, sido, sigungu, category} = value;
               return {
                 title,
                 shopId,
+                fullAddress,
+                sido,
+                sigungu, category,
                 latlng: new kakao.maps.LatLng(+y, +x),
               };
             });
@@ -82,14 +83,12 @@ export const KakaoMap = (): ReactElement => {
                 '        </div>' +
                 '        <div class="body">' +
                 '            <div class="desc">' +
-                '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' +
-                '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
-                '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
+                `                <div class="ellipsis">${positions[i].fullAddress}</div>` +
+                `                <div class="jibun ellipsis">${positions[i].category} / ${positions[i].sido} ${positions[i].sigungu}</div>` +
                 '            </div>' +
                 '        </div>' +
                 '    </div>' +
                 '</div>';
-
 
               const marker = new kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도
@@ -103,8 +102,6 @@ export const KakaoMap = (): ReactElement => {
                 content: content,
                 map: map,
                 position: position,
-                xAnchor: 0.3,
-                yAnchor: 0.91
               });
 
               overlay.setMap(null);
