@@ -1,5 +1,5 @@
-import { style } from "@vanilla-extract/css";
-import { vars } from "@styles/theme.css";
+import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
 export const appLayout = style({
   width: "100%",
@@ -33,5 +33,9 @@ export const appMainContainer = style({
   right: 0,
   bottom: 0,
   height: "100%",
+  '@media': {
+    'screen and (max-width: 767px)': {
+      overflowX: 'hidden'
+    }
+  }
 });
-// height: "calc(100% - 162px)",

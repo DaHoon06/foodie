@@ -112,8 +112,9 @@ section {
 html, body {
   // 모바일에서 스크롤 표기 제거
   @media screen and (max-width: 767px) {
-    -ms-overflow-style: none;
     scrollbar-width: none;
+    -ms-overflow-style: none;
+
     &::-webkit-scrollbar {
       display: none;
     }

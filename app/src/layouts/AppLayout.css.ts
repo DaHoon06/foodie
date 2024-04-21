@@ -11,7 +11,7 @@ export const appLayout = style({
   paddingLeft: "0 !important",
   paddingRight: "0 !important",
   justifyContent: "center",
-  backgroundColor: vars.colors.backgroundColor
+  backgroundColor: vars.colors.backgroundColor,
 });
 
 export const appContainer = style({
@@ -32,4 +32,10 @@ export const appMainContainer = style({
   right: 0,
   bottom: 0,
   height: "calc(100% - 162px)",
+
+  '@media': {
+    'screen and (max-width: 767px)': {
+      overflowX: 'hidden'
+    }
+  }
 })
