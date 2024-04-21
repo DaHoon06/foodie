@@ -20,7 +20,6 @@ export const KakaoMap = (): ReactElement => {
       if (data) {
         setMapData(data);
       }
-
     } catch (e) {
       console.log(e);
     }
@@ -51,8 +50,8 @@ export const KakaoMap = (): ReactElement => {
             level: 7,
           };
           const map = new kakao.maps.Map(mapElement, options);
-          map.setMinLevel(7);
-          map.setMaxLevel(7);
+          // map.setMinLevel(7);
+          // map.setMaxLevel(7);
           map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC); // 교통 정보 삭제
           const locPosition = new kakao.maps.LatLng(lat, lon);
 
@@ -76,24 +75,21 @@ export const KakaoMap = (): ReactElement => {
                 imageSize
               );
 
-              // var infowindow = new kakao.maps.InfoWindow({
-              //   content: `<div class="customoverlay">${positions[i].title}</div>`, // 인포윈도우에 표시할 내용
-              // });
-
-              var content = '<div class="overlay_container">' +
+              const content = '<div class="wrap">' +
                 '    <div class="info">' +
-                '        <div class="title_wrapper">' +
+                '        <div class="title">' +
                 `            <span class="title">${positions[i].title}</span>` +
                 '        </div>' +
-                // '        <div class="content_wrapper">' +
-                // '            <div class="desc">' +
-                // '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' +
-                // '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
-                // '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
-                // '            </div>' +
-                // '        </div>' +
+                '        <div class="body">' +
+                '            <div class="desc">' +
+                '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' +
+                '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' +
+                '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' +
+                '            </div>' +
+                '        </div>' +
                 '    </div>' +
                 '</div>';
+
 
               const marker = new kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도
@@ -102,7 +98,7 @@ export const KakaoMap = (): ReactElement => {
                 image: markerImage, // 마커 이미지
               });
               const {La, Ma} = marker.getPosition(2);
-              const position = new kakao.maps.LatLng(Ma + 0.006, La - 0.002);
+              const position = new kakao.maps.LatLng(Ma, La);
               const overlay = new kakao.maps.CustomOverlay({
                 content: content,
                 map: map,
