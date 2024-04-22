@@ -33,9 +33,4 @@ export const appMainContainer = style({
   right: 0,
   bottom: 0,
   height: "calc(100% - 162px)",
-  '@media': {
-    'screen and (max-width: 767px)': {
-      overflowX: 'hidden'
-    }
-  }
 })
