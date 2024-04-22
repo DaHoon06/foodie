@@ -33,7 +33,7 @@ export class FeedRepository extends Repository<FeedEntity> {
       .leftJoinAndSelect('feed.shop', 'shop')
       .leftJoinAndSelect('feed.user', 'user')
       .leftJoinAndSelect('feed.files', 'files')
-      .select(['feed', 'shop', 'user', 'files.originName', 'files.path1']);
+      .select(['feed', 'shop', 'user', 'files']);
     if (region !== '전체')
       queryBuilder = queryBuilder.andWhere('shop.sido = :sido', {
         sido: region,
@@ -71,7 +71,6 @@ export class FeedRepository extends Repository<FeedEntity> {
           },
         };
       }
-
       return {
         feedId: list._id,
         feedContent: list.content,

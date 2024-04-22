@@ -31,7 +31,7 @@ export const CarouselSwipe = (props: Props) => {
       <Swiper
         {...options}
         onSlideChange={(swiper) => onChangeCarousel(swiper)}
-        slidesPerView={items.length > 0 ? items.length : 1}
+        slidesPerView={1}
         loop={items.length > 1}
         className={styles.carouselContainer}
       >
