@@ -5,14 +5,12 @@ export const carouselLayout = style({
   width: '100%',
   height: 280,
   backgroundColor: 'rgba(227,227,227,0.7)',
-
-})
+});
 
 export const carouselContainer = style({
   width: '100%',
   height: '100%',
-
-})
+});
 
 export const carouselBanner = style({
   display: 'flex',
@@ -20,17 +18,16 @@ export const carouselBanner = style({
   alignItems: 'center',
   width: '100%',
   height: '100%',
-})
+});
 export const carouselBannerImage = style({
   display: 'block',
   width: '100%',
   height: '100%',
   objectFit: 'cover',
   zIndex: 1
-})
+});
 
 export const carouselCountWrapper = style({
-  position: 'absolute',
   width: '100%',
   display: 'flex',
   justifyContent: 'flex-end'
@@ -38,8 +35,8 @@ export const carouselCountWrapper = style({
 
 export const carouselCount = style({
   position: "relative",
-  bottom: 40,
-  right: 40,
+  bottom: 38,
+  right: 4,
   zIndex: 1,
   backgroundColor: 'rgba(79,79,79,0.61)',
   width: 46,
