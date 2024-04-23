@@ -25,10 +25,25 @@ export class FeedRepository extends Repository<FeedEntity> {
       .leftJoinAndSelect('feed.files', 'files')
       .select(['feed', 'shop', 'user', 'files.originName', 'files.path1'])
       .getOne();
+    let shop = null;
+    if (data.shop) {
+      shop = {
+        shopId: data.shop._id,
+        shopName: data.shop.title,
+        shopDescription: data.shop.description,
+        category: data.shop.category,
+        shopAddress: {
+          sido: data.shop.sido,
+          sigungu: data.shop.sigungu,
+          fullAddress: data.shop.fullAddress,
+        },
+      };
+    }
     return {
       ...data,
       feedContent: data.content,
       feedCreatedDate: data.created_at,
+      shop,
     };
   }
 
