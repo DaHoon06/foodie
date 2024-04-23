@@ -8,6 +8,8 @@ export const feedLocationLayout = style({
   paddingLeft: "2em",
   paddingTop: "2em",
   paddingBottom: "4em",
+  maxHeight: 630,
+  overflowY: 'auto'
 });
 
 export const addressSearchTab = style({
