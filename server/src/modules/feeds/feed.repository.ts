@@ -18,13 +18,18 @@ export class FeedRepository extends Repository<FeedEntity> {
   }
 
   async findOneFeedByFeedId(_id: string) {
-    return this.createQueryBuilder('feed')
+    const data = await this.createQueryBuilder('feed')
       .where('feed._id = :_id', { _id })
       .leftJoinAndSelect('feed.shop', 'shop')
       .leftJoinAndSelect('feed.user', 'user')
       .leftJoinAndSelect('feed.files', 'files')
       .select(['feed', 'shop', 'user', 'files.originName', 'files.path1'])
       .getOne();
+    return {
+      ...data,
+      feedContent: data.content,
+      feedCreatedDate: data.created_at,
+    };
   }
 
   async findManyFeedLists(region: string, page: number) {

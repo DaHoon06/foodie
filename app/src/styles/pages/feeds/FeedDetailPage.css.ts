@@ -8,15 +8,24 @@ export const feedDetailTitle = style({
   top: 0,
   left: 0,
   borderBottom: "1px solid #dddddd",
-  padding: '0 20px'
+  padding: '0 20px',
+  zIndex: 100
 });
 
-export const feedListsLayout = style({
-  width: "100%",
-  height: "100%",
-  backgroundColor: vars.colors.backgroundColor,
-  display: "flex",
-  flexDirection: "column",
-  gap: 8,
-  padding: 0,
+export const commentLayout = style({
+  backgroundColor: vars.colors.white000,
+  width: '100%',
+  position: "absolute",
+  bottom: 0,
 });
+
+export const commentBoxContainer = style({
+  height: '100%',
+  position: 'relative',
+  minHeight: 90,
+  display: "flex",
+  alignItems: 'center',
+  justifyContent: "center",
+  gap: 10,
+  padding: '0 2em'
+})

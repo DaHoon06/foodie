@@ -3,7 +3,7 @@ import {vars} from "@styles/theme.css";
 
 export const feedCardLayout = style({
   backgroundColor: vars.colors.white000,
-  // minHeight: 400,
+  width: '100%',
   height: 'auto',
   padding: "1em",
 });
