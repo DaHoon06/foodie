@@ -143,7 +143,7 @@ export const KakaoMap = (): ReactElement => {
     //     }
     //   }
     // };
-  }, [mapData, isLoading]);
+  }, [mapContainer]);
 
   return (
     <>
