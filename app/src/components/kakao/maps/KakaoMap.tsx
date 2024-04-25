@@ -33,116 +33,98 @@ export const KakaoMap = (): ReactElement => {
 
   useEffect(() => {
     setPending(true);
-    const script = document.createElement("script");
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&autoload=false`;
-    script.type = "text/javascript";
-    script.async = true;
-    document.head.appendChild(script);
+    const kakao: any = (window as any).kakao;
+    kakao.maps.load(() => {
+      const mapElement = document.getElementById("map");
 
-    script.onload = () => {
-      const kakao: any = (window as any).kakao;
-      kakao.maps.load(() => {
-        const mapElement = document.getElementById("map");
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude, // 위도
+          lon = position.coords.longitude; // 경도
+        const options = {
+          center: new kakao.maps.LatLng(lat, lon),
+          level: 7,
+        };
+        const map = new kakao.maps.Map(mapElement, options);
+        map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC); // 교통 정보 삭제
+        const locPosition = new kakao.maps.LatLng(lat, lon);
 
-        navigator.geolocation.getCurrentPosition(function (position) {
-          const lat = position.coords.latitude, // 위도
-            lon = position.coords.longitude; // 경도
-          const options = {
-            center: new kakao.maps.LatLng(lat, lon),
-            level: 7,
-          };
-          const map = new kakao.maps.Map(mapElement, options);
-          map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC); // 교통 정보 삭제
-          const locPosition = new kakao.maps.LatLng(lat, lon);
+        if (mapData && mapData.length > 0) {
+          const positions = mapData.map((value: any) => {
+            const {x, y, title, shopId, fullAddress, sido, sigungu, category} = value;
+            return {
+              title,
+              shopId,
+              fullAddress,
+              sido,
+              sigungu, category,
+              latlng: new kakao.maps.LatLng(+y, +x),
+            };
+          });
 
-          if (mapData && mapData.length > 0) {
-            const positions = mapData.map((value: any) => {
-              const {x, y, title, shopId, fullAddress, sido, sigungu, category} = value;
-              return {
-                title,
-                shopId,
-                fullAddress,
-                sido,
-                sigungu, category,
-                latlng: new kakao.maps.LatLng(+y, +x),
-              };
+          const imageSrc =
+            "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+          for (let i = 0; i < positions.length; i++) {
+            const imageSize = new kakao.maps.Size(24, 35);
+            const markerImage = new kakao.maps.MarkerImage(
+              imageSrc,
+              imageSize
+            );
+
+            const content = '<div class="wrap">' +
+              '    <div class="info">' +
+              '        <div class="title">' +
+              `            <span >${positions[i].title}</span>` +
+              '        </div>' +
+              '        <div class="body">' +
+              '            <div class="desc">' +
+              `                <div class="ellipsis">${positions[i].fullAddress}</div>` +
+              `                <div class="jibun ellipsis">${positions[i].category} / ${positions[i].sido} ${positions[i].sigungu}</div>` +
+              '            </div>' +
+              '        </div>' +
+              '    </div>' +
+              '</div>';
+
+            const marker = new kakao.maps.Marker({
+              map: map, // 마커를 표시할 지도
+              position: positions[i].latlng, // 마커를 표시할 위치
+              title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+              image: markerImage, // 마커 이미지
+            });
+            const {La, Ma} = marker.getPosition();
+            const position = new kakao.maps.LatLng(Ma, La);
+            const overlay = new kakao.maps.CustomOverlay({
+              content: content,
+              map: map,
+              position: position,
             });
 
-            const imageSrc =
-              "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+            overlay.setMap(null);
 
-            for (let i = 0; i < positions.length; i++) {
-              const imageSize = new kakao.maps.Size(24, 35);
-              const markerImage = new kakao.maps.MarkerImage(
-                imageSrc,
-                imageSize
-              );
+            kakao.maps.event.addListener(
+              marker,
+              "click",
+              makeClickListener(map, overlay)
+            );
 
-              const content = '<div class="wrap">' +
-                '    <div class="info">' +
-                '        <div class="title">' +
-                `            <span >${positions[i].title}</span>` +
-                '        </div>' +
-                '        <div class="body">' +
-                '            <div class="desc">' +
-                `                <div class="ellipsis">${positions[i].fullAddress}</div>` +
-                `                <div class="jibun ellipsis">${positions[i].category} / ${positions[i].sido} ${positions[i].sigungu}</div>` +
-                '            </div>' +
-                '        </div>' +
-                '    </div>' +
-                '</div>';
+            let isOpen = false;
 
-              const marker = new kakao.maps.Marker({
-                map: map, // 마커를 표시할 지도
-                position: positions[i].latlng, // 마커를 표시할 위치
-                title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                image: markerImage, // 마커 이미지
-              });
-              const {La, Ma} = marker.getPosition();
-              const position = new kakao.maps.LatLng(Ma, La);
-              const overlay = new kakao.maps.CustomOverlay({
-                content: content,
-                map: map,
-                position: position,
-              });
-
-              overlay.setMap(null);
-
-              kakao.maps.event.addListener(
-                marker,
-                "click",
-                makeClickListener(map, overlay)
-              );
-
-              let isOpen = false;
-
-              function makeClickListener(
-                map: any,
-                overlay: any
-              ) {
-                return function () {
-                  isOpen = !isOpen;
-                  if (isOpen) overlay.setMap(map);
-                  else overlay.setMap(null);
-                };
-              }
+            function makeClickListener(
+              map: any,
+              overlay: any
+            ) {
+              return function () {
+                isOpen = !isOpen;
+                if (isOpen) overlay.setMap(map);
+                else overlay.setMap(null);
+              };
             }
           }
-          setPending(false);
-          map.setCenter(locPosition);
-        });
-      });
-    };
-
-    return () => {
-      const scripts = document.head.getElementsByTagName("script");
-      for (let i = 0; i < scripts.length; i++) {
-        const script = scripts[i];
-        if (script.src && script.src.includes("dapi.kakao.com")) {
-          script.parentNode.removeChild(script);
         }
-      }
-    };
+        setPending(false);
+        map.setCenter(locPosition);
+      });
+    });
   }, [mapData, isLoading]);
 
   return (
