@@ -19,7 +19,6 @@ export class UserService {
     const userEntity = UserEntity.create({
       username: user.username,
       creatorId: user.id,
-      hashname: 'hash',
       description: '',
     });
     return this.userRepository.createUser(userEntity);

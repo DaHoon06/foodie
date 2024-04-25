@@ -5,13 +5,11 @@ import {
   Entity,
   Generated,
   PrimaryColumn,
-  Unique,
   UpdateDateColumn,
 } from 'typeorm';
 import { UserType } from '../enum/user.type.enum';
 
 @Entity()
-@Unique(['hashname'])
 export class UserEntity extends BaseEntity {
   @PrimaryColumn({ type: 'uuid' })
   @Generated('uuid')
@@ -22,9 +20,6 @@ export class UserEntity extends BaseEntity {
 
   @Column()
   username: string;
-
-  @Column()
-  hashname: string;
 
   @Column()
   description: string;
