@@ -142,15 +142,15 @@ export const KakaoAddressMap = (): ReactElement => {
     });
     // };
 
-    return () => {
-      const scripts = document.head.getElementsByTagName("script");
-      for (let i = 0; i < scripts.length; i++) {
-        const script = scripts[i];
-        if (script.src && script.src.includes("dapi.kakao.com")) {
-          script.parentNode.removeChild(script);
-        }
-      }
-    };
+    // return () => {
+    //   const scripts = document.head.getElementsByTagName("script");
+    //   for (let i = 0; i < scripts.length; i++) {
+    //     const script = scripts[i];
+    //     if (script.src && script.src.includes("dapi.kakao.com")) {
+    //       script.parentNode.removeChild(script);
+    //     }
+    //   }
+    // };
   }, [mapContainer]);
 
   return (
