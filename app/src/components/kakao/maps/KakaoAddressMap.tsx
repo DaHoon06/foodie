@@ -28,6 +28,13 @@ export const KakaoAddressMap = (): ReactElement => {
 
   useEffect(() => {
     setPending(true);
+    // const script = document.createElement("script");
+    // script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&autoload=true&libraries=services`;
+    // script.type = "text/javascript";
+    // script.async = true;
+    // document.head.appendChild(script);
+    //
+    // script.onload = () => {
     const kakao: any = (window as any).kakao;
     kakao.maps.load(() => {
       const mapElement = document.getElementById("map");
@@ -133,6 +140,7 @@ export const KakaoAddressMap = (): ReactElement => {
         }
       });
     });
+    // };
 
     return () => {
       const scripts = document.head.getElementsByTagName("script");

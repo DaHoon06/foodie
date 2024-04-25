@@ -33,6 +33,13 @@ export const KakaoMap = (): ReactElement => {
 
   useEffect(() => {
     setPending(true);
+    // const script = document.createElement("script");
+    // script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&autoload=false`;
+    // script.type = "text/javascript";
+    // script.async = true;
+    // document.head.appendChild(script);
+    //
+    // script.onload = () => {
     const kakao: any = (window as any).kakao;
     kakao.maps.load(() => {
       const mapElement = document.getElementById("map");
@@ -125,6 +132,17 @@ export const KakaoMap = (): ReactElement => {
         map.setCenter(locPosition);
       });
     });
+    // };
+
+    // return () => {
+    //   const scripts = document.head.getElementsByTagName("script");
+    //   for (let i = 0; i < scripts.length; i++) {
+    //     const script = scripts[i];
+    //     if (script.src && script.src.includes("dapi.kakao.com")) {
+    //       script.parentNode.removeChild(script);
+    //     }
+    //   }
+    // };
   }, [mapData, isLoading]);
 
   return (
