@@ -1,17 +1,6 @@
 import {style} from "@vanilla-extract/css";
 import {vars} from "@styles/theme.css";
 
-export const feedDetailTitle = style({
-  width: "100%",
-  backgroundColor: vars.colors.white000,
-  position: "sticky",
-  top: 0,
-  left: 0,
-  borderBottom: "1px solid #dddddd",
-  padding: '0 20px',
-  zIndex: 100
-});
-
 export const commentLayout = style({
   backgroundColor: vars.colors.white000,
   width: '100%',

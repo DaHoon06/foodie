@@ -6,25 +6,26 @@ import {
   RiStarSLine,
   RiUserLine,
 } from "react-icons/ri";
-import { useRouter } from "next/router";
-import { FontColorType } from "@components/common/typography/Typography.type";
-import { useEffect, useState } from "react";
+import {useRouter} from "next/router";
+import {FontColorType} from "@components/common/typography/Typography.type";
+import {useEffect, useState} from "react";
 import useModalStore from "@store/modalStore";
-import { useSession } from "next-auth/react";
+import {useSession} from "next-auth/react";
+import {CiBoxList} from "react-icons/ci";
 
 const link = {
-  home: { label: "홈", to: "/" },
-  feeds: { label: "소식", to: "/feeds" },
-  posts: { label: "글작성", to: "/feeds/post" },
-  likes: { label: "픽", to: "/pick" },
-  management: { label: "마이", to: "/management" },
+  home: {label: "홈", to: "/"},
+  feeds: {label: "소식", to: "/feeds"},
+  posts: {label: "글작성", to: "/feeds/post"},
+  lists: {label: "내가 작성한 게시글", to: "/feeds/lists"},
+  management: {label: "마이", to: "/management"},
 };
 
 export const NavBarBottom = () => {
   const router = useRouter();
   const [currentPath, setCurrentPath] = useState(router.pathname);
-  const { setIsOpen, setModalType } = useModalStore();
-  const { data: session } = useSession();
+  const {setIsOpen, setModalType} = useModalStore();
+  const {data: session} = useSession();
 
   useEffect(() => {
     const path = router.pathname;
@@ -67,15 +68,15 @@ export const NavBarBottom = () => {
             className={styles.navBarBottomItems}
             onClick={() => onClickHandlerMenu(link.home.to)}
           >
-            <RiHome5Line size={22} color={iconActive(link.home.to)} />
+            <RiHome5Line size={22} color={iconActive(link.home.to)}/>
           </button>
           <button
             aria-label="pick-button"
             type={"button"}
             className={styles.navBarBottomItems}
-            onClick={() => onClickHandlerMenu(link.likes.to)}
+            onClick={() => onClickHandlerMenu(link.lists.to)}
           >
-            <RiStarSLine size={22} color={iconActive(link.likes.to)} />
+            <CiBoxList size={22} color={iconActive(link.lists.to)}/>
           </button>
         </li>
         <li className={styles.navBarCenterBox}>
@@ -85,7 +86,7 @@ export const NavBarBottom = () => {
             className={styles.navBarCenterButton}
             onClick={() => onClickHandlerMenu(link.posts.to)}
           >
-            <RiPencilFill size={22} color={"#fff"} />
+            <RiPencilFill size={22} color={"#fff"}/>
           </button>
         </li>
         <li className={styles.navBarRightBox}>
@@ -95,7 +96,7 @@ export const NavBarBottom = () => {
             className={styles.navBarBottomItems}
             onClick={() => onClickHandlerMenu(link.feeds.to)}
           >
-            <RiMessage3Line size={22} color={iconActive(link.feeds.to)} />
+            <RiMessage3Line size={22} color={iconActive(link.feeds.to)}/>
           </button>
           <button
             aria-label="management-button"
@@ -103,7 +104,7 @@ export const NavBarBottom = () => {
             className={styles.navBarBottomItems}
             onClick={() => onClickHandlerMenu(link.management.to)}
           >
-            <RiUserLine size={22} color={iconActive(link.management.to)} />
+            <RiUserLine size={22} color={iconActive(link.management.to)}/>
           </button>
         </li>
       </ul>

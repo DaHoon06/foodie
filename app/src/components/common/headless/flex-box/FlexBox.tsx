@@ -10,14 +10,15 @@ interface FlexProps {
   direction?: CSSProperties["flexDirection"];
   justifyContent?: CSSProperties["justifyContent"];
   alignItems?: CSSProperties["alignItems"];
-  gap?: number;
+  gap?: number | string;
   width?: string | number;
   height?: string | number;
 }
 
 export interface FlexBoxProps
   extends FlexProps,
-    HTMLAttributes<HTMLDivElement> {}
+    HTMLAttributes<HTMLDivElement> {
+}
 
 const FlexBox = forwardRef(
   (

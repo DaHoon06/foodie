@@ -11,6 +11,7 @@ import CustomHead from "@layouts/heads/CustomHead";
 import {FeedCard, FeedListType} from "@components/ui/cards/feeds/FeedCard";
 import BasicInput from "@components/common/inputs/BasicInput";
 import {Button} from "@components/common/buttons";
+import {TitleBox} from "@layouts/TitleBox";
 
 interface Props {
   feed: FeedListType;
@@ -30,8 +31,7 @@ const FeedDetailPage = (props: Props): ReactElement => {
       <CustomHead title={`고푸디 | gofoodie | ${feed.user.username} - ${feed.feedContent}`}
                   description={feed.feedContent}/>
       <BasicLayout>
-        <FlexBox direction={"row"} justifyContent={"flex-start"} height={56} className={styles.feedDetailTitle}
-                 gap={130}>
+        <TitleBox gap={130}>
           <button aria-label={'history-back-button'} type={'button'} onClick={handleClickHistoryBack}>
             <MdOutlineKeyboardArrowLeft size={24} color={"#d0d0d0"}/>
           </button>
@@ -43,7 +43,8 @@ const FeedDetailPage = (props: Props): ReactElement => {
           >
             리뷰
           </Typography>
-        </FlexBox>
+        </TitleBox>
+
         <FeedCard feedCard={feed}/>
         <section className={styles.commentLayout}>
           <div className={styles.commentBoxContainer}>
