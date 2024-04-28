@@ -1,7 +1,7 @@
 import * as styles from "./HomeContainer.css";
 import {KakaoMap} from "@components/kakao/maps/KakaoMap";
 import {Typography} from "@components/common/typography/Typography";
-import {ThumbnailCard} from "@components/ui/cards/thumbnail/ThumbnailCard";
+import {ThumbnailCard} from "@components/ui/cards/ThumbnailCard";
 import {CustomHorizontalBar} from "@components/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {FollowCard} from "@components/ui/cards/FollowCard";
@@ -59,7 +59,7 @@ export const HomeContainer = () => {
 
   useEffect(() => {
     setPending(true);
-      all();
+    all();
     if (typeof window !== 'undefined' && !isLogin && userId) {
       setPending(false);
     }

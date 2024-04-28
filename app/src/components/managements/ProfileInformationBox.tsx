@@ -1,6 +1,6 @@
 import {ReactElement} from "react";
 
-import * as styles from "./ProfileInformationBox.css";
+import * as styles from "./styles/ProfileInformationBox.css";
 import classNames from "classnames";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {FaUser} from "react-icons/fa6";

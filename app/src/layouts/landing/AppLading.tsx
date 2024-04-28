@@ -1,4 +1,4 @@
-import * as styles from './AppLanding.css';
+import * as styles from '../styles/AppLanding.css';
 import Image from "next/image";
 import {Typography} from "@components/common/typography/Typography";
 

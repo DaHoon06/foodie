@@ -1,5 +1,5 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import * as styles from "./FollowCard.css";
+import * as styles from "./styles/FollowCard.css";
 import Image from "next/image";
 import {Typography} from "@components/common/typography/Typography";
 import {Button} from "@components/common/buttons";

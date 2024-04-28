@@ -8,7 +8,7 @@ import {MdOutlineKeyboardArrowLeft} from "react-icons/md";
 import {GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult} from "next";
 import {feedDetailApi} from "@apis/feeds/feed.api";
 import CustomHead from "@layouts/heads/CustomHead";
-import {FeedCard, FeedListType} from "@components/ui/cards/feeds/FeedCard";
+import {FeedCard, FeedListType} from "@components/ui/cards/FeedCard";
 import BasicInput from "@components/common/inputs/BasicInput";
 import {Button} from "@components/common/buttons";
 import {TitleBox} from "@layouts/TitleBox";

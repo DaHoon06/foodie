@@ -1,5 +1,5 @@
 import Image from "next/image";
-import * as styles from './StoreCard.css';
+import * as styles from './styles/StoreCard.css';
 import {RiEyeLine, RiPencilFill} from "react-icons/ri";
 import {Typography} from "@components/common/typography/Typography";
 import {ReactElement} from "react";

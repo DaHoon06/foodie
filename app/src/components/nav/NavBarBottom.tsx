@@ -1,4 +1,4 @@
-import * as styles from "./NavBarBottom.css";
+import * as styles from "./styles/NavBarBottom.css";
 import {
   RiHome5Line,
   RiMessage3Line,

@@ -1,4 +1,4 @@
-import * as styles from './TitleBox.css';
+import * as styles from './styles/TitleBox.css';
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {CSSProperties, PropsWithChildren} from "react";
 

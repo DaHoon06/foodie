@@ -1,5 +1,5 @@
 import {ReactElement} from "react";
-import * as styles from './Footer.css';
+import * as styles from '../styles/Footer.css';
 import {Typography} from "@components/common/typography/Typography";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 

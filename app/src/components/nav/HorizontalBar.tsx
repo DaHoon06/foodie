@@ -1,4 +1,4 @@
-import * as styles from "./HorizontalBar.css";
+import * as styles from "./styles/HorizontalBar.css";
 import {Typography} from "@components/common/typography/Typography";
 import classNames from "classnames";
 import {useState} from "react";
@@ -11,9 +11,9 @@ interface HorizontalNavBarProps {
 const DEFAULT = '전체'
 
 export const HorizontalNavBar = ({
-  lists,
-  onClickHandle,
-}: HorizontalNavBarProps) => {
+                                   lists,
+                                   onClickHandle,
+                                 }: HorizontalNavBarProps) => {
   const [active, setActive] = useState(DEFAULT);
 
   const onClickItem = (key: string, value: string) => {

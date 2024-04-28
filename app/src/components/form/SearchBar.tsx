@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from "react";
 import {useRouter} from "next/router";
-import * as styles from "@components/form/SearchBar.css";
+import * as styles from "@components/form/styles/SearchBar.css";
 
 type Props = {
   onAddKeyword: (string: string) => void;

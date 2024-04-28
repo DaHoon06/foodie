@@ -1,14 +1,14 @@
-import * as styles from "./HorizontalBar.css";
-import { PropsWithChildren, useState } from "react";
+import * as styles from "./styles/HorizontalBar.css";
+import {PropsWithChildren, useState} from "react";
 
 interface HorizontalNavBarProps extends PropsWithChildren {
   onClickHandle?: (value: string) => void;
 }
 
 export const CustomHorizontalBar = ({
-  onClickHandle,
-  children,
-}: HorizontalNavBarProps) => {
+                                      onClickHandle,
+                                      children,
+                                    }: HorizontalNavBarProps) => {
   const [active, setActive] = useState("seoul");
 
   const onClickItem = (value: string) => {

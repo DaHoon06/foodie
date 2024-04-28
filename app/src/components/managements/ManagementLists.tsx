@@ -1,7 +1,7 @@
 import {Typography} from "@components/common/typography/Typography";
 import classNames from "classnames";
 import {ReactElement} from "react";
-import * as styles from "./ManagementLists.css";
+import * as styles from "./styles/ManagementLists.css";
 import {signOut} from "next-auth/react";
 import {useAuth} from "@providers/AuthProvider";
 import useCookies from "@hooks/useCookie";

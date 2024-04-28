@@ -1,5 +1,5 @@
 import React, {ReactElement, useState} from "react";
-import * as styles from "./FeedLocation.css";
+import * as styles from "./styles/FeedLocation.css";
 import useModalStore from "@store/modalStore";
 import {IoAdd, IoClose, IoLocate, IoLocation} from "react-icons/io5";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";

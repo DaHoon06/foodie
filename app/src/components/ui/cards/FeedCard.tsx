@@ -1,5 +1,5 @@
 import {ReactElement} from "react";
-import * as styles from "./FeedCard.css";
+import * as styles from "./styles/FeedCard.css";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {Typography} from "@components/common/typography/Typography";
 import Image from "next/image";

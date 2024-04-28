@@ -1,4 +1,4 @@
-import * as styles from './ReviewCard.css';
+import * as styles from './styles/ReviewCard.css';
 import Image from "next/image";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {Typography} from "@components/common/typography/Typography";

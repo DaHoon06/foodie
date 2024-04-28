@@ -1,11 +1,11 @@
-import { ReactElement, useEffect, useState } from "react";
-import * as styles from "./KakaoButton.css";
+import {ReactElement, useEffect, useState} from "react";
+import * as styles from "./styles/KakaoButton.css";
 import Image from "next/image";
-import { Typography } from "@components/common/typography/Typography";
-import { useRouter } from "next/router";
-import { getProviders, signIn } from "next-auth/react";
-import { User } from "next-auth";
-import { axiosInstance } from "@libs/axios";
+import {Typography} from "@components/common/typography/Typography";
+import {useRouter} from "next/router";
+import {getProviders, signIn} from "next-auth/react";
+import {User} from "next-auth";
+import {axiosInstance} from "@libs/axios";
 
 export const KakaoButton = (): ReactElement => {
   const router = useRouter();
@@ -27,7 +27,7 @@ export const KakaoButton = (): ReactElement => {
         username: user.name,
         token: user.id,
       };
-      const { data } = await axiosInstance.post("/users/sign-in", body);
+      const {data} = await axiosInstance.post("/users/sign-in", body);
     } catch (e) {
       console.log(e);
     }
