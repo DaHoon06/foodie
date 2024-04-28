@@ -21,7 +21,7 @@ export class UserEntity extends BaseEntity {
   @Column()
   username: string;
 
-  @Column()
+  @Column({ type: String, default: '' })
   description: string;
 
   @CreateDateColumn()
@@ -29,6 +29,9 @@ export class UserEntity extends BaseEntity {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Column({ type: String })
+  nickname: string;
 
   @Column({ type: 'enum', enum: UserType, default: UserType.KAKAO })
   type: UserType; // 로그인 타입

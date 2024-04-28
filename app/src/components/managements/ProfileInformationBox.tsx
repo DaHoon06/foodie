@@ -9,9 +9,15 @@ import {Button} from "@components/common/buttons";
 import {useRouter} from "next/router";
 import {useAuth} from "@providers/AuthProvider";
 import {KakaoButton} from "@components/kakao/KakaoButton";
+import {User} from "@interfaces/users/user";
 
-export const ProfileInformationBox = (): ReactElement => {
-  const { isLogin } = useAuth();
+interface Props {
+  user: User;
+}
+
+export const ProfileInformationBox = (props: Props): ReactElement => {
+  const {user} = props;
+  const {isLogin} = useAuth();
   const router = useRouter();
 
   const handleClickProfileEdit = () => {
@@ -24,7 +30,7 @@ export const ProfileInformationBox = (): ReactElement => {
           <FlexBox direction="row" gap={8} justifyContent="space-between">
             <FlexBox direction="row" justifyContent="flex-start" gap={10}>
               <div className={styles.profileBox}>
-                <FaUser color="#b7b7b7" size={26} />
+                <FaUser color="#b7b7b7" size={26}/>
               </div>
 
               <div className={styles.profileInfoBox}>
@@ -96,15 +102,15 @@ export const ProfileInformationBox = (): ReactElement => {
           </FlexBox>
 
           <FlexBox alignItems="flex-start" gap={10}>
-            <Typography>훈</Typography>
+            <Typography>{user.nickname}</Typography>
 
             <Typography fontSize={14} color={"gray400"} fontWeight={300}>
-              소개 문구를 넣어주세요.
+              {user.description.length > 0 ? user.description : '소개 문구를 넣어주세요.'}
             </Typography>
           </FlexBox>
         </>
       ) : (
-        <KakaoButton />
+        <KakaoButton/>
       )}
     </FlexBox>
   );

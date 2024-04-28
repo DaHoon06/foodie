@@ -1,4 +1,4 @@
-import {NextPage} from "next";
+import {GetServerSideProps, GetServerSidePropsContext, NextPage} from "next";
 import {ReactElement} from "react";
 import {BasicLayout} from "@layouts/BasicLayout";
 import {Typography} from "@components/common/typography/Typography";
@@ -6,11 +6,19 @@ import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {ProfileInformationBox} from "@components/managements/ProfileInformationBox";
 import {ManagementLists} from "@components/managements/ManagementLists";
 import {TitleBox} from "@layouts/TitleBox";
+import {getSession} from "next-auth/react";
+import {getUserProfileApi} from "@apis/users/user.api";
+import {User} from "@interfaces/users/user";
 
-const ManagementPage: NextPage = (): ReactElement => {
+interface Props {
+  user: User
+}
+
+const ManagementPage = ({user}: Props): ReactElement => {
+
   return (
     <BasicLayout>
-      <TitleBox>
+      <TitleBox justifyContent={"center"} alignItems={'center'} direction={'row'}>
         <Typography
           variant={"h1"}
           letterSpacing={"-0.5"}
@@ -22,12 +30,40 @@ const ManagementPage: NextPage = (): ReactElement => {
       </TitleBox>
 
       <FlexBox justifyContent="flex-start" gap={10}>
-        <ProfileInformationBox/>
+        <ProfileInformationBox user={user}/>
 
         <ManagementLists/>
       </FlexBox>
     </BasicLayout>
   );
 };
-
+export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  try {
+    const session = await getSession(ctx);
+    if (!session) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false
+        }
+      }
+    }
+    const id = session.id;
+    const axiosResult = await getUserProfileApi(id);
+    const {data} = axiosResult;
+    return {
+      props: {
+        user: data
+      }
+    }
+  } catch (e) {
+    return {
+      props: {
+        user: null,
+      }
+    }
+  }
+}
 export default ManagementPage;
+
+

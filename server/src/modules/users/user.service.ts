@@ -3,6 +3,8 @@ import { UserRepository } from '@modules/users/user.repository';
 import { UserDto } from './dto/sign-in.dto';
 import { AuthService } from '@modules/auth/auth.service';
 import { UserEntity } from './entities/user.entity';
+import { ProfileUpdateDto } from '@modules/users/dto/profile.update.dto';
+import { JwtPayload } from '@modules/auth/dto/jwt.dto';
 
 @Injectable()
 export class UserService {
@@ -41,8 +43,11 @@ export class UserService {
       };
       userData = await this.createUser(data);
     }
-    console.log(userData);
     // token 생성
     return this.authService.createToken({ id, username: name });
+  }
+
+  async profileUpdate(body: ProfileUpdateDto, user: JwtPayload) {
+    return this.userRepository.profileUpdate(body, user);
   }
 }

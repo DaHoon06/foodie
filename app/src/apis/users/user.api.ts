@@ -5,6 +5,8 @@ import {
   axiosResponseData,
 } from "@libs/axios/axiosResponse";
 import {User} from "@pages/api/auth/[...nextauth]";
+import {RecommendUserListsApi, UserProfileUpdateBody} from "@apis/users/interfaces/user";
+import {awaitExpression} from "@babel/types";
 
 const DOMAIN = `/users`;
 
@@ -29,3 +31,19 @@ export const userCheckApi = async (user: User) => {
       : process.env.NEXT_PUBLIC_LOCAL_API_URL;
   return axios.post(`${BASE_URL}/api${DOMAIN}/checked`, user);
 };
+
+export const getUserProfileApi = async (id: string) => {
+  const url = `${DOMAIN}/profile/${id}`;
+  const {data} = await axiosInstance.get(url);
+  return data;
+}
+
+/**
+ * @description user profile update
+ * @param body
+ */
+export const profileUpdateApi = async (body: UserProfileUpdateBody) => {
+  const url = `${DOMAIN}/profile`;
+  const {data} = await axiosInstance.patch(url, body);
+  return data;
+}

@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
+import { ProfileUpdateDto } from '@modules/users/dto/profile.update.dto';
+import { JwtPayload } from '@modules/auth/dto/jwt.dto';
 
 @Injectable()
 export class UserRepository extends Repository<UserEntity> {
@@ -36,5 +38,15 @@ export class UserRepository extends Repository<UserEntity> {
       .limit(10)
       .getMany();
     return userGroup;
+  }
+
+  async profileUpdate(body: ProfileUpdateDto, user: JwtPayload) {
+    const { id } = user;
+    await UserEntity.update(
+      { creatorId: id },
+      {
+        ...body,
+      },
+    );
   }
 }

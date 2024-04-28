@@ -1,9 +1,12 @@
 import * as styles from './TitleBox.css';
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import {PropsWithChildren} from "react";
+import {CSSProperties, PropsWithChildren} from "react";
 
 interface Props extends PropsWithChildren {
   gap?: string | number;
+  direction?: CSSProperties["flexDirection"];
+  justifyContent?: CSSProperties["justifyContent"];
+  alignItems?: CSSProperties["alignItems"];
 }
 
 export const TitleBox = (props: Props) => {

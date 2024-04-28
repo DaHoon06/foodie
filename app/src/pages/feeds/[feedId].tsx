@@ -66,8 +66,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 > => {
   try {
     const {feedId} = query as { feedId: string };
-    // todo 잘못된 feedId 요청일 경우에 대한 처리
-
     const data = await feedDetailApi(feedId);
 
     if (!feedId || !data) {
