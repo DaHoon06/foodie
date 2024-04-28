@@ -18,7 +18,7 @@ const ManagementPage = ({user}: Props): ReactElement => {
 
   return (
     <BasicLayout>
-      <TitleBox justifyContent={"center"} alignItems={'center'} direction={'row'}>
+      <TitleBox justifyContent={"center"}>
         <Typography
           variant={"h1"}
           letterSpacing={"-0.5"}

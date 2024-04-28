@@ -8,4 +8,5 @@ export const titleBoxLayout = style({
   top: 0,
   left: 0,
   borderBottom: "1px solid #dddddd",
+  padding: '0 1em'
 });

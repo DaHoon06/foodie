@@ -1,6 +1,6 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {BasicLayout} from "@layouts/BasicLayout";
-import {NextPage} from "next";
+import {GetServerSideProps, GetServerSidePropsContext, NextPage} from "next";
 import {ChangeEvent, ReactElement, useState} from "react";
 import {Typography} from "@components/common/typography/Typography";
 import * as styles from '@styles/pages/management/ProfileEdit.css';
@@ -8,13 +8,20 @@ import {MdCameraAlt, MdOutlineKeyboardArrowLeft} from "react-icons/md";
 import {useRouter} from "next/router";
 import Image from "next/image";
 import BasicInput from "@components/common/inputs/BasicInput";
-import {profileUpdateApi} from "@apis/users/user.api";
+import {getUserProfileApi, profileUpdateApi} from "@apis/users/user.api";
+import {getSession} from "next-auth/react";
+import {User} from "@interfaces/users/user";
 
-const ProfileEditPage: NextPage = (): ReactElement => {
+interface Props {
+  user: User;
+}
+
+const ProfileEditPage = (props: Props): ReactElement => {
+  const {user} = props;
   const router = useRouter();
   const [profileUpdateState, setProfileUpdateState] = useState({
-    description: '',
-    nickname: '',
+    description: user.description,
+    nickname: user.nickname,
   })
 
   const handleClickHistoryBack = () => {
@@ -92,7 +99,7 @@ const ProfileEditPage: NextPage = (): ReactElement => {
             <div className={styles.editTextareaWrapper}>
             <textarea
               className={styles.editTextarea}
-              placeholder="자기소개뾰로롱"
+              placeholder={profileUpdateState.description ? profileUpdateState.description : '자기 소개 문구를 작성해주세요.'}
               name={'description'}
               onChange={handleChangeTextarea}
             ></textarea>
@@ -103,5 +110,33 @@ const ProfileEditPage: NextPage = (): ReactElement => {
     </BasicLayout>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  try {
+    const session = await getSession(ctx);
+    if (!session) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false
+        }
+      }
+    }
+    const id = session.id;
+    const axiosResult = await getUserProfileApi(id);
+    const {data} = axiosResult;
+    return {
+      props: {
+        user: data
+      }
+    }
+  } catch (e) {
+    return {
+      props: {
+        user: null,
+      }
+    }
+  }
+}
 
 export default ProfileEditPage;

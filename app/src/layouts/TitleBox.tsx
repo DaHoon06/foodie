@@ -10,9 +10,9 @@ interface Props extends PropsWithChildren {
 }
 
 export const TitleBox = (props: Props) => {
-  const {children, gap = 0} = props;
+  const {children, gap = 0, justifyContent = 'flex-start'} = props;
   return (
-    <FlexBox gap={gap} direction={"row"} justifyContent={"flex-start"} height={56} className={styles.titleBoxLayout}>
+    <FlexBox gap={gap} direction={"row"} justifyContent={justifyContent} height={56} className={styles.titleBoxLayout}>
       {children}
     </FlexBox>
   )
