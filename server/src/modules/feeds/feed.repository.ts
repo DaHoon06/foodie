@@ -71,6 +71,7 @@ export class FeedRepository extends Repository<FeedEntity> {
         user = {
           userId: list.user._id,
           username: list.user.username,
+          nickname: list.user.nickname,
           thumbnail: '',
         };
       }
@@ -126,6 +127,7 @@ export class FeedRepository extends Repository<FeedEntity> {
         user = {
           userId: list.user._id,
           username: list.user.username,
+          nickname: list.user.nickname,
           thumbnail: '',
         };
       }

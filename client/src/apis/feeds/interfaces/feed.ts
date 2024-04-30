@@ -1,6 +1,7 @@
 export interface FeedListUser {
   userId: string;
   username: string;
+  nickname: string;
   thumbnail?: string;
 }
 

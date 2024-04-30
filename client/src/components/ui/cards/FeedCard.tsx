@@ -7,7 +7,6 @@ import {FaComment, FaRegHeart} from "react-icons/fa6";
 import {formatDate} from "@utils/date";
 import {FeedListsState} from "@interfaces/feeds/feed.lists";
 import {CarouselSwipe} from "@components/ui/carousel/CarouselSwipe";
-import {useRouter} from "next/router";
 import Link from "next/link";
 
 export type FeedListType = FeedListsState;
@@ -38,7 +37,7 @@ export const FeedCard = (props: Props): ReactElement => {
             alignItems={"flex-start"}
           >
             <Typography as={"span"} fontSize={14} fontWeight={500}>
-              {user.username}
+              {user.nickname}
             </Typography>
             <Typography as={"span"} color={"gray400"} fontSize={12}>
               {formatDate(new Date(feedCreatedDate))}
