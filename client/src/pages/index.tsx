@@ -17,10 +17,11 @@ const HomePage: NextPage = (): ReactElement => {
 
 export default HomePage;
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps() {
   const filter = {
     sido: "전체",
   };
+
   await queryClient.prefetchInfiniteQuery(
     [queryKeys.feeds.lists],
     ({pageParam = 1}) => feedListsApi(filter, {pageParam})
