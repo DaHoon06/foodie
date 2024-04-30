@@ -15,6 +15,7 @@ import { FeedEntity } from './entities/feed.entity';
 import { ShopService } from '@modules/shop/shop.service';
 import { ShopEntity } from '@modules/shop/entities/shop.entity';
 import { FilterDto } from '@modules/feeds/dto/filter.dto';
+import { JwtPayload } from '@modules/auth/dto/jwt.dto';
 
 @Injectable()
 export class FeedService {
@@ -90,6 +91,12 @@ export class FeedService {
 
   async findOneFeedByFeedId(_id: string) {
     return this.feedRepository.findOneFeedByFeedId(_id);
+  }
+
+  async findMyFeedList(user: JwtPayload, pageParam: number) {
+    let page = +pageParam;
+    if (isNaN(page)) page = 1;
+    return this.feedRepository.findMyFeedLists(user.id, page);
   }
 
   private addressItemCheck(item: ShopDto): boolean {

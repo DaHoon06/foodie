@@ -35,3 +35,12 @@ export const feedDetailApi = async (feedId: string): Promise<FeedListsStateApi> 
   const {data} = await axiosInstance.get<AxiosRequestConfig, AxiosResponse<AxiosResponseData<FeedListsStateApi>>>(url)
   return axiosResponseData<FeedListsStateApi>(data)
 }
+
+export const myFeedListApi = async ({pageParam}: {pageParam: number}): Promise<FeedListsStateApi[] | null> => {
+  let page = 1;
+  if (!isNaN(pageParam)) page = pageParam;
+
+  const url = `${DOMAIN}/my-list?page=${page}`;
+  const {data} = await axiosInstance.get<AxiosRequestConfig, AxiosResponse<AxiosResponseData<FeedListsStateApi[]>>>(url);
+  return axiosResponseData<FeedListsStateApi[]>(data);
+}

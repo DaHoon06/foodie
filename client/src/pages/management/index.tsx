@@ -1,4 +1,4 @@
-import {GetServerSideProps, GetServerSidePropsContext, NextPage} from "next";
+import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import {ReactElement} from "react";
 import {BasicLayout} from "@layouts/BasicLayout";
 import {Typography} from "@components/common/typography/Typography";
@@ -11,7 +11,7 @@ import {getUserProfileApi} from "@apis/users/user.api";
 import {User} from "@interfaces/users/user";
 
 interface Props {
-  user: User
+  user: User | null
 }
 
 const ManagementPage = ({user}: Props): ReactElement => {
@@ -40,22 +40,24 @@ const ManagementPage = ({user}: Props): ReactElement => {
 export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     const session = await getSession(ctx);
-    if (!session) {
+
+    if (session) {
+      const id = session.id;
+      const axiosResult = await getUserProfileApi(id);
+      const {data} = axiosResult;
       return {
-        redirect: {
-          destination: '/',
-          permanent: false
+        props: {
+          user: data
+        }
+      }
+    } else {
+      return {
+        props: {
+          user: null,
         }
       }
     }
-    const id = session.id;
-    const axiosResult = await getUserProfileApi(id);
-    const {data} = axiosResult;
-    return {
-      props: {
-        user: data
-      }
-    }
+
   } catch (e) {
     return {
       props: {

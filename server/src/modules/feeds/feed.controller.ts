@@ -12,6 +12,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreateFeedDto } from './dto/create.feed.dto';
 import { FilterDto } from '@modules/feeds/dto/filter.dto';
 import { JwtGuard } from '@modules/auth/guards/jwt.guard';
+import { UserObject } from '@decorators/user.object.decorator';
+import { JwtPayload } from '@modules/auth/dto/jwt.dto';
 
 @Controller({
   path: 'feeds',
@@ -39,5 +41,14 @@ export class FeedController {
   @Get('/detail/:feedId')
   async feedDetail(@Param('feedId') feedId: string) {
     return this.feedService.findOneFeedByFeedId(feedId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('/my-list')
+  async myFeedList(
+    @UserObject() user: JwtPayload,
+    @Query('page') page: number,
+  ) {
+    return this.feedService.findMyFeedList(user, page);
   }
 }

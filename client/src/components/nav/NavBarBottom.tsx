@@ -1,23 +1,17 @@
 import * as styles from "./styles/NavBarBottom.css";
-import {
-  RiHome5Line,
-  RiMessage3Line,
-  RiPencilFill,
-  RiStarSLine,
-  RiUserLine,
-} from "react-icons/ri";
+import {RiHome5Line, RiMessage3Line, RiPencilFill, RiUserLine,} from "react-icons/ri";
 import {useRouter} from "next/router";
 import {FontColorType} from "@components/common/typography/Typography.type";
 import {useEffect, useState} from "react";
 import useModalStore from "@store/modalStore";
 import {useSession} from "next-auth/react";
-import {CiBoxList} from "react-icons/ci";
+import {CiViewList} from "react-icons/ci";
 
 const link = {
   home: {label: "홈", to: "/"},
-  feeds: {label: "소식", to: "/feeds"},
+  feeds: {label: "소식", to: "/feeds/lists"},
   posts: {label: "글작성", to: "/feeds/post"},
-  lists: {label: "내가 작성한 게시글", to: "/feeds/lists"},
+  lists: {label: "내가 작성한 게시글", to: "/feeds"},
   management: {label: "마이", to: "/management"},
 };
 
@@ -76,7 +70,7 @@ export const NavBarBottom = () => {
             className={styles.navBarBottomItems}
             onClick={() => onClickHandlerMenu(link.lists.to)}
           >
-            <CiBoxList size={22} color={iconActive(link.lists.to)}/>
+            <CiViewList size={22} color={iconActive(link.lists.to)}/>
           </button>
         </li>
         <li className={styles.navBarCenterBox}>

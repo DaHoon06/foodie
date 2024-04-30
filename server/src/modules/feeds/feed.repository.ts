@@ -47,6 +47,58 @@ export class FeedRepository extends Repository<FeedEntity> {
     };
   }
 
+  async findMyFeedLists(creatorId: string, page: number) {
+    const queryBuilder = this.createQueryBuilder('feed')
+      .where('feed.deleted = false')
+      .leftJoinAndSelect('feed.shop', 'shop')
+      .leftJoinAndSelect('feed.user', 'user')
+      .leftJoinAndSelect('feed.files', 'files')
+      .andWhere('user.creatorId = :creatorId')
+      .setParameter('creatorId', creatorId)
+      .select(['feed', 'shop', 'user', 'files']);
+
+    const offset = (page - 1) * this.listLimit;
+    const listsData = await queryBuilder
+      .orderBy('feed.created_at', 'DESC')
+      .skip(offset)
+      .take(this.listLimit)
+      .getMany();
+    return listsData.map((list) => {
+      let user = null;
+      let shop = null;
+
+      if (list.user) {
+        user = {
+          userId: list.user._id,
+          username: list.user.username,
+          thumbnail: '',
+        };
+      }
+
+      if (list.shop) {
+        shop = {
+          shopId: list.shop._id,
+          shopName: list.shop.title,
+          shopDescription: list.shop.description,
+          category: list.shop.category,
+          shopAddress: {
+            sido: list.shop.sido,
+            sigungu: list.shop.sigungu,
+            fullAddress: list.shop.fullAddress,
+          },
+        };
+      }
+      return {
+        feedId: list._id,
+        feedContent: list.content,
+        feedCreatedDate: list.created_at,
+        user,
+        shop,
+        files: list.files,
+      };
+    });
+  }
+
   async findManyFeedLists(region: string, page: number) {
     let queryBuilder = this.createQueryBuilder('feed')
       .where('feed.deleted = false')

@@ -12,7 +12,7 @@ import {KakaoButton} from "@components/kakao/KakaoButton";
 import {User} from "@interfaces/users/user";
 
 interface Props {
-  user: User;
+  user: User | null;
 }
 
 export const ProfileInformationBox = (props: Props): ReactElement => {
@@ -23,6 +23,7 @@ export const ProfileInformationBox = (props: Props): ReactElement => {
   const handleClickProfileEdit = () => {
     router.push("/management/edit");
   };
+
   return (
     <FlexBox gap={20} className={classNames(styles.cardLayout)}>
       {isLogin ? (
@@ -32,7 +33,6 @@ export const ProfileInformationBox = (props: Props): ReactElement => {
               <div className={styles.profileBox}>
                 <FaUser color="#b7b7b7" size={26}/>
               </div>
-
               <div className={styles.profileInfoBox}>
                 <FlexBox direction="row" justifyContent="flex-start" gap={8}>
                   <FlexBox justifyContent="flex-start">
