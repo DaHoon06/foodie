@@ -9,9 +9,9 @@ import {CiViewList} from "react-icons/ci";
 
 const link = {
   home: {label: "홈", to: "/"},
-  feeds: {label: "소식", to: "/feeds/lists"},
+  timeline: {label: "소식", to: "/timeline"},
   posts: {label: "글작성", to: "/feeds/post"},
-  lists: {label: "내가 작성한 게시글", to: "/feeds"},
+  myFeedLists: {label: "내가 작성한 게시글", to: "/feeds"},
   management: {label: "마이", to: "/management"},
 };
 
@@ -28,7 +28,7 @@ export const NavBarBottom = () => {
   }, [currentPath]);
 
   const onClickHandlerMenu = async (to: string) => {
-    if (to === link.posts.to) {
+    if (to === link.posts.to || to === link.myFeedLists.to || to === link.timeline.to) {
       if (!session) {
         setModalType("signInAlertBox");
         setIsOpen(true);
@@ -68,9 +68,9 @@ export const NavBarBottom = () => {
             aria-label="pick-button"
             type={"button"}
             className={styles.navBarBottomItems}
-            onClick={() => onClickHandlerMenu(link.lists.to)}
+            onClick={() => onClickHandlerMenu(link.myFeedLists.to)}
           >
-            <CiViewList size={22} color={iconActive(link.lists.to)}/>
+            <CiViewList size={22} color={iconActive(link.myFeedLists.to)}/>
           </button>
         </li>
         <li className={styles.navBarCenterBox}>
@@ -88,9 +88,9 @@ export const NavBarBottom = () => {
             aria-label="message-button"
             type={"button"}
             className={styles.navBarBottomItems}
-            onClick={() => onClickHandlerMenu(link.feeds.to)}
+            onClick={() => onClickHandlerMenu(link.timeline.to)}
           >
-            <RiMessage3Line size={22} color={iconActive(link.feeds.to)}/>
+            <RiMessage3Line size={22} color={iconActive(link.timeline.to)}/>
           </button>
           <button
             aria-label="management-button"
