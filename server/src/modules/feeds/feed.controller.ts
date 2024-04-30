@@ -11,7 +11,7 @@ import { FeedService } from './feed.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateFeedDto } from './dto/create.feed.dto';
 import { FilterDto } from '@modules/feeds/dto/filter.dto';
-import { JwtGuard } from '@modules/auth/jwt.guard';
+import { JwtGuard } from '@modules/auth/guards/jwt.guard';
 
 @Controller({
   path: 'feeds',

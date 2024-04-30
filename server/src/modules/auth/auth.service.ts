@@ -1,10 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './dto/jwt.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwtService: JwtService) {}
+  secret = '';
+
+  constructor(
+    private configService: ConfigService,
+    private readonly jwtService: JwtService,
+  ) {
+    this.secret = configService.get<string>('JWT_SECRET');
+  }
 
   createToken(payload: JwtPayload): string {
     const token = this.jwtService.sign(
@@ -13,9 +21,15 @@ export class AuthService {
         username: payload.username,
       },
       {
-        secret: process.env.JWT_SECRET,
+        secret: this.secret,
       },
     );
     return token;
+  }
+
+  async verify(token: string) {
+    return this.jwtService.verify(token, {
+      secret: this.secret,
+    });
   }
 }
