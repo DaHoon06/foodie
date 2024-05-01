@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { FileService } from '@modules/file/file.service';
-import { FileImageRepository } from '@modules/file/file.image.repository';
-import { FileController } from '@modules/file/file.controller';
+import { FileService } from '@modules/files/file.service';
+import { FileImageRepository } from '@modules/files/file.image.repository';
+import { FileController } from '@modules/files/file.controller';
 import { FeedModule } from '@modules/feeds/feed.module';
 import { UserModule } from '@modules/users/user.module';
 

@@ -4,10 +4,12 @@ import {
   CreateDateColumn,
   Entity,
   Generated,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { UserType } from '../enum/user.type.enum';
+import { FileImageEntity } from '@modules/files/entities/file.image.entity';
 
 @Entity()
 export class UserEntity extends BaseEntity {
@@ -35,4 +37,7 @@ export class UserEntity extends BaseEntity {
 
   @Column({ type: 'enum', enum: UserType, default: UserType.KAKAO })
   type: UserType; // 로그인 타입
+
+  @OneToMany(() => FileImageEntity, (files) => files.user)
+  files: FileImageEntity[];
 }

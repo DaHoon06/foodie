@@ -4,7 +4,7 @@ import { DataBaseModule } from './db/db.module';
 import { UserModule } from '@modules/users/user.module';
 import { FeedModule } from '@modules/feeds/feed.module';
 import { ShopModule } from '@modules/shop/shop.module';
-import { FileModule } from '@modules/file/file.module';
+import { FileModule } from '@modules/files/file.module';
 import { SseModule } from '@modules/sse/sse.module';
 
 @Module({
