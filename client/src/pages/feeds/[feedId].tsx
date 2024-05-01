@@ -15,7 +15,6 @@ import { FeedCard, FeedListType } from "@components/ui/cards/FeedCard";
 import BasicInput from "@components/common/inputs/BasicInput";
 import { Button } from "@components/common/buttons";
 import { TitleBox } from "@layouts/TitleBox";
-import FlexBox from "@components/common/headless/flex-box/FlexBox";
 
 interface Props {
   feed: FeedListType;
@@ -77,7 +76,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   try {
     const { feedId } = query as { feedId: string };
     const data = await feedDetailApi(feedId);
-
     if (!feedId || !data) {
       return {
         redirect: {

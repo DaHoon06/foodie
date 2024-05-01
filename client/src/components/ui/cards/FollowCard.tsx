@@ -1,8 +1,8 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import * as styles from "./styles/FollowCard.css";
 import Image from "next/image";
-import {Typography} from "@components/common/typography/Typography";
-import {Button} from "@components/common/buttons";
+import { Typography } from "@components/common/typography/Typography";
+import { Button } from "@components/common/buttons";
 
 interface FollowCardProps {
   _id: string;
@@ -17,12 +17,13 @@ interface Props {
 }
 
 export const FollowCard = (props: Props) => {
-  const {username, _id, description, follow, thumbnail} = props.user;
-  const handleClickFollowButton = () => {
-    alert(`${_id}_팔로우`)
-  }
+  const { username, _id, description, follow, thumbnail } = props.user;
 
-  const thumbnailUrl = thumbnail ? thumbnail : "/images/profile.png"
+  const handleClickFollowButton = () => {
+    alert(`${_id}_팔로우`);
+  };
+
+  const thumbnailUrl = thumbnail ? thumbnail : "/images/profile.png";
 
   return (
     <article className={styles.followCardLayout}>
@@ -40,10 +41,11 @@ export const FollowCard = (props: Props) => {
 
         <FlexBox justifyContent={"space-between"} alignItems={"center"}>
           <Typography fontWeight={600}>{username}</Typography>
-          {!!follow &&
-            (<Typography fontWeight={300} color={"gray500"} fontSize={12}>
+          {!!follow && (
+            <Typography fontWeight={300} color={"gray500"} fontSize={12}>
               팔로우 {follow} 명
-            </Typography>)}
+            </Typography>
+          )}
 
           <Typography
             fontWeight={300}
@@ -54,7 +56,7 @@ export const FollowCard = (props: Props) => {
           </Typography>
         </FlexBox>
         <Button width={90} height={32} onClick={handleClickFollowButton}>
-          <Typography as={"span"} color={'white000'}>
+          <Typography as={"span"} color={"white000"}>
             팔로우
           </Typography>
         </Button>
