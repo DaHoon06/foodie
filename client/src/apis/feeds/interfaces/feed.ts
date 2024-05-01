@@ -14,7 +14,7 @@ export interface FeedListShop {
     sido: string;
     sigungu: string;
     fullAddress: string;
-  }
+  };
 }
 
 export interface FeedThumbnail {
@@ -36,7 +36,7 @@ export interface FeedListsStateApi {
 export interface RecentlyFeedListsStateApi {
   content: string;
   createdDate: string;
-  _id: string;
+  id: string;
   shop: {
     category: string;
     description?: string;
