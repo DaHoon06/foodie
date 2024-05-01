@@ -1,7 +1,7 @@
-import { style } from "@vanilla-extract/css";
-import { vars } from "@styles/theme.css";
+import {style} from "@vanilla-extract/css";
+import {vars} from "@styles/theme.css";
 
-const height = 64;
+const height = 76;
 
 export const navBarBottomLayout = style({
   position: "sticky",
@@ -11,6 +11,7 @@ export const navBarBottomLayout = style({
   display: "flex",
   alignItems: "center",
   transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+  backgroundColor: vars.colors.white000,
   height,
   zIndex: 1100,
 });
@@ -21,6 +22,8 @@ export const navBarBottomContainer = style({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  backgroundColor: vars.colors.white000,
+  paddingBottom: '4px'
 });
 
 export const navBarBottomLists = style({
@@ -61,7 +64,7 @@ export const navBarCenterButton = style({
   position: "absolute",
   backgroundColor: vars.colors.primary,
   width: 60,
-  height: "100%",
+  height: 60,
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",
