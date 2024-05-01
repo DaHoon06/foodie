@@ -1,15 +1,15 @@
 "use client";
 
-import {ReactElement, useEffect, useRef, useState} from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import useFeedStore from "@store/feedStore";
-import {AddressState} from "@interfaces/feeds/feed.post";
-import {Skeleton} from "@components/ui/skeleton/Skeleton";
+import { AddressState } from "@interfaces/feeds/feed.post";
+import { Skeleton } from "@components/ui/skeleton/Skeleton";
 
 const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
 
 export const KakaoAddressMap = (): ReactElement => {
   const mapContainer = useRef();
-  const {setFeedItem, item} = useFeedStore();
+  const { setFeedItem, item } = useFeedStore();
   const [address, setAddress] = useState<AddressState>({
     name: "",
     x: "",
@@ -29,7 +29,7 @@ export const KakaoAddressMap = (): ReactElement => {
   useEffect(() => {
     setPending(true);
     const script = document.createElement("script");
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&autoload=true&libraries=services`;
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&autoload=false&libraries=services`;
     script.type = "text/javascript";
     script.async = true;
     document.head.appendChild(script);
@@ -49,7 +49,7 @@ export const KakaoAddressMap = (): ReactElement => {
           const map = new kakao.maps.Map(mapElement, options);
           const geocoder = new kakao.maps.services.Geocoder();
           const marker = new kakao.maps.Marker(); // 클릭한 위치를 표시할 마커입니다
-          const infowindow = new kakao.maps.InfoWindow({zindex: 1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+          const infowindow = new kakao.maps.InfoWindow({ zindex: 1 }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
 
           searchAddrFromCoords(map.getCenter(), displayCenterInfo);
           setPending(false);
@@ -61,7 +61,7 @@ export const KakaoAddressMap = (): ReactElement => {
               searchDetailAddrFromCoords(
                 mouseEvent.latLng,
                 function (result: any, status: any) {
-                  const {address} = result[0];
+                  const { address } = result[0];
                   const {
                     address_name,
                     region_1depth_name,
@@ -71,8 +71,8 @@ export const KakaoAddressMap = (): ReactElement => {
                   if (status === kakao.maps.services.Status.OK) {
                     var detailAddr = !!result[0].road_address
                       ? "<div>도로명주소 : " +
-                      result[0].road_address.address_name +
-                      "</div>"
+                        result[0].road_address.address_name +
+                        "</div>"
                       : "";
                     detailAddr +=
                       "<div>지번 주소 : " +
@@ -155,7 +155,7 @@ export const KakaoAddressMap = (): ReactElement => {
 
   return (
     <>
-      {<Skeleton isLoading={pending}/>}
+      {<Skeleton isLoading={pending} />}
       <div
         id={"map"}
         ref={mapContainer}

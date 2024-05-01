@@ -14,14 +14,14 @@ export const KakaoMap = (): ReactElement => {
   const mapContainer = useRef();
   const [pending, setPending] = useState(true);
   const [csrLoading, setCsrLoading] = useState(false);
-  const { userId, isLogin } = useAuth();
+  const { userId } = useAuth();
 
   useEffect(() => {
     prefetchingMarker(userId);
     setCsrLoading(true);
   }, []);
 
-  const { data: mapData, isLoading } = useQuery(
+  const { data: mapData } = useQuery(
     [queryKeys.maps.marker, userId],
     () => getMarkerApi(userId),
     {
