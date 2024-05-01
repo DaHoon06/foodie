@@ -21,6 +21,7 @@ export class UserService {
     const userEntity = UserEntity.create({
       username: user.username,
       creatorId: user.id,
+      nickname: user.username,
       description: '',
     });
     return this.userRepository.createUser(userEntity);
