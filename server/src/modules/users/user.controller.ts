@@ -5,6 +5,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
@@ -21,8 +22,8 @@ import { ProfileUpdateDto } from '@modules/users/dto/profile.update.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('/recommend/:creatorId')
-  async recommendUser(@Param('creatorId') creatorId: string) {
+  @Get('/recommend')
+  async recommendUser(@Query('id') creatorId: string) {
     return this.userService.randomRecommendUser(creatorId);
   }
 

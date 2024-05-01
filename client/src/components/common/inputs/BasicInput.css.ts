@@ -1,19 +1,19 @@
-import {style} from "@vanilla-extract/css";
-import {vars} from "@styles/theme.css";
+import { style } from "@vanilla-extract/css";
+import { vars } from "@styles/theme.css";
 
 export const basicInputLayout = style({
-  width: '100%',
-  display: 'flex',
-  alignItems: 'flex-start',
-  justifyContent: 'flex-start',
-  flexDirection: 'column',
-  gap: 10
+  width: "100%",
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "flex-start",
+  flexDirection: "column",
+  gap: 10,
 });
 
 export const inputLayout = style({
   boxSizing: "border-box",
   backgroundColor: vars.colors.backgroundColor,
-  borderRadius: 2,
+  borderRadius: 6,
   fontSize: 14,
   border: `1px solid ${vars.colors.gray000}`,
   color: vars.colors.black500,
@@ -25,7 +25,7 @@ export const inputLayout = style({
   selectors: {
     "&::placeholder": {
       fontWeight: 300,
-      color: vars.colors.gray300
+      color: vars.colors.gray300,
     },
   },
 });

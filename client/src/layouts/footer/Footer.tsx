@@ -14,11 +14,11 @@ export const Footer = (): ReactElement => {
         </div>
         <address>
           <Typography color={'gray400'} fontSize={14}>대표자 : 전다훈</Typography>
-          <Typography color={'gray400'} fontSize={14}>이메일 : dahoon226@gmail.com</Typography>
+          <Typography color={'gray400'} fontSize={14}>이메일 : gofoodie.team@gmail.com</Typography>
         </address>
       </div>
       <div className={styles.copyright}>
-        <Typography color={'white000'} fontSize={12}>ⓒ 2024. Dahoon06. All rights reserved.</Typography>
+        <Typography color={'white000'} fontSize={12}>ⓒ 2024. goFoodie. All rights reserved.</Typography>
         <FlexBox direction={'row'} gap={10}>
           <Typography color={'white000'} fontSize={12}>이용약관</Typography>
           <Typography color={'white000'} fontSize={12}>개인정보처리방침</Typography>

@@ -16,5 +16,5 @@ export const commentBoxContainer = style({
   alignItems: 'center',
   justifyContent: "center",
   gap: 10,
-  padding: '0 2em'
+  padding: '0 1em'
 })
