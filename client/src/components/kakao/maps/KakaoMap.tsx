@@ -50,10 +50,10 @@ export const KakaoMap = (): ReactElement => {
     });
 
     const imageSrc =
-      "https://gofoodie-images.s3.ap-northeast-2.amazonaws.com/assets/marker.png";
+      "https://gofoodie-images.s3.ap-northeast-2.amazonaws.com/assets/marker.svg";
 
     for (let i = 0; i < positions.length; i++) {
-      const imageSize = new kakao.maps.Size(24, 28);
+      const imageSize = new kakao.maps.Size(20, 30);
       const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
       const content =
