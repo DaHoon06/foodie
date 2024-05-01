@@ -9,7 +9,7 @@ const TimelinePage: NextPage = (): ReactElement => {
     <BasicLayout>
       <TitleBox justifyContent={'center'}>
         <Typography variant={'h1'} fontWeight={600}>
-          내가 작성한 여행기
+          타임라인
         </Typography>
       </TitleBox>
     </BasicLayout>
