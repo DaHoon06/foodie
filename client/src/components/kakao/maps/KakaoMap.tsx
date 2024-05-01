@@ -149,7 +149,7 @@ export const KakaoMap = (): ReactElement => {
         }
       }
     };
-  }, [mapContainer, mapData]);
+  }, [mapContainer, mapData, csrLoading]);
 
   return (
     <>

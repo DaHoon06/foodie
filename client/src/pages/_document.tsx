@@ -15,7 +15,7 @@ export default function Document() {
         <link rel="manifest" href="/manifest.json"/>
         <link rel="icon" href="/favicon.ico"/>
         <Script src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&autoload=false&libraries=services`}
-                strategy="beforeInteractive"
+                strategy="afterInteractive"
                 type={'text/javascript'} async={true}/>
       </Head>
       <body>
