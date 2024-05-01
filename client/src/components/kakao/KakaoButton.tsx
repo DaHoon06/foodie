@@ -23,12 +23,13 @@ export const KakaoButton = (): ReactElement => {
   const handleClickKakaoSignIn = async () => {
     try {
       const user: any = await signIn("kakao");
-
-      const body = {
-        username: user.name,
-        token: user.id,
-      };
-      const { data } = await axiosInstance.post("/users/sign-in", body);
+      if (user) {
+        const body = {
+          username: user.name,
+          token: user.id,
+        };
+        const { data } = await axiosInstance.post("/users/sign-in", body);
+      }
     } catch (e) {
       console.log(e);
     }
