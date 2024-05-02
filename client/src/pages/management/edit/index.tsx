@@ -11,7 +11,6 @@ import BasicInput from "@components/common/inputs/BasicInput";
 import { getUserProfileApi, profileUpdateApi } from "@apis/users/user.api";
 import { getSession } from "next-auth/react";
 import { User } from "@interfaces/users/user";
-import { FileUploadButton } from "@components/common/buttons/FileUploadButton";
 import { axiosInstance } from "@libs/axios";
 import { FaUser } from "react-icons/fa6";
 
@@ -85,17 +84,13 @@ const ProfileEditPage = (props: Props): ReactElement => {
         "Content-Type": "multipart/form-data",
       };
 
-      try {
-        await axiosInstance.post(
-          `/files/upload/profile/${user.creatorId}`,
-          formData,
-          {
-            headers,
-          }
-        );
-      } catch (e) {
-        console.log(e);
-      }
+      await axiosInstance.post(
+        `/files/upload/profile/${user.creatorId}`,
+        formData,
+        {
+          headers,
+        }
+      );
 
       if (data && data.result) {
         await router.push("/management");

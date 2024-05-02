@@ -20,7 +20,7 @@ export const ProfileInformationBox = (props: Props): ReactElement => {
   const { user } = props;
   const { isLogin } = useAuth();
   const router = useRouter();
-  console.log(user);
+
   const handleClickProfileEdit = () => {
     router.push("/management/edit");
   };

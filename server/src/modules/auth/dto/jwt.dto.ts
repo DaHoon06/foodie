@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class JwtPayload {
   @IsString()
@@ -6,4 +6,8 @@ export class JwtPayload {
 
   @IsString()
   id: string;
+
+  @IsString()
+  @IsOptional()
+  profile: string;
 }

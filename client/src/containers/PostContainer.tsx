@@ -23,6 +23,8 @@ export const FeedPostContainer = (): ReactElement => {
   const { setIsOpen, setModalType } = useModalStore();
   const { item, setFeedItem } = useFeedStore();
   const { data: session } = useSession();
+  const profile = session?.profile ? session?.profile : "/images/profile.png";
+
   const [previewUrl, setPreviewUrl] = useState<string[]>([]);
   const [postForm, setPostForm] = useState<FeedPostBody>({
     content: "",
@@ -165,7 +167,7 @@ export const FeedPostContainer = (): ReactElement => {
             alignItems="flex-center"
             justifyContent="flex-start"
           >
-            <Avatar alt={"dahoon"} src={"/images/dh.png"} />
+            <Avatar alt={"dahoon"} src={profile} />
             <Textarea
               placeholder={"여러분의 이야기를 들려주세요."}
               onChangeTextarea={onChangeTextarea}

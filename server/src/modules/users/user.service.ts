@@ -32,20 +32,32 @@ export class UserService {
     return this.userRepository.randomRecommendUser(creatorId);
   }
 
-  async userChecked(user: any): Promise<string> {
+  async userChecked(user: any): Promise<{ token: string; profile: string }> {
     const { id, name } = user;
     const findUser = await this.findOneUserByCreatorId(id);
+    let profile = '';
 
-    let userData = findUser;
+    if (findUser && findUser.files.length > 0) {
+      profile = findUser.files[0].path1;
+    }
+
     if (!findUser) {
       const data = {
         username: name,
         id,
       };
-      userData = await this.createUser(data);
+      await this.createUser(data);
     }
     // token 생성
-    return this.authService.createToken({ id, username: name });
+    const token = await this.authService.createToken({
+      id,
+      username: name,
+      profile,
+    });
+    return {
+      token,
+      profile,
+    };
   }
 
   async profileUpdate(body: ProfileUpdateDto, user: JwtPayload) {
