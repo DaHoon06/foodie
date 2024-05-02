@@ -1,10 +1,10 @@
-import {style} from "@vanilla-extract/css";
-import {vars} from "@styles/theme.css";
+import { style } from "@vanilla-extract/css";
+import { vars } from "@styles/theme.css";
 
 export const feedCardLayout = style({
   backgroundColor: vars.colors.white000,
-  width: '100%',
-  height: 'auto',
+  width: "100%",
+  height: "auto",
   padding: "1em",
 });
 
@@ -13,6 +13,16 @@ export const profileBox = style({
   height: 44,
   borderRadius: "50%",
 });
+
+export const profileImage = style({
+  display: "block",
+  width: 44,
+  height: 44,
+  borderRadius: "50%",
+  objectFit: "cover",
+  border: "1px solid #ececec",
+});
+
 export const contentBox = style({
   margin: "16px auto",
   width: "100%",
