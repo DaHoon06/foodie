@@ -30,8 +30,8 @@ export const profileImageImageBox = style({
 
 export const profileImage = style({
   display: "block",
-  width: 100,
-  height: 100,
+  width: 96,
+  height: 96,
   objectFit: "cover",
   borderRadius: "50%",
   border: "1px solid #ececec",
@@ -55,7 +55,7 @@ export const profileImageEditButtonWrapper = style({
 
 export const profileImageEditButton = style({
   position: "relative",
-  left: 38,
+  left: 36,
   top: 34,
   zIndex: 999,
   backgroundColor: "rgba(138,138,138,0.68)",

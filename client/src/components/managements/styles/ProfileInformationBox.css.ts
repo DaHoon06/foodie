@@ -26,3 +26,12 @@ export const profileBox = style({
 export const profileInfoBox = style({
   marginLeft: "1em",
 });
+
+export const profileImage = style({
+  display: "block",
+  width: 60,
+  height: 60,
+  objectFit: "cover",
+  borderRadius: "50%",
+  border: "1px solid #ececec",
+});

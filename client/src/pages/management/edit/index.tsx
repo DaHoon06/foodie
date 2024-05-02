@@ -36,10 +36,6 @@ const ProfileEditPage = (props: Props): ReactElement => {
     router.back();
   };
 
-  const handleClickProfileImageEdit = () => {
-    alert("이미지 변경하자");
-  };
-
   const handleClickUploadButton = () => {
     fileInput.current?.click();
   };
@@ -150,22 +146,36 @@ const ProfileEditPage = (props: Props): ReactElement => {
 
       <div className={styles.profileEditorLayout}>
         <section className={styles.profileImageImageBox}>
-          {previewUrls.length === 0 && (
+          {previewUrls.length === 0 && user.files.length > 0 ? (
+            <>
+              <Image
+                width={120}
+                height={110}
+                priority={true}
+                src={user.files[0].path1}
+                alt={`Preview`}
+                className={styles.profileImage}
+              />
+            </>
+          ) : previewUrls.length > 0 ? (
+            <>
+              {previewUrls.map((url, index) => (
+                <Image
+                  width={120}
+                  height={110}
+                  key={index}
+                  priority={true}
+                  src={url}
+                  alt={`Preview ${index}`}
+                  className={styles.profileImage}
+                />
+              ))}
+            </>
+          ) : (
             <div className={styles.profileIcon}>
               <FaUser color="#b7b7b7" size={46} />
             </div>
           )}
-          {previewUrls.map((url, index) => (
-            <Image
-              width={120}
-              height={110}
-              key={index}
-              priority={true}
-              src={url}
-              alt={`Preview ${index}`}
-              className={styles.profileImage}
-            />
-          ))}
 
           <div className={styles.profileImageEditButtonWrapper}>
             <button
