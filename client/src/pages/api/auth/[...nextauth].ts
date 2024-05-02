@@ -1,7 +1,7 @@
 import NextAuth from "next-auth/next";
 import KakaoProvider from "next-auth/providers/kakao";
-import {AuthOptions} from "next-auth";
-import {userCheckApi} from "@apis/users/user.api";
+import { AuthOptions } from "next-auth";
+import { userCheckApi } from "@apis/users/user.api";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -14,24 +14,26 @@ export const authOptions: AuthOptions = {
     async signIn(user: any) {
       try {
         return {
-          ...user
-        }
+          ...user,
+        };
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     },
-    async jwt({user, token, account}) {
+    async jwt({ user, token, account }) {
       if (user && Object.entries(user)) {
         const id = account.providerAccountId;
-        const {data} = await userCheckApi(user as User);
-        token.apiToken = data.data;
+        const { data } = await userCheckApi(user as User);
+        token.apiToken = data.data.token;
         token.id = id;
+        token.profile = data.data.profile;
       }
       return token;
     },
-    async session({token, session}) {
+    async session({ token, session }) {
       session.apiToken = token.apiToken as unknown as string;
       session.id = token.id as unknown as string;
+      session.profile = token.profile as unknown as string;
       return session;
     },
   },
@@ -46,4 +48,3 @@ export interface User {
   image?: string;
   email?: string;
 }
-

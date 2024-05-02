@@ -1,5 +1,5 @@
-import {style} from "@vanilla-extract/css";
-import {vars} from "@styles/theme.css";
+import { style } from "@vanilla-extract/css";
+import { vars } from "@styles/theme.css";
 
 export const profileEditTopLayout = style({
   width: "100%",
@@ -8,16 +8,15 @@ export const profileEditTopLayout = style({
   top: 0,
   left: 0,
   borderBottom: "1px solid #dddddd",
-  padding: '0 20px'
+  padding: "0 20px",
 });
-
 
 export const profileEditorLayout = style({
   backgroundColor: vars.colors.white000,
   width: "100%",
-  height: '100%',
-  padding: '20px 20px'
-})
+  height: "100%",
+  padding: "20px 20px",
+});
 
 export const profileImageImageBox = style({
   width: "100%",
@@ -25,45 +24,57 @@ export const profileImageImageBox = style({
   justifyContent: "center",
   alignItems: "center",
   borderRadius: 4,
-  marginTop: '2em',
-  marginBottom: '2em'
+  marginTop: "2em",
+  marginBottom: "2em",
 });
 
 export const profileImage = style({
   display: "block",
-  width: "auto",
-  maxWidth: 107,
-  height: "auto",
+  width: 96,
+  height: 96,
   objectFit: "cover",
-  borderRadius: 8,
+  borderRadius: "50%",
+  border: "1px solid #ececec",
+});
+
+export const profileIcon = style({
+  width: 100,
+  height: 100,
+  objectFit: "cover",
+  borderRadius: "50%",
+  border: "1px solid #ececec",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#ededed",
 });
 
 export const profileImageEditButtonWrapper = style({
-  position: 'absolute'
+  position: "absolute",
 });
 
 export const profileImageEditButton = style({
-  position: 'relative',
-  left: 38,
+  position: "relative",
+  left: 36,
   top: 34,
   zIndex: 999,
   backgroundColor: "rgba(138,138,138,0.68)",
   width: 28,
   height: 28,
-  borderRadius: '50%',
+  borderRadius: "50%",
   display: "flex",
-  alignItems:"center",
-  justifyContent: 'center'
+  alignItems: "center",
+  justifyContent: "center",
 });
 
 export const profileEditorContainer = style({
-  width: '100%',
+  width: "100%",
   display: "flex",
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  justifyContent: 'flex-start',
-  gap: 20
-})
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "flex-start",
+  gap: 20,
+});
 
 export const editTextareaWrapper = style({
   width: "100%",
@@ -72,10 +83,10 @@ export const editTextareaWrapper = style({
 });
 
 export const editTextarea = style({
-  all: 'unset',
-  "-webkit-appearance": 'none',
-  "-moz-appearance": 'none',
-  appearance: 'none',
+  all: "unset",
+  "-webkit-appearance": "none",
+  "-moz-appearance": "none",
+  appearance: "none",
   width: "100%",
   height: 144,
   boxSizing: "border-box",
@@ -85,18 +96,18 @@ export const editTextarea = style({
   border: `1px solid ${vars.colors.gray000}`,
   color: vars.colors.black500,
   resize: "none",
-  overflow: 'auto',
+  overflow: "auto",
   padding: "1em",
   outline: "none",
-  whiteSpace: 'pre-wrap',
+  whiteSpace: "pre-wrap",
 
   selectors: {
-    '&::-webkit-scrollbar': {
-      display: 'none'
+    "&::-webkit-scrollbar": {
+      display: "none",
     },
     "&::placeholder": {
       fontWeight: 300,
-      color: vars.colors.gray300
+      color: vars.colors.gray300,
     },
-  }
+  },
 });

@@ -2,12 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
-import { FileToS3 } from '@modules/file/enum/file.enum';
+import { FileToS3 } from '@modules/files/enum/file.enum';
 import { FileImageRepository } from './file.image.repository';
-import { FileObjectDto } from '@modules/file/dto/file.object.dto';
+import { FileObjectDto } from '@modules/files/dto/file.object.dto';
 import { FeedService } from '@modules/feeds/feed.service';
 import { UserService } from '@modules/users/user.service';
 import { FeedEntity } from '@modules/feeds/entities/feed.entity';
+import { UserEntity } from '@modules/users/entities/user.entity';
 
 @Injectable()
 export class FileService {
@@ -37,6 +38,19 @@ export class FileService {
         fileType: 'feed',
         feed,
         user: feed.user,
+      };
+      this.fileImageRepository.createFileData(createData);
+    }
+  }
+
+  async createProfileFileData(files: Array<Express.Multer.File>, id: string) {
+    const fileObjs = await this.fileUploadToS3(files);
+    const user: UserEntity = await this.userService.findOneUserByCreatorId(id);
+    for (const file of fileObjs) {
+      const createData = {
+        ...file,
+        fileType: 'user',
+        user: user,
       };
       this.fileImageRepository.createFileData(createData);
     }

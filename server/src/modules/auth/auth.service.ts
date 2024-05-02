@@ -19,6 +19,7 @@ export class AuthService {
       {
         id: payload.id,
         username: payload.username,
+        profile: payload.profile,
       },
       {
         secret: this.secret,

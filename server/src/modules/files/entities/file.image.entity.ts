@@ -4,7 +4,6 @@ import {
   CreateDateColumn,
   Entity,
   Generated,
-  JoinColumn,
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm';
@@ -44,6 +43,6 @@ export class FileImageEntity extends BaseEntity {
   @ManyToOne(() => FeedEntity, (feed) => feed.files)
   feed: FeedEntity;
 
-  @ManyToOne(() => UserEntity)
+  @ManyToOne(() => UserEntity, (user) => user.files)
   user: UserEntity;
 }

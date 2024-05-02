@@ -12,7 +12,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { ShopEntity } from '@modules/shop/entities/shop.entity';
-import { FileImageEntity } from '@modules/file/entities/file.image.entity';
+import { FileImageEntity } from '@modules/files/entities/file.image.entity';
 
 @Entity()
 export class FeedEntity extends BaseEntity {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { FileImageEntity } from '@modules/file/entities/file.image.entity';
+import { FileImageEntity } from '@modules/files/entities/file.image.entity';
 
 @Injectable()
 export class FileImageRepository extends Repository<FileImageEntity> {

@@ -29,8 +29,7 @@ export class UserController {
 
   @Post('/checked')
   async test(@Body() user: any) {
-    const token = await this.userService.userChecked(user);
-    return token;
+    return this.userService.userChecked(user);
   }
 
   @Patch('/profile')

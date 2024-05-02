@@ -16,9 +16,14 @@ export class UserRepository extends Repository<UserEntity> {
 
   async findOneUserByCreatorId(creatorId: string): Promise<UserEntity> {
     return this.createQueryBuilder('user')
+      .leftJoinAndSelect('user.files', 'files', 'files.fileType = :fileType', {
+        fileType: 'user',
+      })
       .where('user.creatorId = :creatorId', {
         creatorId,
       })
+      .orderBy('files.created_at', 'DESC')
+      .limit(1)
       .getOne();
   }
 
