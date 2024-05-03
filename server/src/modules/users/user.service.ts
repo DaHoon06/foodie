@@ -35,12 +35,6 @@ export class UserService {
   async userChecked(user: any): Promise<{ token: string; profile: string }> {
     const { id, name } = user;
     const findUser = await this.findOneUserByCreatorId(id);
-    let profile = '';
-
-    if (findUser && findUser.files.length > 0) {
-      profile = findUser.files[0].path1;
-    }
-
     if (!findUser) {
       const data = {
         username: name,
@@ -52,11 +46,11 @@ export class UserService {
     const token = await this.authService.createToken({
       id,
       username: name,
-      profile,
+      profile: findUser.profileImage,
     });
     return {
       token,
-      profile,
+      profile: findUser.profileImage,
     };
   }
 
