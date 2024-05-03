@@ -3,6 +3,7 @@ import {
   Param,
   Post,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { diskStorage } from 'multer';
@@ -10,7 +11,11 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import * as path from 'path';
 import * as fs from 'node:fs';
 import { FileService } from '@modules/files/file.service';
+import { UserObject } from '@decorators/user.object.decorator';
+import { JwtPayload } from '@modules/auth/dto/jwt.dto';
+import { JwtGuard } from '@modules/auth/guards/jwt.guard';
 
+@UseGuards(JwtGuard)
 @Controller('files')
 export class FileController {
   private readonly filesPath: string;
@@ -66,7 +71,8 @@ export class FileController {
   uploadProfileFile(
     @Param('id') id: string,
     @UploadedFiles() files: Array<Express.Multer.File>,
+    @UserObject() user: JwtPayload,
   ) {
-    return this.fileService.createProfileFileData(files, id);
+    return this.fileService.createProfileFileData(files, id, user);
   }
 }
