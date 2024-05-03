@@ -72,7 +72,7 @@ export class FeedRepository extends Repository<FeedEntity> {
           userId: list.user._id,
           username: list.user.username,
           nickname: list.user.nickname,
-          thumbnail: '',
+          profileImage: list.user.profileImage,
         };
       }
 
@@ -105,16 +105,9 @@ export class FeedRepository extends Repository<FeedEntity> {
       .where('feed.deleted = false')
       .leftJoinAndSelect('feed.shop', 'shop')
       .leftJoinAndSelect('feed.user', 'user')
-      .leftJoinAndSelect(
-        'user.files',
-        'user_files',
-        'user_files.fileType = :fileType',
-        { fileType: 'user' },
-      )
-      .orderBy('files.created_at', 'DESC')
-      .limit(1)
-      .leftJoinAndSelect('feed.files', 'files');
-    // .select(['feed', 'shop', 'user', 'files']);
+      .leftJoinAndSelect('feed.files', 'files')
+      .select(['feed', 'shop', 'user', 'files']);
+
     if (region !== '전체')
       queryBuilder = queryBuilder.andWhere('shop.sido = :sido', {
         sido: region,
@@ -132,16 +125,11 @@ export class FeedRepository extends Repository<FeedEntity> {
       let shop = null;
 
       if (list.user) {
-        let thumbnail = '';
-        if (list.user.files.length > 0) {
-          thumbnail = list.user.files[0].path1;
-        }
-
         user = {
           userId: list.user._id,
           username: list.user.username,
           nickname: list.user.nickname,
-          thumbnail,
+          profileImage: list.user.profileImage,
         };
       }
 

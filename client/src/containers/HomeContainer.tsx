@@ -1,25 +1,25 @@
 import * as styles from "./HomeContainer.css";
-import { KakaoMap } from "@components/kakao/maps/KakaoMap";
-import { Typography } from "@components/common/typography/Typography";
-import { ThumbnailCard } from "@components/ui/cards/ThumbnailCard";
-import { CustomHorizontalBar } from "@components/nav/CustomHorizontalBar";
+import {KakaoMap} from "@components/kakao/maps/KakaoMap";
+import {Typography} from "@components/common/typography/Typography";
+import {ThumbnailCard} from "@components/ui/cards/ThumbnailCard";
+import {CustomHorizontalBar} from "@components/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { FollowCard } from "@components/ui/cards/FollowCard";
-import { useEffect, useState } from "react";
-import { RegionFilter } from "@components/filters/RegionFilter";
-import { VscSettings } from "react-icons/vsc";
-import { recentlyFeedApi } from "@apis/feeds/feed.api";
-import { todayRecommendUserApi } from "@apis/users/user.api";
-import { FeedFilter } from "@interfaces/feeds/feed.filter";
-import { RecentlyFeedListsState } from "@interfaces/feeds/feed.lists";
-import { RecommendUserLists } from "@interfaces/users/user.lists";
-import { FeedLists } from "@components/feeds/FeedLists";
-import { useAuth } from "@providers/AuthProvider";
-import { Skeleton } from "@components/ui/skeleton/Skeleton";
+import {FollowCard} from "@components/ui/cards/FollowCard";
+import {useEffect, useState} from "react";
+import {RegionFilter} from "@components/filters/RegionFilter";
+import {VscSettings} from "react-icons/vsc";
+import {recentlyFeedApi} from "@apis/feeds/feed.api";
+import {todayRecommendUserApi} from "@apis/users/user.api";
+import {FeedFilter} from "@interfaces/feeds/feed.filter";
+import {RecentlyFeedListsState} from "@interfaces/feeds/feed.lists";
+import {RecommendUserLists} from "@interfaces/users/user.lists";
+import {FeedLists} from "@components/feeds/FeedLists";
+import {useAuth} from "@providers/AuthProvider";
+import {Skeleton} from "@components/ui/skeleton/Skeleton";
 import Link from "next/link";
 
 export const HomeContainer = () => {
-  const { userId, isLogin } = useAuth();
+  const {userId, isLogin} = useAuth();
   const [pending, setPending] = useState(true);
   const [filter, setFilter] = useState<FeedFilter>({
     sido: "전체",
@@ -85,7 +85,7 @@ export const HomeContainer = () => {
         className={styles.filterButton}
       >
         <FlexBox direction={"row"} gap={6}>
-          <VscSettings size={14} color={"#8c8c8c"} />
+          <VscSettings size={14} color={"#8c8c8c"}/>
           <Typography color={"gray400"} fontSize={12}>
             필터
           </Typography>
@@ -96,7 +96,7 @@ export const HomeContainer = () => {
 
   return (
     <div className={styles.homeContainerLayout}>
-      <KakaoMap />
+      <KakaoMap/>
       <div className={styles.homeContainer}>
         <FlexBox
           className={styles.recentlyFeedContainer}
@@ -111,20 +111,20 @@ export const HomeContainer = () => {
             <CustomHorizontalBar>
               <div>
                 <FlexBox gap={8} direction="row">
-                  <div style={{ width: "210px", height: "220px" }}>
-                    <Skeleton width={210} height={200} isLoading={true} />
+                  <div style={{width: "210px", height: "220px"}}>
+                    <Skeleton width={210} height={200} isLoading={true}/>
                   </div>
-                  <div style={{ width: "210px", height: "220px" }}>
-                    <Skeleton width={210} height={200} isLoading={true} />
+                  <div style={{width: "210px", height: "220px"}}>
+                    <Skeleton width={210} height={200} isLoading={true}/>
                   </div>
-                  <div style={{ width: "210px", height: "220px" }}>
-                    <Skeleton width={210} height={200} isLoading={true} />
+                  <div style={{width: "210px", height: "220px"}}>
+                    <Skeleton width={210} height={200} isLoading={true}/>
                   </div>
-                  <div style={{ width: "210px", height: "220px" }}>
-                    <Skeleton width={210} height={200} isLoading={true} />
+                  <div style={{width: "210px", height: "220px"}}>
+                    <Skeleton width={210} height={200} isLoading={true}/>
                   </div>
-                  <div style={{ width: "210px", height: "220px" }}>
-                    <Skeleton width={210} height={200} isLoading={true} />
+                  <div style={{width: "210px", height: "220px"}}>
+                    <Skeleton width={210} height={200} isLoading={true}/>
                   </div>
                 </FlexBox>
               </div>
@@ -139,7 +139,7 @@ export const HomeContainer = () => {
                         href={`/feeds/${feed.id}`}
                         key={crypto.randomUUID()}
                       >
-                        <ThumbnailCard item={feed} />
+                        <ThumbnailCard item={feed}/>
                       </Link>
                     );
                   })}
@@ -163,20 +163,20 @@ export const HomeContainer = () => {
             <CustomHorizontalBar>
               <div>
                 <FlexBox gap={8} direction="row">
-                  <div style={{ width: "140px", height: "210px" }}>
-                    <Skeleton width={140} height={210} isLoading={true} />
+                  <div style={{width: "140px", height: "210px"}}>
+                    <Skeleton width={140} height={210} isLoading={true}/>
                   </div>
-                  <div style={{ width: "140px", height: "210px" }}>
-                    <Skeleton width={140} height={210} isLoading={true} />
+                  <div style={{width: "140px", height: "210px"}}>
+                    <Skeleton width={140} height={210} isLoading={true}/>
                   </div>
-                  <div style={{ width: "140px", height: "210px" }}>
-                    <Skeleton width={140} height={210} isLoading={true} />
+                  <div style={{width: "140px", height: "210px"}}>
+                    <Skeleton width={140} height={210} isLoading={true}/>
                   </div>
-                  <div style={{ width: "140px", height: "210px" }}>
-                    <Skeleton width={140} height={210} isLoading={true} />
+                  <div style={{width: "140px", height: "210px"}}>
+                    <Skeleton width={140} height={210} isLoading={true}/>
                   </div>
-                  <div style={{ width: "140px", height: "210px" }}>
-                    <Skeleton width={140} height={210} isLoading={true} />
+                  <div style={{width: "140px", height: "210px"}}>
+                    <Skeleton width={140} height={210} isLoading={true}/>
                   </div>
                 </FlexBox>
               </div>
@@ -187,8 +187,8 @@ export const HomeContainer = () => {
                 <CustomHorizontalBar>
                   {recommendUser.map((user, index) => {
                     return (
-                      <div key={`${crypto.randomUUID()}_${user._id}`}>
-                        <FollowCard user={user} />
+                      <div key={`${crypto.randomUUID()}`}>
+                        <FollowCard user={user}/>
                       </div>
                     );
                   })}
@@ -211,7 +211,7 @@ export const HomeContainer = () => {
         <Typography variant="h2" fontWeight={600} color={"black100"}>
           미식가 여행기
         </Typography>
-        <FilterButton />
+        <FilterButton/>
       </div>
       <div
         style={{
@@ -220,9 +220,9 @@ export const HomeContainer = () => {
         }}
         className={styles.filterLists}
       >
-        <RegionFilter filter={setFilters} />
+        <RegionFilter filter={setFilters}/>
       </div>
-      <FeedLists filter={filter} />
+      <FeedLists filter={filter}/>
     </div>
   );
 };

@@ -1,15 +1,15 @@
-import { ReactElement } from "react";
+import {ReactElement} from "react";
 
 import * as styles from "./styles/ProfileInformationBox.css";
 import classNames from "classnames";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { FaUser } from "react-icons/fa6";
-import { Typography } from "@components/common/typography/Typography";
-import { Button } from "@components/common/buttons";
-import { useRouter } from "next/router";
-import { useAuth } from "@providers/AuthProvider";
-import { KakaoButton } from "@components/kakao/KakaoButton";
-import { User } from "@interfaces/users/user";
+import {FaUser} from "react-icons/fa6";
+import {Typography} from "@components/common/typography/Typography";
+import {Button} from "@components/common/buttons";
+import {useRouter} from "next/router";
+import {useAuth} from "@providers/AuthProvider";
+import {KakaoButton} from "@components/kakao/KakaoButton";
+import {User} from "@interfaces/users/user";
 import Image from "next/image";
 
 interface Props {
@@ -17,8 +17,8 @@ interface Props {
 }
 
 export const ProfileInformationBox = (props: Props): ReactElement => {
-  const { user } = props;
-  const { isLogin } = useAuth();
+  const {user} = props;
+  const {isLogin} = useAuth();
   const router = useRouter();
 
   const handleClickProfileEdit = () => {
@@ -31,23 +31,14 @@ export const ProfileInformationBox = (props: Props): ReactElement => {
         <>
           <FlexBox direction="row" gap={8} justifyContent="space-between">
             <FlexBox direction="row" justifyContent="flex-start" gap={10}>
-              {user.files.length > 0 ? (
-                <>
-                  <Image
-                    width={120}
-                    height={110}
-                    priority={true}
-                    src={user.files[0].path1}
-                    alt={`Preview`}
-                    className={styles.profileImage}
-                  />
-                </>
-              ) : (
-                <div className={styles.profileBox}>
-                  <FaUser color="#b7b7b7" size={26} />
-                </div>
-              )}
-
+                <Image
+                  width={120}
+                  height={110}
+                  priority={true}
+                  src={user.profileImage}
+                  alt={`Preview`}
+                  className={styles.profileImage}
+                />
               <div className={styles.profileInfoBox}>
                 <FlexBox direction="row" justifyContent="flex-start" gap={8}>
                   <FlexBox justifyContent="flex-start">
@@ -127,7 +118,7 @@ export const ProfileInformationBox = (props: Props): ReactElement => {
           </FlexBox>
         </>
       ) : (
-        <KakaoButton />
+        <KakaoButton/>
       )}
     </FlexBox>
   );

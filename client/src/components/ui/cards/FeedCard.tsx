@@ -1,12 +1,12 @@
-import { ReactElement } from "react";
+import {ReactElement} from "react";
 import * as styles from "./styles/FeedCard.css";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { Typography } from "@components/common/typography/Typography";
+import {Typography} from "@components/common/typography/Typography";
 import Image from "next/image";
-import { FaComment, FaRegHeart } from "react-icons/fa6";
-import { formatDate } from "@utils/date";
-import { FeedListsState } from "@interfaces/feeds/feed.lists";
-import { CarouselSwipe } from "@components/ui/carousel/CarouselSwipe";
+import {FaComment, FaRegHeart} from "react-icons/fa6";
+import {formatDate} from "@utils/date";
+import {FeedListsState} from "@interfaces/feeds/feed.lists";
+import {CarouselSwipe} from "@components/ui/carousel/CarouselSwipe";
 import Link from "next/link";
 
 export type FeedListType = FeedListsState;
@@ -16,9 +16,8 @@ interface Props {
 }
 
 export const FeedCard = (props: Props): ReactElement => {
-  const { feedId, feedContent, feedCreatedDate, user, shop, files } =
+  const {feedId, feedContent, feedCreatedDate, user, shop, files} =
     props.feedCard;
-  const profile = user?.thumbnail ? user?.thumbnail : "/images/profile.png";
   return (
     <article className={styles.feedCardLayout}>
       <Link href={`/feeds/${feedId}`}>
@@ -26,7 +25,7 @@ export const FeedCard = (props: Props): ReactElement => {
           <div className={styles.profileBox}>
             <Image
               className={styles.profileImage}
-              src={profile}
+              src={user.profileImage}
               alt={`${user.nickname}_profile_image`}
               width={44}
               height={44}
@@ -53,7 +52,7 @@ export const FeedCard = (props: Props): ReactElement => {
         </Typography>
       </div>
 
-      {files && files.length > 0 && <CarouselSwipe items={files} />}
+      {files && files.length > 0 && <CarouselSwipe items={files}/>}
       {shop && Object.entries(shop) && (
         <div className={styles.storeInfoBox}>
           <Typography fontSize={14} fontWeight={500}>
@@ -70,11 +69,11 @@ export const FeedCard = (props: Props): ReactElement => {
         gap={10}
         className={styles.storeOptions}
       >
-        <FaRegHeart color={"#888888"} />
+        <FaRegHeart color={"#888888"}/>
         <Typography fontSize={14} fontWeight={300} color={"gray400"}>
           0
         </Typography>
-        <FaComment color={"#888888"} />
+        <FaComment color={"#888888"}/>
         <Typography fontSize={14} fontWeight={300} color={"gray400"}>
           0
         </Typography>

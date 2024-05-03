@@ -6,5 +6,7 @@ export interface User {
   created_at: Date;
   updated_at: Date;
   type: string;
+  profileImage: string;
   files?: any[];
+  username: string;
 }

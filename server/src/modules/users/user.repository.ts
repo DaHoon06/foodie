@@ -16,13 +16,9 @@ export class UserRepository extends Repository<UserEntity> {
 
   async findOneUserByCreatorId(creatorId: string): Promise<UserEntity> {
     return this.createQueryBuilder('user')
-      .leftJoinAndSelect('user.files', 'files', 'files.fileType = :fileType', {
-        fileType: 'user',
-      })
       .where('user.creatorId = :creatorId', {
         creatorId,
       })
-      .orderBy('files.created_at', 'DESC')
       .limit(1)
       .getOne();
   }
@@ -37,7 +33,6 @@ export class UserRepository extends Repository<UserEntity> {
 
   async randomRecommendUser(creatorId: string) {
     let queryBuilder = this.createQueryBuilder('user')
-      .select(['user._id', 'user.username'])
       .orderBy('RAND()')
       .limit(10);
 
