@@ -31,7 +31,6 @@ const ManagementPage = ({user}: Props): ReactElement => {
 
       <FlexBox justifyContent="flex-start" gap={10}>
         <ProfileInformationBox user={user}/>
-
         <ManagementLists/>
       </FlexBox>
     </BasicLayout>

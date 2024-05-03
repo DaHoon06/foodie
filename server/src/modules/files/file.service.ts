@@ -9,6 +9,7 @@ import { FeedService } from '@modules/feeds/feed.service';
 import { UserService } from '@modules/users/user.service';
 import { FeedEntity } from '@modules/feeds/entities/feed.entity';
 import { UserEntity } from '@modules/users/entities/user.entity';
+import { JwtPayload } from '@modules/auth/dto/jwt.dto';
 
 @Injectable()
 export class FileService {
@@ -43,17 +44,25 @@ export class FileService {
     }
   }
 
-  async createProfileFileData(files: Array<Express.Multer.File>, id: string) {
+  async createProfileFileData(
+    files: Array<Express.Multer.File>,
+    id: string,
+    userPayload: JwtPayload,
+  ) {
     const fileObjs = await this.fileUploadToS3(files);
     const user: UserEntity = await this.userService.findOneUserByCreatorId(id);
+    let path = '';
     for (const file of fileObjs) {
       const createData = {
         ...file,
         fileType: 'user',
         user: user,
       };
+      path = file.path1;
       this.fileImageRepository.createFileData(createData);
     }
+
+    await this.userService.profileUpdate({ profileImage: path }, userPayload);
   }
 
   async fileUploadToS3(

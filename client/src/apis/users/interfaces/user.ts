@@ -2,6 +2,8 @@
 export interface RecommendUserListsApi {
   _id: string;
   username: string;
+  description: string;
+  profileImage: string;
 }
 
 

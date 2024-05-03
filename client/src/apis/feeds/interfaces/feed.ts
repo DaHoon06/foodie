@@ -2,7 +2,7 @@ export interface FeedListUser {
   userId: string;
   username: string;
   nickname: string;
-  thumbnail?: string;
+  profileImage: string;
 }
 
 export interface FeedListShop {
