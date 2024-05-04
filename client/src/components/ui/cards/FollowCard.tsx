@@ -1,8 +1,9 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import * as styles from "./styles/FollowCard.css";
 import Image from "next/image";
-import {Typography} from "@components/common/typography/Typography";
-import {Button} from "@components/common/buttons";
+import { Typography } from "@components/common/typography/Typography";
+import { Button } from "@components/common/buttons";
+import { Avatar } from "../avatar/Avatar";
 
 interface FollowCardProps {
   _id: string;
@@ -17,7 +18,7 @@ interface Props {
 }
 
 export const FollowCard = (props: Props) => {
-  const {username, _id, description, follow, profileImage} = props.user;
+  const { username, _id, description, follow, profileImage } = props.user;
 
   const handleClickFollowButton = () => {
     alert(`${_id}_팔로우`);
@@ -27,14 +28,7 @@ export const FollowCard = (props: Props) => {
     <article className={styles.followCardLayout}>
       <FlexBox gap={10} justifyContent={"flex-start"}>
         <div className={styles.thumbnailImageBox}>
-          <Image
-            className={styles.thumbnailImage}
-            src={profileImage}
-            alt={"profile_image"}
-            priority={true}
-            width={70}
-            height={70}
-          />
+          <Avatar src={profileImage} alt="profile_image" />
         </div>
 
         <FlexBox justifyContent={"space-between"} alignItems={"center"}>
