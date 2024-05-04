@@ -3,7 +3,7 @@ import { style } from "@vanilla-extract/css";
 export const avatarLayout = style({
   borderRadius: "50%",
   border: "none",
-  width: "fit-content%",
+  width: "fit-content",
   height: "100%",
   minWidth: 44,
   minHeight: 44,
