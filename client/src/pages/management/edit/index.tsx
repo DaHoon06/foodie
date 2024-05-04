@@ -1,18 +1,19 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import {BasicLayout} from "@layouts/BasicLayout";
-import {GetServerSideProps, GetServerSidePropsContext, NextPage} from "next";
-import {ChangeEvent, ReactElement, useRef, useState} from "react";
-import {Typography} from "@components/common/typography/Typography";
+import { BasicLayout } from "@layouts/BasicLayout";
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import { ChangeEvent, ReactElement, useRef, useState } from "react";
+import { Typography } from "@components/common/typography/Typography";
 import * as styles from "@styles/pages/management/ProfileEdit.css";
-import {MdCameraAlt, MdOutlineKeyboardArrowLeft} from "react-icons/md";
-import {useRouter} from "next/router";
+import { MdCameraAlt, MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import BasicInput from "@components/common/inputs/BasicInput";
-import {getUserProfileApi, profileUpdateApi} from "@apis/users/user.api";
-import {getSession} from "next-auth/react";
-import {User} from "@interfaces/users/user";
-import {axiosInstance} from "@libs/axios";
-import {FaUser} from "react-icons/fa6";
+import { getUserProfileApi, profileUpdateApi } from "@apis/users/user.api";
+import { getSession } from "next-auth/react";
+import { User } from "@interfaces/users/user";
+import { axiosInstance } from "@libs/axios";
+import { FaUser } from "react-icons/fa6";
+import { Avatar } from "@components/ui";
 
 interface Props {
   user: User;
@@ -21,7 +22,7 @@ interface Props {
 const maxSize = 5 * 1024 * 1024; // 5MB
 
 const ProfileEditPage = (props: Props): ReactElement => {
-  const {user} = props;
+  const { user } = props;
   const router = useRouter();
   const [files, setFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
@@ -63,7 +64,7 @@ const ProfileEditPage = (props: Props): ReactElement => {
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     e.preventDefault();
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setProfileUpdateState({
       ...profileUpdateState,
       [name]: value,
@@ -113,7 +114,7 @@ const ProfileEditPage = (props: Props): ReactElement => {
           type={"button"}
           onClick={handleClickHistoryBack}
         >
-          <MdOutlineKeyboardArrowLeft size={24} color={"#d0d0d0"}/>
+          <MdOutlineKeyboardArrowLeft size={24} color={"#d0d0d0"} />
         </button>
         <Typography
           variant={"h1"}
@@ -142,34 +143,20 @@ const ProfileEditPage = (props: Props): ReactElement => {
       <div className={styles.profileEditorLayout}>
         <section className={styles.profileImageImageBox}>
           {previewUrls.length === 0 ? (
-            <>
-              <Image
-                width={120}
-                height={110}
-                priority={true}
+            <div className={styles.profileImage}>
+              <Avatar
                 src={user.profileImage}
-                alt={`Preview`}
-                className={styles.profileImage}
+                alt={`${user.username}_profile_image`}
               />
-            </>
-          ) : previewUrls.length > 0 ? (
+            </div>
+          ) : (
             <>
               {previewUrls.map((url, index) => (
-                <Image
-                  width={120}
-                  height={110}
-                  key={index}
-                  priority={true}
-                  src={url}
-                  alt={`Preview ${index}`}
-                  className={styles.profileImage}
-                />
+                <div key={user.username} className={styles.profileImage}>
+                  <Avatar src={url} alt={`${user.username}_profile_image`} />
+                </div>
               ))}
             </>
-          ) : (
-            <div className={styles.profileIcon}>
-              <FaUser color="#b7b7b7" size={46}/>
-            </div>
           )}
 
           <div className={styles.profileImageEditButtonWrapper}>
@@ -178,12 +165,12 @@ const ProfileEditPage = (props: Props): ReactElement => {
               onClick={handleClickUploadButton}
               aria-label={"profile-image-update-button"}
             >
-              <MdCameraAlt size={20} color={"#2D2D2D"}/>
+              <MdCameraAlt size={20} color={"#2D2D2D"} />
             </button>
             <input
               type={"file"}
               onChange={handleChangeFileUpload}
-              style={{display: "none"}}
+              style={{ display: "none" }}
               ref={fileInput}
               name="images"
               accept=".jpg, .jpeg, .png"
@@ -238,7 +225,7 @@ export const getServerSideProps: GetServerSideProps = async (
     }
     const id = session.id;
     const axiosResult = await getUserProfileApi(id);
-    const {data} = axiosResult;
+    const { data } = axiosResult;
     return {
       props: {
         user: data,

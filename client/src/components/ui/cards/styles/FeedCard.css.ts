@@ -8,10 +8,7 @@ export const feedCardLayout = style({
   padding: "1em",
 });
 
-export const profileBox = style({
-  width: 44,
-  height: 44,
-});
+export const profileBox = style({});
 
 export const contentBox = style({
   margin: "16px auto",

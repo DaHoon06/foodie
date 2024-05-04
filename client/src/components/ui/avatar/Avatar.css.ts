@@ -2,14 +2,18 @@ import { style } from "@vanilla-extract/css";
 
 export const avatarLayout = style({
   borderRadius: "50%",
-  border: "1px solid #ececec",
+  border: "none",
+  width: "fit-content%",
+  height: "100%",
+  minWidth: 44,
+  minHeight: 44,
 });
 
 export const avatarImage = style({
   borderRadius: "50%",
-  width: "auto",
+  width: "100%",
   height: "100%",
   display: "block",
   objectFit: "cover",
-  border: "1px solid #ececec",
+  border: "1px solid transpearnt",
 });
