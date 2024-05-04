@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Typography } from "@components/common/typography/Typography";
 import { Button } from "@components/common/buttons";
 import { Avatar } from "../avatar/Avatar";
+import React from "react";
 
 interface FollowCardProps {
   _id: string;
@@ -17,7 +18,7 @@ interface Props {
   user: FollowCardProps;
 }
 
-export const FollowCard = (props: Props) => {
+export const FollowCard = React.memo((props: Props) => {
   const { username, _id, description, follow, profileImage } = props.user;
 
   const handleClickFollowButton = () => {
@@ -55,4 +56,6 @@ export const FollowCard = (props: Props) => {
       </FlexBox>
     </article>
   );
-};
+});
+
+FollowCard.displayName = "FollowCard";

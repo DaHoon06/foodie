@@ -1,19 +1,20 @@
-import {FeedFilter} from "@interfaces/feeds/feed.filter";
-import {useFeedListsInfinityScroll} from "@services/queries/feeds/useFeedListsQuery";
-import {useIntersectionObserver} from "@hooks/useIntersectionObserver";
-import {SpinnerUi} from "@components/ui";
+import { FeedFilter } from "@interfaces/feeds/feed.filter";
+import { useFeedListsInfinityScroll } from "@services/queries/feeds/useFeedListsQuery";
+import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
+import { SpinnerUi } from "@components/ui";
 import * as styles from "./styles/FeedLists.css";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import {Typography} from "@components/common/typography/Typography";
-import {FeedListsState} from "@interfaces/feeds/feed.lists";
-import {FeedCard} from "@components/ui/cards/FeedCard";
+import { Typography } from "@components/common/typography/Typography";
+import { FeedListsState } from "@interfaces/feeds/feed.lists";
+import { FeedCard } from "@components/ui/cards/FeedCard";
+import React from "react";
 
 interface Props {
   filter: FeedFilter;
 }
 
-export const FeedLists = (props: Props) => {
-  const {filter} = props;
+export const FeedLists = React.memo((props: Props) => {
+  const { filter } = props;
 
   const {
     data: listQueryData,
@@ -23,12 +24,12 @@ export const FeedLists = (props: Props) => {
     hasNextPage,
   } = useFeedListsInfinityScroll(filter);
 
-  const {setTarget} = useIntersectionObserver({
+  const { setTarget } = useIntersectionObserver({
     hasNextPage,
     fetchNextPage,
   });
 
-  if (isLoading) return <SpinnerUi isLoading={true}/>;
+  if (isLoading) return <SpinnerUi isLoading={true} />;
 
   return (
     <>
@@ -57,7 +58,7 @@ export const FeedLists = (props: Props) => {
                     className={styles.feedCardWrapper}
                     key={`${crypto.randomUUID()}_${index}`}
                   >
-                    <FeedCard feedCard={feed}/>
+                    <FeedCard feedCard={feed} />
                   </div>
                 ) : (
                   <div className={styles.emptyLabel}>
@@ -77,10 +78,12 @@ export const FeedLists = (props: Props) => {
         })}
       </section>
       {isFetchingNextPage ? (
-        <SpinnerUi isLoading={true}/>
+        <SpinnerUi isLoading={true} />
       ) : (
-        <div ref={setTarget}/>
+        <div ref={setTarget} />
       )}
     </>
   );
-};
+});
+
+FeedLists.displayName = "FeedLists";
