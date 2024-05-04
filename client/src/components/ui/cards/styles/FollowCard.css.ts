@@ -14,10 +14,6 @@ export const followCardLayout = style({
 export const thumbnailImageBox = style({
   width: 70,
   height: 70,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  borderRadius: 4,
 });
 
 export const profileDescription = style({

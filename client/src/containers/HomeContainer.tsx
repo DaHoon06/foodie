@@ -5,7 +5,7 @@ import { ThumbnailCard } from "@components/ui/cards/ThumbnailCard";
 import { CustomHorizontalBar } from "@components/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { FollowCard } from "@components/ui/cards/FollowCard";
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { RegionFilter } from "@components/filters/RegionFilter";
 import { VscSettings } from "react-icons/vsc";
 import { recentlyFeedApi } from "@apis/feeds/feed.api";
@@ -17,6 +17,68 @@ import { FeedLists } from "@components/feeds/FeedLists";
 import { useAuth } from "@providers/AuthProvider";
 import { Skeleton } from "@components/ui/skeleton/Skeleton";
 import Link from "next/link";
+
+interface FilterButtonProps {
+  isOpen: boolean;
+  onClickFilterOpen: (isOpen: boolean) => void;
+}
+
+/**
+ * @description filter 버튼 - 시 선택
+ * @param props
+ * @returns
+ */
+export const FilterButton = (props: FilterButtonProps): ReactElement => {
+  const { onClickFilterOpen, isOpen } = props;
+
+  const handleClickFilterOpen = () => {
+    onClickFilterOpen(!isOpen);
+  };
+
+  return (
+    <button
+      type={"button"}
+      onClick={handleClickFilterOpen}
+      className={styles.filterButton}
+    >
+      <FlexBox direction={"row"} gap={6}>
+        <VscSettings size={14} color={"#8c8c8c"} />
+        <Typography color={"gray400"} fontSize={12}>
+          필터
+        </Typography>
+      </FlexBox>
+    </button>
+  );
+};
+
+interface FilterListProps {
+  isOpen: boolean;
+  onChangeFilterOption: (region: string) => void;
+}
+/**
+ * @description filter list - 시도 리스트
+ * @param props
+ * @returns
+ */
+export const FillterList = (props: FilterListProps): ReactElement => {
+  const { isOpen, onChangeFilterOption } = props;
+
+  const selectFilterOption = (option: string) => {
+    onChangeFilterOption(option);
+  };
+
+  return (
+    <div
+      style={{
+        display: isOpen ? "inline-block" : "none",
+        borderColor: isOpen ? "#ededed" : "transparent",
+      }}
+      className={styles.filterLists}
+    >
+      <RegionFilter filter={selectFilterOption} />
+    </div>
+  );
+};
 
 export const HomeContainer = () => {
   const { userId, isLogin } = useAuth();
@@ -34,10 +96,10 @@ export const HomeContainer = () => {
   const [filterOpen, setFilterOpen] = useState(false);
 
   const setFilters = (value: string) => {
-    setFilter({
-      ...filter,
+    setFilter((prevFilter) => ({
+      ...prevFilter,
       sido: value,
-    });
+    }));
   };
 
   const findFeed = async () => {
@@ -76,23 +138,6 @@ export const HomeContainer = () => {
       console.log(e);
     }
   };
-
-  function FilterButton() {
-    return (
-      <button
-        type={"button"}
-        onClick={() => setFilterOpen(!filterOpen)}
-        className={styles.filterButton}
-      >
-        <FlexBox direction={"row"} gap={6}>
-          <VscSettings size={14} color={"#8c8c8c"} />
-          <Typography color={"gray400"} fontSize={12}>
-            필터
-          </Typography>
-        </FlexBox>
-      </button>
-    );
-  }
 
   return (
     <div className={styles.homeContainerLayout}>
@@ -211,17 +256,12 @@ export const HomeContainer = () => {
         <Typography variant="h2" fontWeight={600} color={"black100"}>
           미식가 여행기
         </Typography>
-        <FilterButton />
+        <FilterButton
+          isOpen={filterOpen}
+          onClickFilterOpen={(isOpen) => setFilterOpen(isOpen)}
+        />
       </div>
-      <div
-        style={{
-          display: filterOpen ? "inline-block" : "none",
-          borderColor: filterOpen ? "#ededed" : "transparent",
-        }}
-        className={styles.filterLists}
-      >
-        <RegionFilter filter={setFilters} />
-      </div>
+      <FillterList isOpen={filterOpen} onChangeFilterOption={setFilters} />
       <FeedLists filter={filter} />
     </div>
   );
