@@ -8,20 +8,7 @@ export const feedCardLayout = style({
   padding: "1em",
 });
 
-export const profileBox = style({
-  width: 44,
-  height: 44,
-  borderRadius: "50%",
-});
-
-export const profileImage = style({
-  display: "block",
-  width: 44,
-  height: 44,
-  borderRadius: "50%",
-  objectFit: "cover",
-  border: "1px solid #ececec",
-});
+export const profileBox = style({});
 
 export const contentBox = style({
   margin: "16px auto",

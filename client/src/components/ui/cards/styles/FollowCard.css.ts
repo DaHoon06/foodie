@@ -12,21 +12,10 @@ export const followCardLayout = style({
 });
 
 export const thumbnailImageBox = style({
-  width: "100%",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  borderRadius: 4,
+  width: 70,
+  height: 70,
 });
 
-export const thumbnailImage = style({
-  display: "block",
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  borderRadius: "50%",
-  maxWidth: 70,
-});
 export const profileDescription = style({
   whiteSpace: "wrap",
   overflow: "hidden",

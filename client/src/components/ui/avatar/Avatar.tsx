@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 import * as styles from "./Avatar.css";
 import Image from "next/image";
 
@@ -7,11 +7,19 @@ interface AvatarProp {
   alt: string;
 }
 
-export const Avatar = (props: AvatarProp): ReactElement => {
+export const Avatar = React.memo((props: AvatarProp): ReactElement => {
   const { src, alt } = props;
   return (
     <div className={styles.avatarLayout}>
-      <Image className={styles.avatarImage} src={src} alt={alt} width={40} height={40} />
+      <Image
+        className={styles.avatarImage}
+        src={src}
+        alt={alt}
+        width={40}
+        height={40}
+      />
     </div>
   );
-};
+});
+
+Avatar.displayName = "Avatar";

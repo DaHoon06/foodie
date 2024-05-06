@@ -2,6 +2,7 @@ import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import * as styles from "./styles/ThumbnailCards.css";
 import Image from "next/image";
 import { Typography } from "@components/common/typography/Typography";
+import React from "react";
 
 interface Shop {
   title: string;
@@ -21,7 +22,7 @@ interface ThumbnailProps {
   item: Props;
 }
 
-export const ThumbnailCard = (props: ThumbnailProps) => {
+export const ThumbnailCard = React.memo((props: ThumbnailProps) => {
   const { content, thumbnail, shop } = props.item;
   return (
     <article className={styles.thumbnailCardLayout}>
@@ -75,4 +76,6 @@ export const ThumbnailCard = (props: ThumbnailProps) => {
       </FlexBox>
     </article>
   );
-};
+});
+
+ThumbnailCard.displayName = "ThumbnailCard";

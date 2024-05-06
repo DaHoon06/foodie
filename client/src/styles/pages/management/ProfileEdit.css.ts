@@ -29,12 +29,8 @@ export const profileImageImageBox = style({
 });
 
 export const profileImage = style({
-  display: "block",
-  width: 96,
-  height: 96,
-  objectFit: "cover",
-  borderRadius: "50%",
-  border: "1px solid #ececec",
+  width: 90,
+  height: 90,
 });
 
 export const profileIcon = style({
@@ -55,8 +51,8 @@ export const profileImageEditButtonWrapper = style({
 
 export const profileImageEditButton = style({
   position: "relative",
-  left: 36,
-  top: 34,
+  left: 34,
+  top: 26,
   zIndex: 999,
   backgroundColor: "rgba(138,138,138,0.68)",
   width: 28,
