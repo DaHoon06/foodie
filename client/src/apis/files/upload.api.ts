@@ -6,8 +6,8 @@ export const imageUploadApi = async (formData: FormData) => {
   const headers = {
     "Content-Type": "multipart/form-data",
   };
-
-  return axiosInstance.post(`/files/upload/profile`, formData, {
+  const url = `${DOMAIN}/upload/profile`
+  return axiosInstance.post(url, formData, {
     headers,
   });
 };
