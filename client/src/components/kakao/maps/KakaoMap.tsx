@@ -25,7 +25,7 @@ export const KakaoMap = (): ReactElement => {
     [queryKeys.maps.marker, userId],
     () => getMarkerApi(userId),
     {
-      staleTime: 60 * 1000,
+      staleTime: 3 * 60 * 1000,
       cacheTime: 5 * 60 * 1000,
       keepPreviousData: true,
       refetchOnWindowFocus: false,

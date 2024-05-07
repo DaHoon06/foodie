@@ -1,33 +1,33 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import {Typography} from "@components/common/typography/Typography";
-import {Avatar} from "@components/ui";
+import { Typography } from "@components/common/typography/Typography";
+import { Avatar } from "@components/ui";
 import Image from "next/image";
-import {FormEventHandler, ReactElement, useEffect, useState} from "react";
-import {FiMapPin} from "react-icons/fi";
+import { FormEventHandler, ReactElement, useEffect, useState } from "react";
+import { FiMapPin } from "react-icons/fi";
 import * as styles from "./PostContainer.css";
-import {FileUploadButton} from "@components/common/buttons/FileUploadButton";
-import {Button} from "@components/common/buttons";
-import {useRouter} from "next/router";
-import {FeedPostBody, FeedUser} from "@interfaces/feeds/feed.post";
-import {feedSubmitApi} from "@apis/feeds/feed.api";
-import {useSession} from "next-auth/react";
+import { FileUploadButton } from "@components/common/buttons/FileUploadButton";
+import { Button } from "@components/common/buttons";
+import { useRouter } from "next/router";
+import { FeedPostBody, FeedUser } from "@interfaces/feeds/feed.post";
+import { feedSubmitApi } from "@apis/feeds/feed.api";
+import { useSession } from "next-auth/react";
 import useModalStore from "@store/modalStore";
 import useFeedStore from "@store/feedStore";
-import {IoTrashOutline} from "react-icons/io5";
-import {axiosInstance} from "@libs/axios";
-import {Textarea} from "@components/common/textarea/Textarea";
-import {queryClient} from "@libs/tanstack";
-import {queryKeys} from "@services/keys/queryKeys";
-import {User} from "@interfaces/users/user";
+import { IoTrashOutline } from "react-icons/io5";
+import { axiosInstance } from "@libs/axios";
+import { Textarea } from "@components/common/textarea/Textarea";
+import { queryClient } from "@libs/tanstack";
+import { queryKeys } from "@services/keys/queryKeys";
+import { User } from "@interfaces/users/user";
 
 interface Props {
   user: User;
 }
 
 export const FeedPostContainer = (props: Props): ReactElement => {
-  const {user} = props;
-  const {setIsOpen, setModalType} = useModalStore();
-  const {item, setFeedItem} = useFeedStore();
+  const { user } = props;
+  const { setIsOpen, setModalType } = useModalStore();
+  const { item, setFeedItem } = useFeedStore();
   const [previewUrl, setPreviewUrl] = useState<string[]>([]);
   const [postForm, setPostForm] = useState<FeedPostBody>({
     content: "",
@@ -69,7 +69,7 @@ export const FeedPostContainer = (props: Props): ReactElement => {
   };
 
   const fileUpload = async (postId: string) => {
-    const {files} = postForm;
+    const { files } = postForm;
     const formData = new FormData();
 
     files.forEach((file) => {
@@ -91,18 +91,14 @@ export const FeedPostContainer = (props: Props): ReactElement => {
   const handleSubmitFeedPost: FormEventHandler<HTMLFormElement> = async (e) => {
     try {
       e.preventDefault();
-      const userPayload = {
-        username: user.username,
-        id: user.creatorId,
-      };
+
       const body = {
-        userPayload,
         ...postForm,
       };
-      const {data} = await feedSubmitApi(body);
+      const { data } = await feedSubmitApi(body);
       if (data.result) {
         if (postForm.files.length > 0) {
-          const {_id} = data.data;
+          const { _id } = data.data;
           await fileUpload(_id);
         }
 
@@ -169,7 +165,7 @@ export const FeedPostContainer = (props: Props): ReactElement => {
             alignItems="flex-center"
             justifyContent="flex-start"
           >
-            <Avatar alt={"dahoon"} src={user.profileImage}/>
+            <Avatar alt={"dahoon"} src={user.profileImage} />
             <Textarea
               placeholder={"여러분의 이야기를 들려주세요."}
               onChangeTextarea={onChangeTextarea}
@@ -218,7 +214,7 @@ export const FeedPostContainer = (props: Props): ReactElement => {
                     variant={"icon"}
                     onClick={handleClickRemoveLocationData}
                   >
-                    <IoTrashOutline size={24} color={"#d3d3d3"}/>
+                    <IoTrashOutline size={24} color={"#d3d3d3"} />
                   </Button>
                 </FlexBox>
               </div>
@@ -232,11 +228,11 @@ export const FeedPostContainer = (props: Props): ReactElement => {
             justifyContent="space-between"
             className={styles.postOptionContainer}
           >
-            <FileUploadButton onFileChange={handleChangeFile}/>
+            <FileUploadButton onFileChange={handleChangeFile} />
 
             <button type={"button"} onClick={handleClickLocation}>
               <FlexBox direction="row" justifyContent="flex-end" gap={4}>
-                <FiMapPin color={"#FF7101"}/>
+                <FiMapPin color={"#FF7101"} />
                 <Typography color="primary" as="span" fontSize={14}>
                   장소
                 </Typography>

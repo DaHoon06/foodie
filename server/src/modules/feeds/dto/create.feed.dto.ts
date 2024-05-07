@@ -1,4 +1,3 @@
-import { UserDto } from '@modules/users/dto/sign-in.dto';
 import { Type } from 'class-transformer';
 import {
   IsArray,
@@ -42,11 +41,6 @@ export class ShopDto {
 export class CreateFeedDto {
   @IsString()
   content: string;
-
-  @IsObject()
-  @Type(() => UserDto)
-  @IsNotEmpty()
-  user: UserDto;
 
   @IsArray()
   @IsOptional()
