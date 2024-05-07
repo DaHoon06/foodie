@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
@@ -30,9 +30,9 @@ export class FileService {
     });
   }
 
-  async createFileData(files: Array<Express.Multer.File>, id: string) {
+  async createFileData(files: Array<Express.Multer.File>, user: JwtPayload) {
     const fileObjs = await this.fileUploadToS3(files);
-    const feed: FeedEntity = await this.feedService.findOneById(id);
+    const feed: FeedEntity = await this.feedService.findOneById(user.id);
     for (const file of fileObjs) {
       const createData = {
         ...file,
@@ -46,11 +46,12 @@ export class FileService {
 
   async createProfileFileData(
     files: Array<Express.Multer.File>,
-    id: string,
-    userPayload: JwtPayload,
+    user: JwtPayload,
   ) {
+    if (files.length === 0)
+      throw new BadRequestException('파일이 존재하지 않습니다.');
+    
     const fileObjs = await this.fileUploadToS3(files);
-    const user: UserEntity = await this.userService.findOneUserByCreatorId(id);
     let path = '';
     for (const file of fileObjs) {
       const createData = {
@@ -62,7 +63,7 @@ export class FileService {
       this.fileImageRepository.createFileData(createData);
     }
 
-    await this.userService.profileUpdate({ profileImage: path }, userPayload);
+    await this.userService.profileUpdate({ profileImage: path }, user);
   }
 
   async fileUploadToS3(
