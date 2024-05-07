@@ -3,7 +3,6 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { getMarkerApi } from "@apis/shop/shop.api";
 import { Skeleton } from "@components/ui/skeleton/Skeleton";
-import { prefetchingMarker } from "@services/queries/maps/useMarkerQuery";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@services/keys/queryKeys";
 import { useAuth } from "@providers/AuthProvider";
@@ -17,15 +16,14 @@ export const KakaoMap = (): ReactElement => {
   const { userId } = useAuth();
 
   useEffect(() => {
-    prefetchingMarker(userId);
     setCsrLoading(true);
   }, []);
 
-  const { data: mapData } = useQuery(
+  const { data: mapData, isLoading } = useQuery(
     [queryKeys.maps.marker, userId],
     () => getMarkerApi(userId),
     {
-      staleTime: 60 * 1000,
+      staleTime: 3 * 60 * 1000,
       cacheTime: 5 * 60 * 1000,
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -106,7 +104,7 @@ export const KakaoMap = (): ReactElement => {
   };
 
   useEffect(() => {
-    if (csrLoading) {
+    if (csrLoading && typeof window !== "undefined") {
       setPending(true);
 
       const script = document.createElement("script");
@@ -115,7 +113,7 @@ export const KakaoMap = (): ReactElement => {
       script.async = true;
       document.head.appendChild(script);
 
-      script.onload = () => {
+      script.onload = async () => {
         const kakao: any = (window as any).kakao;
         kakao.maps.load(() => {
           const mapElement = document.getElementById("map");
@@ -149,7 +147,7 @@ export const KakaoMap = (): ReactElement => {
         }
       }
     };
-  }, [mapContainer, mapData, csrLoading]);
+  }, [mapContainer, csrLoading]);
 
   return (
     <>

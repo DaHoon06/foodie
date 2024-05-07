@@ -1,7 +1,7 @@
 "use client";
 import useCookies from "@hooks/useCookie";
-import {useSession} from "next-auth/react";
-import {createContext, useContext, useEffect, useState} from "react";
+import { useSession } from "next-auth/react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -27,25 +27,28 @@ type AuthContextType = {
 
 export const AuthContext = createContext<AuthContextType>(null!);
 
-const AuthProvider = ({children}: Props) => {
-  const {status, data: session}: SessionType = useSession();
+const AuthProvider = ({ children }: Props) => {
+  const { status, data: session }: SessionType = useSession();
   const isLogin = !!session && status === "authenticated";
   const apiToken = isLogin ? session.apiToken : "";
   const userId = isLogin ? session.id : "";
-  const {setCookie, getCookie} = useCookies();
+  const { setCookie, getCookie } = useCookies();
   const [id, setUserId] = useState("");
 
   useEffect(() => {
-    const token = getCookie('Authorization')
-    const isProd = process.env.NODE_ENV !== 'development';
-    const domain = isProd ? process.env.NEXT_PUBLIC_PROD : process.env.NEXT_PUBLIC_LOCAL;
-    if (!token && apiToken) setCookie("Authorization", apiToken, {
-      path: '/',
-      domain: domain,
-      sameSite: "none",
-      secure: true
-    });
-    if (isLogin) setUserId(userId)
+    const token = getCookie("Authorization");
+    const isProd = process.env.NODE_ENV !== "development";
+    const domain = isProd
+      ? process.env.NEXT_PUBLIC_PROD
+      : process.env.NEXT_PUBLIC_LOCAL;
+    if (!token && apiToken)
+      setCookie("Authorization", apiToken, {
+        path: "/",
+        domain: domain,
+        sameSite: "none",
+        secure: true,
+      });
+    if (isLogin) setUserId(userId);
   }, [isLogin]);
 
   const value = {

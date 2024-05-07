@@ -1,13 +1,12 @@
-import {queryClient} from "@libs/tanstack";
-import {queryKeys} from "@services/keys/queryKeys";
-import {getMarkerApi} from "@apis/shop/shop.api";
-import {useQuery} from "@tanstack/react-query";
+import { queryClient } from "@libs/tanstack";
+import { queryKeys } from "@services/keys/queryKeys";
+import { getMarkerApi } from "@apis/shop/shop.api";
+import { useQuery } from "@tanstack/react-query";
 
 export const prefetchingMarker = async (creatorId: string): Promise<void> => {
-  await queryClient.prefetchQuery(
-    [queryKeys.maps.marker, creatorId],
-    () => getMarkerApi(creatorId)
-  )
+  await queryClient.prefetchQuery([queryKeys.maps.marker, creatorId], () =>
+    getMarkerApi(creatorId)
+  );
 };
 
 export const useMarkerQuery = async (creatorId: string) => {
@@ -22,4 +21,4 @@ export const useMarkerQuery = async (creatorId: string) => {
       useErrorBoundary: false,
     }
   );
-}
+};

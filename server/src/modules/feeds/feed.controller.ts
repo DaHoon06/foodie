@@ -24,8 +24,12 @@ export class FeedController {
 
   @Post()
   @UseGuards(JwtGuard)
-  async createFeed(@Body() body: CreateFeedDto) {
-    return this.feedService.createFeed(body);
+  async createFeed(
+    @Body() body: CreateFeedDto,
+    @UserObject() user: JwtPayload,
+  ) {
+    console.log(user);
+    return this.feedService.createFeed(body, user);
   }
 
   @Get('/lists')

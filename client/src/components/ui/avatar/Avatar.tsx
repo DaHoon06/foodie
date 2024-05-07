@@ -17,6 +17,7 @@ export const Avatar = React.memo((props: AvatarProp): ReactElement => {
         alt={alt}
         width={40}
         height={40}
+        priority={true}
       />
     </div>
   );

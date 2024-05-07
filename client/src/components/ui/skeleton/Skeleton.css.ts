@@ -16,5 +16,5 @@ export const LoadingMapOverlay = style({
   backgroundSize: "200% 100%",
   backgroundPosition: "100% 0",
   animation: `${loading} 1s infinite`,
-  borderRadius: 4,
+  borderRadius: 2,
 });

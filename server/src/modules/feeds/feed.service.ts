@@ -25,14 +25,14 @@ export class FeedService {
     private readonly feedRepository: FeedRepository,
   ) {}
 
-  async createFeed(body: CreateFeedDto) {
+  async createFeed(body: CreateFeedDto, user: JwtPayload) {
     try {
       let findUser: UserEntity = await this.userService.findOneUserByCreatorId(
-        body.user.id,
+        user.id,
       );
-      // 유저가 없다 그럼 새로 추가
+
       if (!findUser) {
-        findUser = await this.userService.createUser(body.user);
+        findUser = await this.userService.createUser(user);
       }
 
       const createData: CreateFeedDataDto = {

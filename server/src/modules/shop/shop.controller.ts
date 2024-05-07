@@ -7,7 +7,7 @@ export class ShopController {
   constructor(private readonly shopService: ShopService) {}
 
   @Get('/marker/:creatorId')
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   async getMarker(@Param('creatorId') creatorId: string) {
     return this.shopService.findShopCoordinate(creatorId);
   }
