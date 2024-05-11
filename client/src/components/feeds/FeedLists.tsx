@@ -1,12 +1,12 @@
 import { FeedFilter } from "@interfaces/feeds/feed.filter";
 import { useFeedListsInfinityScroll } from "@services/queries/feeds/useFeedListsQuery";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
-import { SpinnerUi } from "@components/ui";
+import { SpinnerUi } from "@components/common/ui";
 import * as styles from "./styles/FeedLists.css";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { Typography } from "@components/common/typography/Typography";
 import { FeedListsState } from "@interfaces/feeds/feed.lists";
-import { FeedCard } from "@components/ui/cards/FeedCard";
+import { FeedCard } from "@components/common/ui/cards/FeedCard";
 import React from "react";
 
 interface Props {

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { FaComment, FaRegHeart } from "react-icons/fa6";
 import { formatDate } from "@utils/date";
 import { FeedListsState } from "@interfaces/feeds/feed.lists";
-import { CarouselSwipe } from "@components/ui/carousel/CarouselSwipe";
+import { CarouselSwipe } from "@components/common/ui/carousel/CarouselSwipe";
 import Link from "next/link";
 import { Avatar } from "../avatar/Avatar";
 

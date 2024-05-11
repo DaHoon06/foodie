@@ -2,7 +2,7 @@
 
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { getMarkerApi } from "@apis/shop/shop.api";
-import { Skeleton } from "@components/ui/skeleton/Skeleton";
+import { Skeleton } from "@components/common/ui/skeleton/Skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@services/keys/queryKeys";
 import { useAuth } from "@providers/AuthProvider";

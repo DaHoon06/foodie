@@ -1,4 +1,4 @@
-import { StoreCardItem } from "@components/ui/cards/StoreCard";
+import { StoreCardItem } from "@components/common/ui/cards/StoreCard";
 
 export const restaurantListMockData: StoreCardItem[] = [
   {

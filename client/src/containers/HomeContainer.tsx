@@ -1,10 +1,10 @@
 import * as styles from "./HomeContainer.css";
 import { KakaoMap } from "@components/kakao/maps/KakaoMap";
 import { Typography } from "@components/common/typography/Typography";
-import { ThumbnailCard } from "@components/ui/cards/ThumbnailCard";
+import { ThumbnailCard } from "@components/common/ui/cards/ThumbnailCard";
 import { CustomHorizontalBar } from "@components/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { FollowCard } from "@components/ui/cards/FollowCard";
+import { FollowCard } from "@components/common/ui/cards/FollowCard";
 import { ReactElement, useEffect, useState } from "react";
 import { RegionFilter } from "@components/filters/RegionFilter";
 import { VscSettings } from "react-icons/vsc";
@@ -15,7 +15,7 @@ import { RecentlyFeedListsState } from "@interfaces/feeds/feed.lists";
 import { RecommendUserLists } from "@interfaces/users/user.lists";
 import { FeedLists } from "@components/feeds/FeedLists";
 import { useAuth } from "@providers/AuthProvider";
-import { Skeleton } from "@components/ui/skeleton/Skeleton";
+import { Skeleton } from "@components/common/ui/skeleton/Skeleton";
 import Link from "next/link";
 
 interface FilterButtonProps {

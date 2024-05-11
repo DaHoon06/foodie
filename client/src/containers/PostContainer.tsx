@@ -1,6 +1,6 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { Typography } from "@components/common/typography/Typography";
-import { Avatar } from "@components/ui";
+import { Avatar } from "@components/common/ui";
 import Image from "next/image";
 import { FormEventHandler, ReactElement, useEffect, useState } from "react";
 import { FiMapPin } from "react-icons/fi";

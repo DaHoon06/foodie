@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "@providers/AuthProvider";
 import { KakaoButton } from "@components/kakao/KakaoButton";
 import { User } from "@interfaces/users/user";
-import { Avatar } from "@components/ui";
+import { Avatar } from "@components/common/ui";
 
 interface Props {
   user: User | null;
