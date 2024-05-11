@@ -17,6 +17,8 @@ import { FeedLists } from "@components/feeds/FeedLists";
 import { useAuth } from "@providers/AuthProvider";
 import { Skeleton } from "@components/common/ui/skeleton/Skeleton";
 import Link from "next/link";
+import { useRecentlyFeedListQuery } from "@services/queries/feeds/useFeedListsQuery";
+import { useTodayRecommendUserListQuery } from "@services/queries/users/useTodayRecommendQuery";
 
 interface FilterButtonProps {
   isOpen: boolean;
@@ -82,16 +84,12 @@ export const FillterList = (props: FilterListProps): ReactElement => {
 
 export const HomeContainer = () => {
   const { userId, isLogin } = useAuth();
-  const [pending, setPending] = useState(true);
   const [filter, setFilter] = useState<FeedFilter>({
     sido: "전체",
   });
-  // 최근 다녀온 여행기
-  const [recentlyFeeds, setRecentlyFeeds] = useState<RecentlyFeedListsState[]>(
-    []
-  );
-  // 오늘의 추천 미식가
-  const [recommendUser, setRecommendUser] = useState<RecommendUserLists[]>([]);
+
+  const recentlyFeedListQuery = useRecentlyFeedListQuery(userId);
+  const todayRecommendUserListQuery = useTodayRecommendUserListQuery(userId);
 
   const [filterOpen, setFilterOpen] = useState(false);
 
@@ -100,43 +98,6 @@ export const HomeContainer = () => {
       ...prevFilter,
       sido: value,
     }));
-  };
-
-  const findFeed = async () => {
-    try {
-      const data = await recentlyFeedApi(userId);
-      if (data) setRecentlyFeeds(data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const findRecommendUser = async () => {
-    try {
-      const data = await todayRecommendUserApi(userId);
-      if (data) setRecommendUser(data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    setPending(true);
-    all();
-    if (typeof window !== "undefined" && !isLogin && userId) {
-      setPending(false);
-    }
-  }, [isLogin, userId]);
-
-  const all = async () => {
-    setPending(true);
-    try {
-      await findFeed();
-      await findRecommendUser();
-      setPending(false);
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   return (
@@ -152,7 +113,7 @@ export const HomeContainer = () => {
               최근 다녀온 여행기
             </Typography>
           </div>
-          {pending ? (
+          {recentlyFeedListQuery.isLoading ? (
             <CustomHorizontalBar>
               <div>
                 <FlexBox gap={8} direction="row">
@@ -176,9 +137,10 @@ export const HomeContainer = () => {
             </CustomHorizontalBar>
           ) : (
             <>
-              {recentlyFeeds.length > 0 ? (
+              {recentlyFeedListQuery.data &&
+              recentlyFeedListQuery.data.length > 0 ? (
                 <CustomHorizontalBar>
-                  {recentlyFeeds.map((feed) => {
+                  {recentlyFeedListQuery.data.map((feed) => {
                     return (
                       <Link
                         href={`/feeds/${feed.id}`}
@@ -204,7 +166,7 @@ export const HomeContainer = () => {
               오늘의 추천 미식가
             </Typography>
           </div>
-          {pending ? (
+          {todayRecommendUserListQuery.isLoading ? (
             <CustomHorizontalBar>
               <div>
                 <FlexBox gap={8} direction="row">
@@ -228,9 +190,10 @@ export const HomeContainer = () => {
             </CustomHorizontalBar>
           ) : (
             <>
-              {recommendUser.length > 0 ? (
+              {todayRecommendUserListQuery.data &&
+              todayRecommendUserListQuery.data.length > 0 ? (
                 <CustomHorizontalBar>
-                  {recommendUser.map((user, index) => {
+                  {todayRecommendUserListQuery.data.map((user) => {
                     return (
                       <div key={`${crypto.randomUUID()}`}>
                         <FollowCard user={user} />
