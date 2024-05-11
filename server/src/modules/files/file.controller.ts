@@ -1,6 +1,5 @@
 import {
   Controller,
-  Param,
   Post,
   UploadedFiles,
   UseGuards,
@@ -43,12 +42,12 @@ export class FileController {
       }),
     }),
   )
-  @Post('/upload/:id')
+  @Post('/upload')
   uploadFile(
-    @Param('id') id: string,
+    @UserObject() user: JwtPayload,
     @UploadedFiles() files: Array<Express.Multer.File>,
   ) {
-    return this.fileService.createFileData(files, id);
+    return this.fileService.createFileData(files, user);
   }
 
   @UseInterceptors(
@@ -67,12 +66,11 @@ export class FileController {
       }),
     }),
   )
-  @Post('/upload/profile/:id')
+  @Post('/upload/profile')
   uploadProfileFile(
-    @Param('id') id: string,
     @UploadedFiles() files: Array<Express.Multer.File>,
     @UserObject() user: JwtPayload,
   ) {
-    return this.fileService.createProfileFileData(files, id, user);
+    return this.fileService.createProfileFileData(files, user);
   }
 }

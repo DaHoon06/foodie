@@ -6,14 +6,13 @@ import { Typography } from "@components/common/typography/Typography";
 import * as styles from "@styles/pages/management/ProfileEdit.css";
 import { MdCameraAlt, MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import BasicInput from "@components/common/inputs/BasicInput";
 import { getUserProfileApi, profileUpdateApi } from "@apis/users/user.api";
 import { getSession } from "next-auth/react";
 import { User } from "@interfaces/users/user";
 import { axiosInstance } from "@libs/axios";
-import { FaUser } from "react-icons/fa6";
 import { Avatar } from "@components/ui";
+import { imageUploadApi } from "@apis/files/upload.api";
 
 interface Props {
   user: User;
@@ -50,7 +49,6 @@ const ProfileEditPage = (props: Props): ReactElement => {
 
     const oversizedFiles = fileList.filter((file) => file.size > maxSize);
     if (oversizedFiles.length > 0) {
-      //todo 용량 초과 알람 주기
       return;
     }
 
@@ -77,21 +75,10 @@ const ProfileEditPage = (props: Props): ReactElement => {
         ...profileUpdateState,
       };
       const data = await profileUpdateApi(body);
-      const formData = new FormData();
-      files.forEach((file) => {
-        formData.append(`files`, file);
-      });
-      const headers = {
-        "Content-Type": "multipart/form-data",
-      };
 
-      await axiosInstance.post(
-        `/files/upload/profile/${user.creatorId}`,
-        formData,
-        {
-          headers,
-        }
-      );
+      if (files.length > 0) {
+        await profileImageUpload();
+      }
 
       if (data && data.result) {
         await router.push("/management");
@@ -99,6 +86,14 @@ const ProfileEditPage = (props: Props): ReactElement => {
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const profileImageUpload = async () => {
+    const formData = new FormData();
+    files.forEach((file) => {
+      formData.append(`files`, file);
+    });
+    await imageUploadApi(formData);
   };
 
   return (

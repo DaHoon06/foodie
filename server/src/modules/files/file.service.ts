@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
 import * as fs from 'fs';
@@ -8,8 +12,8 @@ import { FileObjectDto } from '@modules/files/dto/file.object.dto';
 import { FeedService } from '@modules/feeds/feed.service';
 import { UserService } from '@modules/users/user.service';
 import { FeedEntity } from '@modules/feeds/entities/feed.entity';
-import { UserEntity } from '@modules/users/entities/user.entity';
 import { JwtPayload } from '@modules/auth/dto/jwt.dto';
+import { UserEntity } from '@modules/users/entities/user.entity';
 
 @Injectable()
 export class FileService {
@@ -30,9 +34,9 @@ export class FileService {
     });
   }
 
-  async createFileData(files: Array<Express.Multer.File>, id: string) {
+  async createFileData(files: Array<Express.Multer.File>, user: JwtPayload) {
     const fileObjs = await this.fileUploadToS3(files);
-    const feed: FeedEntity = await this.feedService.findOneById(id);
+    const feed: FeedEntity = await this.feedService.findOneById(user.id);
     for (const file of fileObjs) {
       const createData = {
         ...file,
@@ -46,23 +50,32 @@ export class FileService {
 
   async createProfileFileData(
     files: Array<Express.Multer.File>,
-    id: string,
-    userPayload: JwtPayload,
+    user: JwtPayload,
   ) {
+    if (files.length === 0)
+      throw new BadRequestException('파일이 존재하지 않습니다.');
+    const findUser: UserEntity = await this.userService.findOneUserByCreatorId(
+      user.id,
+    );
+
+    if (!findUser)
+      throw new UnauthorizedException(
+        '사용자 정보가 유효하지 않습니다. 로그인 정보를 다시 확인해 주세요.',
+      );
+
     const fileObjs = await this.fileUploadToS3(files);
-    const user: UserEntity = await this.userService.findOneUserByCreatorId(id);
     let path = '';
     for (const file of fileObjs) {
       const createData = {
         ...file,
         fileType: 'user',
-        user: user,
+        user: findUser,
       };
       path = file.path1;
-      this.fileImageRepository.createFileData(createData);
+      await this.fileImageRepository.createFileData(createData);
     }
 
-    await this.userService.profileUpdate({ profileImage: path }, userPayload);
+    await this.userService.profileUpdate({ profileImage: path }, user);
   }
 
   async fileUploadToS3(
