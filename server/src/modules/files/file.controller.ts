@@ -12,9 +12,9 @@ import * as fs from 'node:fs';
 import { FileService } from '@modules/files/file.service';
 import { UserObject } from '@decorators/user.object.decorator';
 import { JwtPayload } from '@modules/auth/dto/jwt.dto';
-import { JwtGuard } from '@modules/auth/guards/jwt.guard';
+import { JwtAuthGuard } from '@modules/auth/guards/jwt.guard';
 
-@UseGuards(JwtGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('files')
 export class FileController {
   private readonly filesPath: string;

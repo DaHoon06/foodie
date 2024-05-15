@@ -11,7 +11,7 @@ import { FeedService } from './feed.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateFeedDto } from './dto/create.feed.dto';
 import { FilterDto } from '@modules/feeds/dto/filter.dto';
-import { JwtGuard } from '@modules/auth/guards/jwt.guard';
+import { JwtAuthGuard } from '@modules/auth/guards/jwt.guard';
 import { UserObject } from '@decorators/user.object.decorator';
 import { JwtPayload } from '@modules/auth/dto/jwt.dto';
 
@@ -23,7 +23,7 @@ export class FeedController {
   constructor(private readonly feedService: FeedService) {}
 
   @Post()
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtAuthGuard)
   async createFeed(
     @Body() body: CreateFeedDto,
     @UserObject() user: JwtPayload,
@@ -47,7 +47,7 @@ export class FeedController {
     return this.feedService.findOneFeedByFeedId(feedId);
   }
 
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtAuthGuard)
   @Get('/my-list')
   async myFeedList(
     @UserObject() user: JwtPayload,

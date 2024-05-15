@@ -8,10 +8,10 @@ export class AuthService {
   secret = '';
 
   constructor(
-    private configService: ConfigService,
+    private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
   ) {
-    this.secret = configService.get<string>('JWT_SECRET');
+    this.secret = this.configService.get<string>('JWT_SECRET');
   }
 
   createToken(payload: JwtPayload): string {
