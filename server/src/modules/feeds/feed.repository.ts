@@ -41,6 +41,7 @@ export class FeedRepository extends Repository<FeedEntity> {
     }
     return {
       ...data,
+      feedId: _id,
       feedContent: data.content,
       feedCreatedDate: data.created_at,
       shop,
@@ -73,6 +74,7 @@ export class FeedRepository extends Repository<FeedEntity> {
           username: list.user.username,
           nickname: list.user.nickname,
           profileImage: list.user.profileImage,
+          creatorId,
         };
       }
 
@@ -130,6 +132,7 @@ export class FeedRepository extends Repository<FeedEntity> {
           username: list.user.username,
           nickname: list.user.nickname,
           profileImage: list.user.profileImage,
+          creatorId: list.user.creatorId,
         };
       }
 
