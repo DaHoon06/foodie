@@ -4,7 +4,6 @@ import {ReactElement} from "react";
 import * as styles from "./styles/ManagementLists.css";
 import {signOut} from "next-auth/react";
 import {useAuth} from "@providers/AuthProvider";
-import useCookies from "@hooks/useCookie";
 import {Cookies} from "react-cookie";
 
 export const ManagementLists = (): ReactElement => {

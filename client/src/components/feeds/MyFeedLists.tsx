@@ -1,11 +1,12 @@
-import { useMyFeedListsInfinityScroll } from "@services/queries/feeds/useFeedListsQuery";
-import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
-import { SpinnerUi } from "@components/common/ui";
+import {useMyFeedListsInfinityScroll} from "@services/queries/feeds/useFeedListsQuery";
+import {useIntersectionObserver} from "@hooks/useIntersectionObserver";
+import {SpinnerUi} from "@components/common/ui";
 import * as styles from "./styles/FeedLists.css";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { Typography } from "@components/common/typography/Typography";
-import { FeedListsState } from "@interfaces/feeds/feed.lists";
-import { FeedCard } from "@components/common/ui/cards/FeedCard";
+import {Typography} from "@components/common/typography/Typography";
+import {FeedListsState} from "@interfaces/feeds/feed.lists";
+import {FeedCard} from "@components/feeds/FeedCard";
+
 export const MyFeedLists = () => {
   const {
     data: listQueryData,
@@ -15,12 +16,12 @@ export const MyFeedLists = () => {
     hasNextPage,
   } = useMyFeedListsInfinityScroll();
 
-  const { setTarget } = useIntersectionObserver({
+  const {setTarget} = useIntersectionObserver({
     hasNextPage,
     fetchNextPage,
   });
 
-  if (isLoading) return <SpinnerUi isLoading={true} />;
+  if (isLoading) return <SpinnerUi isLoading={true}/>;
 
   return (
     <>
@@ -49,7 +50,7 @@ export const MyFeedLists = () => {
                     className={styles.feedCardWrapper}
                     key={`${crypto.randomUUID()}_${index}`}
                   >
-                    <FeedCard feedCard={feed} />
+                    <FeedCard feedCard={feed}/>
                   </div>
                 ) : (
                   <div className={styles.emptyLabel}>
@@ -70,9 +71,9 @@ export const MyFeedLists = () => {
         })}
       </section>
       {isFetchingNextPage ? (
-        <SpinnerUi isLoading={true} />
+        <SpinnerUi isLoading={true}/>
       ) : (
-        <div ref={setTarget} />
+        <div ref={setTarget}/>
       )}
     </>
   );
