@@ -1,24 +1,13 @@
 "use client";
 
-import { ReactElement, useEffect, useState } from "react";
+import {ReactElement, useEffect, useState} from "react";
 import * as styles from "./styles/KakaoButton.css";
 import Image from "next/image";
-import { Typography } from "@components/common/typography/Typography";
-import { useRouter } from "next/router";
-import { getProviders, signIn } from "next-auth/react";
-import { axiosInstance } from "@libs/axios";
+import {Typography} from "@components/common/typography/Typography";
+import {signIn} from "next-auth/react";
+import {axiosInstance} from "@libs/axios";
 
 export const KakaoButton = (): ReactElement => {
-  const router = useRouter();
-
-  const [providers, setProviders] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      const res: any = await getProviders();
-      setProviders(res);
-    })();
-  }, []);
 
   const handleClickKakaoSignIn = async () => {
     try {
@@ -28,7 +17,7 @@ export const KakaoButton = (): ReactElement => {
           username: user.name,
           token: user.id,
         };
-        const { data } = await axiosInstance.post("/users/sign-in", body);
+        const {data} = await axiosInstance.post("/users/sign-in", body);
       }
     } catch (e) {
       console.log(e);
