@@ -3,15 +3,16 @@ import { vars } from "@styles/theme.css";
 
 export const feedOptionList = style({
   position: "absolute",
-  right: 8,
-  border: "1px solid black",
+  right: 22,
+  border: `1px solid ${vars.colors.gray000}`,
   padding: "0.5em 0",
-  borderRadius: 2,
+  borderRadius: 4,
   width: 100,
   textAlign: "center",
   display: "flex",
   flexDirection: "column",
   gap: 10,
+  backgroundColor: vars.colors.white000,
 });
 
 export const feedCardLayout = style({

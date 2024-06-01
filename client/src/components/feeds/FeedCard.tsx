@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import * as styles from "./styles/FeedCard.css";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { Typography } from "@components/common/typography/Typography";
@@ -19,13 +19,27 @@ interface Props {
 
 const FeedOptionButton = (): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const handleClickPopup = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (ref.current && !ref.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div>
+    <div ref={ref}>
       <button type={"button"} onClick={handleClickPopup}>
         <HiOutlineDotsVertical color={"#989898"} size={16} />
       </button>
@@ -39,14 +53,14 @@ const OptionList = () => {
     <ul className={styles.feedOptionList}>
       <li>
         <FlexBox direction={"row"} gap={8}>
-          <PiNotePencilBold size={20} color={"#2a2a2a"} />
-          <Typography as={'span'}>수정</Typography>
+          <PiNotePencilBold size={18} color={"#646464"} />
+          <Typography as={"span"}>수정</Typography>
         </FlexBox>
       </li>
       <li>
         <FlexBox direction={"row"} gap={8}>
-          <PiTrashBold size={20} color={"#2a2a2a"} />
-          <Typography as={'span'}>삭제</Typography>
+          <PiTrashBold size={18} color={"#646464"} />
+          <Typography as={"span"}>삭제</Typography>
         </FlexBox>
       </li>
     </ul>
