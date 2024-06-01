@@ -1,7 +1,36 @@
-import {QueryCache, QueryClient} from "@tanstack/react-query";
+import { QueryCache, QueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { signOut } from "next-auth/react";
 
-const queryErrorHandler = (error: unknown): void => {
-  const message = error instanceof Error ? error.message : "ERROR MESSAGE";
+const unAuthorization = async () => {
+  await signOut();
+};
+
+const removeCookie = () => {
+  const isProd = process.env.NODE_ENV !== "development";
+  const domain = isProd
+    ? process.env.NEXT_PUBLIC_PROD
+    : process.env.NEXT_PUBLIC_LOCAL;
+  const path = "/";
+  document.cookie =
+    name +
+    "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=" +
+    path +
+    "; domain=" +
+    domain +
+    ";";
+};
+
+const queryErrorHandler = async (error: unknown): Promise<void> => {
+  const isAxiosError = error instanceof AxiosError;
+
+  if (isAxiosError) {
+    if (error.response) {
+      const { status } = error.response;
+      if (status === 401) {
+      }
+    }
+  }
 };
 
 export const queryClient = new QueryClient({

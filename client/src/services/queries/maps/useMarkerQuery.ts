@@ -18,7 +18,7 @@ export const useMarkerQuery = async (creatorId: string) => {
       cacheTime: 5 * 60 * 1000,
       keepPreviousData: false,
       refetchOnWindowFocus: false,
-      useErrorBoundary: false,
+      useErrorBoundary: true,
     }
   );
 };

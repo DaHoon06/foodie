@@ -1,6 +1,19 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "@styles/theme.css";
 
+export const feedOptionList = style({
+  position: "absolute",
+  right: 8,
+  border: "1px solid black",
+  padding: "0.5em 0",
+  borderRadius: 2,
+  width: 100,
+  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  gap: 10,
+});
+
 export const feedCardLayout = style({
   backgroundColor: vars.colors.white000,
   width: "100%",
