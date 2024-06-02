@@ -1,19 +1,24 @@
-import {vars} from "@styles/theme.css";
-import {style} from "@vanilla-extract/css";
+import { vars } from "@styles/theme.css";
+import { style } from "@vanilla-extract/css";
 
 export const postLayout = style({
   backgroundColor: vars.colors.white000,
   width: "100%",
   height: "100%",
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
 });
 
 export const postBodyContainer = style({
   backgroundColor: vars.colors.white000,
   width: "100%",
   padding: "1em",
+});
+
+export const avatarWrapper = style({
+  width: 44,
+  height: 44,
 });
 
 export const postOptionContainer = style({
@@ -39,15 +44,10 @@ export const locationItemBox = style({
 });
 
 export const removeLocationButton = style({
-  width: '40px !important',
-  height: '36px !important',
-  borderRadius: '4px !important',
-  border: '1px solid #d3d3d3'
-})
-
-export const avatarWrapper = style({
-  width: 44,
-  height: 44,
+  width: "40px !important",
+  height: "36px !important",
+  borderRadius: "4px !important",
+  border: "1px solid #d3d3d3",
 });
 
 export const imagesContainer = style({
@@ -58,7 +58,7 @@ export const imagesContainer = style({
   justifyItems: "center",
   gap: 6,
   marginBottom: 40,
-  padding: '0.2em 0.6em'
+  padding: "0.2em 0.6em",
 });
 
 export const images = style({

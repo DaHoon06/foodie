@@ -11,13 +11,15 @@ import { Avatar } from "@components/common/ui";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { useAuth } from "@providers/AuthProvider";
 import { PiNotePencilBold, PiTrashBold } from "react-icons/pi";
+import { useRouter } from "next/router";
 export type FeedListType = FeedListsState;
 
 interface Props {
   feedCard: FeedListType;
 }
 
-const FeedOptionButton = (): ReactElement => {
+const FeedOptionButton = (props: { feedId: string }): ReactElement => {
+  const { feedId } = props;
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -43,19 +45,32 @@ const FeedOptionButton = (): ReactElement => {
       <button type={"button"} onClick={handleClickPopup}>
         <HiOutlineDotsVertical color={"#989898"} size={16} />
       </button>
-      {isOpen && <OptionList />}
+      {isOpen && <OptionList feedId={feedId} />}
     </div>
   );
 };
 
-const OptionList = () => {
+const OptionList = (props: { feedId: string }) => {
+  const { feedId } = props;
+  const router = useRouter();
+  const handleClickEditFeed = () => {
+    console.log(feedId);
+    router.push(`/feeds/edit/${feedId}`);
+  };
+
+  const handleClickDeleteFeed = () => {
+    alert("피드를 삭제하시겠습니까?");
+  };
+
   return (
     <ul className={styles.feedOptionList}>
       <li>
-        <FlexBox direction={"row"} gap={8}>
-          <PiNotePencilBold size={18} color={"#646464"} />
-          <Typography as={"span"}>수정</Typography>
-        </FlexBox>
+        <button type="button" onClick={handleClickEditFeed}>
+          <FlexBox direction={"row"} gap={8}>
+            <PiNotePencilBold size={18} color={"#646464"} />
+            <Typography as={"span"}>수정</Typography>
+          </FlexBox>
+        </button>
       </li>
       <li>
         <FlexBox direction={"row"} gap={8}>
@@ -97,7 +112,7 @@ export const FeedCard = (props: Props): ReactElement => {
           <Typography as={"span"} color={"gray400"} fontSize={12}>
             {formatDate(new Date(feedCreatedDate))}
           </Typography>
-          {userId === user.creatorId && <FeedOptionButton />}
+          {userId === user.creatorId && <FeedOptionButton feedId={feedId} />}
         </FlexBox>
       </FlexBox>
 
