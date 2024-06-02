@@ -93,6 +93,10 @@ export class FeedService {
     return this.feedRepository.findOneFeedByFeedId(_id);
   }
 
+  async findOneFeedAndCommentByFeedId(_id: string) {
+    return this.feedRepository.findOneFeedAndCommentByFeedId(_id);
+  }
+
   async findMyFeedList(user: JwtPayload, pageParam: number) {
     let page = +pageParam;
     if (isNaN(page)) page = 1;

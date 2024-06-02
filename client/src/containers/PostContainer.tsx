@@ -1,6 +1,6 @@
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import { Typography } from "@components/common/typography/Typography";
-import { Avatar } from "@components/ui";
+import { Avatar } from "@components/common/ui";
 import Image from "next/image";
 import { FormEventHandler, ReactElement, useEffect, useState } from "react";
 import { FiMapPin } from "react-icons/fi";
@@ -10,7 +10,6 @@ import { Button } from "@components/common/buttons";
 import { useRouter } from "next/router";
 import { FeedPostBody, FeedUser } from "@interfaces/feeds/feed.post";
 import { feedSubmitApi } from "@apis/feeds/feed.api";
-import { useSession } from "next-auth/react";
 import useModalStore from "@store/modalStore";
 import useFeedStore from "@store/feedStore";
 import { IoTrashOutline } from "react-icons/io5";
@@ -165,7 +164,9 @@ export const FeedPostContainer = (props: Props): ReactElement => {
             alignItems="flex-center"
             justifyContent="flex-start"
           >
-            <Avatar alt={"dahoon"} src={user.profileImage} />
+            <div className={styles.avatarWrapper}>
+              <Avatar alt={user.nickname} src={user.profileImage} />
+            </div>
             <Textarea
               placeholder={"여러분의 이야기를 들려주세요."}
               onChangeTextarea={onChangeTextarea}

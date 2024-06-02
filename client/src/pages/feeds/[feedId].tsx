@@ -9,9 +9,9 @@ import {
   GetServerSidePropsContext,
   GetServerSidePropsResult,
 } from "next";
-import { feedDetailApi } from "@apis/feeds/feed.api";
+import { feedDetailWithCommentApi } from "@apis/feeds/feed.api";
 import CustomHead from "@layouts/heads/CustomHead";
-import { FeedCard, FeedListType } from "@components/ui/cards/FeedCard";
+import { FeedCard, FeedListType } from "@components/feeds/FeedCard";
 import BasicInput from "@components/common/inputs/BasicInput";
 import { Button } from "@components/common/buttons";
 import { TitleBox } from "@layouts/TitleBox";
@@ -75,7 +75,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 > => {
   try {
     const { feedId } = query as { feedId: string };
-    const data = await feedDetailApi(feedId);
+    const data = await feedDetailWithCommentApi(feedId);
     if (!feedId || !data) {
       return {
         redirect: {

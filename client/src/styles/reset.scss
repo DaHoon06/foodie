@@ -88,11 +88,15 @@ video {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  font-family: 'Pretendard Variable', Pretendard, -apple-system,
-  BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
-  'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
-  'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   color: #222;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 article,
@@ -109,7 +113,8 @@ section {
   display: block;
 }
 
-html, body {
+html,
+body {
   // 모바일에서 스크롤 표기 제거
   @media screen and (max-width: 767px) {
     scrollbar-width: none;
@@ -128,7 +133,8 @@ html {
   background-color: #fff;
 }
 
-body, #app {
+body,
+#app {
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -154,7 +160,8 @@ input {
 }
 
 ol,
-ul, dl {
+ul,
+dl {
   list-style: none;
   padding-left: 0 !important;
   margin-bottom: 0 !important;
@@ -169,7 +176,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -209,7 +216,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 

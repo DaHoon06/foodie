@@ -1,4 +1,4 @@
-import {widthCalculation} from "@components/ui/rating/star";
+import { widthCalculation } from "@components/common/ui/rating/star";
 
 /**
  * @description 별점 계산

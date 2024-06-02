@@ -1,4 +1,4 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { ExtractJwt, Strategy, VerifiedCallback } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -19,7 +19,10 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  async validate({ id, username, profile }: JwtPayload): Promise<JwtPayload> {
+  async validate(
+    { id, username, profile }: JwtPayload,
+    done: VerifiedCallback,
+  ): Promise<JwtPayload> {
     return {
       id,
       username,

@@ -1,6 +1,20 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "@styles/theme.css";
 
+export const feedOptionList = style({
+  position: "absolute",
+  right: 22,
+  border: `1px solid ${vars.colors.gray000}`,
+  padding: "0.5em 0",
+  borderRadius: 4,
+  width: 100,
+  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  gap: 10,
+  backgroundColor: vars.colors.white000,
+});
+
 export const feedCardLayout = style({
   backgroundColor: vars.colors.white000,
   width: "100%",
@@ -8,7 +22,10 @@ export const feedCardLayout = style({
   padding: "1em",
 });
 
-export const profileBox = style({});
+export const profileBox = style({
+  width: 44,
+  height: 44,
+});
 
 export const contentBox = style({
   margin: "16px auto",

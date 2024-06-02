@@ -17,7 +17,8 @@ export class FeedRepository extends Repository<FeedEntity> {
       .getOne();
   }
 
-  async findOneFeedByFeedId(_id: string) {
+  async findOneFeedAndCommentByFeedId(_id: string) {
+    // todo 댓글 내용 추가
     const data = await this.createQueryBuilder('feed')
       .where('feed._id = :_id', { _id })
       .leftJoinAndSelect('feed.shop', 'shop')
@@ -41,6 +42,43 @@ export class FeedRepository extends Repository<FeedEntity> {
     }
     return {
       ...data,
+      feedId: _id,
+      feedContent: data.content,
+      feedCreatedDate: data.created_at,
+      shop,
+    };
+  }
+
+  async findOneFeedByFeedId(_id: string) {
+    const data = await this.createQueryBuilder('feed')
+      .where('feed._id = :_id', { _id })
+      .leftJoinAndSelect('feed.shop', 'shop')
+      .leftJoinAndSelect('feed.user', 'user')
+      .leftJoinAndSelect('feed.files', 'files')
+      .select(['feed', 'shop', 'user', 'files.originName', 'files.path1'])
+      .getOne();
+
+    let shop = null;
+
+    if (data.shop) {
+      shop = {
+        shopId: data.shop._id,
+        shopName: data.shop.title,
+        shopDescription: data.shop.description,
+        category: data.shop.category,
+        shopAddress: {
+          name: data.shop.description,
+          sido: data.shop.sido,
+          sigungu: data.shop.sigungu,
+          fullAddress: data.shop.fullAddress,
+          x: data.shop.x,
+          y: data.shop.y,
+        },
+      };
+    }
+    return {
+      ...data,
+      feedId: _id,
       feedContent: data.content,
       feedCreatedDate: data.created_at,
       shop,
@@ -73,6 +111,7 @@ export class FeedRepository extends Repository<FeedEntity> {
           username: list.user.username,
           nickname: list.user.nickname,
           profileImage: list.user.profileImage,
+          creatorId,
         };
       }
 
@@ -130,6 +169,7 @@ export class FeedRepository extends Repository<FeedEntity> {
           username: list.user.username,
           nickname: list.user.nickname,
           profileImage: list.user.profileImage,
+          creatorId: list.user.creatorId,
         };
       }
 

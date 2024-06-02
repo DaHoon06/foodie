@@ -11,7 +11,7 @@ import { getUserProfileApi, profileUpdateApi } from "@apis/users/user.api";
 import { getSession } from "next-auth/react";
 import { User } from "@interfaces/users/user";
 import { axiosInstance } from "@libs/axios";
-import { Avatar } from "@components/ui";
+import { Avatar } from "@components/common/ui";
 import { imageUploadApi } from "@apis/files/upload.api";
 
 interface Props {

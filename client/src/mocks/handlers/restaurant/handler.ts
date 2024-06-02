@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { responseConversion } from "@mocks/utills/responseConversion";
 import { restaurantListMockData } from "@mocks/handlers/restaurant/data/listsData";
-import { StoreCardItem } from "@components/ui/cards/StoreCard";
+import { StoreCardItem } from "@components/common/ui/cards/StoreCard";
 
 const DOMAIN = "/api/restaurant";
 

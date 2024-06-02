@@ -1,13 +1,13 @@
 import {useMyFeedListsInfinityScroll} from "@services/queries/feeds/useFeedListsQuery";
 import {useIntersectionObserver} from "@hooks/useIntersectionObserver";
-import {SpinnerUi} from "@components/ui";
+import {SpinnerUi} from "@components/common/ui";
 import * as styles from "./styles/FeedLists.css";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {Typography} from "@components/common/typography/Typography";
 import {FeedListsState} from "@interfaces/feeds/feed.lists";
-import {FeedCard} from "@components/ui/cards/FeedCard";
-export const MyFeedLists = () => {
+import {FeedCard} from "@components/feeds/FeedCard";
 
+export const MyFeedLists = () => {
   const {
     data: listQueryData,
     isLoading,
@@ -54,10 +54,15 @@ export const MyFeedLists = () => {
                   </div>
                 ) : (
                   <div className={styles.emptyLabel}>
-                    <Typography fontWeight={500}
-                                fontSize={14}
-                                color="gray500"
-                                variant="h2"> 작성된 게시글이 없습니다.</Typography>
+                    <Typography
+                      fontWeight={500}
+                      fontSize={14}
+                      color="gray500"
+                      variant="h2"
+                    >
+                      {" "}
+                      작성된 게시글이 없습니다.
+                    </Typography>
                   </div>
                 );
               })}

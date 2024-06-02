@@ -6,10 +6,12 @@ import { FeedModule } from '@modules/feeds/feed.module';
 import { ShopModule } from '@modules/shop/shop.module';
 import { FileModule } from '@modules/files/file.module';
 import { SseModule } from '@modules/sse/sse.module';
+import { AuthModule } from '@modules/auth/auth.module';
 
 @Module({
   imports: [
     DataBaseModule,
+    AuthModule,
     UserModule,
     FeedModule,
     ShopModule,

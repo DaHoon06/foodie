@@ -4,13 +4,21 @@ import {ReactElement} from "react";
 import * as styles from "./styles/ManagementLists.css";
 import {signOut} from "next-auth/react";
 import {useAuth} from "@providers/AuthProvider";
-import useCookies from "@hooks/useCookie";
+import {Cookies} from "react-cookie";
 
 export const ManagementLists = (): ReactElement => {
   const {isLogin} = useAuth();
-  const {removeCookie} = useCookies();
+  const cookies = new Cookies();
+
   const handleClickSignOut = async () => {
-    removeCookie('Authorization');
+    const isProd = process.env.NODE_ENV !== "development";
+    const domain = isProd
+      ? process.env.NEXT_PUBLIC_PROD
+      : process.env.NEXT_PUBLIC_LOCAL;
+    cookies.remove('Authorization', {
+      domain,
+      path: '/'
+    });
     await signOut();
   };
 
