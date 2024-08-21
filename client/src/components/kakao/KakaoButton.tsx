@@ -1,6 +1,4 @@
-"use client";
-
-import {ReactElement, useEffect, useState} from "react";
+import {ReactElement} from "react";
 import * as styles from "./styles/KakaoButton.css";
 import Image from "next/image";
 import {Typography} from "@components/common/typography/Typography";

@@ -1,23 +1,15 @@
-"use client";
+import {ReactElement, useEffect, useRef} from "react";
+import {getMarkerApi} from "@apis/shop/shop.api";
+import {Skeleton} from "@components/common/ui/skeleton/Skeleton";
+import {useQuery} from "@tanstack/react-query";
+import {queryKeys} from "@services/keys/queryKeys";
+import {useAuth} from "@providers/AuthProvider";
+import {KAKAO_API_KEY} from "@config/processConfig";
 
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { getMarkerApi } from "@apis/shop/shop.api";
-import { Skeleton } from "@components/common/ui/skeleton/Skeleton";
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@services/keys/queryKeys";
-import { useAuth } from "@providers/AuthProvider";
-
-const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
 
 export const KakaoMap = (): ReactElement => {
   const mapContainer = useRef();
-  const [pending, setPending] = useState(true);
-  const [csrLoading, setCsrLoading] = useState(false);
   const { userId } = useAuth();
-
-  useEffect(() => {
-    setCsrLoading(true);
-  }, []);
 
   const { data: mapData, isLoading } = useQuery(
     [queryKeys.maps.marker, userId],
@@ -104,11 +96,9 @@ export const KakaoMap = (): ReactElement => {
   };
 
   useEffect(() => {
-    if (csrLoading && typeof window !== "undefined") {
-      setPending(true);
-
+    if (typeof window !== "undefined") {
       const script = document.createElement("script");
-      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&autoload=false`;
+      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_KEY}&autoload=false`;
       script.type = "text/javascript";
       script.async = true;
       document.head.appendChild(script);
@@ -130,8 +120,6 @@ export const KakaoMap = (): ReactElement => {
             const locPosition = new kakao.maps.LatLng(lat, lon);
 
             if (!!mapData) drawMarker(kakao, map);
-
-            setPending(false);
             map.setCenter(locPosition);
           });
         });
@@ -147,11 +135,11 @@ export const KakaoMap = (): ReactElement => {
         }
       }
     };
-  }, [mapContainer, csrLoading]);
+  }, [mapContainer, mapData]);
 
   return (
     <>
-      {<Skeleton isLoading={pending} />}
+      {<Skeleton isLoading={isLoading} />}
       <div
         id={"map"}
         ref={mapContainer}

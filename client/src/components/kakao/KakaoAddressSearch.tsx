@@ -4,8 +4,7 @@ import DaumPostcodeEmbed, {Address} from 'react-daum-postcode';
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {KakaoAddressDocument} from "@interfaces/kakao";
 import {AddressState} from "@interfaces/feeds/feed.post";
-
-const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_REST_KEY;
+import {KAKAO_REST_KEY} from "@config/processConfig";
 
 export const KakaoAddressSearch = () => {
   const {setFeedItem, item} = useFeedStore();
@@ -27,7 +26,7 @@ export const KakaoAddressSearch = () => {
   const handleComplete = (data: Address) => {
     const headers = {
       'content-type': "application/json;charset=UTF-8",
-      'Authorization': `KakaoAK ${kakaoAppKey}`
+      'Authorization': `KakaoAK ${KAKAO_REST_KEY}`
     }
     const url = `https://dapi.kakao.com/v2/local/search/address?query=${data.address}`;
     axios.get<AxiosRequestConfig, AxiosResponse<{ documents: KakaoAddressDocument[] }>>(url, {

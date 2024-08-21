@@ -1,8 +1,7 @@
-import {Swiper, SwiperClass, SwiperSlide} from "swiper/react" // basic
+import {Swiper, SwiperClass, SwiperSlide} from "swiper/react"
 import "swiper/scss"
 import "swiper/scss/navigation"
 import "swiper/scss/pagination"
-import {Autoplay} from 'swiper/modules';
 import * as styles from './Carousel.css';
 import Image from "next/image";
 import {useState} from "react";

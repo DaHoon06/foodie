@@ -1,24 +1,20 @@
 import * as styles from "./HomeContainer.css";
-import { KakaoMap } from "@components/kakao/maps/KakaoMap";
-import { Typography } from "@components/common/typography/Typography";
-import { ThumbnailCard } from "@components/common/ui/cards/ThumbnailCard";
-import { CustomHorizontalBar } from "@components/nav/CustomHorizontalBar";
+import {KakaoMap} from "@components/kakao/maps/KakaoMap";
+import {Typography} from "@components/common/typography/Typography";
+import {ThumbnailCard} from "@components/common/ui/cards/ThumbnailCard";
+import {CustomHorizontalBar} from "@components/nav/CustomHorizontalBar";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { FollowCard } from "@components/common/ui/cards/FollowCard";
-import { ReactElement, useEffect, useState } from "react";
-import { RegionFilter } from "@components/filters/RegionFilter";
-import { VscSettings } from "react-icons/vsc";
-import { recentlyFeedApi } from "@apis/feeds/feed.api";
-import { todayRecommendUserApi } from "@apis/users/user.api";
-import { FeedFilter } from "@interfaces/feeds/feed.filter";
-import { RecentlyFeedListsState } from "@interfaces/feeds/feed.lists";
-import { RecommendUserLists } from "@interfaces/users/user.lists";
-import { FeedLists } from "@components/feeds/FeedLists";
-import { useAuth } from "@providers/AuthProvider";
-import { Skeleton } from "@components/common/ui/skeleton/Skeleton";
+import {FollowCard} from "@components/common/ui/cards/FollowCard";
+import {ReactElement, useState} from "react";
+import {RegionFilter} from "@components/filters/RegionFilter";
+import {VscSettings} from "react-icons/vsc";
+import {FeedFilter} from "@interfaces/feeds/feed.filter";
+import {FeedLists} from "@components/feeds/FeedLists";
+import {useAuth} from "@providers/AuthProvider";
+import {Skeleton} from "@components/common/ui/skeleton/Skeleton";
 import Link from "next/link";
-import { useRecentlyFeedListQuery } from "@services/queries/feeds/useFeedListsQuery";
-import { useTodayRecommendUserListQuery } from "@services/queries/users/useTodayRecommendQuery";
+import {useRecentlyFeedListQuery} from "@services/queries/feeds/useFeedListsQuery";
+import {useTodayRecommendUserListQuery} from "@services/queries/users/useTodayRecommendQuery";
 
 interface FilterButtonProps {
   isOpen: boolean;
@@ -195,7 +191,7 @@ export const HomeContainer = () => {
                 <CustomHorizontalBar>
                   {todayRecommendUserListQuery.data.map((user) => {
                     return (
-                      <div key={`${crypto.randomUUID()}`}>
+                      <div key={`recommend_user_${user._id}`}>
                         <FollowCard user={user} />
                       </div>
                     );

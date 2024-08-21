@@ -5,7 +5,7 @@ import * as styles from "./styles/FeedLists.css";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
 import {Typography} from "@components/common/typography/Typography";
 import {FeedListsState} from "@interfaces/feeds/feed.lists";
-import {FeedCard} from "@components/feeds/FeedCard";
+import FeedCard from "@components/feeds/FeedCard";
 
 export const MyFeedLists = () => {
   const {

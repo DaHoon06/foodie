@@ -1,17 +1,18 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
+import React, {ReactElement, useEffect, useRef, useState} from "react";
 import * as styles from "./styles/FeedCard.css";
 import FlexBox from "@components/common/headless/flex-box/FlexBox";
-import { Typography } from "@components/common/typography/Typography";
-import { FaComment, FaRegHeart } from "react-icons/fa6";
-import { formatDate } from "@utils/date";
-import { FeedListsState } from "@interfaces/feeds/feed.lists";
-import { CarouselSwipe } from "@components/common/ui/carousel/CarouselSwipe";
+import {Typography} from "@components/common/typography/Typography";
+import {FaComment, FaRegHeart} from "react-icons/fa6";
+import {formatDate} from "@utils/date";
+import {FeedListsState} from "@interfaces/feeds/feed.lists";
+import {CarouselSwipe} from "@components/common/ui/carousel/CarouselSwipe";
 import Link from "next/link";
-import { Avatar } from "@components/common/ui";
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import { useAuth } from "@providers/AuthProvider";
-import { PiNotePencilBold, PiTrashBold } from "react-icons/pi";
-import { useRouter } from "next/router";
+import {Avatar} from "@components/common/ui";
+import {HiOutlineDotsVertical} from "react-icons/hi";
+import {useAuth} from "@providers/AuthProvider";
+import {PiNotePencilBold, PiTrashBold} from "react-icons/pi";
+import {useRouter} from "next/router";
+
 export type FeedListType = FeedListsState;
 
 interface Props {
@@ -82,7 +83,7 @@ const OptionList = (props: { feedId: string }) => {
   );
 };
 
-export const FeedCard = (props: Props): ReactElement => {
+const FeedCard = (props: Props): ReactElement => {
   const { feedId, feedContent, feedCreatedDate, user, shop, files } =
     props.feedCard;
   const { userId } = useAuth();
@@ -151,3 +152,5 @@ export const FeedCard = (props: Props): ReactElement => {
     </article>
   );
 };
+
+export default React.memo(FeedCard);

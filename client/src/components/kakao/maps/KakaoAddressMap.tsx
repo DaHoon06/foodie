@@ -1,16 +1,12 @@
-"use client";
-
-import { ReactElement, useEffect, useRef, useState } from "react";
+import {ReactElement, useEffect, useRef, useState} from "react";
 import useFeedStore from "@store/feedStore";
-import { AddressState } from "@interfaces/feeds/feed.post";
-import { Skeleton } from "@components/common/ui/skeleton/Skeleton";
-
-const kakaoAppKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
+import {AddressState} from "@interfaces/feeds/feed.post";
+import {Skeleton} from "@components/common/ui/skeleton/Skeleton";
+import {KAKAO_API_KEY} from "@config/processConfig";
 
 export const KakaoAddressMap = (): ReactElement => {
   const mapContainer = useRef();
   const { setFeedItem, item } = useFeedStore();
-  const [csrLoading, setCsrLoading] = useState(false);
   const [address, setAddress] = useState<AddressState>({
     name: "",
     x: "",
@@ -19,10 +15,6 @@ export const KakaoAddressMap = (): ReactElement => {
     sigungu: "",
   });
   const [pending, setPending] = useState(true);
-
-  useEffect(() => {
-    setCsrLoading(true);
-  }, []);
 
   useEffect(() => {
     setFeedItem({
@@ -35,7 +27,7 @@ export const KakaoAddressMap = (): ReactElement => {
     if (typeof window !== "undefined") {
       setPending(true);
       const script = document.createElement("script");
-      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&autoload=false&libraries=services`;
+      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_API_KEY}&autoload=false&libraries=services`;
       script.type = "text/javascript";
       script.async = true;
       document.head.appendChild(script);
@@ -162,7 +154,7 @@ export const KakaoAddressMap = (): ReactElement => {
         }
       }
     };
-  }, [mapContainer, csrLoading]);
+  }, [mapContainer, pending]);
 
   return (
     <>

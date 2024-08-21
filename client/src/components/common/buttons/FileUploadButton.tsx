@@ -1,6 +1,6 @@
-import { Typography } from "@components/common/typography/Typography";
-import { ChangeEvent, ReactElement, useMemo, useRef, useState } from "react";
-import { FiCamera } from "react-icons/fi";
+import {Typography} from "@components/common/typography/Typography";
+import {ChangeEvent, ReactElement, useRef, useState} from "react";
+import {FiCamera} from "react-icons/fi";
 import * as styles from "./FileUploadButton.css";
 
 interface FileUploadProps {
